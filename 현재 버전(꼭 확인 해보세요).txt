@@ -1,0 +1,2 @@
+ver0 : 아예 제일 초기화 상태
+ver1: header footer(include 파일 안에 있음)/ 패키지명 폴더명 만들어 놓음 <- 현재

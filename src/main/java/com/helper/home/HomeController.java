@@ -1,4 +1,4 @@
-package com.studyhelper.cotroller;
+package com.helper.home;
 
 import java.util.Locale;
 
