@@ -1,4 +1,4 @@
-package com.studyhelper.member;
+package com.helper.member;
 
 public class MemberController {
 
