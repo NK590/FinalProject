@@ -124,7 +124,12 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-				
+		<!-- collections4 -->
+      <dependency>
+         <groupId>org.apache.commons</groupId>
+         <artifactId>commons-collections4</artifactId>
+         <version>4.4</version>
+      </dependency>	
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
