@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   <mapper namespace="boardMapper">
+   	<!-- 모든 게시글 조회 -->
+   	<select id="selectAll" resultType="com.helper.board.BoardDTO">
+   		select * from tb_board
+   	</select>
+   	<!-- 게시글 등록 -->
+   	<insert id = "insert" parameterType="com.helper.board.BoardDTO">
+   		insert into tb_board values
+   			(#{bo_seq}, #{mem_seq}, #{mem_nick}, #{bo_title}, #{bo_content}, sysdate)
+   	</insert>
+   	<!-- 시퀀스 번호 얻기 -->
+   	<select id = "selectSeq" resultType="int">
+   		select bo_seq.nextval from dual
+   	</select> 
+   	<!-- 시퀀스 번호로 해당 상세페이지 호출 -->
+   	<select id="selectOne" parameterType="int" resultType="com.helper.board.BoardDTO">
+   		select * from tb_board where bo_seq = #{bo_seq}
+   	</select>
+   </mapper>
