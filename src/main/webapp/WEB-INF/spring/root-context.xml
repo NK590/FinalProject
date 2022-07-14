@@ -25,6 +25,5 @@
 	<!-- SqlSession 빈 등록 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
-	</bean>
-		
+	</bean>		
 </beans>
