@@ -32,12 +32,14 @@ public class BoardController {
 		
 		return "/board/write";
 	}
-	@RequestMapping(value="/summernote") // summernote 이미지 띄워주기 
+	@RequestMapping(value="/summernote", produces = "text/html; charset=utf-8") // summernote 이미지 띄워주기 
 	@ResponseBody
 	public String summernote(@RequestParam("file") MultipartFile file)throws Exception{
 		String realPath =  session.getServletContext().getRealPath("board");
-		String sys_name = service.summernote(file,realPath);
+		String sys_name = service.summernote(file,realPath); 
+		System.out.println(sys_name);
 		return sys_name;
+		
 	}
 	@RequestMapping(value="/write") // 게시글 삽입  
 	public String write(BoardDTO dto)throws Exception{		

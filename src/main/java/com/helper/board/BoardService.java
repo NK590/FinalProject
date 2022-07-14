@@ -1,11 +1,13 @@
 package com.helper.board;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -22,10 +24,11 @@ public class BoardService {
 		if(!realPathFile.exists()) {
 			realPathFile.mkdir();
 		}
+
 			String ori_name = file.getOriginalFilename();
 			String sys_name =UUID.randomUUID()+"_"+ori_name;
 			file.transferTo(new File(realPath+File.separator+sys_name));
-
+			System.out.println(realPath+File.separator+sys_name);
 		return sys_name;
 	}
 	

@@ -51,12 +51,25 @@
 			document.getElementById("toBack").onclick = function(){
 				location.href = "/board/toBoard";
 			}
+		 	
 			// 섬머노트 
 			$('#summernote').summernote({
-				placeholder : "500자 이내의 내용을 입력해주세요.",
+				// 섬머노트 툴바 옵션
+				  toolbar: [
+				    ['style', ['bold', 'italic', 'underline', 'clear']],
+				    ['font', ['strikethrough', 'superscript', 'subscript']],
+				    ['fontsize', ['fontsize']],
+				    ['color', ['color']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    ['height', ['height']],
+				    ['insert', ['picture']]],
+				placeholder : "200자 이내의 내용을 입력해주세요.",
 				tabsize : 2,
+				minHeight : 400,
+				maxHeight : 400,
 				height : 400,
 				focus : true,
+				disableDragAndDrop: true,  // 드롭앤 드랍 방지 
 				 callbacks : {
 					onImageUpload : function(files, editor, welEditable){
 						for(let i = files.length - 1; i >= 0; i--){
@@ -65,7 +78,7 @@
 					}
 				}   
 			});
-			
+		
 			// 이미지 업로드 할 때 실행되는 함수의 정의 
 			function uploadSummernoteImageFile(file,el){			
 				let data = new FormData();

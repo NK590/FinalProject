@@ -39,6 +39,7 @@
 				<div class="col d-flex justify-content-center">
 					<button type="button" class="btn btn-secondary m-1" id="toBack">뒤로가기</button>
 					<button type="button" class="btn btn-defualt m-1" id="updateBtn">수정</button>
+					<button type="button" class="btn btn-defualt m-1 d-none" id="completeBtn">완료</button>
 				</div>
 			</div>
 		</div>		
@@ -56,21 +57,34 @@
 			
 			// 섬머노트 
 			$('#summernote').summernote({
+				// 섬머노트 툴바 옵션
+				  toolbar: [
+				    ['style', ['bold', 'italic', 'underline', 'clear']],
+				    ['font', ['strikethrough', 'superscript', 'subscript']],
+				    ['fontsize', ['fontsize']],
+				    ['color', ['color']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    ['height', ['height']],
+				    ['insert', ['picture']]],
+				placeholder : "200자 이내의 내용을 입력해주세요.",
+				tabsize : 2,
 				minHeight : 400,
 				maxHeight : 400,
-				tabsize : 2,
 				height : 400,
-				focus : false,
+				focus : true,
+				lang : "ko-KR", // 한글 설정 
+				disableDragAndDrop: true,  // 드롭앤 드랍 방지 
 				 callbacks : {
 					onImageUpload : function(files, editor, welEditable){
 						for(let i = files.length - 1; i >= 0; i--){
 							uploadSummernoteImageFile(files[i],this);
 						}
 					}
-				}
+				}   
 			});
-			$("#summernote").summernote("pasteHTML", '${dto.bo_content}');
-			$("#summernote").summernote("disable");
+			
+			$("#summernote").summernote("pasteHTML", '${dto.bo_content}'); // 태그자 summernote에 넣어주기
+			$("#summernote").summernote("disable"); // 비활성화 
 			
 			// 이미지 업로드 할 때 실행되는 함수의 정의 
 			function uploadSummernoteImageFile(file,el){			
@@ -94,6 +108,8 @@
 			// 수정 버튼을 누르면 
 			$("#updateBtn").on("click",function(){
 				$("#summernote").summernote("enable");
+				$("#updateBtn").addClass("d-none");
+				$("#completeBtn").removeClass("d-none");
 				
 			})
 			
