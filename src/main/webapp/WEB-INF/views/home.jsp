@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -42,20 +42,25 @@
 	background-size: cover;
 	background: linear-gradient(to bottom, white);
 }
+
 .logo {
 	margin-top: 320px;
 	width: 630px;
 	z-index: 1;
 }
+
 .navbar {
 	position: fixed;
 }
+
 .nav-item {
 	padding: 5px;
 }
+
 .navbar-toggler {
 	border: none;
 }
+
 .navbar-nav {
 	padding: 10px;
 	margin: auto;
@@ -63,34 +68,42 @@
 	font-family: "GothicA1-Regular.ttf";
 	font-size: 17px;
 }
+
 .dropdown-toggle {
 	background-color: none;
 	font-family: "GothicA1-Regular.ttf";
 	font-size: 17px;
 }
+
 .dropdown-item {
 	margin: 0 auto;
 }
+
 .offcanvas {
 	width: 300px;
 }
+
 a {
 	text-decoration: none;
 	padding: 20px;
 	color: black;
 	margin-top: -20px;
 }
+
 a:hover {
 	color: rgb(20, 62, 177);
 }
+
 .dropdown {
 	font-size: 14px;
 }
+
 .footer>* {
 	background-color: none;
 	padding: 20px;
 	position: relative;
 }
+
 .ft-ul {
 	list-style: none;
 	text-align: center;
@@ -100,6 +113,7 @@ a:hover {
 	font-size: 12px;
 	z-index: 1;
 }
+
 .top_text {
 	background-color: none;
 	position: relative;
@@ -110,6 +124,7 @@ a:hover {
 	font-family: "AppleSDGothicNeoL.ttf";
 	margin: 10px;
 }
+
 .image_left {
 	margin-top: 100px;
 	float: left;
@@ -117,6 +132,7 @@ a:hover {
 	width: 660px;
 	height: 400px;
 }
+
 .image_right {
 	margin-top: 100px;
 	float: right;
@@ -124,6 +140,7 @@ a:hover {
 	width: 600px;
 	height: 400px;
 }
+
 .main_text {
 	text-align: center;
 	margin-top: 150px;
@@ -131,12 +148,14 @@ a:hover {
 	font-family: "AppleSDGothicNeoL.ttf";
 	text-decoration: underline;
 }
+
 .sub_text {
 	text-align: center;
 	margin-top: 30px;
 	font-size: 20px;
 	font-family: "AppleSDGothicNeoL.ttf";
 }
+
 .logo_text {
 	margin-top: -20px;
 	font-size: 20px;
@@ -144,6 +163,7 @@ a:hover {
 	color: white;
 	text-align: center;
 }
+
 .gostudy {
 	border: 1.5px solid white;
 	width: 135px;
@@ -153,12 +173,14 @@ a:hover {
 	font-family: "AppleSDGothicNeoL.ttf";
 	margin-top: -30px;
 }
+
 .weekend_user {
 	text-align: center;
 	font-size: 23px;
 	font-weight: bold;
 	font-family: "AppleSDGothicNeoL.ttf";
 }
+
 .weekend_user_box {
 	text-align: center;
 	border: 1px solid rgb(112, 112, 112);
@@ -167,12 +189,14 @@ a:hover {
 	margin: 20px;
 	border-radius: 50%;
 }
+
 .new_group {
 	text-align: center;
 	font-size: 23px;
 	font-weight: bold;
 	font-family: "AppleSDGothicNeoL.ttf";
 }
+
 .new_group_box {
 	text-align: center;
 	border: 1px solid rgb(112, 112, 112);
@@ -182,6 +206,7 @@ a:hover {
 	border-radius: 50%;
 	margin-bottom: 70px;
 }
+
 .bottom_text {
 	margin-top: 50px;
 	margin-bottom: 100px;
@@ -189,11 +214,13 @@ a:hover {
 	font-family: "AppleSDGothicNeoL.ttf";
 	font-size: 30px;
 }
+
 .top_icon {
 	position: fixed;
 	bottom: 5px;
 	right: 5px;
 }
+
 .fastbtn {
 	background-color: rgb(8, 0, 83);
 	color: white;
@@ -207,7 +234,8 @@ a:hover {
 	<!--메인 배너-->
 	<div class="container-fluid banner">
 		<div class="col" style="text-align: center;">
-			<img src="images/SH_logo2.png" class="logo"> <br> <br>
+			<img src="/resources/images/SH_logo2.png" class="logo"> <br>
+			<br>
 			<p class="logo_text">함께 공부하는 즐거움</p>
 			<br>
 			<div class="gostudy">
@@ -283,7 +311,7 @@ a:hover {
 		<div class="row justify-content-center">
 			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-				<img class="image_left" src="/images/11.jpg">
+				<img class="image_left" src="/resources/images/11.jpg">
 			</div>
 			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
@@ -313,13 +341,13 @@ a:hover {
 			</div>
 			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-				<img class="image_left" src="/images/12.jpg">
+				<img class="image_left" src="/resources/images/12.jpg">
 			</div>
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-				<img class="image_left" src="/images/2.jpg">
+				<img class="image_left" src="/resources/images/2.jpg">
 			</div>
 			<div class="col-6" data-aos="fade-up" data-aos-offset="200"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
@@ -366,7 +394,7 @@ a:hover {
 		</div>
 	</div>
 </footer>
-<!--스크립트 영역-->
+<!—스크립트 영역—>
 <script>
   AOS.init(); //스크롤 애니메이션 명령어
 </script>
