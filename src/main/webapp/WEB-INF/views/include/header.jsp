@@ -17,7 +17,7 @@
 	crossorigin="anonymous"></script>
 <style>
 @font-face {
-	src: url("/fonts/GothicA1-Regular.ttf");
+	src: url("/resources/fonts/GothicA1-Regular.ttf");
 	font-family: "GothicA1-Regular.ttf";
 }
 
