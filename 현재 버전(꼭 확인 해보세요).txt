@@ -1,2 +1,3 @@
 ver0 : 아예 제일 초기화 상태
-ver1: header footer(include 파일 안에 있음)/ 패키지명 폴더명 만들어 놓음 <- 현재
+ver1: header footer(include 파일 안에 있음)/ 패키지명 폴더명 만들어 놓음 
+ver2: 모든 폴더에 dao dto controller 추가됨/home.jsp파일(랜딩페이지 생김)/ git ignore 에 root cotext 추가/ ->현재
