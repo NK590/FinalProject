@@ -65,7 +65,6 @@
     		<artifactId>jackson-databind</artifactId>
     		<version>2.13.3</version>
 		</dependency>
-
 		<!--jsoninJava-->
 		<dependency>
     		<groupId>org.json</groupId>
