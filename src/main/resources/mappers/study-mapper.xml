@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studyMapper">
+	<update id="insertAll" parameterType="com.helper.study.TimeDTO">
+		<foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
+			INTO TB_TIMER VALUES (1, #{item.time_subject},#{item.time_count},DEFAULT)
+		</foreach>
+	</update>
+	<select id="selectrecord" resultType="int">
+		SELECT COUNT(*)FROM tb_timer
+ 			WHERE TRUNC (time_date) = TRUNC (SYSDATE)
+	</select>
+	<select id="selectsubject" resultType="int" parameterType="String">
+		SELECT COUNT(*)FROM tb_timer
+ 			WHERE TRUNC (time_date) = TRUNC (SYSDATE) and time_subject = #{time_subject} and mem_seq=1
+	</select>
+	<insert id="insertOne" parameterType="com.helper.study.TimeDTO">
+		INSERT INTO TB_TIMER VALUES (1, #{time_subject},#{time_count},DEFAULT)
+	</insert>
+	<update id="updatetime" parameterType="com.helper.study.TimeDTO">
+		update tb_timer set time_count=time_count+#{time_count} where time_subject = #{time_subject} and mem_seq=1 and TRUNC (time_date) = TRUNC (SYSDATE)
+	</update>
+	<delete id="deletesubject">
+		delete from tb_subject
+	</delete>
+	<update id="insertsubject" parameterType="com.helper.study.SubjectDTO">
+		<foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
+			INTO TB_SUBJECT VALUES (1, #{item.time_subject})
+		</foreach>
+	</update>
+	<select id="selectall" resultType="com.helper.study.SubjectDTO">
+		select time_subject from tb_subject where mem_seq=1 
+	</select>
+</mapper>
