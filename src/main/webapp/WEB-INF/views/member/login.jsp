@@ -19,6 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <title>login</title>
 <style>
 body {
@@ -108,7 +109,7 @@ span {
 </style>
 </head>
 <body>
-<form id="loginForm" action="/member/loginForm" method="post">
+<form id="loginForm">
 	<div class="row m-3">
 		<div class="col d-flex justify-content-center">
 			<h2>로그인</h2>
@@ -135,11 +136,23 @@ span {
 			<button type="button" id="memberBtn">회원가입</button>
 		</div>
 	</div>
+	<!-- 
 	<div class="row justify-content-around logininput">
-		<a href="javascript:kakaoLogin();">
-			<img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style="width: 270px; height: 50px;">
+		<a href="https://kauth.kakao.com//oauth/logout?client_id=1d93d50b4296c95206af1d69936465bf&logout_redirect_uri=http://localhost/member/login">로그아웃</a>
+		<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a988e7d46e170a65e7bfc2447c3f1d09&redirect_uri=http://localhost/member/kakaoLogin&response_type=code">
+						<img src="/resources/images/kakao_login_medium_narrow.png" style="width: 260px; height:50px;">
 		</a>
 	</div>
+	 -->
+
+<p id="token-result"></p>
+
+	 <div class="btnBox d-flex justify-content-center">
+			<a href="javascript:kakaoLogin()"> 
+				<img src="/resources/images/kakao_login_medium_narrow.png" alt="카카오 로그인 버튼" />
+			</a>
+	</div>
+	
 	<br>
 	<div class="row justify-content-center search">
 		<div class="col-lg-3">
@@ -149,51 +162,151 @@ span {
 		</div>
 	</div>
 </form>
+	 
+	<script>
+	// 카카오로그인 버튼 눌렀을때 무조건 카카오 로그인창 띄워주기 
+	function kakaoLogin(){
+		Kakao.init('1d93d50b4296c95206af1d69936465bf'); // 본인의 자바스크립트 키로 카카오 기능 활성화
+		
+		// 카카오 로그인 서비스 실행하기 및 사용자 정보 가져오기.
+		Kakao.Auth.login({ // 로그인하면서 인증정보 얻어오는 코드 
+			success:function(auth){
+				Kakao.API.request({
+					url: '/v2/user/me',
+					success: function(response){ // response의 kakao_account 안에 로그인된 사용자 정보값이 담겨있음
+						console.log(response);
+						// 사용자 정보를 가져와서 폼에 추가.
+						var account = response.kakao_account;
+						console.log(account);
+						// -> 여기서부터는 얻어온 값을 이용해 서버랑 통신하며 카카오 로그인 진행
+						
+					},
+					error: function(error){
+						console.log(error);
+					}
+				}); // api request
+			}, // success 결과.
+			error:function(error){
+				console.log(error);
+			}
+		})
+	}
 	
+		
 	
-	<!-- 카카오 로그인 API -->
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>  
-    <script>
-        // 1d93d50b4296c95206af1d69936465bf
-        window.Kakao.init("1d93d50b4296c95206af1d69936465bf");
+	/* //카카오 로그인
+	Kakao.init('1d93d50b4296c95206af1d69936465bf');
+Kakao.isInitialized();
+  function loginWithKakao() {
+    Kakao.Auth.authorize({
+      redirectUri: 'http://localhost/member/login'
+    })
+  }
+  // 아래는 데모를 위한 UI 코드입니다.
+  displayToken()
+  function displayToken() {
+    const token = getCookie('authorize-access-token')
+    if(token) {
+      Kakao.Auth.setAccessToken(token)
+      Kakao.Auth.getStatusInfo(({ status }) => {
+        if(status === 'connected') {
+          document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
 
-        function kakaoLogin(){
-            window.Kakao.Auth.login({
-                scope:'profile_nickname, account_email, gender',
-                success: function(authObj){
-                    console.log(authObj);
-                    window.Kakao.API.request({
-                        url:'/v2/user/me',
-                        success: res =>{
-                            const kakao_account = res.kakao_account;
-                            console.log(kakao_account);
+        } else {
+          Kakao.Auth.setAccessToken(null)
+        }
+      })
+    }
+  }
+  function getCookie(name) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+ */
+	
+	/*
+	window.Kakao.init('1d93d50b4296c95206af1d69936465bf'); // 발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
+function kakaoLogin() {
+	window.Kakao.Auth.login({
+		scope:'account_email'
+		, success: function(authObj){
+			console.log(authObj);
+			window.Kakao.API.request({
+				url : '/v2/user/me'
+				, success : res => {
+					const kakao_account = res.kakao_account;
+					const email = kakao_account.email;
+					
+					console.log(kakao_account);
+					console.log(email)
+					
+					$.ajax({
+                        				type: "post",
+                       					 url: '/member/kakaoLogin', // 로그인
+                      					  data: { "email" : email },
+                      					  dataType: "text",
+                        				success: function (data) {
+                            					console.log(data);
+                            					if (data === "fail") {// 회원가입
+                               					console.log("성공!");
+                              					 location.href = '/member/toKakaoSignUp?email=' + email;
+                          					  } else if (data === "success") {
+								console.log("success");
+								location.href="/"
+                           					 }
+                        }, error: function (request, status, error) {
+                            console.log("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
                         }
-                    });
+                    })
+                    // ajax끝
                 }
+				, fail: function (error) {
+					alert(error);
+				}
             })
         }
-
-
-    </script>
-
-	<script>
+    })
+};
+*/
+	// 아이디, 비밀번호 입력후 엔터키 치면~
+	$('#id, #password').on('keypress', function(e){ 
+	    if(e.keyCode == '13'){ 
+	        $('#loginBtn').click(); 
+	    }
+	});
+	
+	
 	// 회원가입 버튼 누르면 회원가입 페이지로 이동
+	
 	document.getElementById("memberBtn").onclick = function(){
 		location.href = "/member/signup"
 	}	
 	
-		$("#loginBtn").on("click",function() {
-					if ($('input[name=mem_id]').val() === "" || $('input[name=mem_pw]').val() === "") {
-						alert("아이디 혹은 비밀번호를 입력하세요.");
-						return;
-					} else if ($('input[name=mem_id]').val() == "${dto.mem_id}"
-							|| $('input[name=mem_pw]').val() == "${dto.mem_pw}") {
-						alert("로그인 성공.");
-						return;
-					}
-					//saveid();
-					$("#loginForm").submit();
-				})
+	 
+	document.getElementById("loginBtn").onclick = function(){
+		let login = $("#loginForm").serialize();
+		console.log(login);
+		
+		$.ajax({
+			url : "/member/loginForm"
+			,type : "post"
+			,data :login
+			, success: function(data){
+				console.log(data);
+				if(data == "success"){
+					location.href = "/member/toLogin";
+				}else if(data == "fail"){
+					alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+				}
+			}, error : function(e){
+				console.log(e);
+			}
+		})
+	}
+
 	</script>
 </body>
 </html>

@@ -66,95 +66,72 @@ body{
 </style>
 </head>
 <body>
-	<div class="container"
-		style="border-radius: 30px; width: 550px; height: 200px;">
-		<form id="checkIdForm" action="/member/checkEmailForm" method="post">
-			<div class='container'>
-				<div class="row m-2 justify-content-start">
-					<div class="col-8" style="padding-left: 0px;">
-						<input type="text" class="form-control" id="mem_id" name="mem_id"
-							value="${mem_id}" placeholder="이메일을 입력하세요.">
-							
-					</div>
-					<div class="col-4" style="margin-top:6px;">
-						<button type="button" id="checkIdBtn">중복확인</button>
-					</div>
+<div class="container" style="border-radius: 30px; width: 550px; height: 200px;">
+	<form id="checkIdForm">
+		<div class='container'>
+			<div class="row m-2 justify-content-start">
+				<div class="col-8" style="padding-left: 0px;">
+					<input type="text" class="form-control" id="mem_id" name="mem_id" value="${mem_id}" placeholder="이메일을 입력하세요.">							
 				</div>
-
-				<br>
-				<div class="row m-2 justify-content-start">
-					<div class="col-3" style="margin-top:3px;">
-						<span class="abcd">확인결과 :</span>
-					</div>
-					<c:if test="${rs eq 'ok'}">
-						<div class="col-5" style="margin-top:3px;">
-							<span>사용가능 이메일입니다.</span>
-						</div>
-						<div class="col-4" style="margin-bottom:6px;">
-							<button type="button" id="certificationBtn">인증번호발송</button>
-						</div>
-						<script>
-							//이메일인증 > 인증버튼 누르자  
-							document.getElementById("certificationBtn").onclick = function() {
-								console.log("certificationEmail");
-								alert("인증코드 발송!");
-								let email = $("#id").val();
-
-										$.ajax({
-											type : "post",
-											url : "/certificationEmail.mem",
-											data : {
-												"email" : email
-											},
-											timeout : 600000,
-											success : function(data) {
-												console
-														.log("=================data===============");
-												console.log(data);
-
-												document
-														.getElementById("ranNumCheck").onclick = function() {
-
-													console
-															.log($(
-																	"#randomCode")
-																	.val());
-													console.log(data);
-													let randomCode = /[0~9]{6}w/;
-													let useBtn = document
-															.getElementById("useBtn");
-
-													console.log("${rs}");
-													if ($("#randomCode").val() == data) {
-														alert("인증성공");
-														useBtn.disabled = false;
-													} else {
-														alert("인증실패");
-														useBtn.disabled = true;
-													}
-												}
-
-											},
-											error : function(e) {
-												console.log("ERROR : ", e);
-												console.log("ERROR : ",
-														e.resultMsg);
-											}
-										});
-
-							}
-						</script>
-					</c:if>
-					<c:if test="${rs eq 'no'}">
-						<div class="col-5">
-							<span>중복된 이메일입니다.</span>
-						</div>
-					</c:if>
+				<div class="col-4" style="margin-top:6px;">
+					<button type="button" id="checkIdBtn">중복확인</button>
 				</div>
-
 			</div>
 
-			
+		<br>
+			<div class="row m-3 justify-content-start">
+				<div class="col-3" style="margin-top:3px;">
+					<span class="abcd">확인결과 :</span>
+				</div>
+				 
+				<div class="col-5" style="margin-top:3px; padding:0px;" id="okId">
+				
+				</div>
+				<div class="col-4" style="margin-bottom:6px;" id="checkNumSend">
+					<button type="button" id="certificationBtn" style="display: none;">인증번호발송</button>
+				</div>
+<script>
+	//이메일인증 > 인증버튼 누르자  
+	document.getElementById("certificationBtn").onclick = function() {
+	alert("인증코드 발송!");
+	let mem_id = $("#mem_id").val();
+	console.log(mem_id);
+
+	$.ajax({
+		url : "/member/certificationEmail"
+		,type : "post"
+		,data : { mem_id : mem_id }
+		,timeout : 600000
+		,success : function(data) {
+			 console.log("=================data===============");
+			 console.log(data);
+		document.getElementById("ranNumCheck").onclick = function() {
+
+		console.log($("#randomCode").val());
+		console.log(data);
+		let randomCode = /[0~9]{6}/;
+		let useBtn = document.getElementById("useBtn");
+
+		console.log("${rs}");
+			if ($("#randomCode").val() == data) {
+				alert("인증성공");
+				useBtn.disabled = false;
+		    }else {
+				alert("인증실패");
+				useBtn.disabled = true;
+			}
+		}
+	},error : function(e) {
+			console.log("ERROR : ", e);
+			console.log("ERROR : ", e.resultMsg);
+		}
+	});
+}
+</script>
+	
+	</div>
+
+</div>
 
 			<div class="row m-2 justify-content-start">
 				<div class="col-3">
@@ -178,7 +155,7 @@ body{
 				</div>
 				<div class="col-4 d-flex justify-content-start">
 					<button type="button" class="w-btn w-btn-skin"
-						style="height: 50px;" id="useBtn">사용</button>
+						style="height: 50px;" id="useBtn" disabled>사용</button>
 				</div>
 			</div>
 
@@ -188,6 +165,39 @@ body{
 
 
 	<script>
+	// 이메일 중복확인 요청
+		document.getElementById("checkIdBtn").onclick = function(){
+			let checkEmail = $("#mem_id").val();
+			console.log($("#mem_id").val());
+			let regexId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+			console.log("이메일 중복확인 버튼 눌렀음");
+			//if(!regexId.test($("#mem_id").val())){
+				//alert("형식에 맞지 않는 아이디입니다.");
+			//}
+			
+			$.ajax({
+				url : "/member/checkEmailForm"
+				,type : "post"
+				,data : {mem_id:checkEmail}
+				,success : function(data){
+					console.log(data);
+					if(!regexId.test($("#mem_id").val())){
+						alert("형식에 맞지 않는 아이디입니다.");
+					}else if(data == "no"){
+						document.getElementById("okId").innerHTML="<span>중복된 이메일입니다.</span>";
+						return "no";
+					}else if(data == "ok"){
+						document.getElementById("okId").innerHTML="<span>사용가능한 이메일입니다.</span>";
+						document.getElementById("certificationBtn").style.display="block";
+						return "/member/popup";
+					}
+					
+				}
+			})
+			
+		}
+	
+		/*
 		$("#checkIdBtn").on("click", function() {
 							let regexId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 							if (!regexId.test($("#mem_id").val())) {
@@ -196,8 +206,7 @@ body{
 							}
 							$("#checkIdForm").submit();
 
-						})
-
+						})*/
 		document.getElementById("useBtn").onclick = function() { // 사용가능 이메일 사용한다 했을때
 			let regexId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 			if (!regexId.test($('#mem_id').val())) {
@@ -214,5 +223,6 @@ body{
 			self.close();
 		}
 	</script>
+	
 </body>
 </html>

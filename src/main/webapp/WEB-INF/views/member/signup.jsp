@@ -40,6 +40,7 @@ body {
 	text-decoration: none;
 	font-weight: bold;
 	margin-right: 25px;
+	height:50px;
 }
 
 #submitBtn {
@@ -52,6 +53,7 @@ body {
 	text-decoration: none;
 	font-weight: bold;
 	margin-left: 25px;
+	height:50px;
 }
 
 .checkFalse {
@@ -70,13 +72,14 @@ body {
 	font-size: xx-small;
 	margin-top: 7px;
 }
+
 </style>
 </head>
 <body>
 	<div class="container"
 		style="border-radius: 30px; width: 450px; border: 3px solid #1e8ae972">
 		<form id="memberForm" action="/member/signupForm" method="post">
-			<div class="row m-3">
+			<div class="row m-3" >
 				<div class="col d-flex justify-content-center">
 					<h2>회원가입</h2>
 				</div>
