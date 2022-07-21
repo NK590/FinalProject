@@ -59,10 +59,5 @@ public class StudyService {
 		return dao.myLastWeekList(mem_seq);
 	}
 	
-	@ExceptionHandler
-	public String toError(Exception e) {
-		System.out.println("예외발생");
-		e.printStackTrace();
-		return "redirect:/toError";
-	}
+	
 }
