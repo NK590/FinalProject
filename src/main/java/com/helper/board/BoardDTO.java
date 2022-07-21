@@ -10,10 +10,11 @@ public class BoardDTO {
 	private String bo_title;
 	private String bo_content;
 	private String bo_date;
+	private int view_count;
 	
 	BoardDTO(){}
 
-	public BoardDTO(int bo_seq, int mem_seq, String mem_nick, String bo_title, String bo_content, String bo_date) {
+	public BoardDTO(int bo_seq, int mem_seq, String mem_nick, String bo_title, String bo_content, String bo_date, int view_count) {
 		super();
 		this.bo_seq = bo_seq;
 		this.mem_seq = mem_seq;
@@ -21,10 +22,10 @@ public class BoardDTO {
 		this.bo_title = bo_title;
 		this.bo_content = bo_content;
 		this.bo_date = bo_date;
+		this.view_count = view_count;
 	}
-	
 
-	public BoardDTO(int bo_seq, int mem_seq, String mem_nick, String bo_title, String bo_content, Date bo_date) {
+	public BoardDTO(int bo_seq, int mem_seq, String mem_nick, String bo_title, String bo_content, Date bo_date, int view_count) {
 		super();
 		this.bo_seq = bo_seq;
 		this.mem_seq = mem_seq;
@@ -32,6 +33,7 @@ public class BoardDTO {
 		this.bo_title = bo_title;
 		this.bo_content = bo_content;
 		this.bo_date = getStrDate(bo_date);
+		this.view_count = view_count;
 	}
 	public String getStrDate(Date date) { // Date형을 String 형으로 변환 
 		String rs = null;
@@ -87,15 +89,21 @@ public class BoardDTO {
 	public String getBo_date() {
 		return bo_date;
 	}
+	public void setBo_date(Date bo_date) {
+		this.bo_date = getStrDate(bo_date);
+	}
+	public int getView_count() {
+		return view_count;
+	}
 
-	public void setBo_date(String bo_date) {
-		this.bo_date = bo_date;
+	public void setView_count(int view_count) {
+		this.view_count = view_count;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardDTO [bo_seq=" + bo_seq + ", mem_seq=" + mem_seq + ", mem_nick=" + mem_nick + ", bo_title="
-				+ bo_title + ", bo_content=" + bo_content + ", bo_date=" + bo_date + "]";
+				+ bo_title + ", bo_content=" + bo_content + ", bo_date=" + bo_date + " : "+view_count+"]";
 	}
 	
 }
