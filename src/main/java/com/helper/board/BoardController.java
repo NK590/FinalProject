@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-@RequestMapping(value="board")
+@RequestMapping(value="/board")
 @Controller
 public class BoardController {
 	@Autowired
@@ -32,7 +32,7 @@ public class BoardController {
 		
 		return "/board/write";
 	}
-	@RequestMapping(value="/summernote") // summernote 이미지 띄워주기 
+	@RequestMapping(value="/summernote", produces="text/html; charset=utf-8") // summernote 이미지 띄워주기 
 	@ResponseBody
 	public String summernote(@RequestParam("file") MultipartFile file)throws Exception{
 		String realPath =  session.getServletContext().getRealPath("board");
