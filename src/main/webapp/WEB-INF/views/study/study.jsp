@@ -558,9 +558,9 @@ button {
           bt[i].style.visibility="hidden";
         }
       i=0;
-      <c:forEach var="dto" items="${subjectlist}">//재 접속시 저장한 과목의 이름 보이게 
-  			$(".basic").children(".subjectName:eq("+(i++)+")").val("${dto.time_subject}")
-  		</c:forEach>    
+      	<c:forEach var="dto" items="${subjectlist}">//재 접속시 저장한 과목의 이름 보이게 
+			$(".basic").children(".subjectName:eq("+(i++)+")").val("${dto.time_subject}")
+		</c:forEach> 
       $("#alert").hide();
       $("#alert2").hide();
     });
