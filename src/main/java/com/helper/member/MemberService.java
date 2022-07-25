@@ -34,8 +34,13 @@ public class MemberService{
 	}
 	
 	// 로그인
-	public MemberDTO login(String mem_id, String mem_pw) throws Exception{
-		return dao.login(mem_id, mem_pw);
+	public MemberDTO login(String mem_id) throws Exception{
+		return dao.login(mem_id);
+	}
+	
+	// 이메일 찾기
+	public MemberDTO findNickname(String mem_nick) throws Exception{
+		return dao.findNickname(mem_nick);
 	}
 	
 	// 카카오 로그인

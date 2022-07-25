@@ -117,9 +117,9 @@ span {
 	</div>
 
 	<div class="row justify-content-around logininput">
-		<input type="text" id="id" name="mem_id" placeholder="이메일을 입력해주세요.">
+		<input type="text" id="id" name="mem_id" required placeholder="이메일을 입력해주세요.">
 			<div class="nothing"></div>
-		<input type="password" id="password" name="mem_pw" placeholder="비밀번호를 입력해주세요.">
+		<input type="password" id="password" name="mem_pw" required placeholder="비밀번호를 입력해주세요.">
 	</div>
 	
 	<div class="row justify-content-center emailSave">
@@ -144,6 +144,7 @@ span {
 		</a>
 	</div>
 	 -->
+	 <button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 
 <p id="token-result"></p>
 
@@ -163,13 +164,26 @@ span {
 	</div>
 </form>
 	 
-	<script>
+	<script>	
+	function kakaoLogout() {
+	    if (!Kakao.Auth.getAccessToken()) {
+	      alert('Not logged in.')
+	      return
+	    }
+	    Kakao.Auth.logout(function() {
+	      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+	      location.href="/member/logout"
+	    })
+	  }
+	/* 성민 카카오
+	
 	// 카카오로그인 버튼 눌렀을때 무조건 카카오 로그인창 띄워주기 
 	function kakaoLogin(){
 		Kakao.init('1d93d50b4296c95206af1d69936465bf'); // 본인의 자바스크립트 키로 카카오 기능 활성화
-		
+		console.log(Kakao.isInitialized());
 		// 카카오 로그인 서비스 실행하기 및 사용자 정보 가져오기.
-		Kakao.Auth.login({ // 로그인하면서 인증정보 얻어오는 코드 
+		Kakao.Auth.login({ // 로그인하면서 인증정보 얻어오는 코드
+			scope: 'account_email',
 			success:function(auth){
 				Kakao.API.request({
 					url: '/v2/user/me',
@@ -194,7 +208,7 @@ span {
 	
 		
 	
-	/* //카카오 로그인
+	 //카카오 로그인
 	Kakao.init('1d93d50b4296c95206af1d69936465bf');
 Kakao.isInitialized();
   function loginWithKakao() {
@@ -225,10 +239,10 @@ Kakao.isInitialized();
   }
  */
 	
-	/*
+	// 예지 카카오
 	window.Kakao.init('1d93d50b4296c95206af1d69936465bf'); // 발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	
 function kakaoLogin() {
 	window.Kakao.Auth.login({
 		scope:'account_email'
@@ -241,7 +255,7 @@ function kakaoLogin() {
 					const email = kakao_account.email;
 					
 					console.log(kakao_account);
-					console.log(email)
+					console.log(email);
 					
 					$.ajax({
                         				type: "post",
@@ -255,7 +269,7 @@ function kakaoLogin() {
                               					 location.href = '/member/toKakaoSignUp?email=' + email;
                           					  } else if (data === "success") {
 								console.log("success");
-								location.href="/"
+								location.href="/member/login"
                            					 }
                         }, error: function (request, status, error) {
                             console.log("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
@@ -270,7 +284,8 @@ function kakaoLogin() {
         }
     })
 };
-*/
+
+
 	// 아이디, 비밀번호 입력후 엔터키 치면~
 	$('#id, #password').on('keypress', function(e){ 
 	    if(e.keyCode == '13'){ 
@@ -289,23 +304,39 @@ function kakaoLogin() {
 	document.getElementById("loginBtn").onclick = function(){
 		let login = $("#loginForm").serialize();
 		console.log(login);
-		
-		$.ajax({
-			url : "/member/loginForm"
-			,type : "post"
-			,data :login
-			, success: function(data){
-				console.log(data);
-				if(data == "success"){
-					location.href = "/member/toLogin";
-				}else if(data == "fail"){
-					alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+		if( $('#id').val() == "" || $('#password').val() == "" ){
+			alert("아이디 혹은 비밀번호를 입력해주세요.");
+		} else{
+			// 아이디, 비밀번호 입력 시 ajax실행
+			$.ajax({
+				url : "/member/loginForm"
+				,type : "post"
+				,data :login
+				, success: function(data){
+					console.log(data);
+					if(data == "success"){
+						location.href = "/member/toLogin";
+					}else if(data == "fail"){
+						
+						alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+					}
+				}, error : function(e){
+					console.log(e);
 				}
-			}, error : function(e){
-				console.log(e);
-			}
-		})
+			})
+			
+		}
 	}
+	
+	
+	
+	// 이메일 찾기 버튼 누르면 팝업창 띄우기
+    document.getElementById("idSearch").onclick = function () {
+        let url = "/member/searchId"; 
+        let name = "이메일 찾기"; // 팝업창 이름값
+        let option = "width=600, height=400, left=500, top=300"; // 팝업창 크기, 위치
+        window.open(url, name, option);
+    }
 
 	</script>
 </body>

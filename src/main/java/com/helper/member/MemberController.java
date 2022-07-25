@@ -1,10 +1,12 @@
 package com.helper.member;
 
-import java.util.Locale;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,12 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	
 	@RequestMapping(value = "/login") //로그인 페이지 요청
-	public String login() throws Exception{
+	public String login() throws Exception{		
 		return "member/login";
 	}
 	
@@ -35,6 +40,30 @@ public class MemberController {
 		return "member/popup";
 	}
 	
+	@RequestMapping(value = "/searchId") 
+	public String searchId() {
+		return "member/idSearch";
+	}
+	
+	// 이메일 찾기
+	@RequestMapping(value = "/findNick")
+	@ResponseBody
+	public String findNick(String mem_nick) throws Exception{
+		System.out.println(mem_nick);
+		MemberDTO dto = null;
+		dto = service.findNickname(mem_nick);
+		if(dto != null) {
+			//id값 가져와서 뿌리기
+			//session.setAttribute("mem_id", dto.getMem_id());
+			String mem_id = dto.getMem_id();
+			return mem_id;
+			
+		} else {
+			
+			return "no";
+		}
+	}
+	
 	// 이메일 중복확인 요청
 	@RequestMapping(value = "/checkEmailForm")
 	@ResponseBody
@@ -43,6 +72,7 @@ public class MemberController {
 		MemberDTO dto = null;
 		dto = service.checkEmail(mem_id);
 		if(dto != null) {
+			
 			return "no";
 			
 		} else {
@@ -68,7 +98,11 @@ public class MemberController {
 	@RequestMapping(value = "/signupForm") // 회원가입 요청
 	public String signupForm(MemberDTO dto, HttpSession session) throws Exception{
 		System.out.println(dto.toString());
+		String encodePassword = passwordEncoder.encode(dto.getMem_pw());
+		dto.setMem_pw(encodePassword); 
+		System.out.println("encodePassword : " + encodePassword);
 		service.signupForm(dto);
+		
 		return "redirect:/member/login";
 	}
 	
@@ -76,16 +110,19 @@ public class MemberController {
 	@ResponseBody	// 로그인 요청 
 	public String loginForm(String mem_id, String mem_pw) throws Exception{
 		System.out.println(mem_id + " : " + mem_pw);
-		MemberDTO dto = service.login(mem_id, mem_pw);
-		if(dto != null) {
+		//MemberDTO dto = null;
+		MemberDTO dto = service.login(mem_id);
+		System.out.println(dto);
+		//boolean pwdMatch = passwordEncoder.matches(mem_pw, dto.getMem_pw());
+		if(dto != null && passwordEncoder.matches(mem_pw, dto.getMem_pw())) {
 			session.setAttribute("loginSession", dto);
 			System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
 			System.out.println("넘어왔니?");
+			
 			return "success";
 		}
 		return "fail";
 	}
-	
 	
 	@RequestMapping(value = "/toLogin") // toLogin페이지 요청
 	public String toLogin() {
@@ -132,7 +169,7 @@ public class MemberController {
 		@RequestMapping(value = "/logout")
 		public String logout() {
 			session.removeAttribute("loginSession");
-			return "redirect: / ";
+			return "redirect: /";
 		}
 	
 	

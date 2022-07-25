@@ -16,12 +16,16 @@
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="map" resultType="com.helper.member.MemberDTO">
+	<select id="login" parameterType="String" resultType="com.helper.member.MemberDTO">
 		select * from tb_member
-			where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+			where mem_id = #{mem_id}
 	</select>
 	
-	
+	<!-- 이메일 찾기 -->
+	<select id="findNickname" parameterType="String" resultType="com.helper.member.MemberDTO">
+		select * from tb_member where mem_nick = #{mem_nick}
+	</select>
+	<!-- 카카오 로그인 시  -->
 	
 	<!-- 카카오 정보 찾기 
 	<select id="findKakao" parameterType="java.util.HashMap" resultType="com.helper.member.KakaoDTO">

@@ -24,12 +24,17 @@ public class MemberDAO {
 	}
 	
 	// 로그인
-	public MemberDTO login(String mem_id, String mem_pw) throws Exception {
-		Map<String, String> map = new HashMap<>();
-		map.put("mem_id", mem_id);
-		map.put("mem_pw", mem_pw);
+	public MemberDTO login(String mem_id) throws Exception {
 		
-		return session.selectOne("memberMapper.login", map);
+		//map.put("mem_id", mem_id);
+		//map.put("mem_pw", mem_pw);
+		
+		return session.selectOne("memberMapper.login", mem_id);
+	}
+	
+	// 이메일 찾기
+	public MemberDTO findNickname(String mem_nick) throws Exception{
+		return session.selectOne("memberMapper.findNickname", mem_nick);
 	}
 	
 	// 카카오 로그인

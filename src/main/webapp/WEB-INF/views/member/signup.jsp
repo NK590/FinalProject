@@ -194,9 +194,9 @@ body {
 		
 		// 이메일 확인 버튼 누르면 팝업창 띄우기
 		document.getElementById("checkIdBtn").onclick = function() {
-			let url = "/member/popup"; // jsp 경로값 (팝업창 꾸며주는 jsp 필요 **)
-			let name = "이메일 중복검사"; // 팝업창 이름값
-			let option = "width=600, height=300, left=500, top=300"; // 팝업창 크기, 위치
+			let url = "/member/popup"; 
+			let name = "이메일 중복검사"; 
+			let option = "width=600, height=300, left=500, top=300"; 
 			window.open(url, name, option);
 		}
 		

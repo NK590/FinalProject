@@ -37,6 +37,9 @@
 			<exclude-mapping path="/member/signupForm"/>
 			<exclude-mapping path="/member/loginForm"/>
 			<exclude-mapping path="/member/certificationEmail"/>
+			<exclude-mapping path="/member/searchId"/>
+			<exclude-mapping path="/member/findNick"/>
+			<exclude-mapping path="/member/kakaoLogin"/>
 			<beans:bean class="com.helper.utils.AuthLoginInterceptor"/>
 		</interceptor>
 	</interceptors>
