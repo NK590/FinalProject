@@ -3,14 +3,18 @@ package com.helper.study;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.helper.member.MemberDTO;
 import com.helper.utils.Crawl;
 
 
@@ -23,22 +27,14 @@ public class StudyController {
 	private HttpSession session;
 	@Autowired
 	private StudyService service;
-	// crawlSample.jsp 매핑
-	@RequestMapping(value = "/crawl")
-	public String crawl() throws Exception {
-		return "study/crawlSample";
-	}
-	
 	// 크롤링 검색
 	@ResponseBody
 	@RequestMapping(value = "/dicSearch", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<String> dicSearch(String queryInput, String languageInput, Model model) throws Exception {
 		System.out.println("검색한 단어 : " + queryInput);
-		
-		List<String> list = crawlUtils.getCrawlResult(queryInput, languageInput);
-		
+		List<String> list = crawlUtils.getCrawlResult(queryInput, languageInput);	
 		return list;
-	}
+		}
 	@RequestMapping(value = "/toStudy")
 	public String toStudy(Model model)throws Exception{
 		System.out.println("공부하기 페이지 요청");
@@ -49,8 +45,9 @@ public class StudyController {
 	@ResponseBody
 	@RequestMapping(value = "/record")
 	public String record(@RequestBody List<TimeDTO> list)throws Exception{
+
 		if(service.selectrecord()==0) {
-			service.insertAll(list);	
+			service.insertAll(list);
 		}else {
 			for(TimeDTO dto : list) {
 				if(service.selectsubject(dto.getTime_subject())==0) {
@@ -102,5 +99,15 @@ public class StudyController {
 	      model.addAttribute("weekTotalTime", weekTotalTime);
 	      return "study/record";
 	   }
+	@RequestMapping(value= "/toError") // 에러페이지로 이동
+	public String toError() {
+		return "error";
+	}
+	@ExceptionHandler
+	public String toError(Exception e) {
+		System.out.println("예외발생");
+		e.printStackTrace();
+		return "redirect:/toError";
+	}
 	
 }

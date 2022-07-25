@@ -4,20 +4,62 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="memberMapper">
-
+	<!-- 이메일 중복확인 -->
 	<select id="checkEmail" parameterType="String" resultType="com.helper.member.MemberDTO">
 		select * from tb_member
 			where mem_id = #{mem_id}
 	</select>
 	
+	<!-- 회원가입 -->
 	<insert id="insert" parameterType="com.helper.member.MemberDTO">
 		insert into tb_member values(mem_seq.nextval, #{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_std_key}, 'N', 0)
 	</insert>
 	
-	<select id="loginOk" parameterType="String" resultType="com.helper.member.MemberDTO">
+	<!-- 로그인 -->
+	<select id="login" parameterType="map" resultType="com.helper.member.MemberDTO">
 		select * from tb_member
-			where where mem_id = #{mem_id} and mem_pw = #{mem_pw}"
+			where mem_id = #{mem_id} and mem_pw = #{mem_pw}
 	</select>
+	
+	
+	
+	<!-- 카카오 정보 찾기 
+	<select id="findKakao" parameterType="java.util.HashMap" resultType="com.helper.member.KakaoDTO">
+		select * from tb_kakao where kakao_name=#{kakao_name} and kakao_email=#{kakao_email}
+	</select>
+	-->
+	<!-- 카카오 정보 저장 
+	<insert id="kakaoInsert" parameterType="java.util.HashMap">
+		insert into tb_kakao values(#{kakao_name}, #{kakao_email})
+	</insert>
+	
+	<select id="kakaoNumber" parameterType="com.helper.member.KakaoDTO" resultType="com.helper.member.KakaoDTO">
+		select * from tb_kakao where kakao_name=#{kakao_name} and kakao_email=#{kakao_email}
+	</select>
+	-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
