@@ -24,21 +24,21 @@ public class StudyController {
 	@Autowired
 	private StudyService service;
 	// crawlSample.jsp 매핑
-		@RequestMapping(value = "/crawl")
-		public String crawl() throws Exception {
-			return "study/crawlSample";
-		}
+	@RequestMapping(value = "/crawl")
+	public String crawl() throws Exception {
+		return "study/crawlSample";
+	}
+	
+	// 크롤링 검색
+	@ResponseBody
+	@RequestMapping(value = "/dicSearch", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> dicSearch(String queryInput, String languageInput, Model model) throws Exception {
+		System.out.println("검색한 단어 : " + queryInput);
 		
-		// 크롤링 검색
-		@ResponseBody
-		@RequestMapping(value = "/dicSearch", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public List<String> dicSearch(String queryInput, String languageInput, Model model) throws Exception {
-			System.out.println("검색한 단어 : " + queryInput);
-			
-			List<String> list = crawlUtils.getCrawlResult(queryInput, languageInput);
-			
-			return list;
-		}
+		List<String> list = crawlUtils.getCrawlResult(queryInput, languageInput);
+		
+		return list;
+	}
 	@RequestMapping(value = "/toStudy")
 	public String toStudy(Model model)throws Exception{
 		System.out.println("공부하기 페이지 요청");

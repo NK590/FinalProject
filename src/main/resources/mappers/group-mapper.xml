@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="groupMapper">
+	<!-- 그룹 생성 -->
+	<insert id="insert" parameterType="com.helper.group.GroupDTO">
+		insert into tb_group values
+			(group_seq.nextval, #{mem_seq}, #{group_title}, #{group_content}, #{group_std_key}, #{group_max}, #{group_memCount}, #{group_image})
+	</insert>
+	
+	<!-- 그룹 전체 조회 -->
+	<select id="selectAll" resultType="com.helper.group.GroupDTO">
+		select * from tb_group
+	</select>
+	
+	<!-- 그룹 번호로 단일 그룹 조회 -->
+	<select id="selectBySeq" parameterType="int" resultType="com.helper.group.GroupDTO">
+		select * from tb_group
+			where group_seq = #{group_seq}
+	</select>
+	
+	<!-- 그룹 정보 업데이트 통합 쿼리 (입력값 DTO) -->
+	<update id="modify" parameterType="com.helper.group.GroupDTO">
+		update tb_group set
+			mem_seq = #{mem_seq},
+			group_title = #{group_title},
+			group_content = #{group_content).
+			group_max = #{group_max},
+			where group_seq = #{group_seq}
+	</update>
+	
+	<!-- 그룹 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from tb_group
+			where group_seq = #{group_seq}
+	</delete>
+</mapper>
