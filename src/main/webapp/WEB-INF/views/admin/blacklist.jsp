@@ -63,7 +63,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 	<div class="container">
 		<div class="row">
 			<div class="col-12" id="serchDiv">
@@ -176,7 +176,7 @@
 			})
 		})
 		
-		$(document).on("click", ".page-link", function(){
+		$(document).on("click", ".link", function(){
 			let curPage = this.getAttribute('data-value');
 			let mem_id = $("#getMem_id").val();
 			
@@ -287,7 +287,7 @@
 				if(data.naviMap.needPrev){
 					let prevLi = $("<li>").attr({class : "page-item"});
 					let prevA = $("<a>").attr({
-						class : "page-link",
+						class : "page-link link",
 						"data-value" : data.naviMap.startNavi-1,
 					})
 					let prevSpan = $("<span>").attr({ "aria-hidden" : "true"}).html("&laquo;");
@@ -298,7 +298,7 @@
 				for(let i=data.naviMap.startNavi; i<=data.naviMap.endNavi; i++){
 					let numLi = $("<li>").attr({class : "page-item"});
 					let numA = $("<a>").attr({
-						class : "page-link",
+						class : "page-link link",
 						"data-value" : i,
 					});
 					numA.html(i);
@@ -308,7 +308,7 @@
 				if(data.naviMap.needNext){
 					let nextLi = $("<li>").attr({class : "page-item"});
 					let nextA = $("<a>").attr({
-						class : "page-link",
+						class : "page-link link",
 						"data-value" : data.naviMap.endNavi+1,
 					})
 					let nextSpan = $("<span>").attr({ "aria-hidden" : "true"}).html("&raquo;");

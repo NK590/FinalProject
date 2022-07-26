@@ -13,6 +13,17 @@ public class AdminService {
 	private ReportDAO reportDAO;
 	@Autowired
 	private GroupDAO groupDAO;
+	@Autowired
+	private RecordDAO recordDAO;
+	
+	/* Main record */
+	public List<Map<String, Object>> selectTopMem() throws Exception {
+		return recordDAO.selectTopMem();
+	}
+	
+	public List<Map<String, Object>> selectTopGroup() throws Exception {
+		return recordDAO.selectTopGroup();
+	}
 	
 	/* Report */
 	// 블랙리스트 목록
@@ -36,10 +47,16 @@ public class AdminService {
 		return reportDAO.getSearchPageNavi(mem_id, curPage);
 	}
 	
-	
 	/* Group */
-	public List<GroupDTO> groupList(int start, int end) throws Exception {
+	public List<Map<String, Object>> groupList(int start, int end) throws Exception {
 		return groupDAO.groupList(start,end);
+	}
+	public Map<String, Object> getGroupPageNavi(int curPage) throws Exception {
+		return groupDAO.getGroupPageNavi(curPage);
+	}
+	
+	public void deleteGroup(int group_seq) throws Exception {
+		groupDAO.deleteGroup(group_seq);
 	}
 	
 	

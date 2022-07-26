@@ -41,6 +41,46 @@
 			from (select * from tb_report where mem_id like '%'||#{mem_id}||'%')
 	</select>
 	
+	<!-- 그룹 리스트 -->
+	<select id="groupList" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+		select * from (select sum(time_count) as group_count, group_seq 
+			from tb_member full join tb_timer 
+					using(mem_seq)
+    				group by group_seq 
+    				order by group_count desc) join tb_group 
+    		using(group_seq)
+	</select>
+	<select id="groupPage" resultType="int">
+		select count(*) as totalCnt from tb_group
+	</select>
+	<!-- 그룹 삭제시 -->
+	<delete id="deleteGroup" parameterType="int">
+		delete from tb_group 
+			where group_seq = #{group_seq}
+	</delete>
+	<update id="memGroupSetNull" parameterType="int">
+		update tb_member set group_seq=null 
+			where group_seq = #{group_seq}
+	</update>
 	
+	<!-- 메인페이지 top3 -->
+	<select id="selectTopMem" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+		select * from (select mem_seq,sum(time_count) as time_count 
+				from tb_timer where to_char(sysdate, 'MM/dd') = to_char(time_date, 'MM/dd')
+ 				group by mem_seq
+ 				order by time_count desc) join tb_member 
+ 			using(mem_seq)
+ 			where rownum <![CDATA[<=]]> 3
+	</select>
+	<select id="selectTopGroup" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+		select * from 
+			(select sum(time_count) as group_count, group_seq 
+			from tb_member join tb_timer 
+					using(mem_seq)
+    				group by group_seq 
+    				order by group_count desc) join tb_group 
+    		using(group_seq)
+    		where rownum <![CDATA[<=]]> 3
+	</select>
 	
 </mapper>
