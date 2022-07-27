@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GroupDAO {
+public class AdminGroupDAO {
 	
 	@Autowired
 	private SqlSession session;

@@ -12,7 +12,7 @@ public class AdminService {
 	@Autowired
 	private ReportDAO reportDAO;
 	@Autowired
-	private GroupDAO groupDAO;
+	private AdminGroupDAO groupDAO;
 	@Autowired
 	private RecordDAO recordDAO;
 	
