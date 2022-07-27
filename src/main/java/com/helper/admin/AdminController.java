@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.helper.member.MemberDTO;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -61,6 +63,20 @@ public class AdminController {
 		service.deleteGroup(group_seq);
 		
 		return "redirect:/admin/toGrouplist?curPage=1";
+	}
+	
+	@RequestMapping(value = "/toAdmin")
+	public String toAdmin() throws Exception {
+		return "admin/adminMain";
+	}
+	
+	@RequestMapping(value = "/toBlackManage")
+	public String toBlackManage(int curPage ,Model model) throws Exception {
+		List<MemberDTO> blacklist = service.selectBlacklist(curPage*10-9,curPage*10);
+		Map<String, Object> map = service.getBlacklistPageNavi(curPage);
+		model.addAttribute("blacklist", blacklist);
+		model.addAttribute("naviMap", map);
+		return "admin/blackManage";
 	}
 	
 	

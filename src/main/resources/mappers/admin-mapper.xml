@@ -6,7 +6,7 @@
 <mapper namespace="adminMapper">
 	<!-- 블랙리스트 부분 -->
 	<!-- 
-		블랙리스트 목록페이지 페이징
+		신고 목록페이지 페이징
 		mem_black = N 인사람만 카운트 + 출력
 	-->
 	<select id="blackPage" resultType="int">
@@ -14,14 +14,14 @@
     		on re.mem_seq = me.mem_seq
     		where me.mem_black = 'N'
 	</select>
-	<!-- 블랙리스트 목록 -->
+	<!-- 신고 목록 -->
 	<select id="reportList" parameterType="map" resultType="com.helper.admin.ReportDTO">
 		select * from (select re.*, row_number() over(order by report_seq desc) as num from tb_report re join tb_member me
    			on re.mem_seq = me.mem_seq
     		where me.mem_black = 'N')
     		where num between #{start} and #{end}
 	</select>
-	<!-- 블랙리스트 추가/삭제 -->
+	<!-- 신고 추가/삭제 -->
 	<update id="addBleck" parameterType="int">
 		update tb_member set mem_black = 'Y' 
 			where mem_seq = #{mem_seq}
@@ -40,6 +40,17 @@
 		select count(*) as totalCnt 
 			from (select * from tb_report where mem_id like '%'||#{mem_id}||'%')
 	</select>
+	<!-- 블랙리스트 유저 -->
+	<select id="selectBlacklist" parameterType="map" resultType="com.helper.member.MemberDTO">
+		select *
+			from (select tb_member.*, row_number() over(order by mem_seq desc) as num from tb_member where mem_black='Y')
+			where num between #{start} and #{end}
+	</select>
+	<select id="blacklistPage" resultType="int">
+		select count(*) from tb_member
+			where mem_black='Y'
+	</select>
+	
 	
 	<!-- 그룹 리스트 -->
 	<select id="groupList" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">

@@ -81,6 +81,7 @@
 					<th>분류</th>
 					<th>아이디</th>
 					<th>닉네임</th>
+					<th>신고유저 닉네임</th>
 					<th>신고내역 보기</th>
 				</tr>
 			</thead>
@@ -88,7 +89,7 @@
 				<c:choose>
 					<c:when test="${reportList.size() == 0}">
 						<tr>
-							<td colspan="4">등록된 신고내역이 없습니다.</td>
+							<td colspan="5">등록된 신고내역이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -97,6 +98,7 @@
 								<td>${dto.mem_std_key}</td>
 								<td>${dto.mem_id}</td>
 								<td>${dto.mem_nick}</td>
+								<td>${dto.report_nick}</td>
 								<td><button type="button" class="fastbtn"
 										id="reportContent" data-bs-toggle="modal"
 										data-bs-target="#reportModal${dto.report_seq}">신고내용</button></td>
@@ -216,7 +218,7 @@
 			$("tbody").empty();
 			if(data.list.length == 0) {
 				let tr = $("<tr>");
-				let td = $("<td colspan='4'>").html("등록된 신고내역이 없습니다.");
+				let td = $("<td colspan='5'>").html("등록된 신고내역이 없습니다.");
 				tr.append(td);
 				tr.appendTo($("tbody"));
 			} else {
@@ -225,7 +227,8 @@
 					let td1 = $("<td>").html(dto.mem_std_key);
 					let td2 = $("<td>").html(dto.mem_id);
 					let td3 = $("<td>").html(dto.mem_nick);
-					let td4 = $("<td>")
+					let td4 = $("<td>").html(dto.report_nick);
+					let td5 = $("<td>")
 					let ContentBtn = $("<button>").attr({
 						type : "button",
 						class : "fastbtn",
@@ -278,8 +281,8 @@
 					div2.append(div3);
 					div1.append(div2);
 					
-					td4.append(ContentBtn);
-					tr.append(td1, td2, td3, td4);
+					td5.append(ContentBtn);
+					tr.append(td1, td2, td3, td4, td5);
 					tr.appendTo($("tbody"));
 					div1.appendTo($("tbody"));
 				}

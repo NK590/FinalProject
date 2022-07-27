@@ -449,7 +449,7 @@ a:hover {
 								</c:if>
 								<c:if test="${not empty groupList[0].group_image}">
 									<!-- 그룹 이미지 -->
-									<img src="/img/group/${groupList[0].group_image}">
+									<img src="/group/${groupList[0].group_image}">
 								</c:if>
 							</div>
 							<c:if test="${groupList.size() == 0}">
@@ -471,7 +471,7 @@ a:hover {
 								</c:if>
 								<c:if test="${not empty groupList[1].group_image}">
 									<!-- 그룹 이미지 -->
-									<img src="/img/group/${groupList[1].group_image}">
+									<img src="/group/${groupList[1].group_image}">
 								</c:if>
 							</div>
 							<c:if test="${groupList.size() <= 1}">
@@ -493,7 +493,7 @@ a:hover {
 								</c:if>
 								<c:if test="${not empty groupList[2].group_image}">
 									<!-- 그룹 이미지 -->
-									<img src="/img/group/${groupList[2].group_image}">
+									<img src="/group/${groupList[2].group_image}">
 								</c:if>
 							</div>
 							<c:if test="${groupList.size() <= 2}">

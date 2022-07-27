@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
+
+import com.helper.member.MemberDTO;
 
 @Service
 public class AdminService {
@@ -15,6 +18,8 @@ public class AdminService {
 	private AdminGroupDAO groupDAO;
 	@Autowired
 	private RecordDAO recordDAO;
+	@Autowired
+	private AdminDAO adminDAO;
 	
 	/* Main record */
 	public List<Map<String, Object>> selectTopMem() throws Exception {
@@ -59,6 +64,13 @@ public class AdminService {
 		groupDAO.deleteGroup(group_seq);
 	}
 	
+	public List<MemberDTO> selectBlacklist(int start, int end) throws Exception {
+		return adminDAO.selectBlacklist(start, end);
+	}
+	
+	public Map<String, Object> getBlacklistPageNavi(int curPage) throws Exception {
+		return adminDAO.getBlacklistPageNavi(curPage);
+	}
 	
 	
 }

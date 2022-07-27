@@ -21,7 +21,19 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
-	
+	<div class="container">
+		<div class="row">
+			<div class="col-6"> <!-- 왼쪽 상당 -->
+				<div class="row">
+					<div class="col-12">
+						<h4>이번주 가입 회원 수</h4>
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
 	
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
