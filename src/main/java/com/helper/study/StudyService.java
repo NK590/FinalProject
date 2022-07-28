@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.helper.week.WeekDAO;
+import com.helper.week.WeekDTO;
+
 @Service
 public class StudyService {
 	@Autowired
@@ -14,15 +17,17 @@ public class StudyService {
 	private SubjectDAO subjectdao;
 	@Autowired
 	private StudyDAO dao;
+	@Autowired
+	private WeekDAO weekdao;
 	
 	public void insertAll(List<TimeDTO> list)throws Exception{
 		timedao.insertAll(list);
 	}
-	public int selectrecord()throws Exception{
-		return timedao.selectrecord();
+	public int selectrecord(int mem_seq)throws Exception{
+		return timedao.selectrecord(mem_seq);
 	}
-	public int selectsubject(String time_subject)throws Exception{
-		return timedao.selectsubject(time_subject);
+	public int selectsubject(TimeDTO dto)throws Exception{
+		return timedao.selectsubject(dto);
 	}
 	public void insertOne(TimeDTO dto)throws Exception{
 		timedao.insertOne(dto);
@@ -30,14 +35,14 @@ public class StudyService {
 	public void updatetime(TimeDTO dto)throws Exception{
 		timedao.updatetime(dto);
 	}
-	public void deletesubject()throws Exception{
-		subjectdao.deletesubject();
+	public void deletesubject(int mem_seq)throws Exception{
+		subjectdao.deletesubject(mem_seq);
 	}
 	public void insertsubject(List<SubjectDTO> list)throws Exception{
 		subjectdao.insertsubject(list);
 	}
-	public List<SubjectDTO> selectall()throws Exception{
-		return subjectdao.selectall();
+	public List<SubjectDTO> selectall(int mem_seq)throws Exception{
+		return subjectdao.selectall(mem_seq);
 	}
 	// 오늘 공부한 과목들
 	public List<String> subjectList(int mem_seq) throws Exception {
@@ -58,6 +63,8 @@ public class StudyService {
 	public List<Integer> myLastWeekList(int mem_seq) throws Exception {
 		return dao.myLastWeekList(mem_seq);
 	}
-	
+	public int insertWeek(WeekDTO weekdto)throws Exception{
+		return weekdao.insertWeek(weekdto);
+	}
 	
 }
