@@ -11,7 +11,7 @@
 	
 	<!-- 회원가입 -->
 	<insert id="insert" parameterType="com.helper.member.MemberDTO">
-		insert into tb_member values(mem_seq.nextval, #{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_std_key}, 'N', 0)
+		insert into tb_member values(mem_seq.nextval, #{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_std_key}, 'N', 0, sysdate)
 	</insert>
 	
 	<!-- 로그인 -->
@@ -36,7 +36,7 @@
 	
 	<!-- 카카오 회원가입  -->
 	<insert id="insertKakao" parameterType="com.helper.member.MemberDTO">
-		insert into tb_member values(mem_seq.nextval, #{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_std_key}, 'N', 0)
+		insert into tb_member values(mem_seq.nextval, #{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_std_key}, 'N', 0, sysdate)
 	</insert>
 	
 	<!-- 마이페이지 회원정보 수정  -->
