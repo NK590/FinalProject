@@ -6,8 +6,7 @@
 <mapper namespace="memberMapper">
 	<!-- 이메일 중복확인 -->
 	<select id="checkEmail" parameterType="String" resultType="com.helper.member.MemberDTO">
-		select * from tb_member
-			where mem_id = #{mem_id}
+		select * from tb_member where mem_id = #{mem_id}
 	</select>
 	
 	<!-- 회원가입 -->
@@ -16,10 +15,50 @@
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="map" resultType="com.helper.member.MemberDTO">
-		select * from tb_member
-			where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+	<select id="login" parameterType="String" resultType="com.helper.member.MemberDTO">
+		select * from tb_member where mem_id = #{mem_id}
 	</select>
+	
+	<!-- 이메일 찾기 -->
+	<select id="findNickname" parameterType="String" resultType="com.helper.member.MemberDTO">
+		select * from tb_member where mem_nick = #{mem_nick}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="update" parameterType="com.helper.member.MemberDTO">
+		update tb_member set mem_pw = #{mem_pw} where mem_id = #{mem_id}
+	</select>
+	
+	<!-- 카카오 로그인 -->
+	<select id="kakaoLogin" parameterType="String" resultType="com.helper.member.MemberDTO">
+		select * from tb_member where mem_id = #{mem_id}
+	</select>
+	
+	<!-- 카카오 회원가입  -->
+	<insert id="insertKakao" parameterType="com.helper.member.MemberDTO">
+		insert into tb_member values(mem_seq.nextval, #{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_std_key}, 'N', 0)
+	</insert>
+	
+	<!-- 마이페이지 회원정보 수정  -->
+	<insert id="updateInfo" parameterType="com.helper.member.MemberDTO">
+		update tb_member set mem_pw = #{mem_pw}, mem_nick = #{mem_nick}, mem_std_key = #{mem_std_key} where mem_id = #{mem_id}
+	</insert>
+	
+	<!-- 마이페이지 회원탈퇴  -->
+	<delete id="dropoutInfo" parameterType="com.helper.member.MemberDTO">
+		delete from tb_member where mem_id = #{mem_id}
+	</delete>
+	
+	<!-- 마이페이지 내가 쓴 게시글 -->
+	<select id="myBoard" parameterType="int" resultType="com.helper.board.BoardDTO">
+		select * from tb_board where mem_seq = #{mem_seq} 
+	</select>
+	
+	<!-- 마이페이지 나의 그룹 -->
+	<select id="myGroup" parameterType="int" resultType="com.helper.board.BoardDTO">
+		select * from tb_group where group_seq = #{group_seq} 
+	</select>
+	
 	
 	
 	

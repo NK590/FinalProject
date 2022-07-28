@@ -24,6 +24,7 @@ import com.helper.member.MemberDTO;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
 	@Autowired
 	private HttpSession session;
 	@Autowired
@@ -66,6 +67,7 @@ public class AdminController {
 		
 		return "admin/grouplist";
 	}
+
 	@RequestMapping(value="/noticeWrite")
 	public String noticeWrite() throws Exception {
 		return "admin/noticeWrite";

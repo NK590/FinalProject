@@ -1,10 +1,12 @@
 package com.helper.member;
 
-import java.util.Locale;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,12 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	
 	@RequestMapping(value = "/login") //로그인 페이지 요청
-	public String login() throws Exception{
+	public String login() throws Exception{		
 		return "member/login";
 	}
 	
@@ -35,6 +40,47 @@ public class MemberController {
 		return "member/popup";
 	}
 	
+	// 이메일 찾기
+	@RequestMapping(value = "/searchId") 
+	public String searchId() {
+		return "member/idSearch";
+	}
+	
+	// 이메일 찾기
+	@RequestMapping(value = "/findNick")
+	@ResponseBody
+	public String findNick(String mem_nick) throws Exception{
+		System.out.println(mem_nick);
+		MemberDTO dto = null;
+		dto = service.findNickname(mem_nick);
+		if(dto != null) {
+			String mem_id = dto.getMem_id();
+			return mem_id;
+			
+		} else {
+			
+			return "no";
+		}
+	}
+	
+	// 비밀번호 찾기
+	@RequestMapping(value = "/searchPw") 
+	public String searchPw() {
+		return "member/passwordSearch";
+	}
+	
+	// 비밀번호 찾기
+		
+		@ResponseBody
+		@RequestMapping(value = "/findPassword")
+		public String pwUpdate(MemberDTO dto)throws Exception{
+			String encodePassword = passwordEncoder.encode(dto.getMem_pw());
+			dto.setMem_pw(encodePassword);
+			service.findPasswordForm(dto);
+			
+			return "member/findPassword";
+		}
+	
 	// 이메일 중복확인 요청
 	@RequestMapping(value = "/checkEmailForm")
 	@ResponseBody
@@ -43,14 +89,13 @@ public class MemberController {
 		MemberDTO dto = null;
 		dto = service.checkEmail(mem_id);
 		if(dto != null) {
+			
 			return "no";
 			
 		} else {
 			return "ok";
 		}
 	}
-
-	
 	
 	@RequestMapping(value = "/certificationEmail")
 	@ResponseBody// 이메일 인증번호 발송
@@ -67,8 +112,19 @@ public class MemberController {
 	
 	@RequestMapping(value = "/signupForm") // 회원가입 요청
 	public String signupForm(MemberDTO dto, HttpSession session) throws Exception{
-		System.out.println(dto.toString());
+		if(dto.getMem_pw() != null) {
+			System.out.println(dto.toString());
+			String encodePassword = passwordEncoder.encode(dto.getMem_pw());
+			dto.setMem_pw(encodePassword); 
+			System.out.println("encodePassword : " + encodePassword);
+		}else {
+			dto.setMem_pw("kakaoUser");
+			String encodePassword = passwordEncoder.encode(dto.getMem_pw());
+			dto.setMem_pw(encodePassword);
+			
+		}
 		service.signupForm(dto);
+		
 		return "redirect:/member/login";
 	}
 	
@@ -76,16 +132,16 @@ public class MemberController {
 	@ResponseBody	// 로그인 요청 
 	public String loginForm(String mem_id, String mem_pw) throws Exception{
 		System.out.println(mem_id + " : " + mem_pw);
-		MemberDTO dto = service.login(mem_id, mem_pw);
-		if(dto != null) {
+		MemberDTO dto = service.login(mem_id);
+		if(dto != null && passwordEncoder.matches(mem_pw, dto.getMem_pw())) {
 			session.setAttribute("loginSession", dto);
 			System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
 			System.out.println("넘어왔니?");
+			
 			return "success";
 		}
 		return "fail";
 	}
-	
 	
 	@RequestMapping(value = "/toLogin") // toLogin페이지 요청
 	public String toLogin() {
@@ -108,8 +164,8 @@ public class MemberController {
 	// 카카오 로그인
 		@ResponseBody
 		@RequestMapping(value = "/kakaoLogin")
-		public String kakaoLogin(String email) throws Exception{
-			MemberDTO dto = service.kakaoLogin(email);
+		public String kakaoLogin(String mem_id) throws Exception{
+			MemberDTO dto = service.kakaoLogin(mem_id);
 			if(dto != null) {
 				session.setAttribute("loginSession", dto);
 				System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
@@ -117,43 +173,34 @@ public class MemberController {
 			} else {
 				return "fail";
 			}
+		}
+		
+
+		// 카카오 회원가입 페이지 이동
+		//@ResponseBody
+		@RequestMapping(value = "/kakaoSignUp")
+		public String toKakaoSignUp(String mem_id, Model model) throws Exception{
+			System.out.println(mem_id);
+			System.out.println("도착");
+			MemberDTO dto = service.login(mem_id);
+			if(dto != null) {
+				session.setAttribute("loginSession", dto);
+				return "home";
+			}else {
+				model.addAttribute("mem_id", mem_id);
+				return "member/kakaoSignUp";
+			}
 			
 		}
 
-		// 카카오 회원가입 페이지 이동
-		@RequestMapping(value = "/toKakaoSignUp")
-		public String toKakaoSignUp(String email, Model model) {
-			System.out.println("도착");
-			model.addAttribute("email", email);
-			return "/member/kakaoSignUp";
-		}
 		
 		// 로그아웃
 		@RequestMapping(value = "/logout")
 		public String logout() {
 			session.removeAttribute("loginSession");
-			return "redirect: / ";
+			return "redirect:/member/login";
 		}
 	
-	
-	
-	// 카카오 로그인 토큰 받기
-//		@RequestMapping(value="/kakaoLogin")
-//		public String kakaoLogin(@RequestParam(value = "code", required = false) String code, Model model) throws Exception{
-//	        System.out.println("#########" + code);
-//	        return "member/signup";
-//	        String access_Token = service.getAccessToken(code);
-//	        KakaoDTO userInfo = service.getUserInfo(access_Token);
-//	        KakaoDTO number = service.kakaoNumber(userInfo); //
-//	        session.invalidate();
-//	        session.setAttribute("kakaoName", userInfo.getkakao_name());
-//	        session.setAttribute("kakaoEmail", userInfo.getkakao_email());
-//	        session.setAttribute("kakaoNumber", number.getkakao_seq());
-//	        return "member/signup";
-//	    }
-	
 		
-	
-	
-
+		
 }

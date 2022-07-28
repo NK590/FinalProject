@@ -109,126 +109,141 @@ span {
 </style>
 </head>
 <body>
-<form id="loginForm">
-	<div class="row m-3">
-		<div class="col d-flex justify-content-center">
-			<h2>로그인</h2>
+	<form id="loginForm">
+		<div class="row m-3">
+			<div class="col d-flex justify-content-center">
+				<h2>로그인</h2>
+			</div>
 		</div>
-	</div>
 
-	<div class="row justify-content-around logininput">
-		<input type="text" id="id" name="mem_id" placeholder="이메일을 입력해주세요.">
+		<div class="row justify-content-around logininput">
+			<input type="text" id="id" name="mem_id" required
+				placeholder="이메일을 입력해주세요.">
 			<div class="nothing"></div>
-		<input type="password" id="password" name="mem_pw" placeholder="비밀번호를 입력해주세요.">
-	</div>
-	
-	<div class="row justify-content-center emailSave">
-		<div class="col-lg-3">
-			<input type="checkbox" id="emailSave" name="emailSave">이메일	저장하기
+			<input type="password" id="password" name="mem_pw" required
+				placeholder="비밀번호를 입력해주세요.">
 		</div>
-	</div>
 
-	<div class="row justify-content-center text-center">
-		<div class="col-6 text-end">
-			<button type="button" id="loginBtn">로그인</button>
+		<div class="row justify-content-center text-center">
+			<div class="col-6 text-end">
+				<button type="button" id="loginBtn">로그인</button>
+			</div>
+			<div class="col-6 text-start">
+				<button type="button" id="memberBtn">회원가입</button>
+			</div>
 		</div>
-		<div class="col-6 text-start">
-			<button type="button" id="memberBtn">회원가입</button>
+		
+		<div class="row justify-content-center emailSave">
+				<div class="col-lg-2">
+					<input type="checkbox" id="emailSave" name="emailSave">이메일	저장하기
+				</div>
 		</div>
-	</div>
-	<!-- 
-	<div class="row justify-content-around logininput">
-		<a href="https://kauth.kakao.com//oauth/logout?client_id=1d93d50b4296c95206af1d69936465bf&logout_redirect_uri=http://localhost/member/login">로그아웃</a>
-		<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a988e7d46e170a65e7bfc2447c3f1d09&redirect_uri=http://localhost/member/kakaoLogin&response_type=code">
-						<img src="/resources/images/kakao_login_medium_narrow.png" style="width: 260px; height:50px;">
-		</a>
-	</div>
-	 -->
 
-<p id="token-result"></p>
+		<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 
-	 <div class="btnBox d-flex justify-content-center">
-			<a href="javascript:kakaoLogin()"> 
-				<img src="/resources/images/kakao_login_medium_narrow.png" alt="카카오 로그인 버튼" />
+		<p id="token-result"></p>
+
+		<div class="btnBox d-flex justify-content-center">
+			<a href="javascript:kakaoLogin()"> <img	src="/resources/images/kakao_login_medium_narrow.png" alt="카카오 로그인 버튼" />
 			</a>
-	</div>
-	
-	<br>
-	<div class="row justify-content-center search">
-		<div class="col-lg-3">
-			<a class="link" href="#" id="idSearch">이메일 찾기</a> 
-				<span>/</span> 
-			<a class="link" href="#" id="passwordSearch">비밀번호 찾기</a>
 		</div>
-	</div>
-</form>
-	 
+
+		<br>
+		<div class="row justify-content-center search">
+			<div class="col-lg-3">
+				<a class="link" href="#" id="idSearch">이메일 찾기</a> <span>/</span> <a
+					class="link" href="#" id="passwordSearch">비밀번호 찾기</a>
+			</div>
+		</div>
+
+	</form>
+	
+	<!-- 캐시를 이용하여 이메일 저장하기 checkbox 활용 -->
+		<script type="text/javascript">
+
+	    	$('#main-logo').on('click', () => {
+	    		location.href = "/home";
+	    	})
+	    	$('#main-logo').on('click', () => {
+	    		location.href = "/home";
+	    	})
+            $(function () {
+                fnInit();
+            });
+
+            function fnInit() {
+                var cookieid = getCookie("emailSave");
+                console.log(cookieid);
+                if (cookieid != "") {
+                    $("input:checkbox[id='emailSave']").prop("checked", true);
+                    $('#id').val(cookieid);
+                }
+
+            }
+
+            function setCookie(name, value, expiredays) {
+                if (expiredays == 0) {
+                    document.cookie = name + "=" + escape(value) + "; path=/; max-age=0;";
+                } else {
+                    document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expiredays + ";";
+                }
+                console.log(document.cookie);
+            }
+            
+            function saveid() {
+                var expdate = new Date();
+                if ($("#emailSave").is(":checked")) {
+                    expdate.setTime(expdate.getTime() + 1);
+                    setCookie("emailSave", $("#id").val(), expdate);
+                } else {
+                    expdate.setTime(expdate.getTime() - 1);
+                    setCookie("emailSave", $("#id").val(), 0);
+                }
+            } 
+
+            function getCookie(Name) {
+                var search = Name + "=";
+                console.log("search : " + search);
+
+                if (document.cookie.length > 0) { // 쿠키가 설정되어 있다면 
+                    offset = document.cookie.indexOf(search);
+                    console.log("offset : " + offset);
+                    if (offset != -1) { // 쿠키가 존재하면 
+                        offset += search.length;
+                        // set index of beginning of value
+                        end = document.cookie.indexOf(";", offset);
+                        console.log("end : " + end);
+                        // 쿠키 값의 마지막 위치 인덱스 번호 설정 
+                        if (end == -1)
+                            end = document.cookie.length;
+                        console.log("end위치  : " + end);
+
+                        return unescape(document.cookie.substring(offset, end));
+                    }
+                }
+                return "";
+            }
+
+           
+        </script>
+
 	<script>
-	// 카카오로그인 버튼 눌렀을때 무조건 카카오 로그인창 띄워주기 
-	function kakaoLogin(){
-		Kakao.init('1d93d50b4296c95206af1d69936465bf'); // 본인의 자바스크립트 키로 카카오 기능 활성화
-		
-		// 카카오 로그인 서비스 실행하기 및 사용자 정보 가져오기.
-		Kakao.Auth.login({ // 로그인하면서 인증정보 얻어오는 코드 
-			success:function(auth){
-				Kakao.API.request({
-					url: '/v2/user/me',
-					success: function(response){ // response의 kakao_account 안에 로그인된 사용자 정보값이 담겨있음
-						console.log(response);
-						// 사용자 정보를 가져와서 폼에 추가.
-						var account = response.kakao_account;
-						console.log(account);
-						// -> 여기서부터는 얻어온 값을 이용해 서버랑 통신하며 카카오 로그인 진행
-						
-					},
-					error: function(error){
-						console.log(error);
-					}
-				}); // api request
-			}, // success 결과.
-			error:function(error){
-				console.log(error);
-			}
-		})
-	}
-	
-		
-	
-	/* //카카오 로그인
-	Kakao.init('1d93d50b4296c95206af1d69936465bf');
-Kakao.isInitialized();
-  function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://localhost/member/login'
-    })
-  }
-  // 아래는 데모를 위한 UI 코드입니다.
-  displayToken()
-  function displayToken() {
-    const token = getCookie('authorize-access-token')
-    if(token) {
-      Kakao.Auth.setAccessToken(token)
-      Kakao.Auth.getStatusInfo(({ status }) => {
-        if(status === 'connected') {
-          document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
+	function kakaoLogout() {
+	    if (!Kakao.Auth.getAccessToken()) {
+	      alert('Not logged in.')
+	      return
+	    }
+	    Kakao.Auth.logout(function() {
+	      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+	      Kakao.Auth.setAccessToken(null);
+	    })
+	  }
 
-        } else {
-          Kakao.Auth.setAccessToken(null)
-        }
-      })
-    }
-  }
-  function getCookie(name) {
-    const value = "; " + document.cookie;
-    const parts = value.split("; " + name + "=");
-    if (parts.length === 2) return parts.pop().split(";").shift();
-  }
- */
 	
-	/*
-	window.Kakao.init('1d93d50b4296c95206af1d69936465bf'); // 발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-
+	// 카카오
+	window.Kakao.init('1d93d50b4296c95206af1d69936465bf'); // SDK를 초기화 합니다 발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	
 function kakaoLogin() {
 	window.Kakao.Auth.login({
 		scope:'account_email'
@@ -238,21 +253,23 @@ function kakaoLogin() {
 				url : '/v2/user/me'
 				, success : res => {
 					const kakao_account = res.kakao_account;
-					const email = kakao_account.email;
+					const mem_id = kakao_account.email;
 					
 					console.log(kakao_account);
-					console.log(email)
-					
+					console.log(mem_id);
+					location.href = '/member/kakaoSignUp?mem_id=' + mem_id;
+					/*
 					$.ajax({
                         				type: "post",
                        					 url: '/member/kakaoLogin', // 로그인
-                      					  data: { "email" : email },
+                      					  data: { "mem_id" : mem_id },
                       					  dataType: "text",
                         				success: function (data) {
                             					console.log(data);
                             					if (data === "fail") {// 회원가입
-                               					console.log("성공!");
-                              					 location.href = '/member/toKakaoSignUp?email=' + email;
+                               					console.log("왔어!");
+                               					//location.href = "/member/kakaoSignUp"
+                              					 location.href = '/member/kakaoSignUp?mem_id=' + mem_id;
                           					  } else if (data === "success") {
 								console.log("success");
 								location.href="/"
@@ -260,7 +277,7 @@ function kakaoLogin() {
                         }, error: function (request, status, error) {
                             console.log("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
                         }
-                    })
+                    })*/
                     // ajax끝
                 }
 				, fail: function (error) {
@@ -270,13 +287,14 @@ function kakaoLogin() {
         }
     })
 };
-*/
+
+
 	// 아이디, 비밀번호 입력후 엔터키 치면~
-	$('#id, #password').on('keypress', function(e){ 
-	    if(e.keyCode == '13'){ 
-	        $('#loginBtn').click(); 
-	    }
-	});
+//	$('#id, #password').on('keypress', function(e){ 
+//	    if(e.keyCode == '13'){ 
+//	        $('#loginBtn').click(); 
+//	    }
+//	});
 	
 	
 	// 회원가입 버튼 누르면 회원가입 페이지로 이동
@@ -289,23 +307,46 @@ function kakaoLogin() {
 	document.getElementById("loginBtn").onclick = function(){
 		let login = $("#loginForm").serialize();
 		console.log(login);
-		
-		$.ajax({
-			url : "/member/loginForm"
-			,type : "post"
-			,data :login
-			, success: function(data){
-				console.log(data);
-				if(data == "success"){
-					location.href = "/member/toLogin";
-				}else if(data == "fail"){
-					alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+		if( $('#id').val() == "" || $('#password').val() == "" ){
+			alert("아이디 혹은 비밀번호를 입력해주세요.");
+		} else{
+			// 아이디, 비밀번호 입력 시 ajax실행
+			$.ajax({
+				url : "/member/loginForm"
+				,type : "post"
+				,data :login
+				, success: function(data){
+					console.log(data);
+					if(data == "success"){
+						alert("로그인 되었습니다.");
+						saveid();
+						location.href = "/member/toLogin";
+					}else if(data == "fail"){
+						
+						alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+					}
+				}, error : function(e){
+					console.log(e);
 				}
-			}, error : function(e){
-				console.log(e);
-			}
-		})
+			})
+			
+		}
 	}
+	// 이메일 찾기 버튼 누르면 팝업창 띄우기
+    document.getElementById("idSearch").onclick = function () {
+        let url = "/member/searchId"; 
+        let name = "이메일 찾기"; // 팝업창 이름값
+        let option = "width=600, height=400, left=500, top=300"; // 팝업창 크기, 위치
+        window.open(url, name, option);
+    }
+	
+	// 비밀번호 찾기 버튼 누르면 팝업창 띄우기
+    document.getElementById("passwordSearch").onclick = function () {
+        let url = "/member/searchPw"; 
+        let name = "비밀번호 찾기"; // 팝업창 이름값
+        let option = "width=650, height=400, left=500, top=300"; // 팝업창 크기, 위치
+        window.open(url, name, option);
+    }
 
 	</script>
 </body>

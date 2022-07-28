@@ -19,7 +19,6 @@ public class AdminService {
 
 	@Autowired
 	private ReportDAO reportDAO;
-
 	@Autowired
 	private AdminGroupDAO groupDAO;
 	@Autowired
@@ -37,7 +36,7 @@ public class AdminService {
 		return recordDAO.selectTopGroup();
 	}
 		
-	/* Report */
+/* Report */
 	// 블랙리스트 목록
 	public List<ReportDTO> reportList(int start, int end) throws Exception {
 		return reportDAO.reportList(start, end);
