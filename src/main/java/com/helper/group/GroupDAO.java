@@ -27,7 +27,7 @@ public class GroupDAO {
 		} else if (group_title.equals("")) {
 			return session.selectList("groupMapper.selectByCategory", group_std_key);
 		} else {
-			GroupDTO dto = new GroupDTO(0, 0, group_title, "", group_std_key, 0, 0, "");
+			GroupDTO dto = new GroupDTO(0, 0, group_title, "", group_std_key, 0, 0, "", null);
 			return session.selectList("groupMapper.selectByNameCategory", dto);
 		}
 	}
