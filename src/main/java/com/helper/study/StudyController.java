@@ -1,6 +1,9 @@
 package com.helper.study;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.helper.member.MemberDTO;
 import com.helper.utils.Crawl;
+import com.helper.week.WeekDTO;
 
 
 @RequestMapping("/study")
@@ -37,37 +41,56 @@ public class StudyController {
 		}
 	@RequestMapping(value = "/toStudy")
 	public String toStudy(Model model)throws Exception{
+		MemberDTO memdto = (MemberDTO)session.getAttribute("loginSession");
+		int mem_seq = memdto.getMem_seq();
 		System.out.println("공부하기 페이지 요청");
-		List<SubjectDTO> subjectlist = service.selectall();
-		model.addAttribute("subjectlist",subjectlist);
+		List<SubjectDTO> subjectlist = service.selectall(mem_seq);
+		model.addAttribute("subjectlist",subjectlist);		
 		return "study/study";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/record")
 	public String record(@RequestBody List<TimeDTO> list)throws Exception{
-
-		if(service.selectrecord()==0) {
+		int mem_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
+		List<Integer> arr = new ArrayList<>();
+		for(TimeDTO dto : list) {
+			arr.add(dto.getTime_count());
+		}
+		int record_time = arr.stream().mapToInt(Integer::intValue).sum();//weekrecord로 보내기 위해 합쳐줌
+		SimpleDateFormat now = new SimpleDateFormat ("MM/dd");//weekrecord를 위해 현재날짜를 string 형식으로 바꿔줌
+		String record_week = now.format (System.currentTimeMillis());
+		WeekDTO weekdto = new WeekDTO();
+		weekdto.setMem_seq(mem_seq);
+		weekdto.setRecord_time(record_time);
+		weekdto.setRecord_week(record_week);
+		service.insertWeek(weekdto);
+		if(service.selectrecord(mem_seq)==0) {
 			service.insertAll(list);
 		}else {
 			for(TimeDTO dto : list) {
-				if(service.selectsubject(dto.getTime_subject())==0) {
+				if(service.selectsubject(dto)==0) {//오늘 시간 기록을 한적 없다.
 					service.insertOne(dto);
-				}else {
+				}else {//오늘 시간기록을 한적 있다.
 					service.updatetime(dto);
 				}
-			}
-		}
-		return "redirect:study/toStudy";
+			} 
+		}	
+		return "success";
 	}
 	@RequestMapping(value = "/recordSubject")
 	public String recordSubjcet(@RequestBody List<SubjectDTO> list)throws Exception{
-		if(service.selectrecord()==0) {
-			service.insertsubject(list);	
-		}else {
-			service.deletesubject();
-			service.insertsubject(list);
-		}
-		return "redirect:study/toStudy";
+		int mem_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
+		
+			if(service.selectrecord(mem_seq)==0) {
+				service.insertsubject(list);	
+			}else {
+				for(SubjectDTO dto : list) {
+				service.deletesubject(dto.getMem_seq());
+				}
+				service.insertsubject(list);
+			}
+			
+		return "success";
 	}
 	
 	@RequestMapping(value = "/toRecord")

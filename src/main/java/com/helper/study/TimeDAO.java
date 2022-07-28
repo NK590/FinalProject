@@ -13,11 +13,11 @@ public class TimeDAO {
 	public void insertAll (List<TimeDTO> list)throws Exception{
 		session.update("studyMapper.insertAll",list);
 	}
-	public int selectrecord ()throws Exception{
-		return session.selectOne("studyMapper.selectrecord");
+	public int selectrecord (int mem_seq)throws Exception{
+		return session.selectOne("studyMapper.selectrecord",mem_seq);
 	}
-	public int selectsubject(String time_subject)throws Exception{
-		return session.selectOne("studyMapper.selectsubject",time_subject);
+	public int selectsubject(TimeDTO dto)throws Exception{
+		return session.selectOne("studyMapper.selectsubject",dto);
 	}
 	public void insertOne(TimeDTO dto)throws Exception{
 		session.insert("studyMapper.insertOne",dto);
