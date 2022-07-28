@@ -9,10 +9,11 @@ public class GroupDTO {
 	private int group_max;
 	private int group_memCount;
 	private String group_image;
+	private String group_sign;
 	
 	public GroupDTO() {}
 	public GroupDTO(int group_seq, int mem_seq, String group_title, String group_content, String group_std_key,
-			int group_max, int group_memCount, String group_image) {
+			int group_max, int group_memCount, String group_image, String group_sign) {
 		super();
 		this.group_seq = group_seq;
 		this.mem_seq = mem_seq;
@@ -22,6 +23,7 @@ public class GroupDTO {
 		this.group_max = group_max;
 		this.group_memCount = group_memCount;
 		this.group_image = group_image;
+		this.group_sign = group_sign;
 	}
 	public int getGroup_seq() {
 		return group_seq;
@@ -71,10 +73,17 @@ public class GroupDTO {
 	public void setGroup_image(String group_image) {
 		this.group_image = group_image;
 	}
+	public String getGroup_sign() {
+		return group_sign;
+	}
+	public void setGroup_sign(String group_sign) {
+		this.group_sign = group_sign;
+	}
 	@Override
 	public String toString() {
 		return "GroupDTO [group_seq=" + group_seq + ", mem_seq=" + mem_seq + ", group_title=" + group_title
 				+ ", group_content=" + group_content + ", group_std_key=" + group_std_key + ", group_max=" + group_max
-				+ ", group_memCount=" + group_memCount + ", group_image=" + group_image + "]";
+				+ ", group_memCount=" + group_memCount + ", group_image=" + group_image + ", group_sign=" + group_sign
+				+ "]";
 	}
 }

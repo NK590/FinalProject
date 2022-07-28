@@ -7,7 +7,7 @@
 	<!-- 그룹 생성 -->
 	<insert id="insert" parameterType="com.helper.group.GroupDTO">
 		insert into tb_group values
-			(group_seq.nextval, #{mem_seq}, #{group_title}, #{group_content}, #{group_std_key}, #{group_max}, #{group_memCount}, #{group_image})
+			(group_seq.nextval, #{mem_seq}, #{group_title}, #{group_content}, #{group_std_key}, #{group_max}, #{group_memCount}, #{group_image}, sysdate)
 	</insert>
 	
 	<!-- 그룹 전체 조회 -->
