@@ -98,13 +98,12 @@ public class AdminService {
 		System.out.println(realPath + File.separator + sys_name);
 		return sys_name;
 	}
-	
+
 	public void imgDelete(String img, String realPath) throws Exception { // summernote 서버에서 이미지 제거
 		File file = new File(realPath + File.separator + img);
 		if (file.exists()) { // 경로에 파일이 존재한다면
 			file.delete(); // 파일을 삭제
 		}
-
 	}
 	
 	public int insertNotice(NoticeDTO dto) throws Exception { // 게시글 등록
@@ -151,5 +150,4 @@ public class AdminService {
 
 		return noticeDAO.noticeDelete(notice_seq);
 	}
-
 }

@@ -93,8 +93,9 @@ public class AdminController {
 	}
 	@RequestMapping(value="/write") // 게시글 삽입  
 	public String write(NoticeDTO dto)throws Exception{		
-
-				int rs = service.insertNotice(dto);
+			int rs = service.insertNotice(dto);
+      return "redirect:/admin/toNotice";
+	}
 	
 	@RequestMapping(value = "/deleteGroup")
 	public String deleteGroup(int group_seq) throws Exception {
