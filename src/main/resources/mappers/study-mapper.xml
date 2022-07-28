@@ -5,32 +5,35 @@
 <mapper namespace="studyMapper">
 	<update id="insertAll" parameterType="com.helper.study.TimeDTO">
 		<foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
-			INTO TB_TIMER VALUES (1, #{item.time_subject},#{item.time_count},DEFAULT)
+			INTO TB_TIMER VALUES (#{item.mem_seq}, #{item.time_subject},#{item.time_count},DEFAULT)
 		</foreach>
 	</update>
-	<select id="selectrecord" resultType="int">
-		SELECT COUNT(*)FROM tb_timer
- 			WHERE TRUNC (time_date) = TRUNC (SYSDATE)
+	<select id="selectrecord" resultType="int" parameterType="int">
+		SELECT COUNT(*)FROM tb_subject
+ 			WHERE mem_seq= #{mem_seq}
 	</select>
-	<select id="selectsubject" resultType="int" parameterType="String">
+	<select id="selectsubject" resultType="int" parameterType="com.helper.study.TimeDTO">
 		SELECT COUNT(*)FROM tb_timer
- 			WHERE TRUNC (time_date) = TRUNC (SYSDATE) and time_subject = #{time_subject} and mem_seq=1
+ 			WHERE TRUNC (time_date) = TRUNC (SYSDATE) and time_subject = #{time_subject} and mem_seq= #{mem_seq}
 	</select>
 	<insert id="insertOne" parameterType="com.helper.study.TimeDTO">
-		INSERT INTO TB_TIMER VALUES (1, #{time_subject},#{time_count},DEFAULT)
+		INSERT INTO TB_TIMER VALUES (#{mem_seq}, #{time_subject},#{time_count},DEFAULT)
 	</insert>
 	<update id="updatetime" parameterType="com.helper.study.TimeDTO">
-		update tb_timer set time_count=time_count+#{time_count} where time_subject = #{time_subject} and mem_seq=1 and TRUNC (time_date) = TRUNC (SYSDATE)
+		update tb_timer set time_count=time_count+#{time_count} where time_subject = #{time_subject} and mem_seq=#{mem_seq} and TRUNC (time_date) = TRUNC (SYSDATE)
 	</update>
-	<delete id="deletesubject">
-		delete from tb_subject
+	<delete id="deletesubject" parameterType="int">
+		delete from tb_subject where mem_seq=#{mem_seq}
 	</delete>
 	<update id="insertsubject" parameterType="com.helper.study.SubjectDTO">
 		<foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
-			INTO TB_SUBJECT VALUES (1, #{item.time_subject})
+			INTO TB_SUBJECT VALUES (#{item.mem_seq}, #{item.time_subject})
 		</foreach>
 	</update>
 	<select id="selectall" resultType="com.helper.study.SubjectDTO">
-		select time_subject from tb_subject where mem_seq=1 
+		select time_subject from tb_subject where mem_seq=#{mem_seq}
 	</select>
+	<insert id="insertWeek" parameterType="com.helper.week.WeekDTO">
+		INSERT INTO TB_WEEK_RECORD VALUES (#{mem_seq}, #{record_week},#{record_time})
+	</insert>
 </mapper>

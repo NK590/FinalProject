@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 public class SubjectDAO {
 	@Autowired
 	private SqlSession session;
-	public void deletesubject() {
-		session.delete("studyMapper.deletesubject");
+	public void deletesubject(int mem_seq) {
+		session.delete("studyMapper.deletesubject",mem_seq);
 	}
 	public void insertsubject (List<SubjectDTO>list)throws Exception{
 		session.insert("studyMapper.insertsubject",list);
 	}
-	public List<SubjectDTO> selectall()throws Exception{
-		return session.selectList("studyMapper.selectall");
+	public List<SubjectDTO> selectall(int mem_seq)throws Exception{
+		return session.selectList("studyMapper.selectall",mem_seq);
 	}
 }

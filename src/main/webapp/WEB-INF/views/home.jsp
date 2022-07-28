@@ -15,6 +15,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <title>Document</title>
@@ -254,7 +255,7 @@ a:hover {
 			<p class="logo_text">함께 공부하는 즐거움</p>
 			<br>
 			<div class="gostudy">
-				<a href="#" style="color: white;">공부하러 가기</a>
+				<a href="/study/toStudy" style="color: white;">공부하러 가기</a>
 			</div>
 		</div>
 	</div>

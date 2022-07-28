@@ -93,6 +93,7 @@ a:nth-child(5) {
 
 body {
 	box-sizing: border-box;
+	overflow-x: hidden;
 }
 
 .crawl-container {
@@ -259,6 +260,7 @@ button {
 					공부시간을 저장해 주세요!!</p>
 			</div>
 		</div>
+		<!-- 사전시작 -->
 		<div class="row row-cols-2">
 			<div class="col-lg-4 col-12">
 				<div class="crawl-container">
@@ -278,6 +280,7 @@ button {
 						</button>
 					</div>
 				</div>
+				<!-- 카운트다운 타이머 시작 -->
 				<h4 style="margin-top: 40px;">
 					<i class="fa-solid fa-stopwatch"></i> 타이머
 				</h4>
@@ -311,8 +314,8 @@ button {
 					</button>
 				</div>
 			</div>
-
-			<div class="col-lg-8 col-auto">
+			<!-- 타이머 시작 -->
+			<div class="col-lg-8 col-auto watchgroup">
 				<div class="basic stopwatch d-flex justify-content-center"></div>
 				<div class="basic stopwatch d-flex justify-content-center"></div>
 				<div class="basic stopwatch d-flex justify-content-center"></div>
@@ -488,7 +491,7 @@ button {
     $("#result").on("click", function () {//시간 기록 버튼
       for (let i=0; i<5;i++){
         if($(".basic").children("span:eq("+i+")").html()!=="00:00:00"&& $(".basic").children(".subjectName:eq("+i+")").val()==""){
-          $("#alert2").fadeTo(5000, 400).slideUp(400, function () {
+          $("#alert2").fadeTo(2000, 400).slideUp(400, function () {
           $("#alert2").slideUp(400)
           })
           return;
@@ -505,8 +508,8 @@ button {
           const totalSeconds = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
           let data = {
         		   "time_subject" : $(".basic").children(".subjectName:eq("+i+")").val(),
-        		   "time_count"  : totalSeconds
-        		   //"mem_seq":$("#mem_seq").val()
+        		   "time_count"  : totalSeconds,
+        		   "mem_seq":$("#mem_seq").val()
         		}
           list.push(data);
         }
@@ -545,13 +548,9 @@ button {
       closeFullScreenMode();//전체화면닫기
     })
     
-
-    let bt1 = document.querySelectorAll(".startbtn2"); // get all buttons with the class
-    for (var i = 0; i < bt1.length; i++) { // newer browsers can use forEach
-      bt1[i].onclick = function () { // assign anonymous handler
-        openFullScreenMode()
-      }
-    }
+    $(".startbtn2").on('click', function (){ 
+       openFullScreenMode()
+    });
     $(document).ready(function () {//처음 로딩 됐을떄 - 버튼, alert들 다 감추고 시작
     	let bt = document.querySelectorAll(".fa-circle-minus"); // get all buttons with the class 모든타이머00으로
         for (var i = 0; i < bt.length; i++) { // newer browsers can use forEach
@@ -560,6 +559,7 @@ button {
       i=0;
       	<c:forEach var="dto" items="${subjectlist}">//재 접속시 저장한 과목의 이름 보이게 
 			$(".basic").children(".subjectName:eq("+(i++)+")").val("${dto.time_subject}")
+			//$(".stopwatch").children("span:eq("+(i++)+")").html();
 		</c:forEach> 
       $("#alert").hide();
       $("#alert2").hide();
@@ -699,7 +699,7 @@ button {
         let isPause = false;
         let countDown = "";
 
-        buttons.startButton.addEventListener("click", function (event) {
+        buttons.startButton.addEventListener("click", function (event) {//카운트 다운 스타트버튼
             form.style.display = "none";
             timeDisplay.style.display = "inline-block";
             this.classList.add("hidden");

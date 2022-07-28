@@ -10,5 +10,8 @@ public class WeekDAO {
 	@Autowired
 	private SqlSession session;
 	
+	public int insertWeek(WeekDTO dto) {
+		return session.insert("studyMapper.insertWeek",dto);
+	}
 
 }
