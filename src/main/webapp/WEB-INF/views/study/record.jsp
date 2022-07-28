@@ -47,6 +47,10 @@ font-size: 25px;
 color: orange;
 }
 
+#viewTime{
+	width: 20%;
+}
+
 
 </style>
 <body>
@@ -54,26 +58,32 @@ color: orange;
 	<div class="container">
 		<!-- 바디 시작 -->
 		<div class="row bodyContainer">
+			<select class="form-select" id="viewTime">
+				<option value="hour">시간으로 보기</option>
+				<option value="min" selected>분으로 보기</option>
+				<option value="sec">초로 보기</option>
+				<option value="totalToday">시 분 초로 보기</option>
+			</select>
 			<div class="row" id="recordDiv">
-				<div class="col-12 col-lg-5 totalDiv">
+				<div class="col-12 col-lg-5 totalDiv" id="todayDiv">
 					<h3>오늘 총 공부시간</h3>
 					<c:choose>
 						<c:when test="${empty countList}">
-							<span>오늘 공부한 기록이 없습니다.</span>
+							<span id="todaySpan">오늘 공부한 기록이 없습니다.</span>
 						</c:when>
 						<c:otherwise>
-							<span>${dayTotalTime} 분</span>
+							<span id="todaySpan">${dayTotalTime} 분</span>
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="col-12 col-lg-7 totalDiv">
+				<div class="col-12 col-lg-7 totalDiv" id="weekDiv">
 					<h3>이번주 총 공부시간</h3>
 					<c:choose>
 						<c:when test="${empty weekList}">
-							<h3>이번주에 공부한 기록이 없습니다.</h3>
+							<span id="weekSpan">이번주에 공부한 기록이 없습니다.</span>
 						</c:when>
 						<c:otherwise>
-							<span>${weekTotalTime} 분</span>
+							<span id="weekSpan">${weekTotalTime} 분</span>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -270,7 +280,50 @@ color: orange;
 			
 		})
 		
+		// 시 분 초로보기
+		let minToday = ${dayTotalTime};
+		let hourToday = (minToday/60).toFixed(2);
+		let secToday = minToday*60;
+		let minWeek = ${weekTotalTime};
+		let hourWeek = (minWeek/60).toFixed(2);
+		let secWeek = minWeek*60;
 		
+		$("#viewTime").on("change", function(){
+			let value = this.value;
+			if(value === "hour"){
+				$("#todaySpan").html(hourToday+" 시간");
+				$("#weekSpan").html(hourWeek+" 시간");
+			} else if (value === "min") {
+				$("#todaySpan").html(minToday+" 분");
+				$("#weekSpan").html(minWeek+" 분");
+			} else if (value === "sec") {
+				$("#todaySpan").html(secToday+" 초");
+				$("#weekSpan").html(secWeek+" 초");
+			} else if (value === "totalToday"){
+				$("#todaySpan").html(getTime(secToday));
+				$("#weekSpan").html(getTime(secWeek));
+			}
+		})
+		
+		let getTime = function getTimeSeconds(seconds){
+			let hour, min, sec
+			
+			hour = parseInt(seconds/3600);
+			min = parseInt((seconds%3600)/60);
+			sec = seconds%60;
+			
+			if(hour.toString().length == 1){
+				hour = "0"+hour;
+			}
+			if(min.toString().length == 1){
+				min = "0"+min;
+			}
+			if(sec.toString().length == 1){
+				sec = "0"+sec;
+			}
+			
+			return hour + ":" + min + ":" + sec;
+		}
 	</script>
 
 </body>
