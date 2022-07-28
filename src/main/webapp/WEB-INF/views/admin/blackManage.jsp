@@ -25,6 +25,9 @@
 	border: 3px solid rgb(8, 0, 83);
 	border-radius: 30px;
 }
+.empty {
+	margin : 30px;
+}
 </style>
 </head>
 <body>
@@ -60,6 +63,7 @@
 				</c:choose>
 			</tbody>
 		</table>
+		<div class="empty"></div>
 		<nav>
 			<ul class="pagination justify-content-center" id="pagingUl">
 				<c:if test="${naviMap.needPrev eq true}">
@@ -81,5 +85,19 @@
 		</nav>
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+	<script>
+		$(".unblocking").on("click", function(){
+			let mem_seq = this.value;
+			let answer = confirm("차단을 해제하시겠습니까?");
+			if(answer) {
+				location.href = "/admin/unblocking?mem_seq="+mem_seq;
+				return;
+			} else {
+				return;
+			}
+			console.log(mem_seq);
+		})
+		
+	</script>
 </body>
 </html>

@@ -78,7 +78,7 @@
 		<table class="table">
 			<thead class="table-light">
 				<tr>
-					<th>분류</th>
+					<th>카테고리</th>
 					<th>아이디</th>
 					<th>닉네임</th>
 					<th>신고유저 닉네임</th>

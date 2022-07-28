@@ -69,5 +69,9 @@ public class AdminDAO {
 		
 	}
 	
+	public void unblocking(int mem_seq) throws Exception {
+		session.update("adminMapper.unblocking", mem_seq);
+	}
+	
 	
 }

@@ -79,6 +79,13 @@ public class AdminController {
 		return "admin/blackManage";
 	}
 	
+	@RequestMapping(value = "/unblocking")
+	public String unblocking(int mem_seq) throws Exception {
+		service.unblocking(mem_seq);
+		
+		return "redirect:/admin/toBlackManage?curPage=1";
+	}
+	
 	
 	
 }
