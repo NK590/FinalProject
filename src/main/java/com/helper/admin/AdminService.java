@@ -10,8 +10,6 @@ import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.helper.board.BoardDTO;
-
 import com.helper.member.MemberDTO;
 
 @Service
@@ -86,6 +84,7 @@ public class AdminService {
 	// 차단 해제
 	public void unblocking(int mem_seq) throws Exception {
 		adminDAO.unblocking(mem_seq);
+	}
 
 	public String summernote(MultipartFile file, String realPath) throws Exception { // summernote에 이미지 띄워주기
 		File realPathFile = new File(realPath);

@@ -6,7 +6,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="bds" class="org.apache.commons.dbcp2.BasicDataSource">	
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@3.36.65.154:1521:xe"/>	
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="helper"/>
 		<property name="password" value="helper"/>
 		<property name="initialSize" value="30"/>

@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.helper.board.BoardDTO;
-import com.helper.reply.ReplyDTO;
-
 import com.helper.member.MemberDTO;
 
 @Controller
@@ -125,8 +122,6 @@ public class AdminController {
 		return "redirect:/admin/toBlackManage?curPage=1";
 	}
 	
-		return "redirect:/admin/toNotice";
-	}
 	@RequestMapping(value="/toNotice")//공지 목록
 	public String toNotice(Model model)throws Exception{
 		List<NoticeDTO> list = service.selectAllNotice();
