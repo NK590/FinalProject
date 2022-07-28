@@ -19,7 +19,13 @@ public class ChatController {
 		return "chat/enter";
 	}
 	@RequestMapping(value="/chatroom")
-	public String chatroom() throws Exception {
+	public String chatroom(String nickname, String room) throws Exception {
+		System.out.println("입장 닉네임 : " + nickname);
+		System.out.println("입장 방 번호 : " + room);
+		
+		session.setAttribute("nickname", nickname);
+		session.setAttribute("room", room);
+		
 		return "chat/chatSample";
 	}
 }

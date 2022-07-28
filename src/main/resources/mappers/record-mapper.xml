@@ -21,76 +21,76 @@
 	
 	<!-- 이번주 요일별 총 공부시간 -->
 	<select id="monRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw'), 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw'), 'MM/dd') = record_week
 	</select>
 	<select id="tueRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')+1, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')+1, 'MM/dd') = record_week
 	</select>
 	<select id="wedRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')+2, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')+2, 'MM/dd') = record_week
 	</select>
 	<select id="thuRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')+3, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')+3, 'MM/dd') = record_week
 	</select>
 	<select id="friRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')+4, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')+4, 'MM/dd') = record_week
 	</select>
 	<select id="satRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')+5, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')+5, 'MM/dd') = record_week
 	</select>
 	<select id="sunRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')+6, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')+6, 'MM/dd') = record_week
 	</select>
 	
 	<!-- 저번주 요일별 총 공부시간 -->
 	<select id="lastMonRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')-7, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')-7, 'MM/dd') = record_week
 	</select>
 	<select id="lastTueRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')-6, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')-6, 'MM/dd') = record_week
 	</select>
 	<select id="lastWedRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')-5, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')-5, 'MM/dd') = record_week
 	</select>
 	<select id="lastThuRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')-4, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')-4, 'MM/dd') = record_week
 	</select>
 	<select id="lastFriRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')-3, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')-3, 'MM/dd') = record_week
 	</select>
 	<select id="lastSatRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')-2, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')-2, 'MM/dd') = record_week
 	</select>
 	<select id="lastSunRecord" parameterType="int" resultType="int">
-		select sum(recode_time) from tb_week_record 
+		select sum(record_time) from tb_week_record 
 			where mem_seq = #{mem_seq} 
-			and (select to_char(trunc(sysdate, 'iw')-1, 'MM/dd') from dual) = to_char(record_week, 'MM/dd')
+			and to_char(trunc(sysdate, 'iw')-1, 'MM/dd') = record_week
 	</select>
 	
 </mapper>

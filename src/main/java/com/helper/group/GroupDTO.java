@@ -1,6 +1,7 @@
 package com.helper.group;
 
 public class GroupDTO {
+
    private int group_seq;
    private int mem_seq;
    private String group_title;

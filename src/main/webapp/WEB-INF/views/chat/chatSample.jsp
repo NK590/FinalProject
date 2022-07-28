@@ -86,10 +86,7 @@
         </div>
     </div>
     <script>
-    	// home.jsp 페이지가 로드됐을 때 바로 WebSocket 접속이 이뤄져 스트림이 생성되고,
-    	// 그 후 작성하여 보는 메세지가 요청이 되거나 다른 접속자가 보낸 메세지를 응답받을 수 있게 만듬
-    	// 웹소켓 객체를 생성할 때 반드시 서버의 IP 주소값은 실제 IP 주소를 이용해야 함
-    	let ws = new WebSocket("ws://211.207.221.23:8099/chat")
+    	let ws = new WebSocket("ws://211.207.221.23:8099/chat/chatSample")
     	
     	
     	document.getElementById('chatSend').addEventListener('click', (e) => {
@@ -104,14 +101,10 @@
     	})
     	
     	// endpoint로부터 전송된 메세지 받기
-    	// endpoint에서 sendTexT() 메서드를 실행하면 onmessage 이벤트가 trigger됨
     	ws.onmessage = (message) => {
-    		// console.log(message.data)
     		
     		let messageData = JSON.parse(message.data)
-    		// console.log(messageData)
     		
-    		console.log(messageData.nickname)
     		let nicknameDiv = $('<div>').append(messageData.nickname).css({
     			'display' : 'inline',
     			'padding' : '5px',
