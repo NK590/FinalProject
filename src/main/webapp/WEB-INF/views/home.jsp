@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -262,6 +263,43 @@ a:hover {
 					<button type="button" class="btn-close text-reset"
 						data-bs-dismiss="offcanvas" aria-label="Close"></button>
 				</div>
+				
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+				<div class="offcanvas-body">
+					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="#">홈</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">About
+								us</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">그룹 스터디</a>
+						</li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="offcanvasNavbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
+							<ul class="dropdown-menu"
+								aria-labelledby="offcanvasNavbarDropdown">
+								<li><a class="dropdown-item" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown-item" id="golibrary" href="/librarymap">도서관 위치</a></li>
+							</ul>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="offcanvasNavbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> Study Helper
+						</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="offcanvasNavbarDropdown">
+								<li><a class="dropdown-item" href="#">플래너</a></li>
+								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
+							</ul>
+						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myGroup">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
+				</div>
+				</c:when>
+								
+		            <c:otherwise>
 				<div class="offcanvas-body">
 					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 						<li class="nav-item"><a class="nav-link active"
@@ -294,6 +332,8 @@ a:hover {
 						<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
 				</div>
+				</c:otherwise>
+		           	</c:choose>
 			</div>
 		</div>
 	</nav>
@@ -394,7 +434,7 @@ a:hover {
 		</div>
 	</div>
 </footer>
-<!—스크립트 영역—>
+<!-- 스크립트 영역 -->
 <script>
   AOS.init(); //스크롤 애니메이션 명령어
   
