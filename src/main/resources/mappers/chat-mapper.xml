@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="chatMapper">
+	<!-- 채팅 저장 -->
+	<insert id="insert" parameterType="com.helper.chat.ChatDTO">
+		insert into tb_chat values
+			(chat_seq.nextval, #{group_seq}, #{mem_nick}, #{chat_content}, #{chat_time})
+	</insert>
+	
+	<!-- 채팅방별 채팅 전체 조회 -->
+	<select id="selectAllByNum" parameterType="int" resultType="com.helper.chat.ChatDTO">
+		select * from tb_chat
+			where group_seq = #{group_seq}
+			order by chat_time
+	</select>
+</mapper>

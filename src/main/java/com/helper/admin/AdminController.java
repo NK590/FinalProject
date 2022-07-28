@@ -22,7 +22,6 @@ import com.helper.reply.ReplyDTO;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
 	@Autowired
 	private HttpSession session;
 	@Autowired

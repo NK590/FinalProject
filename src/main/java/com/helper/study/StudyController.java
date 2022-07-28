@@ -31,7 +31,7 @@ public class StudyController {
 	private HttpSession session;
 	@Autowired
 	private StudyService service;
-		// 크롤링 검색
+	// 크롤링 검색
 	@ResponseBody
 	@RequestMapping(value = "/dicSearch", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<String> dicSearch(String queryInput, String languageInput, Model model) throws Exception {

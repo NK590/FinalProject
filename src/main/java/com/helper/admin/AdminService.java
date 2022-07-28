@@ -16,6 +16,7 @@ public class AdminService {
 
 	@Autowired
 	private ReportDAO reportDAO;
+
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
@@ -40,7 +41,7 @@ public class AdminService {
 	public Map<String, Object> getSearchPageNavi(String mem_id, int curPage) throws Exception {
 		return reportDAO.getSearchPageNavi(mem_id, curPage);
 	}
-		
+
 	public String summernote(MultipartFile file, String realPath) throws Exception { // summernote에 이미지 띄워주기
 
 		File realPathFile = new File(realPath);
@@ -106,4 +107,5 @@ public class AdminService {
 
 		return noticeDAO.noticeDelete(notice_seq);
 	}
+
 }
