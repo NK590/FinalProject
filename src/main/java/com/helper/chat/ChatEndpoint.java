@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import com.helper.utils.SpringContext;
 import com.helper.utils.WSConfig;
 
-@ServerEndpoint(value="/chat/chatSample", configurator=WSConfig.class)
+@ServerEndpoint(value="/group/detail", configurator=WSConfig.class)
 public class ChatEndpoint {
 	private static Map<Integer, List<Session>> roomSessions = new HashMap<Integer, List<Session>>();
 	private ChatService service = SpringContext.getApplicationContext().getBean(ChatService.class);
@@ -52,6 +52,12 @@ public class ChatEndpoint {
 	
 	@OnMessage
 	public void onMessage(Session session, String message) {
+		
+		try {
+			service.insert(new ChatDTO(0, room, nickname, message, System.currentTimeMillis()-1658900000000L));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		JSONObject obj = new JSONObject();
 		obj.put("message", message);

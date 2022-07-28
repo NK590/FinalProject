@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
 	@Autowired
 	private AdminService service;
 	
@@ -54,7 +53,4 @@ public class AdminController {
 	public String grouplist() throws Exception {
 		return "admin/grouplist";
 	}
-	
-	
-	
 }

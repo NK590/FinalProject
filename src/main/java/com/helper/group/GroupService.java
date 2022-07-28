@@ -18,6 +18,10 @@ public class GroupService {
 		return dao.selectAll();
 	}
 	
+	public List<GroupDTO> selectByName(String group_title, String group_std_key) throws Exception {
+		return dao.selectByName(group_title, group_std_key);
+	}
+	
 	public GroupDTO selectBySeq(int group_seq) throws Exception {
 		return dao.selectBySeq(group_seq);
 	}

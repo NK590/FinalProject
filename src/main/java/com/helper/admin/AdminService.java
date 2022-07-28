@@ -11,8 +11,6 @@ public class AdminService {
 
 	@Autowired
 	private ReportDAO reportDAO;
-	@Autowired
-	private GroupDAO groupDAO;
 	
 	/* Report */
 	// 블랙리스트 목록
@@ -35,13 +33,4 @@ public class AdminService {
 	public Map<String, Object> getSearchPageNavi(String mem_id, int curPage) throws Exception {
 		return reportDAO.getSearchPageNavi(mem_id, curPage);
 	}
-	
-	
-	/* Group */
-	public List<GroupDTO> groupList(int start, int end) throws Exception {
-		return groupDAO.groupList(start,end);
-	}
-	
-	
-	
 }
