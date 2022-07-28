@@ -1,11 +1,13 @@
 package com.helper.member;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.helper.board.BoardDTO;
+import com.helper.group.GroupDTO;
 
 @Repository
 public class MemberDAO {
@@ -24,41 +26,51 @@ public class MemberDAO {
 	}
 	
 	// 로그인
-	public MemberDTO login(String mem_id, String mem_pw) throws Exception {
-		Map<String, String> map = new HashMap<>();
-		map.put("mem_id", mem_id);
-		map.put("mem_pw", mem_pw);
-		
-		return session.selectOne("memberMapper.login", map);
+	public MemberDTO login(String mem_id) throws Exception {
+		return session.selectOne("memberMapper.login", mem_id);
+	}
+	
+	// 이메일 찾기
+	public MemberDTO findNickname(String mem_nick) throws Exception{
+		return session.selectOne("memberMapper.findNickname", mem_nick);
+	}
+	
+	// 비밀번호 찾기
+	public int update(MemberDTO dto) throws Exception{
+		return session.update("memberMapper.update", dto);
 	}
 	
 	// 카카오 로그인
-		public MemberDTO kakaoLogin(String email) throws Exception {
-			return session.selectOne("memberMapper.checkEmail", email);
-		}
+	public MemberDTO kakaoLogin(String mem_id) throws Exception {
+		return session.selectOne("memberMapper.kakaoLogin", mem_id);
+	}
+	
+	// 카카오 회원가입
+	public int insertKakao(MemberDTO dto) throws Exception {
+		return session.insert("memberMapper.insertKakao", dto);
+	}
+	
+	// 마이페이지 회원정보 수정
+	public int updateInfo(MemberDTO dto) throws Exception {
+		return session.update("memberMapper.updateInfo", dto);
+	}
+	
+	// 마이페이지 회원탈퇴
+	public void dropoutInfo(MemberDTO dto) throws Exception {
+		session.delete("memberMapper.dropoutInfo", dto);
+	}
+	
+	// 마이페이지 내가 쓴 게시글
+	public ArrayList<BoardDTO> myBoard(int mem_seq) {
+		return (ArrayList)session.selectList("memberMapper.myBoard", mem_seq); 
+	}
+	
+	// 마이페이지 내가 쓴 게시글
+	public ArrayList<GroupDTO> myGroup(int group_seq) {
+		return (ArrayList)session.selectList("memberMapper.myGroup", group_seq); 
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-		// 카카오 로그인
-//		public void kakaoinsert(HashMap<String, Object> userInfo) {
-//			session.insert("Member.kakaoInsert",userInfo);
-//		}
 
-		// 카카오 확인
-//		public KakaoDTO findkakao(HashMap<String, Object> userInfo) {
-//			System.out.println("RN:"+userInfo.get("nickname"));
-//			System.out.println("RE:"+userInfo.get("email"));
-//			return session.selectOne("Member.findKakao", userInfo);
-//		}
-//		
-//		public KakaoDTO kakaoNumber(KakaoDTO userInfo) {
-//			return session.selectOne("Member.kakaoNumber",userInfo);
-//		}
 
 }

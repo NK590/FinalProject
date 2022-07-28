@@ -17,17 +17,16 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>스터디 그룹 목록</title>
+<title>관리자 블랙리스트 관리</title>
 <style>
-.fastDelete {
-	background-color: rgb(255, 59, 59);
+.fastbtn {
+	background-color: rgb(8, 0, 83);
 	color: white;
-	border: 3px solid rgb(255, 59, 59);
+	border: 3px solid rgb(8, 0, 83);
 	border-radius: 30px;
 }
-
 .empty {
-	margin-top: 30px;
+	margin : 30px;
 }
 </style>
 </head>
@@ -37,29 +36,27 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>그룹방 번호</th>
-					<th>그룹 제목</th>
-					<th>이번주 활동 시간</th>
-					<th>그룹 인원</th>
-					<th>삭제</th>
+					<th>카테고리</th>
+					<th>아이디</th>
+					<th>닉네임</th>
+					<th>차단 해제</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${list.size() == 0}">
+					<c:when test="${empty blacklist}">
 						<tr>
-							<td colspan="5">등록된 그룹방이 없습니다.</td>
+							<td colspan="4">차단된 유저가 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${list}" var="dto">
+						<c:forEach items="${blacklist}" var="list">
 							<tr>
-								<td>${dto.group_seq}</td>
-								<td>${dto.group_title}</td>
-								<td>${dto.group_count}분</td>
-								<td>${dto.group_memCount}명</td>
-								<td><button type="button" class="groupDelete fastDelete"
-										value="${dto.group_seq}">삭제</button></td>
+								<td>${list.mem_std_key}</td>
+								<td>${list.mem_id}</td>
+								<td>${list.mem_nick}</td>
+								<td><button type="button" class="fastbtn unblocking"
+										value="${list.mem_seq}">차단 해제</button></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -71,17 +68,17 @@
 			<ul class="pagination justify-content-center" id="pagingUl">
 				<c:if test="${naviMap.needPrev eq true}">
 					<li class="page-item"><a class="page-link"
-						href="/admin/toGrouplist?curPage=${naviMap.startNavi-1}"><span
+						href="/admin/toBlackManage?curPage=${naviMap.startNavi-1}"><span
 							aria-hidden="true">&laquo;</span> </a></li>
 				</c:if>
 				<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 					end="${naviMap.endNavi}" step="1">
 					<li class="page-item"><a class="page-link"
-						href="/admin/toGrouplist?curPage=${pageNum}">${pageNum}</a></li>
+						href="/admin/toBlackManage?curPage=${pageNum}">${pageNum}</a></li>
 				</c:forEach>
 				<c:if test="${naviMap.needNext eq true}">
 					<li class="page-item"><a class="page-link"
-						href="/admin/toGrouplist?curPage=${naviMap.endNavi+1}"><span
+						href="/admin/toBlackManage?curPage=${naviMap.endNavi+1}"><span
 							aria-hidden="true">&raquo;</span> </a></li>
 				</c:if>
 			</ul>
@@ -89,14 +86,18 @@
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
-		$(".groupDelete").on("click", function() {
-			let answer = confirm("정말 삭제하시겠습니까?");
-			if(answer){
-				location.href = "/admin/deleteGroup?group_seq=" + this.value;
+		$(".unblocking").on("click", function(){
+			let mem_seq = this.value;
+			let answer = confirm("차단을 해제하시겠습니까?");
+			if(answer) {
+				location.href = "/admin/unblocking?mem_seq="+mem_seq;
+				return;
 			} else {
 				return;
 			}
+			console.log(mem_seq);
 		})
+		
 	</script>
 </body>
 </html>

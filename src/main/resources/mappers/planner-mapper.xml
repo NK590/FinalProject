@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="plannerMapper">
+	<!-- plan_seq값 -->
+	<select id="selectSeq" resultType="int">
+		select plan_seq.nextval from dual
+	</select>
+	<!-- 게시글 등록 -->
+	<insert id="insert"
+		parameterType="com.helper.planner.PlannerDTO">
+		insert into tb_planner values
+		(#{plan_seq}, #{mem_seq},
+		#{plan_title},TO_DATE(Translate(SUBSTR ( #{plan_start} , 1, 19),'T','
+		'),'YYYY-MM-DD HH24:MI:SS'), TO_DATE(Translate(SUBSTR (#{plan_end} ,
+		1, 19),'T',' '),'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	<select id="selectAll"
+		resultType="com.helper.planner.PlannerDTO">		<!-- 추가적으로 mem_seq넘겨 받아서 해당 id값의 planner만 출력할 수 있게 한다 -->
+		select * from tb_planner
+	</select>
+	<select id="getToDate" parameterType="String" resultType="Date">
+		select TO_DATE(Translate(SUBSTR ( #{date} , 1, 19),'T',' '),'YYYY-MM-DD
+		HH24:MI:SS') from dual
+	</select>
+	<delete id="delete">
+		delete from tb_planner where plan_seq = #{plan_seq}
+	</delete>
+	<update id="update" parameterType="Map">
+		update tb_planner set plan_start = TO_DATE(Translate(SUBSTR ( #{plan_start} , 1, 19),'T',' '),'YYYY-MM-DD
+		HH24:MI:SS'), plan_end = TO_DATE(Translate(SUBSTR ( #{plan_end} , 1, 19),'T',' '),'YYYY-MM-DD
+		HH24:MI:SS') where plan_seq = #{plan_seq}
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

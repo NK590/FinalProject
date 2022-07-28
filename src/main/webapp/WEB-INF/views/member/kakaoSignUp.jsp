@@ -81,7 +81,7 @@ body {
 		<form id="memberForm" action="/member/signupForm" method="post">
 			<div class="row m-3" >
 				<div class="col d-flex justify-content-center">
-					<h2>회원가입</h2>
+					<h2>카카오 회원가입</h2>
 				</div>
 			</div>
 
@@ -90,46 +90,15 @@ body {
 					<label for="id" class="form-label">아이디 (이메일)</label>
 				</div>
 				<div class="col-8">
-					<input type="text" class="form-control" id="mem_id" name="mem_id"
-						readonly>
+					<input type="text" class="form-control" id="mem_id" name="mem_id" value="${mem_id}" readonly>
 				</div>
+				<!--
 				<div class="col-4">
-					<button type="button" id="checkIdBtn">이메일 확인</button>
+					  <button type="button" id="checkIdBtn">이메일 확인</button>
 				</div>
+				-->
 			</div>
 
-			<div class="row p-2">
-				<div class="col-3">
-					<label class="form-label">비밀번호</label>
-				</div>
-				<div class="col-9" style="padding: 0px;">
-					<div class="check checkFalse" id="checkPwdFalse"
-						style="display: none;">*조건에 맞게 입력해주세요.</div>
-					<div class="check checkTrue" id="checkPwdTrue"
-						style="display: none;">*사용 가능한 비밀번호입니다.</div>
-				</div>
-				<div class="col-12 mb-2">
-					<input type="password" class="form-control" name="mem_pw" required
-						onkeyup="pwdCheck();"> <span style="font-size: 10px;">*영문,
-						숫자, 특수문자 중 2가지 이상 조합하여 6자이상 12자 이하로 입력해주세요.</span>
-				</div>
-			</div>
-
-			<div class="row p-2">
-				<div class="col-4">
-					<label class="form-label">비밀번호 확인</label>
-				</div>
-				<div class="col-8" style="padding: 0px;">
-					<div class="check checkFalse" id="samePwdFalse"
-						style="display: none;">*비밀번호가 일치하지 않습니다.</div>
-					<div class="check checkTrue" id="samePwdTrue"
-						style="display: none;">*비밀번호가 일치합니다.</div>
-				</div>
-				<div class="col-12 mb-2">
-					<input type="password" class="form-control" id="mem_pwCheck"
-						required onkeyup="samePwdCheck();">
-				</div>
-			</div>
 
 			<div class="row p-2">
 				<div class="col-3">
@@ -193,62 +162,13 @@ body {
 		}
 		
 		// 이메일 확인 버튼 누르면 팝업창 띄우기
-		document.getElementById("checkIdBtn").onclick = function() {
-			let url = "/member/popup"; 
-			let name = "이메일 중복검사"; 
-			let option = "width=600, height=300, left=500, top=300"; 
-			window.open(url, name, option);
-		}
-		
-		// 비밀번호
-        let memPw = $("#memberForm input[name=mem_pw]");
-         
-        //let regExpPwd = /^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?=[0-9]+))$)[A-Za-z\d~!@#$%^&*()_+=]{6,12}$/;
-        let regExpPwd = /^[a-zA-Z0-9~!@#$%^&*()_+=?]{6,12}$/;
-         
-      function pwdCheck(){
-    	  
-    	  $("#samePwdFalse").attr('style',"display:none");
-          $("#samePwdTrue").attr('style',"display:none");
-      
-         if(memPw.val() != ""){
-            
-            if(!regExpPwd.test(memPw.val())){ // 조건에 맞지 않는 비밀번호일 경우
-               $("#checkPwdFalse").attr('style',"display:block");
-               $("#checkPwdTrue").attr('style', "display:none");
-               
-            } else { // 사용가능한 비밀번호
-               $("#checkPwdFalse").attr('style',"display:none");
-               $("#checkPwdTrue").attr('style', "display:block");
-               let ok1 = "Y";
-               return ok1;
-            }
-         } else { // 비밀번호 빈 문자열일 경우
-            $("#checkPwdFalse").attr('style',"display:none");
-            $("#checkPwdTrue").attr('style', "display:none");
-            $("#samePwdFalse").attr('style',"display:none");
-            $("#samePwdTrue").attr('style',"display:none");
-         }   
-      }
+//		document.getElementById("checkIdBtn").onclick = function() {
+//			let url = "/member/popup"; 
+//			let name = "이메일 중복검사"; 
+//			let option = "width=600, height=300, left=500, top=300"; 
+//			window.open(url, name, option);
+//		}
 
-      // 비밀번호 확인
-      function samePwdCheck(){
-         if(regExpPwd.test(memPw.val())){ // 일단 비밀번호는 사용가능일 경우
-            if($("#mem_pwCheck").val() != memPw.val()){ // 비밀번호와 비밀번호 확인 불일치
-               $("#samePwdFalse").attr('style',"display:block");
-               $("#samePwdTrue").attr('style',"display:none");
-            } else{   // 비밀번호와 비밀번호 확인 일치
-               $("#samePwdFalse").attr('style',"display:none");
-               $("#samePwdTrue").attr('style',"display:block");
-               let ok2 = "Y";
-               return ok2;
-            }
-         } else { // 비밀번호가 사용불가능(안보여줘도된다.)
-            $("#samePwdFalse").attr('style',"display:none");
-            $("#samePwdTrue").attr('style',"display:none");
-         }
-         
-      }
 
 		 // 닉네임
          function nameCheck(){
