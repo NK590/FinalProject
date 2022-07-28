@@ -34,14 +34,8 @@ public class PlannerController {
 	public String planInsert(@RequestBody Map<String, Object> jsonData)throws Exception{	// 일정 추가  + dto에 멤버mem_seq 넣어주기 
 																							// json형식으로 넘겨받은 데이터는 Map형식으로 값을 받아와야한다
 		System.out.println("jsondata : " +jsonData);										
-		
-		String title = (String)jsonData.get("plan_title"); // Object형으로 변환된 데이터를 String값으로 변환시켜준다
-		String start = (String)jsonData.get("plan_start");
-		String end = (String)jsonData.get("plan_end");
-		
-        PlannerDTO dto = new PlannerDTO(0,1,title,start,end);
-		
-        int rs = service.planInsert(dto);
+
+        int rs = service.planInsert(jsonData);
 		
         if(rs>0) { // 일정 등록 성공
         	return "success";

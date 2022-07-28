@@ -170,9 +170,7 @@ a {
 											console.log(e);
 										}
 									})
-									
-									
-									
+
 								}
 								
 							},
@@ -184,7 +182,7 @@ a {
  								event.plan_title = 	plan.event._def.title; // 일정 내용 */
  								event.plan_start = plan.event._instance.range.start; // 시작 시간
 								event.plan_end =  plan.event._instance.range.end; // 마치는 시간
-								/* event.plan_allDay = plan.event._def.allDay; // 하루종일 여부  */ 
+								event.plan_allDay = plan.event._def.allDay; // 하루종일 여부  
 								let jsonData = JSON.stringify(event);  // 객체를 json으로 변환하는 이유는ㄴ controller단에 날짜형식을 parse하기 위함이다
 								console.log(event);
 								console.log(jsonData);
@@ -209,7 +207,7 @@ a {
 								
 							},
 
-							eventDrop : function(plan) { // 일정 수정
+							eventChange : function(plan) { // 일정 수정
 		                            console.log(plan);		                            	
 		                            	let event = new Object(); // json을 담기 위한 객체 선언
 		 								event.plan_title = 	plan.event._def.title; // 일정 내용 */
@@ -229,7 +227,7 @@ a {
 				                          		if(data=="success"){
 				                          			alert("일정이 변경되었습니다.");
 				                          		}else{
-				                          			alert("일정 등록에 실패했습니다.")
+				                          			alert("새로고침 후 일정을 변경해주세요.")
 				                          		}
 				                          	}
 											, error : function(e){
