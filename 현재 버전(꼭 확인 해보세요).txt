@@ -1,4 +1,5 @@
 ver0 : 아예 제일 초기화 상태
 ver1: header footer(include 파일 안에 있음)/ 패키지명 폴더명 만들어 놓음 
 ver2: 모든 폴더에 dao dto controller 추가됨/home.jsp파일(랜딩페이지 생김)/ git ignore 에 root cotext 추가
-ver3: 로그인화면구현/admin패키지에 admindao groupdao등 생성 /study.jsp에 단어검색, 카운트다운 생성 ->현재
+ver3: 로그인화면구현/admin패키지에 admindao groupdao등 생성 /study.jsp에 단어검색, 카운트다운 생성 
+ver4: 마이페이지, 플래너 페이지 생성됨 , 그룹방 만들기 가능, 블랙리스트 관리 페이지 생성->현재
