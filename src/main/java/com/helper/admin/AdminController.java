@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.helper.board.BoardDTO;
 import com.helper.reply.ReplyDTO;
 
+import com.helper.member.MemberDTO;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -48,10 +50,6 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> searchMember(String mem_id, int curPage) throws Exception {
 		List<ReportDTO> dto = service.searchMember(mem_id, curPage*10-9, curPage*10);
-		for(ReportDTO list : dto) {
-			System.out.println(list);
-		}
-		System.out.println("===");
 		Map<String, Object> map = new HashedMap<String, Object>();
 		map.put("list", dto);
 		map.put("naviMap", service.getSearchPageNavi(mem_id, curPage));
@@ -59,8 +57,13 @@ public class AdminController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/grouplist")
-	public String grouplist() throws Exception {
+	@RequestMapping(value = "/toGrouplist")
+	public String grouplist(int curPage, Model model) throws Exception {
+		List<Map<String, Object>> dto = service.groupList(curPage*10-9, curPage*10);
+		Map<String, Object> map = service.getGroupPageNavi(curPage);
+		model.addAttribute("list", dto);
+		model.addAttribute("naviMap", map);
+		
 		return "admin/grouplist";
 	}
 	@RequestMapping(value="/noticeWrite")
@@ -90,6 +93,34 @@ public class AdminController {
 	public String write(NoticeDTO dto)throws Exception{		
 
 				int rs = service.insertNotice(dto);
+	
+	@RequestMapping(value = "/deleteGroup")
+	public String deleteGroup(int group_seq) throws Exception {
+		service.deleteGroup(group_seq);
+		
+		return "redirect:/admin/toGrouplist?curPage=1";
+	}
+	
+	@RequestMapping(value = "/toAdmin")
+	public String toAdmin() throws Exception {
+		return "admin/adminMain";
+	}
+	
+	@RequestMapping(value = "/toBlackManage")
+	public String toBlackManage(int curPage ,Model model) throws Exception {
+		List<MemberDTO> blacklist = service.selectBlacklist(curPage*10-9,curPage*10);
+		Map<String, Object> map = service.getBlacklistPageNavi(curPage);
+		model.addAttribute("blacklist", blacklist);
+		model.addAttribute("naviMap", map);
+		return "admin/blackManage";
+	}
+	
+	@RequestMapping(value = "/unblocking")
+	public String unblocking(int mem_seq) throws Exception {
+		service.unblocking(mem_seq);
+		
+		return "redirect:/admin/toBlackManage?curPage=1";
+	}
 	
 		return "redirect:/admin/toNotice";
 	}
@@ -121,7 +152,7 @@ public class AdminController {
 		int rs = service.noticeUpdate(list,dto,realPath);
 		return "redirect:/admin/toNoticeDetail?notice_seq="+dto.getNotice_seq();
 	}
-	
+
 	@RequestMapping(value="/noticeDelete") // 이미지가 있는 게시글 삭제
 	@ResponseBody
 	public String noticeDelete(@RequestParam(value="arr[]")List<String>img_arr,@RequestParam(value="notice_seq")int notice_seq)throws Exception{

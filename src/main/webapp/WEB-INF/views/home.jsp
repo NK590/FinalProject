@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
@@ -183,12 +184,22 @@ a:hover {
 }
 
 .weekend_user_box {
-	text-align: center;
-	border: 1px solid rgb(112, 112, 112);
-	width: 120px;
-	height: 180px;
-	margin: 20px;
 	border-radius: 50%;
+}
+
+.weekend_user_box>img {
+	width: 80%;
+	height: 60%;
+}
+
+.topNick {
+	font-size: 21px;
+}
+
+.topTime {
+	font-size: 18px;
+	font-weight: bold;
+	color: rgb(255, 197, 61);
 }
 
 .new_group {
@@ -199,13 +210,17 @@ a:hover {
 }
 
 .new_group_box {
-	text-align: center;
 	border: 1px solid rgb(112, 112, 112);
 	width: 120px;
-	height: 180px;
-	margin: 20px;
+	height: 120px;
 	border-radius: 50%;
-	margin-bottom: 70px;
+	overflow: hidden;
+	margin: auto;
+}
+
+.new_group_box>img {
+	width: 100%;
+	height: 100%;
 }
 
 .bottom_text {
@@ -278,7 +293,8 @@ a:hover {
 							<ul class="dropdown-menu"
 								aria-labelledby="offcanvasNavbarDropdown">
 								<li><a class="dropdown-item" href="#">공부 시작하기</a></li>
-								<li><a class="dropdown-item" id="golibrary" href="/librarymap">도서관 위치</a></li>
+								<li><a class="dropdown-item" id="golibrary"
+									href="/librarymap">도서관 위치</a></li>
 							</ul>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -294,6 +310,7 @@ a:hover {
 						<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -370,16 +387,133 @@ a:hover {
 			<p>인내가 꿈을 이루는 날까지 스터디 헬퍼는 여러분과 함께합니다.</p>
 		</div>
 		<br>
-		<div class="row justify-content-center">
-			<div class="col-6 weekend_user">이주의 회원</div>
-			<div class="col-6 new_group">새로 생긴 그룹</div>
-			<div class="row justify-content-center"></div>
-			<div class="col weekend_user_box"></div>
-			<div class="col weekend_user_box"></div>
-			<div class="col weekend_user_box"></div>
-			<div class="col new_group_box"></div>
-			<div class="col new_group_box"></div>
-			<div class="col new_group_box"></div>
+		
+		<!-- 일간 Top3 영역 -->
+		<div class="row jusitify-content-center">
+			<div class="col-12 col-md-6 weekend_user">
+				<div class="row">
+					<span>일간 Top 3</span>
+				</div>
+				<div class="row">
+					<div class="col-4 weekend_user_box">
+						<img src="/resources/images/goldtrophy.png"><br>
+						<c:if test="${todayList.size() == 0}">
+							<span class="topNick">-</span>
+							<br>
+							<span class="topTime">-</span>
+						</c:if>
+						<c:if test="${todayList.size() >= 1}">
+							<span class="topNick">${todayList[0].mem_nick}</span>
+							<br>
+							<span class="topTime">${todayList[0].time_count}</span>
+						</c:if>
+					</div>
+					<div class="col-4 weekend_user_box">
+						<img src="/resources/images/silvertrophy.png"><br>
+						<c:if test="${todayList.size() <= 1}">
+							<span class="topNick">-</span>
+							<br>
+							<span class="topTime">-</span>
+						</c:if>
+						<c:if test="${todayList.size() >= 2}">
+							<span class="topNick">${todayList[1].mem_nick}</span>
+							<br>
+							<span class="topTime">${todayList[1].time_count}</span>
+						</c:if>
+					</div>
+					<div class="col-4 weekend_user_box">
+						<img src="/resources/images/bronzetrophy.png"><br>
+						<c:if test="${todayList.size() <= 2}">
+							<span class="topNick">-</span>
+							<br>
+							<span class="topTime">-</span>
+						</c:if>
+						<c:if test="${todayList.size() >= 3}">
+							<span class="topNick">${todayList[2].mem_nick}</span>
+							<br>
+							<span class="topTime">${todayList[2].time_count}</span>
+						</c:if>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 new_group">
+				<div class="row justify-content-center">
+					<div class="row">
+						<span>베스트 그룹 Top 3</span>
+					</div>
+					<div class="row">
+						<div class="col-4 justify-content-center">
+							<div class="new_group_box">
+								<c:if test="${empty groupList[0].group_image}">
+									<!-- 그룹 기본 이미지 -->
+									<img src="/resources/images/group5.jpg">
+								</c:if>
+								<c:if test="${not empty groupList[0].group_image}">
+									<!-- 그룹 이미지 -->
+									<img src="/group/${groupList[0].group_image}">
+								</c:if>
+							</div>
+							<c:if test="${groupList.size() == 0}">
+								<span class="topNick">-</span>
+								<br>
+								<span class="topTime">-</span>
+							</c:if>
+							<c:if test="${groupList.size() >= 1}">
+								<span class="topNick">${groupList[0].group_title}</span>
+								<br>
+								<span class="topTime">${groupList[0].group_count}</span>
+							</c:if>
+						</div>
+						<div class="col-4 justify-content-center">
+							<div class="new_group_box">
+								<c:if test="${empty groupList[1].group_image}">
+									<!-- 그룹 기본 이미지 -->
+									<img src="/resources/images/group5.jpg">
+								</c:if>
+								<c:if test="${not empty groupList[1].group_image}">
+									<!-- 그룹 이미지 -->
+									<img src="/group/${groupList[1].group_image}">
+								</c:if>
+							</div>
+							<c:if test="${groupList.size() <= 1}">
+								<span class="topNick">-</span>
+								<br>
+								<span class="topTime">-</span>
+							</c:if>
+							<c:if test="${groupList.size() >= 2}">
+								<span class="topNick">${groupList[1].group_title}</span>
+								<br>
+								<span class="topTime">${groupList[1].group_count}</span>
+							</c:if>
+						</div>
+						<div class="col-4 justify-content-center">
+							<div class="new_group_box">
+								<c:if test="${empty groupList[2].group_image}">
+									<!-- 그룹 기본 이미지 -->
+									<img src="/resources/images/group5.jpg">
+								</c:if>
+								<c:if test="${not empty groupList[2].group_image}">
+									<!-- 그룹 이미지 -->
+									<img src="/group/${groupList[2].group_image}">
+								</c:if>
+							</div>
+							<c:if test="${groupList.size() <= 2}">
+								<span class="topNick">-</span>
+								<br>
+								<span class="topTime">-</span>
+							</c:if>
+							<c:if test="${groupList.size() >= 3}">
+								<span class="topNick">${groupList[2].group_title}</span>
+								<br>
+								<span class="topTime">${groupList[2].group_count}</span>
+							</c:if>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 일간 Top3 끝 -->
+	</div>
 </body>
 <!--풋터 영역-->
 <footer>
@@ -397,6 +531,6 @@ a:hover {
 </footer>
 <!—스크립트 영역—>
 <script>
-  AOS.init(); //스크롤 애니메이션 명령어
+	AOS.init(); //스크롤 애니메이션 명령어
 </script>
 </html>

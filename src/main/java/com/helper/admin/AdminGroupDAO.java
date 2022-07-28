@@ -8,24 +8,34 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.helper.member.MemberDTO;
-
 @Repository
-public class AdminDAO {
-
+public class AdminGroupDAO {
+	
 	@Autowired
 	private SqlSession session;
 	
-	public List<MemberDTO> selectBlacklist(int start, int end) throws Exception {
+	public List<Map<String, Object>> groupList(int start, int end) throws Exception {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("start", start);
 		map.put("end", end);
-		return session.selectList("adminMapper.selectBlacklist", map);
+		List<Map<String, Object>> list = session.selectList("adminMapper.groupList", map);
+		for(Map<String, Object> l : list) {
+			System.out.println(l);
+			System.out.println(l.get("group_count"));
+			int i = 0;
+			if(l.get("group_count") == null) {
+				l.put("group_count", 0);
+			}
+			i = Integer.parseInt(String.valueOf(l.get("group_count")));
+			l.put("group_count", i/60);
+		}
+		System.out.println(list.size());
+		return list;
 	}
 	
-	public Map<String, Object> getBlacklistPageNavi(int curPage) throws Exception {
+	public Map<String, Object> getGroupPageNavi(int curPage) throws Exception {
 		
-		int totalCnt = session.selectOne("adminMapper.blacklistPage"); // 전체 게시글 개수
+		int totalCnt = session.selectOne("adminMapper.groupPage"); // 전체 게시글 개수
 		int recordCntPerPage = 10; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
 		int naviCntPerPage = 5; // 네비를 몇개 단위로 페이징을 구성할지
 		int pageTotalCnt = 0; // 총 몇 페이지
@@ -69,9 +79,11 @@ public class AdminDAO {
 		
 	}
 	
-	public void unblocking(int mem_seq) throws Exception {
-		session.update("adminMapper.unblocking", mem_seq);
-	}
 	
+	
+	public void deleteGroup(int group_seq) throws Exception {
+		session.delete("adminMapper.deleteGroup", group_seq);
+		session.update("adminMapper.memGroupSetNull", group_seq);
+	}
 	
 }

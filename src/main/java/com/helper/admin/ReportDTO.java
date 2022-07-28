@@ -3,12 +3,12 @@ package com.helper.admin;
 public class ReportDTO {
 
 	private int report_seq, mem_seq;
-	private String mem_std_key, mem_id, mem_nick, report_reason;
+	private String mem_std_key, mem_id, mem_nick, report_reason, report_nick;
 	
 	
 	public ReportDTO() {}
 	public ReportDTO(int report_seq, int mem_seq, String mem_std_key, String mem_id, String mem_nick,
-			String report_reason) {
+			String report_reason, String report_nick) {
 		super();
 		this.report_seq = report_seq;
 		this.mem_seq = mem_seq;
@@ -16,8 +16,8 @@ public class ReportDTO {
 		this.mem_id = mem_id;
 		this.mem_nick = mem_nick;
 		this.report_reason = report_reason;
+		this.report_nick = report_nick;
 	}
-
 	public int getReport_seq() {
 		return report_seq;
 	}
@@ -54,11 +54,18 @@ public class ReportDTO {
 	public void setReport_reason(String report_reason) {
 		this.report_reason = report_reason;
 	}
-
+	public String getReport_nick() {
+		return report_nick;
+	}
+	public void setReport_nick(String report_nick) {
+		this.report_nick = report_nick;
+	}
+	
 	@Override
 	public String toString() {
 		return report_seq + " : " + mem_seq + " : " + mem_std_key
-				+ " : " + mem_id + " : " + mem_nick + " : " + report_reason;
+				+ " : " + mem_id + " : " + mem_nick + " : " + report_reason
+				+ " : " + report_nick;
 	}
 	
 	
