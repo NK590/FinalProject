@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.helper.member.MemberDTO;
 import com.helper.utils.Crawl;
 import com.helper.week.WeekDTO;
+import com.helper.week.WeekService;
 
 @RequestMapping("/study")
 @Controller
@@ -30,6 +31,8 @@ public class StudyController {
 	private HttpSession session;
 	@Autowired
 	private StudyService service;
+	@Autowired
+	private WeekService weekservice;
 
 	// 크롤링 검색
 	@ResponseBody
@@ -42,11 +45,13 @@ public class StudyController {
 
 	@RequestMapping(value = "/toStudy")
 	public String toStudy(Model model)throws Exception{
+		System.out.println("공부하기 페이지 요청");
 		MemberDTO memdto = (MemberDTO)session.getAttribute("loginSession");
 		int mem_seq = memdto.getMem_seq();
-		System.out.println("공부하기 페이지 요청");
 		List<SubjectDTO> subjectlist = service.selectall(mem_seq);
+		int record = weekservice.selectSumToday(mem_seq);
 		model.addAttribute("subjectlist",subjectlist);		
+		model.addAttribute("record",record);
 		return "study/study";
 	}
 

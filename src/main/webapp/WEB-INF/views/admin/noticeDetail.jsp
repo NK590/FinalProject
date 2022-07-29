@@ -209,8 +209,9 @@ a {
 				placeholder : "200자 이내의 내용을 입력해주세요.",
 				tabsize : 2,
 				minHeight : 400,
-				maxHeight : 400,
-				height : 400,
+				maxHeight : $(this).children().prop("height"),
+				height : $(this).children().prop("height"),
+				disableResizeEditor: true,
 				focus : true,
 				lang : "ko-KR", // 한글 설정 
 				disableDragAndDrop: true,  // 드롭앤 드랍 방지 
@@ -219,7 +220,20 @@ a {
 						for(let i = files.length - 1; i >= 0; i--){
 							uploadSummernoteImageFile(files[i],this);
 						}
-					}
+					},
+					// Blur면 툴바 d-none, Focus시 툴바 d-block
+					onBlur:function(e){   // summernote에 커서가 없을때 툴바 숨김
+						let p = e.target.parentNode.parentNode;
+						if(!(e.relatedTarget && $.contains(p,e.relatedTarget))){
+							$(this).parent().children(".note-editor").children(".note-toolbar").css("display","none");
+							console.log("onBlur");
+						}
+					},
+					onFocus:function(e){ // summernote에 커서가 올라가 있을때 툴바 표시
+						$(this).parent().children(".note-editor").children(".note-toolbar").css("display","block");
+						console.log("onBlur");
+					} 
+					
 				}   
 			});
 			
@@ -240,6 +254,7 @@ a {
 					success : function(data) {
 						 console.log(data);
  						let img = $('<img>').attr('src','/admin/'+data);
+ 						img.attr({"width":"50%","height":"50%"}); //이미지 크기 미리 설정
 						console.log(img);  
 						$(el).summernote("insertNode", img[0]);
 					}

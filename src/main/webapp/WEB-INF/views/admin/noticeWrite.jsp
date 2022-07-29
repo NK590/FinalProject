@@ -104,8 +104,9 @@ h2, h4 {
 				placeholder : "200자 이내의 내용을 입력해주세요.",
 				tabsize : 2,
 				minHeight : 400,
-				maxHeight : 400,
-				height : 400,
+				maxHeight : $(this).children().prop("height"),
+				height : $(this).children().prop("height"),//높이를 자식의 높이로
+				disableResizeEditor:true,//resize방지
 				focus : true,
 				disableDragAndDrop: true,  // 드롭앤 드랍 방지 
 				 callbacks : {
@@ -113,11 +114,8 @@ h2, h4 {
 						for(let i = files.length - 1; i >= 0; i--){
 							uploadSummernoteImageFile(files[i],this);
 						}
-					},
-					/* onMediaDelete : function(target)    {
-		                console.log(target[0].src);
-		            	deleteFile(target[0].src);
-		            } */
+					}
+					
 				}   
 			});
 		
@@ -135,6 +133,7 @@ h2, h4 {
 					success : function(data) {
 						 console.log(data);
  						let img = $("<img>").attr("src","/admin/"+data);
+ 						img.attr({"width":"50%","height":"50%"});//이미지 크기 미리 설정
 						console.log(img);  
 						$(el).summernote("insertNode", img[0]);
 					}

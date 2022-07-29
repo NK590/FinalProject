@@ -9,6 +9,9 @@ public class WeekService {
 	@Autowired
 	private WeekDAO dao;
 	
-	
+	//오늘 공부시간 합계
+		public int selectSumToday(int mem_seq)throws Exception{
+			return dao.selectSumToday(mem_seq);
+		}
 	
 }
