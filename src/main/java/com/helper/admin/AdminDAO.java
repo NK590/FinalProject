@@ -73,5 +73,29 @@ public class AdminDAO {
 		session.update("adminMapper.unblocking", mem_seq);
 	}
 	
+	public int reportTotal() throws Exception {
+		return session.selectOne("adminMapper.reportTotal");
+	}
+	public int visitToday() throws Exception {
+		return session.selectOne("adminMapper.visitToday");
+	}
+	public int visitTotal() throws Exception {
+		return session.selectOne("adminMapper.visitTotal");
+	}
+	public void visitCount() throws Exception {
+		int searchToday = session.selectOne("adminMapper.searchToday");
+		if(searchToday == 1) {
+			session.update("adminMapper.visitCount");
+		} else {
+			session.insert("adminMapper.visitInsert");
+		}
+	}
+	
+	public List<Map<String, Integer>> memberJoinCount() throws Exception {
+		return session.selectList("adminMapper.memberJoinCount");
+	}
+	public List<Map<String, Integer>> groupCategoryCount() throws Exception {
+		return session.selectList("adminMapper.groupCategoryCount");
+	}
 	
 }

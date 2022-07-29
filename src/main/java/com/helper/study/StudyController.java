@@ -102,16 +102,12 @@ public class StudyController {
 
 	@RequestMapping(value = "/toRecord")
 	public String toRecord(Model model) throws Exception {
-//	    MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginSession");
+	    MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginSession");
 
-//	    List<String> time_subjectList = service.subjectList(memberDTO.getMem_seq()); // 과목 list
-		List<String> time_subjectList = service.subjectList(1); // 오늘 과목 list
-//	    List<Integer> time_countList = service.timeList(memberDTO.getMem_seq()); // 과목별 시간 list
-		List<Integer> time_countList = service.countList(1); // 오늘 과목별 시간 list
-//	    List<Integer> time_weekList = service.myWeekList(memberDTO.getMem_seq()); // 이번주 월-금 시간List
-		List<Integer> time_weekList = service.myWeekList(1); // 이번주 월-금 시간List
-//	    List<Integer> time_LastWeekList = service.myLastWeekList(memberDTO.getMem_seq()); // 저번주 월-금 시간List
-		List<Integer> time_LastWeekList = service.myLastWeekList(1); // 저번주 월-금 시간List
+	    List<String> time_subjectList = service.subjectList(memberDTO.getMem_seq()); // 과목 list
+	    List<Integer> time_countList = service.countList(memberDTO.getMem_seq()); // 과목별 시간 list
+	    List<Integer> time_weekList = service.myWeekList(memberDTO.getMem_seq()); // 이번주 월-금 시간List
+	    List<Integer> time_LastWeekList = service.myLastWeekList(memberDTO.getMem_seq()); // 저번주 월-금 시간List
 		int dayTotalTime = 0;
 		int weekTotalTime = 0;
 		for (int i : time_countList) {

@@ -86,7 +86,7 @@ a:hover {
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav" href="#">관리자 홈</a></li>
+						<li class="nav-item"><a class="nav" href="/admin/toAdmin">관리자 홈</a></li>
 						<li class="nav-item"><a class="nav" href="/admin/toBlacklist?curPage=1">신고 목록 관리</a></li>
 						<li class="nav-item"><a class="nav" href="/admin/toBlackManage?curPage=1">차단 유저 관리</a></li>
 						<li class="nav-item"><a class="nav" href="/admin/toGrouplist?curPage=1">그룹 관리</a></li>

@@ -149,4 +149,28 @@ public class AdminService {
 
 		return noticeDAO.noticeDelete(notice_seq);
 	}
-}
+	
+	// 방문자 수 체크
+	public void visitCount() throws Exception {
+		adminDAO.visitCount();
+	}
+	public int visitToday() throws Exception {
+		return adminDAO.visitToday();
+	}
+	public int visitTotal() throws Exception {
+		return adminDAO.visitTotal();
+	}
+	public int reportTotal() throws Exception {
+		return adminDAO.reportTotal();
+	}
+	
+	public List<Map<String, Integer>> memberJoinCount() throws Exception {
+		return adminDAO.memberJoinCount();
+	}
+	
+	public List<Map<String, Integer>> groupCategoryCount() throws Exception {
+		return adminDAO.groupCategoryCount();
+	}
+	
+ 	
+ }

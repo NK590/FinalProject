@@ -123,4 +123,45 @@
 	<delete id="noticeDelete" parameterType="int">
 		delete from tb_notice where notice_seq = #{notice_seq}
 	</delete>
+	
+	<!-- admin Home -->
+	<select id="searchToday" resultType="int">
+		select count(*)
+			from tb_visit
+			where to_char(sysdate, 'YY/MM/dd') = to_char(vi_date, 'YY/MM/dd')
+	</select>
+	<select id="visitToday" resultType="int">
+		select sum(vi_count) 
+			from tb_visit 
+			where to_char(sysdate, 'YY/MM/dd') = to_char(vi_date, 'YY/MM/dd')
+	</select>
+	<select id="visitTotal" resultType="int">
+		select sum(vi_count)
+			from tb_visit
+	</select>
+	<update id="visitCount">
+		update tb_visit 
+			set vi_count = vi_count+1
+			where to_char(sysdate, 'YY/MM/dd') = to_char(vi_date, 'YY/MM/dd')
+	</update>
+	<insert id="visitInsert">
+		insert into tb_visit
+			values(1, sysdate)
+	</insert>
+	<select id="reportTotal" resultType="int">
+		select count(*)
+			from tb_report
+	</select>
+	<select id="memberJoinCount" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+		select to_char(mem_sign, 'YY/MM/dd') as mem_sign,count(*) as count from tb_member
+    		group by to_char(mem_sign, 'YY/MM/dd')
+    		order by mem_sign
+	</select>
+	<select id="groupCategoryCount" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+		 select group_std_key as std_key, count(*) as count from tb_group
+    		group by group_std_key
+	</select>
+	
+	
+	
 </mapper>
