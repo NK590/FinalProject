@@ -4,15 +4,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.helper.member.MemberDTO;
 
 @Service
 public class PlannerService {
 	@Autowired
 	private PlannerDAO dao;
 
-	public int planInsert(Map<String,Object> jsonData) throws Exception { // 일정 추가
+	public int planInsert(Map<String,Object> jsonData,int mem_seq) throws Exception { // 일정 추가
+		System.out.println("Service : "+jsonData);
+
+
 		int plan_seq = dao.selectSeq();// plan_seq값 얻기
 		// Object형으로 변환된 데이터를 String값으로 변환시켜준다
 		String title = (String)jsonData.get("plan_title"); 
@@ -25,7 +32,7 @@ public class PlannerService {
 		}else if(!allDay) {
 			int plan_allDay = 1;
 		}
-        PlannerDTO dto = new PlannerDTO(plan_seq,1,title,start,end);
+        PlannerDTO dto = new PlannerDTO(plan_seq,mem_seq,title,start,end);
 
 		System.out.println("after : "+dto.toString());
 		return dao.planInsert(dto);

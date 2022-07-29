@@ -80,12 +80,15 @@ h2, h4 {
 			</div>
 		</div>
 		<div>
-			<input type="text" name="mem_nick" value="abc123"> <input
-				type="text" name="mem_seq" value="1"> <input type="text"
-				name="img_src" id="img_src">
+			<input type="text" name="mem_nick" value="${loginSession.mem_nick }" class="d-none"> <input
+				type="text" name="mem_seq" value="${loginSession.mem_seq}" class="d-none"> <input type="text"
+				name="img_src" id="img_src" class="d-none">
 		</div>
 	</form>
 	<script>
+			$(window).on("load", function() {
+	    		$("#title").focus();
+			});
 		 	// 뒤로 가기 버튼
 			document.getElementById("toBack").onclick = function(){
 				location.href = "/board/toBoard";
@@ -102,12 +105,13 @@ h2, h4 {
 				    ['para', ['ul', 'ol', 'paragraph']],
 				    ['height', ['height']],
 				    ['insert', ['picture']]],
-				placeholder : "200자 이내의 내용을 입력해주세요.",
+				placeholder : "300자 이내의 내용을 입력해주세요.",
 				tabsize : 2,
 				minHeight : 400,
-				maxHeight : 400,
-				height : 400,
-				focus : true,
+				maxHeight : $(this).children().prop("height"),
+				height : $(this).children().prop("height"),  // 높이 속성을 자식의 높이 값으로 한다.
+				disableResizeEditor: true,	// resize-none
+				focus : false,
 				disableDragAndDrop: true,  // 드롭앤 드랍 방지 
 				 callbacks : {
 					onImageUpload : function(files, editor, welEditable){
@@ -136,14 +140,38 @@ h2, h4 {
 					success : function(data) {
 						 console.log(data);
  						let img = $("<img>").attr("src","/board/"+data);
-						console.log(img);  
+ 						img.attr({"width":"50%","height":"50%"}); 			// image 업로드시 width/height 50%로 맞춰주기
+ 						console.log(img);  
 						$(el).summernote("insertNode", img[0]);
 					}
 				});
 			}
 			// 등록 버튼을 누르면 
 			$("#writeBtn").on("click",function(){
-				// 정규식 추가하기
+				// 정규표현식
+				let regexTitle = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,20}$/;
+				let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,300}$/;
+				
+				if($("#title").val()==""){
+            		alert("제목을 입력해주세요."); 
+            		$("#title").focus();
+            		return;
+            	}else if(!regexTitle.test($("#title").val())){
+            		alert("20자 이내로 입력해주세요.");
+            		$("#title").focus();
+            		$("#title").val("");
+            		return;
+            	}else if(!regexContent.test($("#summernote").val())){
+            		alert("내용을 200자 이내로 입력해주세요.");
+            		$('#summernote').summernote({focus:true})
+            		$("#summernote").val("");
+            		return;
+            	}
+				else if($("#summernote").val()==""){
+            		alert("내용을 입력해주세요."); 
+            		$('#summernote').summernote({focus:true})
+            		return;
+            	}
 				
 				$("#writeForm").submit();
 			}) 
