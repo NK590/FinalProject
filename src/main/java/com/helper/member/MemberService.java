@@ -2,6 +2,7 @@ package com.helper.member;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,17 +57,19 @@ public class MemberService{
 	}
 	
 	//마이페이지 회원탈퇴
-	public void dropoutForm(MemberDTO dto) throws Exception{
-		dao.dropoutInfo(dto);
+	public int dropoutForm(int mem_seq) throws Exception{
+		return dao.dropoutInfo(mem_seq);
 	}
 	
-	//마이페이지 내가쓴 게시글
-	public ArrayList<BoardDTO> myBoard(int mem_seq) {
+	//마이페이지 나의 커뮤니티
+	public List<BoardDTO> myBoard(int mem_seq)throws Exception{
+		System.out.println("mem_seq : "+mem_seq);
 		return dao.myBoard(mem_seq);
 	}
 	
 	//마이페이지 나의 그룹
-	public ArrayList<GroupDTO> myGroup(int group_seq) {
+	public ArrayList<GroupDTO> myGroup(int group_seq)throws Exception{
+		System.out.println("group_seq : "+group_seq);
 		return dao.myGroup(group_seq);
 	}
 

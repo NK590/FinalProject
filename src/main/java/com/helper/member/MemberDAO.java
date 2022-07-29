@@ -1,6 +1,7 @@
 package com.helper.member;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,17 +57,17 @@ public class MemberDAO {
 	}
 	
 	// 마이페이지 회원탈퇴
-	public void dropoutInfo(MemberDTO dto) throws Exception {
-		session.delete("memberMapper.dropoutInfo", dto);
+	public int dropoutInfo(int mem_seq) throws Exception {
+		return session.delete("memberMapper.dropoutInfo", mem_seq);
 	}
 	
-	// 마이페이지 내가 쓴 게시글
-	public ArrayList<BoardDTO> myBoard(int mem_seq) {
-		return (ArrayList)session.selectList("memberMapper.myBoard", mem_seq); 
+	// 마이페이지 나의 커뮤니티
+	public List<BoardDTO> myBoard(int mem_seq)throws Exception{
+		return session.selectList("memberMapper.myBoard", mem_seq); 
 	}
 	
-	// 마이페이지 내가 쓴 게시글
-	public ArrayList<GroupDTO> myGroup(int group_seq) {
+	// 마이페이지 나의 그룹
+	public ArrayList<GroupDTO> myGroup(int group_seq)throws Exception{
 		return (ArrayList)session.selectList("memberMapper.myGroup", group_seq); 
 	}
 	
