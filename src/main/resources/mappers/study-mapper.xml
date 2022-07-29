@@ -36,4 +36,9 @@
 	<insert id="insertWeek" parameterType="com.helper.week.WeekDTO">
 		INSERT INTO TB_WEEK_RECORD VALUES (#{mem_seq}, #{record_week},#{record_time})
 	</insert>
+	<select id="selectSumToday" resultType="int" parameterType="int">
+		select sum(record_time) from tb_week_record 
+			where mem_seq = #{mem_seq} 
+			and to_char(sysdate,'MM/dd') = record_week
+	</select>
 </mapper>
