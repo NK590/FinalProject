@@ -2,6 +2,7 @@ package com.helper.member;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,19 @@ public class MemberService{
 	public ArrayList<GroupDTO> myGroup(int group_seq) {
 		return dao.myGroup(group_seq);
 	}
-
 	
+	// 그룹 가입 여부 체크
+	public int checkJoinStatus(int mem_seq) throws Exception {
+		return dao.checkJoinStatus(mem_seq);
+	}
+	
+	// 그룹 가입, 탈퇴 시 가입 그룹 번호 업데이트
+	public void updateGroupSeq(MemberDTO dto) throws Exception {
+		dao.updateGroupSeq(dto);
+	}
+	
+	// 특정 그룹 번호에 가입된 회원 조회
+	public List<MemberDTO> selectByGroupSeq(int group_seq) throws Exception {
+		return dao.selectByGroupSeq(group_seq);
+	}
 }

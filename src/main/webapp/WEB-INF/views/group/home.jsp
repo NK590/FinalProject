@@ -24,6 +24,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <div class="container">
     <div class="row">
+        <c:if test="${not empty loginSession}">
         <div class="col-10">
             <div class="row text-center">
                 <h3>그룹 검색</h3>
@@ -50,8 +51,34 @@
             </div>
         </div>
         <div class="col-2">
-            <button class="btn btn-primary" id="createGroupBtn" data-bs-toggle="modal" data-bs-target="#makeGroupModal">그룹 생성</button>
+        		<button class="btn btn-primary" id="createGroupBtn" data-bs-toggle="modal" data-bs-target="#makeGroupModal">그룹 생성</button>
         </div>
+        </c:if>
+        <c:if test="${empty loginSession}">
+        	<div class="row text-center">
+                <h3>그룹 검색</h3>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <select class="form-select" id="searchCategoryInput">
+                        <option selected value="">그룹 선택</option>
+                        <option value="초등학생">초등학생</option>
+                        <option value="중학생">중학생</option>
+                        <option value="고등학생">고등학생</option>
+                        <option value="수능/N수">수능/N수</option>
+                        <option value="자격증">자격증</option>
+                        <option value="취준생">취준생</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                <div class="col-9">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="그룹명 입력" id="searchGroupInput">
+                        <button class="btn btn-outline-secondary" type="button" id="searchGroupBtn">검색</button>
+                    </div>
+                </div>
+            </div>
+        </c:if>
     </div>
 	<!-- <div class="row text-center">
 		<h3>그룹 TOP3</h3>
@@ -161,7 +188,20 @@
 			} else if (memberNumberInput === '0') {
 				alert('그룹 인원수를 설정해주세요.')
 			} else {
-				$('#makeGroupForm').submit()
+				$.ajax({
+					url : "/group/checkJoinStatus",
+					type : "get",
+					success : (result) => {
+						if (result !== 0) {
+							alert("이미 그룹에 참여중입니다. 그룹을 탈퇴 후 시도해주세요.")
+						} else {
+							$('#makeGroupForm').submit()
+						}
+					},
+					error : (error) => {
+						console.log(error)
+					}
+				})
 			}
 		}
 	})

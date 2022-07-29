@@ -66,7 +66,11 @@
 	            <div class="row" style="margin: 20px">
 	                <p>참가자</p>
 	                <div style="background-color: #eee; height: 200px">
-	                    여기에 참가자 리스트
+	                    <c:if test="${not empty memberList}">
+	                    	<c:forEach items="${memberList}" var="dto">
+	                    		<p>${dto.mem_nick}</p>
+	                    	</c:forEach>
+	                    </c:if>
 	                </div>
 	            </div>
 	            <div class="row" style="margin: 20px">
@@ -78,6 +82,7 @@
 	            <div class="col text-center">
 	            	<button class="btn btn-danger" id="deleteGroupBtn">그룹 삭제</button>
 	            	<button class="btn btn-primary" id="modifyRoomContentBtn">방장의 한마디 수정</button>
+	            	<button class="btn btn-secondary" id="goBackBtn">그룹 리스트</button>
 	            </div>
 	        </div>
 	        <div class="col-6">
@@ -158,7 +163,7 @@
         </div>
     </div> --%>
     <script>
-    	let ws = new WebSocket("ws://192.168.20.4:8099/group/detail")
+    	let ws = new WebSocket("ws://211.207.221.23:8099/group/detail")
     	
     	// 전송 버튼 삭제로 인해 없앰
     	/* document.getElementById('chatSend').addEventListener('click', (e) => {
@@ -260,6 +265,10 @@
     		console.log(${groupDto.mem_seq})
     	})
     	
+    	// 방장의 한마디 수정 버튼 눌렀을 시
+    	$('#goBackBtn').on('click', (e) => {
+    		location.href = "/group/"
+    	})
     </script>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
