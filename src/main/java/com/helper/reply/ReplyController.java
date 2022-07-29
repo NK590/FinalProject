@@ -24,8 +24,7 @@ public class ReplyController {
 	@ResponseBody
 	public List<ReplyDTO> write(int bo_seq, ReplyDTO reDto) throws Exception { // 댓글 작성
 		System.out.println(bo_seq + " : " + reDto.getReply_content());
-		MemberDTO dto = new MemberDTO(1, "abc123", "abc123", "abc123", "N수", "N", 0); // MemberDTO dto =// session.getAttribute("loginSession");
-
+		MemberDTO dto = (MemberDTO)session.getAttribute("loginSession");
 		int rs = service.insert(bo_seq, reDto, dto);
 		if (rs > 0) {
 			return service.selectReply(bo_seq);

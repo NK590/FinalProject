@@ -31,6 +31,11 @@
 <link
 	href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css'
 	rel='stylesheet'>
+	<!-- flat picker -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	
 <title>플래너</title>
 <style>
 html, body {
@@ -49,6 +54,20 @@ a {
 	text-decoration: none;
 	color: black;
 }
+.planContent{
+resize:none;
+height:150px;
+}
+.inputRow:first-child{
+	display:flex;
+	justify-content:center;
+}
+.inputRow:first-child .label{
+	justify-content : start;
+}
+.inputRow:first-child input{
+	width:470px;
+}
 </style>
 </head>
 <body>
@@ -57,11 +76,50 @@ a {
 			<div id="calendar"></div>
 		</div>
 	</div>
+	<!-- modal -->
+	<div id='datepicker'></div>
+
+	<div class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">일정 등록</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row inputRow">
+						<label class="col label" for="title"><span>일정명</span></label> <input
+							type="text" class="form-control col-6" id="title" placeholder="15자 이내로 입력해주세요.">
+					</div>
+					<div class="inputRow">
+						<label class="col-2 label" for="start"><span>시작일</span></label> <input
+							type="datetime-local" class="form-control col-6" id="start" placeholder="시작일 선택">
+					</div>
+					<div class="inputRow">
+						<label class="col-2 label" for="end"><span>종료일</span></label> <input
+							type="datetime-local" class="form-control col-6" id="end" placeholder="종료일 선택">
+					</div>
+					<div class="row">
+						<label class="col-2 label" for="content"><span>내용</span></label>
+						<textarea id="content" class="planContent" placeholder="30자 이내로 입력해주세요."></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal" id="cancel">취소</button>
+					<button type="button" class="btn btn-primary" id="saveBtn">저장</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script>
+	
+	
 		(function() {
-
+	
+			
 			$(function() {
-
 				// calendar element 취득
 
 				var calendarEl = $('#calendar')[0];
@@ -111,14 +169,36 @@ a {
 							locale : 'ko', // 한국어 설정
 
 							select : function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-
-								let title = prompt("일정을 입력해주세요.");
+									
+							$(".modal").modal("show"); // 캘린더 클릭했을시 모달창 띄워주기
+							$('.modal').on('hidden.bs.modal', function () {  // 모달창이 사라지면 input창 비워두기
+								 let title = $("#title").val("");
+								 let start = $("#start").val("");
+								 let end = $("#end").val("");
+								 let content = $("#content").val("");
+					    	});
+							
+								 $("#saveBtn").on("click",function(){
+									 let title = $("#title").val();
+									 let start = $("#start").val();
+									 let end = $("#end").val();
+									 let content = $("#content").val();
+									 
+									 console.log(title);
+									 console.log(start);
+									 console.log(end);
+									 console.log(content);
+									 
+									 
+								 })
+								
+ 								/* let title = prompt("일정을 입력해주세요.");
 								let str_space = /\s/;
 								if(str_space.exec(title)|| title==""){
 									alert("일정명을 입력해주세요."); return;
-								}else if (title!=null){
+								}else if (title!=null){ */
 	
-									calendar.addEvent({
+									/* calendar.addEvent({
 
 										title : title,
 
@@ -132,9 +212,9 @@ a {
 										
 										endStr : arg.endStr
 
-									})
+									}) */
 								
-								} console.log(arg);
+								//}  console.log(arg);
 														
 								calendar.unselect()
 
@@ -170,9 +250,7 @@ a {
 											console.log(e);
 										}
 									})
-									
-									
-									
+
 								}
 								
 							},
@@ -184,7 +262,7 @@ a {
  								event.plan_title = 	plan.event._def.title; // 일정 내용 */
  								event.plan_start = plan.event._instance.range.start; // 시작 시간
 								event.plan_end =  plan.event._instance.range.end; // 마치는 시간
-								/* event.plan_allDay = plan.event._def.allDay; // 하루종일 여부  */ 
+								event.plan_allDay = plan.event._def.allDay; // 하루종일 여부  
 								let jsonData = JSON.stringify(event);  // 객체를 json으로 변환하는 이유는ㄴ controller단에 날짜형식을 parse하기 위함이다
 								console.log(event);
 								console.log(jsonData);
@@ -197,6 +275,7 @@ a {
 		                          	,success : function(data){
 		                          		if(data=="success"){
 		                          			alert("일정이 추가되었습니다.");
+		                          			location.href="/planner/toPlanner"; 
 		                          		}else{
 		                          			alert("일정 등록에 실패했습니다.")
 		                          		}
@@ -209,7 +288,7 @@ a {
 								
 							},
 
-							eventDrop : function(plan) { // 일정 수정
+							eventChange : function(plan) { // 일정 수정
 		                            console.log(plan);		                            	
 		                            	let event = new Object(); // json을 담기 위한 객체 선언
 		 								event.plan_title = 	plan.event._def.title; // 일정 내용 */
@@ -229,7 +308,7 @@ a {
 				                          		if(data=="success"){
 				                          			alert("일정이 변경되었습니다.");
 				                          		}else{
-				                          			alert("일정 등록에 실패했습니다.")
+				                          			alert("새로고침 후 일정을 변경해주세요.")
 				                          		}
 				                          	}
 											, error : function(e){
@@ -248,26 +327,34 @@ a {
 							//이벤트 
 
 							events : [ 
-								
 								<c:forEach items="${list}" var="dto">
 									{	
 									id : "${dto.plan_seq}",  /* plan_seq id값에 담아주기 */
 									title : "${dto.plan_title}",
 									start : "${dto.plan_start}",
-									end : "${dto.plan_end}",
-									color : '#' + Math.round(Math.random() * 0xffffff).toString(16) 
+									end : "${dto.plan_end}"
+									/* color : '#' + Math.round(Math.random() * 0xffffff).toString(16)  */
 									},
 								</c:forEach>
 							]
 						});
-
 				// 캘린더 랜더링
 
 				calendar.render();
 
+				let config ={
+						enableTime: true, 
+					    dateFormat: "Y-m-d H:i",
+					    defaultDate: "today"
+					}
+
+				flatpickr("input[type=datetime-local]",config);
+				
 			});
 
 		})();
+
+
 	</script>
 </body>
 </html>
