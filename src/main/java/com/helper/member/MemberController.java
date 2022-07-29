@@ -149,17 +149,18 @@ public class MemberController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/toAdmin") // toLogin페이지 요청
+	public String toAdmin() {
+		System.out.println("toAdmin 페이지 요청");
+		return "admin/adminMain";
+	}
+	
 	@RequestMapping(value="/toKakao")
 	public String home(String code) {
 		System.out.println("code : " + code);
 		return "home";
 	}
 	
-	
-//	@RequestMapping(value="/kakaoLogin")
-//	public String home(Locale locale, Model model) {
-//		return "home";
-//	}
 	
 	// 카카오 로그인
 		@ResponseBody

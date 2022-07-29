@@ -69,8 +69,8 @@ body {
 						<span>안녕하세요.</span>
 					</h3>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myGroup">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">내가 쓴 문의</a></li>
+						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
 					</ul>
@@ -101,39 +101,7 @@ body {
 								</div>
 							</div>
 
-							<div class="row p-2">
-								<div class="col-3">
-									<label class="form-label">비밀번호</label>
-								</div>
-								<div class="col-9" style="padding: 0px;">
-									<div class="check checkFalse" id="checkPwdFalse"
-										style="display: none;">*조건에 맞게 입력해주세요.</div>
-									<div class="check checkTrue" id="checkPwdTrue"
-										style="display: none;">*사용 가능한 비밀번호입니다.</div>
-								</div>
-								<div class="col-12 mb-2">
-									<input type="password" class="form-control" name="mem_pw"
-										required onkeyup="pwdCheck();"> <span
-										style="font-size: 10px;">*영문, 숫자, 특수문자 중 2가지 이상 조합하여
-										6자이상 12자 이하로 입력해주세요.</span>
-								</div>
-							</div>
-
-							<div class="row p-2">
-								<div class="col-4">
-									<label class="form-label">비밀번호 확인</label>
-								</div>
-								<div class="col-8" style="padding: 0px;">
-									<div class="check checkFalse" id="samePwdFalse"
-										style="display: none;">*비밀번호가 일치하지 않습니다.</div>
-									<div class="check checkTrue" id="samePwdTrue"
-										style="display: none;">*비밀번호가 일치합니다.</div>
-								</div>
-								<div class="col-12 mb-2">
-									<input type="password" class="form-control" id="mem_pwCheck"
-										required onkeyup="samePwdCheck();">
-								</div>
-							</div>
+							
 
 							<div class="row p-2">
 								<div class="col-3">
@@ -161,9 +129,8 @@ body {
 									<div class="selectPlz">*선택 필수</div>
 								</div>
 								<div class="col-12 mb-2">
-									<select class="form-select" aria-label="Default select example"
-										id="memStdkey" name="mem_std_key">
-										<option selected value="선택">선택</option>
+									<select class="form-select" aria-label="Default select example"	id="memStdkey" name="mem_std_key">
+										<option selected value="${loginSession.mem_std_key}">${loginSession.mem_std_key}</option>
 										<option value="초등학생">초등학생</option>
 										<option value="중학생">중학생</option>
 										<option value="고등학생">고등학생</option>
@@ -195,19 +162,16 @@ body {
 		</div>
 	</div>
 	<script>
+	// 취소하기 버튼 누르면 마이페이지->나의그룹 페이지로 이동
+	document.getElementById("btnCancel").onclick = function(){
+		location.href = "/mypage/myPage"
+	}
+	
 	 // 수정 버튼을 눌렀을 때 유효성 검사 후 form 제출
 	$("#updateBtn").on("click", function() {
-		//let regExpPwd = /^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?=[0-9]+))$)[A-Za-z\d~!@#$%^&*()_+=]{6,12}$/; // 비밀번호 정규식 (영문자, 숫자,~!@#$%^&* 6~10자리)
 		let regexName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/; // 닉네임 정규식 3~10자의 영문 대소문자와 숫자, 한글 
-		let regExpPwd = /^[a-zA-Z0-9~!@#$%^&*()_+=?]{6,12}$/;
 		// 유효성 검사
-		if(!regExpPwd.test($('input[name=mem_pw]').val())) {
-			alert("형식에 맞지 않는 비밀번호입니다.");
-			return;
-		} else if ($("#pwCheck").val() !== $("#mem_pw").val()) {
-			alert("비밀번호와 비밀번호 확인창의 값이 일치하지 않습니다.");
-			return;
-		} else if (!regexName.test($('input[name=mem_nick]').val())) {
+		if (!regexName.test($('input[name=mem_nick]').val())) {
 			alert("형식에 맞지 않는 닉네임입니다.");
 			return;
 		}else if ($("#memStdkey").val() === "선택") {

@@ -53,6 +53,7 @@ public class GroupController {
 		// 임시 테스트
 		GroupDTO dto = new GroupDTO(1, 1, roomNameInput, roomContentInput, categoryInput, Integer.parseInt(memberNumberInput), 1, "aaa", null);
 		service.insert(dto);
+		System.out.println(dto);
 		model.addAttribute("group_seq", 1); // 여기 버그임 수정필요
 		
 		return "redirect:/group/room";

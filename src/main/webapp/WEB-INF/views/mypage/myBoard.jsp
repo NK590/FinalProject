@@ -69,8 +69,8 @@ body {
 						<span>안녕하세요.</span>
 					</h3>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myGroup">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">내가 쓴 문의</a></li>
+						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
 					</ul>
@@ -80,7 +80,7 @@ body {
 
 			<div class="col-9">
 				<p>
-				<h3>내가 쓴 문의</h3>
+				<h3>나의 커뮤니티</h3>
 				</p>
 				<div class="line"></div>
 				<div class="col-sm-10 wrap" id="allbody">
