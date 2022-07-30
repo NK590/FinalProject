@@ -13,5 +13,8 @@ public class WeekService {
 		public int selectSumToday(int mem_seq)throws Exception{
 			return dao.selectSumToday(mem_seq);
 		}
-	
+	//오늘 공부시간이 있는지
+		public int selectIsRecord(int mem_seq)throws Exception{
+			return dao.selectIsRecord(mem_seq);
+		}
 }

@@ -41,4 +41,8 @@
 			where mem_seq = #{mem_seq} 
 			and to_char(sysdate,'MM/dd') = record_week
 	</select>
+	<select id="selectIsRecord" resultType="int" parameterType="int">
+		SELECT COUNT(*)FROM tb_week_record where mem_seq = #{mem_seq} 
+			and to_char(sysdate,'MM/dd') = record_week
+	</select>
 </mapper>

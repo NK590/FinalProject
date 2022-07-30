@@ -18,4 +18,8 @@ public class WeekDAO {
 	public int selectSumToday (int mem_seq)throws Exception{
 		return session.selectOne("studyMapper.selectSumToday",mem_seq);
 	} 
+	
+	public int selectIsRecord(int mem_seq)throws Exception{
+		return session.selectOne("studyMapper.selectIsRecord",mem_seq);
+	}
 }

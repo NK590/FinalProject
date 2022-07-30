@@ -557,10 +557,10 @@ button {
 			var sec = seconds % 60 < 10 ? '0'+seconds % 60 : seconds % 60;
 			return hour+":"+min+":" + sec;
 			}	
-    document.getElementById("sumTime").innerText = '오늘 공부 시간 : ' + time(${record});
-    let seconds = ${record};
-	let active = false;
-    $(".startbtn2").parent().on('click', function (){ //시작버튼 누르면 다른 시작버튼은 눌리지 않게 막아둠
+    	document.getElementById("sumTime").innerText = '오늘 공부 시간 : ' + time(${record});
+        let seconds = ${record};
+		let active = false;
+        $(".startbtn2").parent().on('click', function (){ //시작버튼 누르면 다른 시작버튼은 눌리지 않게 막아둠
     	$(this).children(".startbtn2").css("color","red")
     	$(".startbtn2").parent().not(this).css({ 'pointer-events': 'none' });
     	$(".startbtn2").parent().not(this).next().css({ 'pointer-events': 'none' });

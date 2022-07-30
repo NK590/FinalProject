@@ -49,9 +49,13 @@ public class StudyController {
 		MemberDTO memdto = (MemberDTO)session.getAttribute("loginSession");
 		int mem_seq = memdto.getMem_seq();
 		List<SubjectDTO> subjectlist = service.selectall(mem_seq);
-		int record = weekservice.selectSumToday(mem_seq);
+		if(weekservice.selectIsRecord(mem_seq)!=0) {			
+			int record = weekservice.selectSumToday(mem_seq);
+			model.addAttribute("record",record);
+		}else {
+			model.addAttribute("record",0);
+		}
 		model.addAttribute("subjectlist",subjectlist);		
-		model.addAttribute("record",record);
 		return "study/study";
 	}
 
