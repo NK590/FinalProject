@@ -34,6 +34,9 @@ public class PlannerDAO {
 	
 		return session.update("plannerMapper.update",map);
 	}
+	public int updateNoSeq(Map map)throws Exception{
+		return session.update("plannerMapper.udpateNoSeq",map);
+	}
 	
 }
 

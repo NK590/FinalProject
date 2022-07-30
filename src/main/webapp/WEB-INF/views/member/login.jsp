@@ -309,7 +309,10 @@ function kakaoLogin() {
 		console.log(login);
 		if( $('#id').val() == "" || $('#password').val() == "" ){
 			alert("아이디 혹은 비밀번호를 입력해주세요.");
-		} else{
+		}else if($('#id').val() == "admin" || $('#password').val() == "admin"){
+			alert("관리자 페이지로 이동합니다.");
+			location.href = "/member/toAdmin";
+		}else{
 			// 아이디, 비밀번호 입력 시 ajax실행
 			$.ajax({
 				url : "/member/loginForm"

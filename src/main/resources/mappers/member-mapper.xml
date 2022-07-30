@@ -40,22 +40,22 @@
 	</insert>
 	
 	<!-- 마이페이지 회원정보 수정  -->
-	<insert id="updateInfo" parameterType="com.helper.member.MemberDTO">
-		update tb_member set mem_pw = #{mem_pw}, mem_nick = #{mem_nick}, mem_std_key = #{mem_std_key} where mem_id = #{mem_id}
-	</insert>
+	<update id="updateInfo" parameterType="com.helper.member.MemberDTO">
+		update tb_member set mem_nick = #{mem_nick}, mem_std_key = #{mem_std_key} where mem_id = #{mem_id}
+	</update>
 	
 	<!-- 마이페이지 회원탈퇴  -->
-	<delete id="dropoutInfo" parameterType="com.helper.member.MemberDTO">
-		delete from tb_member where mem_id = #{mem_id}
+	<delete id="dropoutInfo" parameterType="int">
+		delete from tb_member where mem_seq = #{mem_seq}
 	</delete>
 	
-	<!-- 마이페이지 내가 쓴 게시글 -->
+	<!-- 마이페이지 나의 커뮤니티 -->
 	<select id="myBoard" parameterType="int" resultType="com.helper.board.BoardDTO">
 		select * from tb_board where mem_seq = #{mem_seq} 
 	</select>
 	
 	<!-- 마이페이지 나의 그룹 -->
-	<select id="myGroup" parameterType="int" resultType="com.helper.board.BoardDTO">
+	<select id="myGroup" parameterType="int" resultType="com.helper.group.GroupDTO">
 		select * from tb_group where group_seq = #{group_seq} 
 	</select>
 	

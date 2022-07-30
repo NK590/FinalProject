@@ -156,7 +156,7 @@ a {
 			<div class="row bo-title2 d-none">
 				<!-- 수정을 했을때 d-none을 풀어준다 -->
 				<div class="col d-flex justify-content-center">
-					<input type="text" class="form-control" id="title" name="bo_title"
+					<input type="text" class="form-control" id="title1" name="bo_title"
 						value="${dto.bo_title}" placeholder="제목을 입력해주세요">
 				</div>
 			</div>
@@ -186,7 +186,7 @@ a {
 					<c:forEach items="${list}" var="reDto">
 						<div class="reply-content-area">
 							<p>
-								<b>${reDto.mem_nick}</b><span class="reply-date">${reDto.reply_date}</span><c:if test="${dto.mem_seq == reDto.mem_seq}"><i class="bi bi-trash"></i><!--  mem_seq와 댓글 쓴사람의 seq가 같을 때 삭제 버튼을 띄우준다.  -->
+								<b>${reDto.mem_nick}</b><span class="reply-date">${reDto.reply_date}</span><c:if test="${loginSession.mem_seq == reDto.mem_seq}"><i class="bi bi-trash"></i><!--  mem_seq와 댓글 쓴사람의 seq가 같을 때 삭제 버튼을 띄우준다.  -->
 									<input type="text" class="d-none getSeq"
 										value="${reDto.reply_seq}" name="reply_seq">
 								</c:if>
@@ -211,7 +211,7 @@ a {
 			<div class="row">
 				<div class="col d-flex justify-content-center">
 					<button type="button" class="btn btn-secondary m-2" id="toBack">목록</button>
-					<c:if test="${dto.mem_seq == 1}">
+					<c:if test="${dto.mem_seq == loginSession.mem_seq}">
 						<!-- loginSession.mem_seq 값으로 대체하기 -->
 						<button type="button" class="btn btn-defualt m-2" id="updateBtn">수정</button>
 						<button type="button" class="btn btn-dark m-2" id="deleteBtn">삭제</button>
@@ -234,35 +234,49 @@ a {
 			document.getElementById("toBack").onclick = function(){
 				location.href = "/board/toBoard";
 			}
-		 	
-			
 			// 섬머노트 
 			$('#summernote').summernote({
 				// 섬머노트 툴바 옵션
-				  toolbar: [
-				    ['style', ['bold', 'italic', 'underline', 'clear']],
-				    ['font', ['strikethrough', 'superscript', 'subscript']],
-				    ['fontsize', ['fontsize']],
-				    ['color', ['color']],
-				    ['para', ['ul', 'ol', 'paragraph']],
-				    ['height', ['height']],
-				    ['insert', ['picture']]],
-				placeholder : "200자 이내의 내용을 입력해주세요.",
+				  toolbar: [ 
+					  		['style', ['bold', 'italic', 'underline', 'clear']],
+						    ['font', ['strikethrough', 'superscript', 'subscript']],
+						    ['fontsize', ['fontsize']],
+						    ['color', ['color']],
+						    ['para', ['ul', 'ol', 'paragraph']],
+						    ['height', ['height']],
+						    ['insert', ['picture']]
+					   ],
+				placeholder : "300자 이내의 내용을 입력해주세요.",
 				tabsize : 2,
 				minHeight : 400,
-				maxHeight : 400,
-				height : 400,
+				maxHeight : $(this).children().prop("height"),
+				height : $(this).children().prop("height"),  // 높이 속성을 자식의 높이 값으로 한다.
+				disableResizeEditor: true,	// resize-none
 				focus : true,
 				lang : "ko-KR", // 한글 설정 
 				disableDragAndDrop: true,  // 드롭앤 드랍 방지 
 				 callbacks : {
-					onImageUpload : function(files, editor, welEditable){
+					onImageUpload : function(files, editor, welEditable){ // 이미지 업로드
 						for(let i = files.length - 1; i >= 0; i--){
 							uploadSummernoteImageFile(files[i],this);
 						}
-					}
+					} ,
+					// Blur면 툴바 d-none, Focus시 툴바 d-block
+					onBlur:function(e){   // summernote에 커서가 없을때 툴바 숨김
+						let p = e.target.parentNode.parentNode;
+						if(!(e.relatedTarget && $.contains(p,e.relatedTarget))){
+							$(this).parent().children(".note-editor").children(".note-toolbar").css("display","none");
+							console.log("onBlur");
+						}
+					},
+					onFocus:function(e){ // summernote에 커서가 올라가 있을때 툴바 표시
+						$(this).parent().children(".note-editor").children(".note-toolbar").css("display","block");
+						console.log("onBlur");
+					} 
+					
 				}   
 			});
+
 			
 			$("#summernote").summernote("pasteHTML", '${dto.bo_content}'); // 태그자 summernote에 넣어주기 // 게시글 내용 띄워주기
 			$("#summernote").summernote("disable"); // 비활성화 
@@ -281,6 +295,7 @@ a {
 					success : function(data) {
 						 console.log(data);
  						let img = $('<img>').attr('src','/board/'+data);
+ 						img.attr({"width":"50%","height":"50%"}); 			// image 업로드시 width/height 50%로 맞춰주기
 						console.log(img);  
 						$(el).summernote("insertNode", img[0]);
 					}
@@ -295,7 +310,7 @@ a {
 				$("#completeBtn").removeClass("d-none");
 				$(".bo-title1").addClass("d-none");
 				$(".bo-title2").removeClass("d-none");
-				$(".bo-title2").focus();
+				$("#title1").focus();				
 			})
 			
 			// 삭제 버튼을 누르면
@@ -362,14 +377,38 @@ a {
 			//!!!!!!!!!!!!!!! 수정시 실제로 삭제되어야할 이미지경로를 배열에 담는다 
 			let updateFile = [];
 			// 수정완료 버튼을 누르면 
-			$("#completeBtn").on("click",function(){	
+			$("#completeBtn").on("click",function(){
+				// 정규표현식
+				let regexTitle = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,20}$/;
+				let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,300}$/;
+				
+				if($("#title1").val()==""){
+            		alert("제목을 입력해주세요."); 
+            		$("#title1").focus();
+            		return;
+            	}else if(!regexTitle.test($("#title1").val())){
+            		alert("20자 이내로 입력해주세요.");
+            		$("#title1").focus();
+            		$("#title1").val("");
+            		return;
+            	}else if(!regexContent.test($("#summernote").val())){
+            		alert("내용을 300자 이내로 입력해주세요.");
+            		$('#summernote').summernote({focus:true})
+            		$("#summernote").val("");
+            		return;
+            	}
+				else if($("#summernote").val()==""){
+            		alert("내용을 입력해주세요."); 
+            		$('#summernote').summernote({focus:true})
+            		return;
+            	}				
+				
 				let files = $("<input>").attr({
 					"type": "text",
 					"name": "arr[]",
 					"value": updateFile}).css("display", "none");
 				$("#updateForm").append(files);
 				$("#updateForm").submit();
-				 // 정규식 적용하기
 			}) 
 			
 			
@@ -402,16 +441,24 @@ a {
 				
 				/////  댓글 영역 /////
 				$("#replyBtn").on("click",function(){
-					if($("#reply-area").val()==""){
+					let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,50}$/; // 정규식
+								
+					if($("#reply-area").val()==""){ 
 						alert("댓글을 입력해주세요.");
+						$("#reply-area").focus();
 						return;
-					}else{
+					}else if(!regexContent.test($("#reply-area").val())){
+	            		alert("50자 이내로 입력해주세요.");
+	            		$("#reply-area").focus();
+	            		$("#reply-area").val("");
+	            		return;
+	            	}else{
 						$.ajax({
 							url:"/reply/write"
 							,type:"post"
 							,data : {"bo_seq":$("#bo_seq").val(), "reply_content":$("#reply-area").val()}
 							,success : function(data){
-								console.log(data);
+								console.log(data);	
 									makeReply(data);
 							}
 							,error : function(e){
@@ -474,7 +521,7 @@ a {
 									let p1 = $("<p>");
 									let p2 = $("<p>").html(reply.reply_content);
 									let input = $("<input>").addClass("d-none getSeq").val(reply.reply_seq).attr("type","text");
-									if("${dto.mem_seq}"==reply.mem_seq){
+									if("${loginSession.mem_seq}"==reply.mem_seq){
 										p1.append(b,span,a,input);
 										div.append(p1,p2);
 										$(".replyBox").append(div);

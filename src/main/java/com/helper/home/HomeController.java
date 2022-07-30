@@ -18,6 +18,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/")
 	public String home(Model model) throws Exception {
+		adminService.visitCount();
 		List<Map<String, Object>> todayList = adminService.selectTopMem();
 		List<Map<String, Object>> groupList = adminService.selectTopGroup();
 		model.addAttribute("todayList", todayList);

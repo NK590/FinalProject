@@ -1,12 +1,14 @@
 package com.helper.admin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections4.map.HashedMap;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.stereotype.Controller;
@@ -38,7 +40,7 @@ public class AdminController {
 		return "admin/blacklist";
 	}
 	
-	@RequestMapping(value = "/addBleck")
+	@RequestMapping(value = "/addBlack")
 	public String addBleck(int mem_seq) throws Exception {
 		service.addBleck(mem_seq);
 		return "redirect:/admin/toBlacklist?curPage=1";
@@ -102,7 +104,20 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/toAdmin")
-	public String toAdmin() throws Exception {
+	public String toAdmin(Model model) throws Exception {
+		Map<String, Object> totalMap = new HashMap<String, Object>();
+		int visitToday = service.visitToday();
+		int visitTotal = service.visitTotal();
+		int reportTotal = service.reportTotal();
+		totalMap.put("visitToday", visitToday);
+		totalMap.put("visitTotal", visitTotal);
+		totalMap.put("reportTotal", reportTotal);
+		// 1주일 회원가입수 가져오기
+		JSONArray memberJoinCount = new JSONArray(service.memberJoinCount());
+		JSONArray groupCategoryCount = new JSONArray(service.groupCategoryCount());
+		model.addAttribute("totalMap", totalMap);
+		model.addAttribute("memberJoinCount", memberJoinCount);
+		model.addAttribute("groupCategoryCount", groupCategoryCount);
 		return "admin/adminMain";
 	}
 	

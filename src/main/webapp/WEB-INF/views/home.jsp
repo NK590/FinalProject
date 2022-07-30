@@ -306,11 +306,12 @@ a:hover {
 						</a>
 							<ul class="dropdown-menu"
 								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="#">플래너</a></li>
+								<li><a class="dropdown-item" href="/planner/toPlanner">플래너</a></li>
 								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
 							</ul>
+						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식커뮤니티</a></li>	
 						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myGroup">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
 				</div>
 				</c:when>
@@ -347,7 +348,7 @@ a:hover {
 						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="/member/signup">회원가입</a></li>
 					</ul>
 				</div>
 				</c:otherwise>

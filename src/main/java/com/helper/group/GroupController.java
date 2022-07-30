@@ -63,7 +63,7 @@ public class GroupController {
 		int currval = service.selectSeqCurrval();
 		System.out.println("현재 생성한 방 번호 : " + currval);
 		model.addAttribute("group_seq", currval);
-		
+
 		memberDto.setGroup_seq(currval);
 		session.setAttribute("loginSession", memberDto);
 		memberService.updateGroupSeq(memberDto);

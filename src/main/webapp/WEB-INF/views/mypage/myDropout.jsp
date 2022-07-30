@@ -65,8 +65,8 @@ body {
 						<span>안녕하세요.</span>
 					</h3>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myGroup">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">내가 쓴 문의</a></li>
+						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
 					</ul>
@@ -85,15 +85,37 @@ body {
 				
 				<div class="row p-2">		
 					<div class="row withdrawal-input">
-						<div class="col-4">
+						
+							
+							<div class="row withdrawal-info">
+						<div class="col-12">
+							<p>
+							<h6>회원탈퇴시 다음의 내용을 숙지해 주시기 바랍니다.</h6>
+							</p>
+						</div>
+						<div class="col-12 term-box">
+							<p>1. 탈퇴시 고객님의 정보는 소비자 보호에 관한 법률에 의거한 고객정보 보호 정책에 따라 청약철회에 관한
+								기록, 대금결제 및 재화 등의 기록은 법정 기간에 따라 관리됩니다.</p>
+							<p>2. 탈퇴 후 리뷰 및 문의하기 등의 게시물은 관리가 불가능 하오니, 편집 또는 삭제를 원하시는 경우
+								탈퇴 전 관리해 주시기 바랍니다.</p>
+							<p>3. 결제 후 진행중인 서비스는 탈퇴로 취소 또는 환불되지않습니다.</p>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value=""
+								id="flexCheckDefault"> <label class="form-check-label"
+								for="flexCheckDefault"> 위 내용을 모두 숙지하였습니다. </label>
+						</div>
+							</div>
+							<div class="col-4">
 							<span>* 비밀번호</span>
 						</div>
 							<div class="col-8">
 								<input type="password" class="form-control withdrawPw"
 									placeholder="비밀번호를 입력해주세요." id="dropoutPw" name="mem_pw">
 							</div>
+							
 							<div class="btn-area">
-								<button type="button" class="btn btn-light btnCancle">취소하기</button>
+								<button type="button" class="btn btn-light btnCancle" id="btnCancel">취소하기</button>
 								<button type="button" class="btn btn-danger btnWithdraw" id="dropoutBtn">탈퇴하기</button>
 							</div>
 					</div>
@@ -106,41 +128,63 @@ body {
 		</div>
 	</div>
 	<script>
+	// 취소하기 버튼 누르면 마이페이지->나의그룹 페이지로 이동
+	document.getElementById("btnCancel").onclick = function(){
+		location.href = "/mypage/myPage"
+	}
+	
 	// 탈퇴하기 버튼을 눌렀을 때  --> 체크박스 체크여부 확인 / 비밀번호 동일한지 확인하기!  --> confirm창으로 탈퇴여부 재차 물어보기
-	$("#dropoutBtn").on("click", function() {
+
+		$("#dropoutBtn").on("click", function() {
+			// 체크박스
+			if (!$("#flexCheckDefault").prop('checked')) {
+				alert("회원탈퇴 안내를 숙지해주세요.");
+				return;
+			}
+	
 		let dropoutPw = $("#dropoutPw").val();
 		if($("#dropoutPw").val() == ""){
 			alert("비밀번호를 입력해주세요.");
 			return;
-		}
+		}else{
+			
+		}	
+		
 		$.ajax({
 			url : "/mypage/dropoutForm"
 			,type : "post"
 			,data : { mem_pw : dropoutPw}
 			,success : function(data) {
 				console.log(data);
-				if (data === "success") {
+				if (data == "success") {
 					
-//					let result = confirm("정말 탈퇴하시겠습니까?");
-//					console.log(result);
-//					if (result) { // confirm 창에서 확인버튼을 눌렀을 때 아이디 삭제 후 메인페이지로 이동
+					let result = confirm("정말 탈퇴하시겠습니까?");
+					console.log(result);
+					if (!result) { // confirm 창에서 확인버튼을 눌렀을 때 아이디 삭제 후 메인페이지로 이동
 
-//						$.ajax({
-//							url : "/mypage/dropoutConfirm"
-//							,type : "get"
-//							,success : function(confirm) {
-//								console.log(confirm);
-//							},
-//							error : function(e) {
-//								console.log(e);
-//							}
-//						});
-						alert("이용해주셔서 감사합니다.");
-						location.href = "/"; // 회원 탈퇴완료 후 메인페이지로 이동 
+						location.href="/mypage/myPage"
 
-//					} else { // confirm 창에서 취소버튼 눌렀을때 마이페이지의 구독화면으로 이동
-//						location.href = "/mypage/myGroup";
-//					}
+					} else { // confirm 창에서 취소버튼 눌렀을때 마이페이지의 구독화면으로 이동
+						$.ajax({
+							url : "/mypage/dropoutConfirm"
+							,type : "get"
+							,success : function(confirm) {
+								console.log(confirm);
+								if(confirm=="success"){
+								alert("이용해주셔서 감사합니다.");
+								location.href = "/"; // 회원 탈퇴완료 후 메인페이지로 이동
+								}else{
+									alert("회원탈퇴에 실패했습니다. 고객센터에 문의하세요");
+									location.href="/mypage/myPage";
+								}
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						});
+						
+					}
+					
 				} else {
 					alert("올바른 비밀번호를 입력해주세요.");
 					return;
@@ -151,8 +195,7 @@ body {
 				console.log(e);
 			}
 		});
-		
-	});
+		});
 	</script>
 </body>
 </html>

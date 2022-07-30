@@ -1,6 +1,7 @@
 package com.helper.mypage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,22 +28,28 @@ public class MypageController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
-	@RequestMapping(value = "/myGroup") //마이페이지 -> 나의 그룹 요청
+	@RequestMapping(value = "/myPage") //마이페이지 -> 나의 그룹 요청
 	public String myGroup(Model model) throws Exception{
-//		int group_seq = ((GroupDTO)session.getAttribute("loginSession")).getGroup_seq();
-//		ArrayList<GroupDTO> list = service.myGroup(group_seq);
-//		model.addAttribute("list", list);
-		
+		System.out.println("도착");
+		int group_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
+		System.out.println(group_seq);
+		ArrayList<GroupDTO> list = service.myGroup(group_seq);
+		System.out.println(list);
+		model.addAttribute("list", list);
+		System.out.println("group마이페이지 값을 보여달라");;
 		return "mypage/myGroup";
 	}
+	
+	
 	
 	@RequestMapping(value = "/myBoard") //마이페이지 -> 내가 쓴 문의 요청
 	public String myBoard(Model model) throws Exception{	
 		int mem_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
-		
-		ArrayList<BoardDTO> list = service.myBoard(mem_seq);
+		System.out.println(mem_seq);
+		List<BoardDTO> list = service.myBoard(mem_seq);
+		System.out.println(list);
 		model.addAttribute("list", list);
-		
+		System.out.println("board마이페이지 값을 보여달라");
 		return "mypage/myBoard";
 	}
 	
@@ -59,29 +66,41 @@ public class MypageController {
 	@RequestMapping(value = "/updateForm") // 정보 수정 요청	
 	public String updateForm(MemberDTO dto) throws Exception{
 		System.out.println("왔어?");
-		String encodePassword = passwordEncoder.encode(dto.getMem_pw());
-		dto.setMem_pw(encodePassword);
-		session.setAttribute("loginSession", dto);
+		MemberDTO ddto = (MemberDTO)session.getAttribute("loginSession");
+		System.out.println(ddto);
 		service.updateForm(dto);
 
-		return "mypage/myGroup";
+			ddto.setMem_nick(dto.getMem_nick());
+			ddto.setMem_std_key(dto.getMem_std_key());
+			return "mypage/myGroup";
+		
 	}
 	
 	
-	@RequestMapping(value="/dropoutForm") // 마이페이지 -> 회원 탈퇴
+	@RequestMapping(value="/dropoutForm") // 마이페이지 -> 회원 탈퇴 전 비번 확인
 	@ResponseBody 
 	public String dropoutForm(String mem_pw) throws Exception{
 		System.out.println("왔어?");
+		System.out.println(mem_pw);
 		MemberDTO dto = (MemberDTO)(session.getAttribute("loginSession"));
+		System.out.println("dto에 담긴거들어왔니??" + dto);
 		if(passwordEncoder.matches(mem_pw, dto.getMem_pw())) {
-			service.dropoutForm(dto);
-			session.removeAttribute("loginSession");
-			System.out.println("넘어왔니?");
 			
 			return "success";
 		}
 		return "fail";
 	}
-
+	
+	@RequestMapping(value="/dropoutConfirm") // 마이페이지 -> 회원 탈퇴
+	@ResponseBody
+	public String dropoutConfirm()throws Exception{
+		int mem_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
+		int rs = service.dropoutForm(mem_seq);
+		
+		if(rs>0) {
+			return "success";
+			}
+		return "fail";
+	}
 
 }

@@ -26,7 +26,7 @@ public class StudyDAO {
 		}
 		return countList;
 	}
-
+	
 	// 주간 데이터
 	// 이번주 일별 공부시간 (분)
 	public List<Integer> myWeekList(int mem_seq) throws Exception {
@@ -67,5 +67,5 @@ public class StudyDAO {
 		}
 		return time_LastWeekList;
 	}
-
+	
 }

@@ -166,16 +166,20 @@ button {
 	width: 380px;
 }
 
-#hourDisplay {
+#hourDisplay {/*스탑워치 시*/
 	font-size: x-large
 }
 
-#minuteDisplay {
+#minuteDisplay {/*스탑워치 분*/
 	font-size: x-large
 }
 
-#secondDisplay {
+#secondDisplay {/*스탑워치 초*/
 	font-size: x-large
+}
+#sumTime{/*총공부시간*/
+	font-size: 20pt;
+	font-weight: bold;
 }
 </style>
 </head>
@@ -266,7 +270,7 @@ button {
 				<div class="crawl-container">
 					<h4><i class="fa-solid fa-book-atlas"></i> 사전</h4>
 					<div class="crawl-display">
-						<!-- 여기에 검색결과 뜰 예정 -->
+						<!-- 여기에 검색결과 뜸 -->
 					</div>
 					<div class="crawl-input">
 						<select id="languageSelect">
@@ -316,6 +320,7 @@ button {
 			</div>
 			<!-- 타이머 시작 -->
 			<div class="col-lg-8 col-auto watchgroup">
+				<div class="d-flex justify-content-center" id="sumTime"></div>
 				<div class="basic stopwatch d-flex justify-content-center"></div>
 				<div class="basic stopwatch d-flex justify-content-center"></div>
 				<div class="basic stopwatch d-flex justify-content-center"></div>
@@ -447,7 +452,6 @@ button {
         return timer.innerHTML = h + ':' + m + ':' + s
 
       }
-
       function delta() {
         var now = Date.now(),
           d = now - offset;
@@ -507,7 +511,7 @@ button {
           const [hours, minutes, seconds] = timeRecord.split(":");//00:00:00 seconds로 변환 
           const totalSeconds = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
           let data = {
-        		   "time_subject" : $(".basic").children(".subjectName:eq("+i+")").val(),
+        		   "time_subject" : $(".basic").children(".subjectName:eq("+i+")").val().trim(),
         		   "time_count"  : totalSeconds,
         		   "mem_seq":$("#mem_seq").val()
         		}
@@ -547,10 +551,44 @@ button {
       }
       closeFullScreenMode();//전체화면닫기
     })
-    
-    $(".startbtn2").on('click', function (){ 
-       openFullScreenMode()
+    function time(seconds) {
+			var hour = parseInt(seconds/3600) < 10 ? '0'+ parseInt(seconds/3600) : parseInt(seconds/3600);
+			var min = parseInt((seconds%3600)/60) < 10 ? '0'+ parseInt((seconds%3600)/60) : parseInt((seconds%3600)/60);
+			var sec = seconds % 60 < 10 ? '0'+seconds % 60 : seconds % 60;
+			return hour+":"+min+":" + sec;
+			}	
+    document.getElementById("sumTime").innerText = '오늘 공부 시간 : ' + time(${record});
+    let seconds = ${record};
+	let active = false;
+    $(".startbtn2").parent().on('click', function (){ //시작버튼 누르면 다른 시작버튼은 눌리지 않게 막아둠
+    	$(this).children(".startbtn2").css("color","red")
+    	$(".startbtn2").parent().not(this).css({ 'pointer-events': 'none' });
+    	$(".startbtn2").parent().not(this).next().css({ 'pointer-events': 'none' });
+    	$(this).next().on('click',function(){
+    		$('.startbtn2').parent().not(this).next().css({ 'pointer-events': 'auto' });
+    		$('.startbtn2').parent().not(this).css({ 'pointer-events': 'auto' });
+    		$(this).prev().children("i").css("color","blue");
+    	})
+    	openFullScreenMode();
+    				if(active==false){
+    					active = true;					
+    			    	var timerID=0;
+    			    	timerID = setInterval(function() {
+    			    	 // 값 증가
+    			    	seconds++;
+    			    	 // 값을 출력
+    				     document.getElementById("sumTime").innerText =
+    				        '오늘 공부 시간 : '+ time(seconds)
+    				    }, 1000);
+    				  }
+    				$(".pausebtn2").click(function() {
+    					active = false;
+    		                clearInterval(timerID);
+    			
+    			});
+    				    
     });
+    
     $(document).ready(function () {//처음 로딩 됐을떄 - 버튼, alert들 다 감추고 시작
     	let bt = document.querySelectorAll(".fa-circle-minus"); // get all buttons with the class 모든타이머00으로
         for (var i = 0; i < bt.length; i++) { // newer browsers can use forEach
