@@ -22,6 +22,10 @@ public class GroupService {
 		return dao.selectByName(group_title, group_std_key);
 	}
 	
+	public int selectSeqCurrval() throws Exception {
+		return dao.selectSeqCurrval();
+	}
+	
 	public GroupDTO selectBySeq(int group_seq) throws Exception {
 		return dao.selectBySeq(group_seq);
 	}
@@ -32,5 +36,9 @@ public class GroupService {
 	
 	public void delete(int group_seq) throws Exception {
 		dao.delete(group_seq);
+	}
+	
+	public void updateMemCount(GroupDTO dto) throws Exception {
+		dao.updateMemCount(dto);
 	}
 }

@@ -94,7 +94,7 @@ a:hover {
 							aria-current="page" href="#">홈</a></li>
 						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav"
-							style="margin-right: -20px" href="#">그룹 스터디</a></li>
+							style="margin-right: -20px" href="/group/">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
@@ -127,7 +127,7 @@ a:hover {
 							aria-current="page" href="#">홈</a></li>
 						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav"
-							style="margin-right: -20px" href="#">그룹 스터디</a></li>
+							style="margin-right: -20px" href="/group/">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>

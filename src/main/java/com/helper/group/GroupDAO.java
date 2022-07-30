@@ -36,11 +36,19 @@ public class GroupDAO {
 		return session.selectOne("groupMapper.selectBySeq", group_seq);
 	}
 	
+	public int selectSeqCurrval() throws Exception {
+		return session.selectOne("groupMapper.selectSeqCurrval");
+	}
+	
 	public void modify(GroupDTO dto) throws Exception {
 		session.update("groupMapper.modify", dto);
 	}
 	
 	public void delete(int group_seq) throws Exception {
 		session.delete("groupMapper.delete", group_seq);
+	}
+	
+	public void updateMemCount(GroupDTO dto) throws Exception {
+		session.update("groupMapper.updateMemCount", dto);
 	}
 }
