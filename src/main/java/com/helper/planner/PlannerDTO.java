@@ -8,20 +8,24 @@ public class PlannerDTO {
 	private int plan_seq;
 	private int mem_seq;
 	private String plan_title;
+	private String plan_content;
+	private String plan_background;
 	private String plan_start;
 	private String plan_end;
 	
 	public PlannerDTO() {}
 
-	public PlannerDTO(int plan_seq, int mem_seq, String plan_title, String plan_start, String plan_end) {
+	public PlannerDTO(int plan_seq, int mem_seq, String plan_title, String plan_content, String plan_background,
+			String plan_start, String plan_end) {
 		super();
 		this.plan_seq = plan_seq;
 		this.mem_seq = mem_seq;
 		this.plan_title = plan_title;
+		this.plan_content = plan_content;
+		this.plan_background = plan_background;
 		this.plan_start = plan_start;
 		this.plan_end = plan_end;
 	}
-	
 
 	public int getPlan_seq() {
 		return plan_seq;
@@ -47,6 +51,22 @@ public class PlannerDTO {
 		this.plan_title = plan_title;
 	}
 
+	public String getPlan_content() {
+		return plan_content;
+	}
+
+	public void setPlan_content(String plan_content) {
+		this.plan_content = plan_content;
+	}
+
+	public String getPlan_background() {
+		return plan_background;
+	}
+
+	public void setPlan_background(String plan_background) {
+		this.plan_background = plan_background;
+	}
+
 	public String getPlan_start() {
 		return plan_start;
 	}
@@ -66,9 +86,11 @@ public class PlannerDTO {
 	@Override
 	public String toString() {
 		return "PlannerDTO [plan_seq=" + plan_seq + ", mem_seq=" + mem_seq + ", plan_title=" + plan_title
-				+ ", plan_start=" + plan_start + ", plan_end=" + plan_end + "]";
+				+ ", plan_content=" + plan_content + ", plan_background=" + plan_background + ", plan_start="
+				+ plan_start + ", plan_end=" + plan_end + "]";
 	}
 
+	
 
 	
 }

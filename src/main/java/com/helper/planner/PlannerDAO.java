@@ -37,6 +37,14 @@ public class PlannerDAO {
 	public int updateNoSeq(Map map)throws Exception{
 		return session.update("plannerMapper.udpateNoSeq",map);
 	}
+	public PlannerDTO selectPlan_seq(int plan_seq)throws Exception{ // plan_seq로 DTO뽑아내기
+		
+		return session.selectOne("plannerMapper.selectPlan_seq",plan_seq);
+	}
+	public int updateModal(PlannerDTO dto)throws Exception{ // modal로 일정수정하기
+		System.out.println("dto : "+dto);
+		return session.update("plannerMapper.updateModal",dto);
+	}
 	
 }
 

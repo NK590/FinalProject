@@ -22,23 +22,25 @@ public class PlannerService {
 
 		int plan_seq = dao.selectSeq();// plan_seq값 얻기
 		// Object형으로 변환된 데이터를 String값으로 변환시켜준다
-		String title = (String)jsonData.get("plan_title"); 
+		String title = (String)jsonData.get("plan_title");
+		String content = (String)jsonData.get("plan_content");
+		String background = (String)jsonData.get("plan_background");
 		String start = (String)jsonData.get("plan_start");
 		String end = (String)jsonData.get("plan_end");
-		Boolean allDay = (Boolean)jsonData.get("plan_allDay");
+		/*Boolean allDay = (Boolean)jsonData.get("plan_allDay");
 		System.out.println(allDay);
 		if(allDay) {
 			int plan_allDay = 0;
 		}else if(!allDay) {
 			int plan_allDay = 1;
-		}
-        PlannerDTO dto = new PlannerDTO(plan_seq,mem_seq,title,start,end);
+		}*/
+        PlannerDTO dto = new PlannerDTO(plan_seq,mem_seq,title,content,background,start,end);
 
 		System.out.println("after : "+dto.toString());
 		return dao.planInsert(dto);
 	}
-	public int delete(Map<String,Object> jsonData)throws Exception{ // 일정 삭제
-			int plan_seq = Integer.parseInt((String)jsonData.get("plan_seq"));		
+	public int delete(int plan_seq)throws Exception{ // 일정 삭제
+	
 			System.out.println(plan_seq);
 			
 			
@@ -67,8 +69,29 @@ public class PlannerService {
 		
 		return dao.selectAll();
 	}
+	public PlannerDTO selectPlan_seq(int plan_seq)throws Exception { // plan_seq로 정보값 얻기
+		
+		return dao.selectPlan_seq(plan_seq);
+	}
+	public int updateModal(PlannerDTO dto)throws Exception{ // 모달창에서 일정 수정하기
+		System.out.println(dao.updateModal(dto));
+		return dao.updateModal(dto);
+	}
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
