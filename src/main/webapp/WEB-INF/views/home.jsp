@@ -296,7 +296,7 @@ a:hover {
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
 								<li><a class="dropdown-item" id="golibrary" href="/librarymap">도서관 위치</a></li>
 							</ul>
 						<li class="nav-item dropdown"><a
@@ -331,7 +331,7 @@ a:hover {
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
 								<li><a class="dropdown-item" id="golibrary"
 									href="/librarymap">도서관 위치</a></li>
 							</ul>
