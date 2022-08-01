@@ -19,7 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>myBoard</title>
+<title>myDropout</title>
 <style>
 body {
 	box-sizing: border-box;
@@ -27,7 +27,7 @@ body {
 }
 
 #bodylist {
-	width: 450px;
+	width: 515px;
 	padding: 30px;
 	background-color: white;
 	position: absolute;
@@ -45,14 +45,10 @@ body {
 }
 
 #allbody {
-	
+	background-color: aliceblue;
 	width: 100%;
 	height: 650px;
 	position: relative;
-}
-.tr:hover {
-	background-color: aliceblue;
-
 }
 </style>
 </head>
@@ -81,61 +77,23 @@ body {
 
 			<div class="col-9">
 				<p>
-				<h3>나의 커뮤니티</h3>
+				<h3>나의 플래너</h3>
 				</p>
 				<div class="line"></div>
-				<div class="col-sm-10 wrap" id="allbody">
-						
-						<div class="row">
-							<div class="col-12">
-								<table class="table">
-									<colgroup>
-										<col style="width: 10%">
-										<col style="width: 40%">
-										<col style="width: 25%">
-										<col style="width: 15%">
-										<col style="width: 10%">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col">번호</th>
-											<th scope="col">제목</th>
-											<th scope="col">작성자</th>
-											<th scope="col">작성일</th>
-											<th scope="col">조회수</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:if test="${list.size() == 0}">
-											<tr>
-												<th colspan="5" class="textNo">조회된 게시물이 없습니다.</th>												
-											</tr>
-										</c:if>
-										<c:if test="${list.size() > 0}">
-											<c:forEach items="${list}" var="dto">
-												<tr class="tr" onclick="location.href='/board/toDetail?bo_seq=${dto.bo_seq}'">
-													<th scope="row">${dto.bo_seq}</th>
-													<td><a href="/board/toDetail?bo_seq=${dto.bo_seq}">${dto.bo_title}</a></td>
-													<td>${dto.mem_nick }</td>
-													<td>${dto.bo_date}</td>
-													<td>${dto.view_count}</td>
-												</tr>
-											</c:forEach>
-										</c:if>
-									</tbody>
-								</table>
-							</div>
+					<div class="col-sm-10 wrap" id="allbody">
+
+						<div class="container d-flex justify-content-center" id="bodylist">
+			
 						</div>
-					
+					</div>
+
 				</div>
 
 			</div>
-
-		</div>
 	</div>
-	
 	<script>
-		
+	
+	
 	</script>
 </body>
 </html>

@@ -39,16 +39,17 @@ body {
 
 			<div class="row p-2">
 				<label for="nick" class="form-label" id="cdcd">닉네임</label>
-					<input type="text" id="findName">
-				<div class="col-3 mb-2">
-					<button type="button" id="searchIdBtn" class="btn btn-warning w-100">닉네임
-						확인</button>
+				<div class="col-8">
+					<input type="text" class="form-control" id="findName" placeholder="닉네임을 입력하세요.">
+				</div>
+				<div class="col-4">
+					<button type="button" id="searchIdBtn">닉네임 확인</button>
 				</div>
 			</div>
             <div class="row justify-content-center">
                 <div class="col-3 d-flex justify-content-center">
                     <button type="button" id="loginButton" class="btn btn-primary">로그인</button>
-            </div>
+            	</div>
             </div>
 		</form>
 	</div>
@@ -73,6 +74,8 @@ body {
        			 console.log(data);
           		  if (data != "no"){
           		  alert(data);
+          		opener.document.getElementById("id").value = data;
+    			self.close();
           			return "/member/idSearch";  
           		  }else{
           			  alert("등록된 닉네임이 없습니다.");
@@ -84,6 +87,11 @@ body {
                 }
             })
 		}
+		
+//		document.getElementById("loginButton").onclick = function() {			
+//			opener.document.getElementById("").value = document.getElementById("#id").value;
+//			self.close();
+//		}
 			
 		
 
