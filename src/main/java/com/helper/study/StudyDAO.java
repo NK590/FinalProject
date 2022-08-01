@@ -26,7 +26,12 @@ public class StudyDAO {
 		}
 		return countList;
 	}
-	
+
+	public List<Integer> countListSec(int mem_seq) throws Exception {
+		List<Integer> countList = session.selectList("recordMapper.countList", mem_seq);
+		return countList;
+	}
+
 	// 주간 데이터
 	// 이번주 일별 공부시간 (분)
 	public List<Integer> myWeekList(int mem_seq) throws Exception {
@@ -42,6 +47,23 @@ public class StudyDAO {
 			if (time_weekList.get(i) != null) {
 				time_weekList.set(i, time_weekList.get(i) / 60);
 			} else {
+				time_weekList.set(i, 0);
+			}
+		}
+		return time_weekList;
+	}
+
+	public List<Integer> myWeekListSec(int mem_seq) throws Exception {
+		List<Integer> time_weekList = new ArrayList<Integer>();
+		time_weekList.add(session.selectOne("recordMapper.monRecord", mem_seq));
+		time_weekList.add(session.selectOne("recordMapper.tueRecord", mem_seq));
+		time_weekList.add(session.selectOne("recordMapper.wedRecord", mem_seq));
+		time_weekList.add(session.selectOne("recordMapper.thuRecord", mem_seq));
+		time_weekList.add(session.selectOne("recordMapper.friRecord", mem_seq));
+		time_weekList.add(session.selectOne("recordMapper.satRecord", mem_seq));
+		time_weekList.add(session.selectOne("recordMapper.sunRecord", mem_seq));
+		for (int i = 0; i < time_weekList.size(); i++) {
+			if(time_weekList.get(i) == null) {
 				time_weekList.set(i, 0);
 			}
 		}
@@ -67,5 +89,5 @@ public class StudyDAO {
 		}
 		return time_LastWeekList;
 	}
-	
+
 }

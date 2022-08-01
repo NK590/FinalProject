@@ -312,7 +312,7 @@ a:hover {
 						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식커뮤니티</a></li>	
 						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
-						<li class="nav-item"><a class="nav-link" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" id="logoutBtn" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
 				</div>
 				</c:when>
 								

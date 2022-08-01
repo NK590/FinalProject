@@ -139,7 +139,7 @@ span {
 				</div>
 		</div>
 
-		<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
+		<button id="kakaoLogout" onclick="kakaoLogout()">로그아웃</button>
 
 		<p id="token-result"></p>
 
@@ -229,14 +229,7 @@ span {
 
 	<script>
 	function kakaoLogout() {
-	    if (!Kakao.Auth.getAccessToken()) {
-	      alert('Not logged in.')
-	      return
-	    }
-	    Kakao.Auth.logout(function() {
-	      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
-	      Kakao.Auth.setAccessToken(null);
-	    })
+	    console.log(Kakao.Auth.getAccessToken());
 	  }
 
 	
@@ -244,22 +237,22 @@ span {
 	window.Kakao.init('1d93d50b4296c95206af1d69936465bf'); // SDK를 초기화 합니다 발급받은 키 중 javascript키를 사용해준다.
 	console.log(Kakao.isInitialized()); // sdk초기화여부판단
 	
-function kakaoLogin() {
-	window.Kakao.Auth.login({
-		scope:'account_email'
-		, success: function(authObj){
-			console.log(authObj);
-			window.Kakao.API.request({
-				url : '/v2/user/me'
-				, success : res => {
-					const kakao_account = res.kakao_account;
-					const mem_id = kakao_account.email;
-					
-					console.log(kakao_account);
-					console.log(mem_id);
-					location.href = '/member/kakaoSignUp?mem_id=' + mem_id;
-					/*
-					$.ajax({
+	function kakaoLogin() {
+		window.Kakao.Auth.login({
+			scope:'account_email'
+			, success: function(authObj){
+				console.log(authObj);
+				window.Kakao.API.request({
+					url : '/v2/user/me'
+					, success : res => {
+						const kakao_account = res.kakao_account;
+						const mem_id = kakao_account.email;
+						
+						console.log(kakao_account);
+						console.log(mem_id);
+						location.href = '/member/kakaoSignUp?mem_id=' + mem_id;
+										/*
+										$.ajax({
                         				type: "post",
                        					 url: '/member/kakaoLogin', // 로그인
                       					  data: { "mem_id" : mem_id },
