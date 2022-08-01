@@ -31,10 +31,9 @@
 	<!-- 그룹 정보 업데이트 통합 쿼리 (입력값 DTO) -->
 	<update id="modify" parameterType="com.helper.group.GroupDTO">
 		update tb_group set
-			mem_seq = #{mem_seq},
 			group_title = #{group_title},
-			group_content = #{group_content).
-			group_memCount = #{group_memCount},
+			group_content = #{group_content},
+			group_memCount = #{group_memCount}
 			where group_seq = #{group_seq}
 	</update>
 	

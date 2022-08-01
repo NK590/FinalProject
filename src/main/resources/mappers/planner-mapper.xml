@@ -8,15 +8,15 @@
 	<select id="selectSeq" resultType="int">
 		select plan_seq.nextval from dual
 	</select>
-	<!-- 게시글 등록 -->
+	<!-- 일정 등록 -->
 	<insert id="insert"
 		parameterType="com.helper.planner.PlannerDTO">
 		insert into tb_planner values
 		(#{plan_seq}, #{mem_seq},
-		#{plan_title},TO_DATE(Translate(SUBSTR ( #{plan_start} , 1, 19),'T','
-		'),'YYYY-MM-DD HH24:MI:SS'), TO_DATE(Translate(SUBSTR (#{plan_end} ,
-		1, 19),'T',' '),'YYYY-MM-DD HH24:MI:SS'))
+		#{plan_title},#{plan_content},#{plan_background},TO_DATE(Translate(SUBSTR (#{plan_start},1,19),'T',' ')
+		,'YYYY-MM-DD HH24:MI:SS'), TO_DATE(Translate(SUBSTR (#{plan_end},1,19),'T',' '),'YYYY-MM-DD HH24:MI:SS'))
 	</insert>
+
 	<!-- 일정 출력 -->
 	<select id="selectAll"
 		resultType="com.helper.planner.PlannerDTO">		<!-- 추가적으로 mem_seq넘겨 받아서 해당 id값의 planner만 출력할 수 있게 한다 -->
@@ -30,11 +30,22 @@
 	<delete id="delete">
 		delete from tb_planner where plan_seq = #{plan_seq}
 	</delete>
-	<!-- 일정 수정 -->
+	<!-- 드래그로 일정 수정 -->
 	<update id="update" parameterType="Map">
 		update tb_planner set plan_start = TO_DATE(Translate(SUBSTR ( #{plan_start} , 1, 19),'T',' '),'YYYY-MM-DD
 		HH24:MI:SS'), plan_end = TO_DATE(Translate(SUBSTR ( #{plan_end} , 1, 19),'T',' '),'YYYY-MM-DD
 		HH24:MI:SS') where plan_seq = #{plan_seq}
+	</update>
+	<!-- plan_seq로 DTO뽑아내기 -->
+	<select id="selectPlan_seq" parameterType="int" resultType="com.helper.planner.PlannerDTO">
+		select * from tb_planner where plan_seq = #{plan_seq}
+	</select>
+	<!-- 모달창으로 일정 수정 -->
+	<update id="updateModal" parameterType="com.helper.planner.PlannerDTO">
+		update tb_planner set plan_title = #{plan_title}, plan_background = #{plan_background},plan_start = TO_DATE(#{plan_start},'YYYY-MM-DD
+		HH24:MI:SS')
+		,plan_end = TO_DATE(#{plan_end},'YYYY-MM-DD
+		HH24:MI:SS'),plan_content=#{plan_content} where plan_seq = #{plan_seq}
 	</update>
 </mapper>
 
