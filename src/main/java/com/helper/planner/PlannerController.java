@@ -47,8 +47,8 @@ public class PlannerController {
 	}
 	@RequestMapping(value="/planDelete")
 	@ResponseBody
-	public String planDelete(@RequestBody Map<String,Object> jsonData)throws Exception{	 // 일정 삭제  + 멤버mem_seq 같이 넘겨주기
-		int rs = service.delete(jsonData);
+	public String planDelete(int plan_seq)throws Exception{	 // 일정 삭제  + 멤버mem_seq 같이 넘겨주기
+		int rs = service.delete(plan_seq);
 		
 		if(rs>0) {
 			return "success";
@@ -59,7 +59,7 @@ public class PlannerController {
 	
 	@RequestMapping(value="/planUpdate")
 	@ResponseBody
-	public String planUpdate(@RequestBody Map<String,Object>jsonData)throws Exception{ // 일정 수정 + 멤버mem_seq 같이 넘겨주기
+	public String planUpdate(@RequestBody Map<String,Object>jsonData)throws Exception{ // 드래그로 일정 수정 + 멤버mem_seq 같이 넘겨주기
 			System.out.println(jsonData);
 			int rs = service.update(jsonData);
 			if(rs>0) {
@@ -68,8 +68,27 @@ public class PlannerController {
 				return "fail";
 			}
 	}
-	
-	
+	@RequestMapping(value="/selectPublicId")	// plan_seq 로 DTO 뽑아내기
+	@ResponseBody
+	public PlannerDTO selectPublicId (int plan_seq)throws Exception{
+		System.out.println(plan_seq);
+		PlannerDTO dto= service.selectPlan_seq(plan_seq);
+		
+		return dto;
+	}
+	@RequestMapping(value="/planUpdateModal")	// 모달창으로 정보를 수정했을때
+	@ResponseBody
+	public String updateModal(PlannerDTO dto)throws Exception {
+
+		System.out.println(dto.toString());
+		int rs = service.updateModal(dto);
+		if(rs>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
 	
 	@ExceptionHandler // 에러 처리
 	public String toError(Exception e) {
