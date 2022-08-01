@@ -4,12 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.helper.member.MemberDTO;
+import com.helper.study.TimeDTO;
 
 @Service
 public class PlannerService {
@@ -65,9 +63,9 @@ public class PlannerService {
 		}
 	}
 
-	public List<PlannerDTO> selectAll()throws Exception{ // 모든 일정 출력	
+	public List<PlannerDTO> selectAll(int mem_seq)throws Exception{ // 모든 일정 출력	
 		
-		return dao.selectAll();
+		return dao.selectAll(mem_seq);
 	}
 	public PlannerDTO selectPlan_seq(int plan_seq)throws Exception { // plan_seq로 정보값 얻기
 		
@@ -76,6 +74,10 @@ public class PlannerService {
 	public int updateModal(PlannerDTO dto)throws Exception{ // 모달창에서 일정 수정하기
 		System.out.println(dao.updateModal(dto));
 		return dao.updateModal(dto);
+	}
+	public List<TimeDTO> recordForPlanner(int mem_seq)throws Exception{ // TimeDTO list 출력
+		
+		return dao.recordForPlanner(mem_seq);
 	}
 	
 	

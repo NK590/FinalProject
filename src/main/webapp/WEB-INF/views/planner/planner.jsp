@@ -222,6 +222,7 @@ a {
 					<button type="button" class="btn btn-default" id="updateBtn">수정</button>
 					<button type="button" class="btn btn-primary d-none" id="completeBtn">완료</button>
 					<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
+					<input type="text" class="d-none" id="mem_seq" value="${loginSession.mem_seq}">
 				</div>
 			</div>
 		</div>
@@ -232,6 +233,10 @@ a {
 	
 			
 			$(function() {
+				
+				// mem_seq 값
+				 let mem = $("#mem_seq").val();
+				 console.log(mem);
 				
 				// calendar element 취득
 
@@ -246,7 +251,7 @@ a {
 							
 							themeSystem : "bootstrap5",  // 부트스트랩 테마
 							
-							height : "700px", // calendar 높이 설정
+							height : "800px", // calendar 높이 설정
 
 							expandRows : true, // 화면에 맞게 높이 재설정
 
@@ -317,7 +322,7 @@ a {
 							},	
 							
 							eventClick : function(plan) { // 일정 수정 및 삭제
-								
+								if(!plan.event.allDay){
 							console.log(plan);
  								//if (confirm("'"+plan.event.title+"' 일정을 수정하시겠습니까?")) { }
 									$(".updateModal").modal("show");
@@ -343,10 +348,10 @@ a {
 										}
 									
 									})
+								}
 									
 									
 									
-									//plan.event.remove();
 	
 							},
 
@@ -371,7 +376,7 @@ a {
 		                          	,success : function(data){
 		                          		if(data=="success"){		                          		
 		                          			alert("일정이 추가되었습니다.");
-		                          			/* location.href="/planner/toPlanner";  */
+		                          			/* location.href="/planner/toPlanner+mem";  */
 		                          		}else{
 		                          			alert("일정 등록에 실패했습니다.")
 		                          		}
@@ -404,8 +409,10 @@ a {
 				                          	,success : function(data){
 				                          		if(data=="success"){
 				                          			alert("일정이 변경되었습니다.");
+				                          		/* 	location.href="/planner/toPlanner?mem_seq="+mem; */
 				                          		}else{
-				                          			alert("새로고침 후 일정을 변경해주세요.")
+				                          			alert("공부기록은 변경할 수 없습니다.");
+				                          			location.href="/planner/toPlanner?mem_seq="+mem;
 				                          		}
 				                          	}
 											, error : function(e){
@@ -417,32 +424,7 @@ a {
 
 							eventRemove : function(plan) { // 이벤트가 삭제되면 발생하는 이벤트
 
-								/* let event = new Object(); // json을 담기 위한 객체 선언
- 								event.plan_title = 	plan.event._def.title; // 일정 내용 
- 								event.plan_content = plan.event._def.extendedProps.description; // 일정 내용
- 								event.plan_start = plan.event._instance.range.start; // 시작 시간
- 								event.plan_end =  plan.event._instance.range.end; // 마치는 시간
-								event.plan_seq = plan.event._def.publicId; // 일정의 seq번호
-								let jsonData = JSON.stringify(event);  
-								console.log(jsonData);
-								
-								$.ajax({
-									url:"/planner/planDelete"
-									,type:"post"
-									,data: jsonData
-									,contentType:"application/json"
-		                          	,success : function(data){
-		                          		if(data=="success"){
-		                          			alert("일정이 삭제되었습니다.");
-		                          		}else{
-		                          			alert("일정 삭제에 실패했습니다.");
-		                          		}
-		                          	}
-									, error : function(e){
-										console.log(e);
-									}
-								}) */
-
+								plan.event.remove();
 							},
 
 							// 등록된 이벤트 띄워주기
@@ -460,6 +442,13 @@ a {
 									borderColor : "${dto.plan_background}",
 									},
 									
+								</c:forEach>
+								<c:forEach items="${timeList}" var="timeDto">
+									{	
+									title : "${timeDto.time_subject}"+" - "+"${timeDto.time_count}",
+									start : "${timeDto.time_date}",
+									allDay : true
+									},
 								</c:forEach>
 							]
 						});
@@ -559,7 +548,7 @@ a {
                       	,success : function(data){
                       		if(data=="success"){
                       			alert("일정이 변경되었습니다.");
-                      			location.href="/planner/toPlanner";
+                      			 location.href="/planner/toPlanner?mem_seq="+mem; 
                       		}else{
                       			alert("일정 수정에 실패했습니다.");
                       		}
@@ -583,7 +572,7 @@ a {
                       		if(data=="success"){
                       			$(".updateModal").modal("hide");
                       			alert("일정이 삭제되었습니다.");
-                      			location.href="/planner/toPlanner";
+                      			location.href="/planner/toPlanner?mem_seq="+mem;
                       		}else{
                       			alert("일정 삭제에 실패했습니다.");
                       		}

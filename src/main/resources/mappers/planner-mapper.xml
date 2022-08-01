@@ -18,9 +18,9 @@
 	</insert>
 
 	<!-- 일정 출력 -->
-	<select id="selectAll"
+	<select id="selectAll" parameterType="int"
 		resultType="com.helper.planner.PlannerDTO">		<!-- 추가적으로 mem_seq넘겨 받아서 해당 id값의 planner만 출력할 수 있게 한다 -->
-		select * from tb_planner
+		select * from tb_planner where mem_seq = #{mem_seq}
 	</select>
 <!-- 	<select id="getToDate" parameterType="String" resultType="Date">
 		select TO_DATE(Translate(SUBSTR ( #{date} , 1, 19),'T',' '),'YYYY-MM-DD
@@ -47,6 +47,10 @@
 		,plan_end = TO_DATE(#{plan_end},'YYYY-MM-DD
 		HH24:MI:SS'),plan_content=#{plan_content} where plan_seq = #{plan_seq}
 	</update>
+	<!-- 공부시간 플래너에 띄워주기 -->
+	<select id="recordForPlanner" parameterType="int" resultType="com.helper.study.TimeDTO">
+		select * from tb_timer where mem_seq = #{mem_seq}
+	</select>
 </mapper>
 
 
