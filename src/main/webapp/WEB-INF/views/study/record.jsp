@@ -37,31 +37,28 @@
 	margin-top: 20px;
 }
 
-
-.totalDiv>*{
-font-family: "GothicA1-Regular.ttf";
+.totalDiv>* {
+	font-family: "GothicA1-Regular.ttf";
 }
 
-.totalDiv>span{
-font-size: 25px;
-color: orange;
+.totalDiv>span {
+	font-size: 25px;
+	color: orange;
 }
 
-#viewTime{
+#viewTime {
 	width: 20%;
 }
-
-
 </style>
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="container">
 		<!-- 바디 시작 -->
 		<div class="row bodyContainer">
 			<select class="form-select" id="viewTime">
 				<option value="hour">시간으로 보기</option>
-				<option value="min" selected>분으로 보기</option>
-				<option value="sec">초로 보기</option>
+				<option value="min">분으로 보기</option>
+				<option value="sec" selected>초로 보기</option>
 				<option value="totalToday">시 분 초로 보기</option>
 			</select>
 			<div class="row" id="recordDiv">
@@ -72,7 +69,7 @@ color: orange;
 							<span id="todaySpan">오늘 공부한 기록이 없습니다.</span>
 						</c:when>
 						<c:otherwise>
-							<span id="todaySpan">${dayTotalTime} 분</span>
+							<span id="todaySpan">${dayTotalTime} 초</span>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -83,7 +80,7 @@ color: orange;
 							<span id="weekSpan">이번주에 공부한 기록이 없습니다.</span>
 						</c:when>
 						<c:otherwise>
-							<span id="weekSpan">${weekTotalTime} 분</span>
+							<span id="weekSpan">${weekTotalTime} 초</span>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -100,7 +97,7 @@ color: orange;
 			</div>
 		</div>
 	</div>
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 		$(document).ready(function(){
 			let weekList = "${weekList}";
@@ -261,7 +258,8 @@ color: orange;
 					scales: {
 						y: {
 							ticks: {
-								min: 0
+								min: 0,
+								stepSize: 1
 							}
 						}
 					}
@@ -281,12 +279,13 @@ color: orange;
 		})
 		
 		// 시 분 초로보기
-		let minToday = ${dayTotalTime};
-		let hourToday = (minToday/60).toFixed(2);
-		let secToday = minToday*60;
-		let minWeek = ${weekTotalTime};
-		let hourWeek = (minWeek/60).toFixed(2);
-		let secWeek = minWeek*60;
+		let secToday = ${dayTotalTime}
+		let minToday = (secToday/60).toFixed(2);
+		let hourToday = (secToday/(60*60)).toFixed(2);
+		let secWeek = ${weekTotalTime};
+		let minWeek = (secWeek/60).toFixed(2);
+		let hourWeek = (secWeek/(60*60)).toFixed(2);
+		
 		
 		$("#viewTime").on("change", function(){
 			let value = this.value;

@@ -112,12 +112,15 @@ public class StudyController {
 	    List<Integer> time_countList = service.countList(memberDTO.getMem_seq()); // 과목별 시간 list
 	    List<Integer> time_weekList = service.myWeekList(memberDTO.getMem_seq()); // 이번주 월-금 시간List
 	    List<Integer> time_LastWeekList = service.myLastWeekList(memberDTO.getMem_seq()); // 저번주 월-금 시간List
-		int dayTotalTime = 0;
+	    List<Integer> time_countListSec = service.countListSec(memberDTO.getMem_seq());
+	    List<Integer> time_weekListSec = service.myWeekListSec(memberDTO.getMem_seq());
+	    int dayTotalTime = 0;
 		int weekTotalTime = 0;
-		for (int i : time_countList) {
+		System.out.println(time_countList);
+		for (int i : time_countListSec) {
 			dayTotalTime += i;
 		}
-		for (int i : time_weekList) {
+		for (int i : time_weekListSec) {
 			weekTotalTime += i;
 		}
 

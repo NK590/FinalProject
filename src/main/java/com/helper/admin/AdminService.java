@@ -23,8 +23,9 @@ public class AdminService {
 	private RecordDAO recordDAO;
 	@Autowired
 	private AdminDAO adminDAO;
-  @Autowired
-  private NoticeDAO noticeDAO;
+	@Autowired
+	private NoticeDAO noticeDAO;
+
 	/* Main record */
 	public List<Map<String, Object>> selectTopMem() throws Exception {
 		return recordDAO.selectTopMem();
@@ -33,8 +34,8 @@ public class AdminService {
 	public List<Map<String, Object>> selectTopGroup() throws Exception {
 		return recordDAO.selectTopGroup();
 	}
-		
-/* Report */
+
+	/* Report */
 	// 블랙리스트 목록
 	public List<ReportDTO> reportList(int start, int end) throws Exception {
 		return reportDAO.reportList(start, end);
@@ -104,25 +105,25 @@ public class AdminService {
 			file.delete(); // 파일을 삭제
 		}
 	}
-	
+
 	public int insertNotice(NoticeDTO dto) throws Exception { // 게시글 등록
 		int rs = noticeDAO.insertNotice(dto);
 		return rs;
 	}
-	
-	public List<NoticeDTO> selectAllNotice()throws Exception{
+
+	public List<NoticeDTO> selectAllNotice() throws Exception {
 		List<NoticeDTO> list = noticeDAO.selectAllNotice();
 		return list;
 	}
-	
-	public NoticeDTO selectOneNotice(int notice_seq)throws Exception{
+
+	public NoticeDTO selectOneNotice(int notice_seq) throws Exception {
 		noticeDAO.updateView(notice_seq);
 		return noticeDAO.selectOneNotice(notice_seq);
 	}
-	
-	public int noticeUpdate(List<String>list,NoticeDTO dto,String realPath)throws Exception{
-		if(list.size()>0) { // 삭제할 파일이 있다면 
-			for(String sys_name:list) {
+
+	public int noticeUpdate(List<String> list, NoticeDTO dto, String realPath) throws Exception {
+		if (list.size() > 0) { // 삭제할 파일이 있다면
+			for (String sys_name : list) {
 				File file = new File(realPath + File.separator + sys_name);
 				if (file.exists()) { // 경로에 파일이 존재한다면
 					file.delete(); // 파일을 삭제
@@ -131,46 +132,49 @@ public class AdminService {
 		}
 		return noticeDAO.noticeUpdate(dto);
 	}
-	
+
 	public int noticeDelete(int notice_seq, List<String> img_arr, String realPath) throws Exception { // 게시글 삭제
 
 		if (img_arr != null) {
 			for (String arr : img_arr) { // 배열의 값 꺼내기
 				File file = new File(realPath + File.separator + arr); // 이미지의 서버 경로값
 				System.out.println(file);
-				if(file.exists()) {
+				if (file.exists()) {
 					file.delete();
 				}
 			}
 		}
 		return noticeDAO.noticeDelete(notice_seq);
 	}
+
 	public int noticeDelete2(int notice_seq) throws Exception { // 이미지없는 게시글 삭제
 
 		return noticeDAO.noticeDelete(notice_seq);
 	}
-	
+
 	// 방문자 수 체크
 	public void visitCount() throws Exception {
 		adminDAO.visitCount();
 	}
+
 	public int visitToday() throws Exception {
 		return adminDAO.visitToday();
 	}
+
 	public int visitTotal() throws Exception {
 		return adminDAO.visitTotal();
 	}
+
 	public int reportTotal() throws Exception {
 		return adminDAO.reportTotal();
 	}
-	
+
 	public List<Map<String, Integer>> memberJoinCount() throws Exception {
 		return adminDAO.memberJoinCount();
 	}
-	
+
 	public List<Map<String, Integer>> groupCategoryCount() throws Exception {
 		return adminDAO.groupCategoryCount();
 	}
-	
- 	
- }
+
+}
