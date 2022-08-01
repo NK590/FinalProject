@@ -68,8 +68,7 @@ public class MemberService{
 	}
 	
 	//마이페이지 나의 그룹
-	public ArrayList<GroupDTO> myGroup(int group_seq)throws Exception{
-		System.out.println("group_seq : "+group_seq);
+	public List<GroupDTO> myGroup(int group_seq)throws Exception{
 		return dao.myGroup(group_seq);
 	}
 	

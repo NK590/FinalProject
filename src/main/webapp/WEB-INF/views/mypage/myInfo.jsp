@@ -53,6 +53,9 @@ body {
 .nav-link{
 	font-size: 20px;
 }
+#changePW{
+	font-size: x-small;
+}
 </style>
 </head>
 <body>
@@ -71,6 +74,7 @@ body {
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
 					</ul>
@@ -140,6 +144,14 @@ body {
 										<option value="기타">기타</option>
 									</select>
 								</div>
+							</div>
+							
+							<div class="row p-2">
+								<div id="changePW">*비밀번호 변경은 비밀번호 찾기를 통해 변경이 가능합니다.</div>
+								<div id="changePW" style="margin-left:4px;">비밀번호 찾기로 이동하려면
+										<a href="/member/login" style="font-size: x-small; color: #0d6efd; padding: 0px;">여기</a>
+													를 클릭해주세요.</div>
+								
 							</div>
 
 						</form>

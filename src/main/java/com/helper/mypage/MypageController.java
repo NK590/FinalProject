@@ -28,21 +28,22 @@ public class MypageController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
-	@RequestMapping(value = "/myPage") //마이페이지 -> 나의 그룹 요청
+	//마이페이지 -> 나의 그룹 요청
+	@RequestMapping(value = "/myPage") 
 	public String myGroup(Model model) throws Exception{
 		System.out.println("도착");
 		int group_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
 		System.out.println(group_seq);
-		ArrayList<GroupDTO> list = service.myGroup(group_seq);
+		List<GroupDTO> list = service.myGroup(group_seq);
 		System.out.println(list);
 		model.addAttribute("list", list);
 		System.out.println("group마이페이지 값을 보여달라");;
 		return "mypage/myGroup";
 	}
+
 	
-	
-	
-	@RequestMapping(value = "/myBoard") //마이페이지 -> 내가 쓴 문의 요청
+	//마이페이지 -> 나의 커뮤니티 요청
+	@RequestMapping(value = "/myBoard") 
 	public String myBoard(Model model) throws Exception{	
 		int mem_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
 		System.out.println(mem_seq);
@@ -51,6 +52,11 @@ public class MypageController {
 		model.addAttribute("list", list);
 		System.out.println("board마이페이지 값을 보여달라");
 		return "mypage/myBoard";
+	}
+	
+	@RequestMapping(value = "/myPlanner") //마이페이지 -> 회원정보 수정 요청
+	public String myPlanner() throws Exception{		
+		return "mypage/myPlanner";
 	}
 	
 	@RequestMapping(value = "/myInfo") //마이페이지 -> 회원정보 수정 요청

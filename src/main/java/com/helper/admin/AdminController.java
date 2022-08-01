@@ -115,6 +115,7 @@ public class AdminController {
 		// 1주일 회원가입수 가져오기
 		JSONArray memberJoinCount = new JSONArray(service.memberJoinCount());
 		JSONArray groupCategoryCount = new JSONArray(service.groupCategoryCount());
+		System.out.println(totalMap);
 		model.addAttribute("totalMap", totalMap);
 		model.addAttribute("memberJoinCount", memberJoinCount);
 		model.addAttribute("groupCategoryCount", groupCategoryCount);

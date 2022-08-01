@@ -45,7 +45,8 @@
 			<exclude-mapping path="/member/kakaoLogin"/>
 			<exclude-mapping path="/member/kakaoSignUp"/>
 			<exclude-mapping path="/member/toKakaoSignUp"/>
-			<exclude-mapping path="/member/toAdmin"/>
+			<exclude-mapping path="/member/logout"/>
+			<exclude-mapping path="/admin/*"/>
 			<beans:bean class="com.helper.utils.AuthLoginInterceptor"/>
 		</interceptor>
 	</interceptors>
