@@ -14,8 +14,13 @@
 <title>그룹 리스트</title>
 <style>
     #createGroupBtn {
-        margin: 20px;
-        width: 60%;
+    	margin: 10px;
+        width: 40%;
+        height: 60%;
+    }
+    #goMyGroupBtn {
+    	margin: 10px;
+        width: 40%;
         height: 60%;
     }
 </style>
@@ -23,9 +28,10 @@
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <div class="container">
+	<!-- 그룹 검색창 -->
     <div class="row">
         <c:if test="${not empty loginSession}">
-        <div class="col-10">
+        <div class="col-9">
             <div class="row text-center">
                 <h3>그룹 검색</h3>
             </div>
@@ -50,8 +56,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-2">
-        		<button class="btn btn-primary" id="createGroupBtn" data-bs-toggle="modal" data-bs-target="#makeGroupModal">그룹 생성</button>
+        <div class="col-3 align-self-center">
+        	<button class="btn btn-primary" id="createGroupBtn" data-bs-toggle="modal" data-bs-target="#makeGroupModal">그룹 생성</button>
+        	<c:if test="${loginSession.group_seq ne 0}">
+        		<button class="btn btn-secondary" id="goMyGroupBtn">내 그룹</button>
+        	</c:if>
         </div>
         </c:if>
         <c:if test="${empty loginSession}">
@@ -80,6 +89,8 @@
             </div>
         </c:if>
     </div>
+    <!-- 여기까지 그룹 검색창 -->
+    
 	<!-- <div class="row text-center">
 		<h3>그룹 TOP3</h3>
 	</div>
@@ -94,6 +105,8 @@
             결과
         </div>
 	</div> -->
+	
+	<!-- 그룹 리스트 -->
 	<div class="row text-center">
 		<h3>그룹 리스트</h3>
 	</div>
@@ -101,13 +114,20 @@
 		<c:choose>
 			<c:when test="${empty groupList}">
 				<div class="row text-center">
-					<h2>생성된 그룹이 없습니다.</h2>
+					<h4>생성된 그룹이 없습니다.</h4>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${groupList}" var="group">
-					<div class="row text-center">
-						<a href="/group/room?group_seq=${group.group_seq}">${group.group_title}</a>
+					<div class="row g-0 groupDetail" style="border: 1px solid grey; width: 100%; height: 200px">
+						<div class="col-4">
+							<img src="/resources/group_img/group_img_${group.group_image}.jpg" style="width: 300px; height: 200px">
+						</div>
+						<div class="col-8 align-self-center">
+					        <h3>${group.group_title}</h3>
+					        <button type="button" class="btn btn-secondary groupDetailBtn" data-bs-toggle="modal" data-bs-target="#groupDetailModal">그룹 상세정보</button>
+					        <input type="text" value="${group.group_seq}" style="display: none;">
+						</div>
 					</div>
 				</c:forEach>
 			</c:otherwise>
@@ -154,6 +174,39 @@
 		                        <option value="5">5</option>
 		                    </select>
 			      		</div>
+			      		<div class="row">
+			      			<div class="col-4 align-self-center">
+			      				<button type="button" class="btn btn-primary" id="toggleImageSelectBtn">그룹 이미지</button>
+			      			</div>
+			      			<div class="col-8" id="selectedImageDiv">
+			      				<img src="/resources/group_img/group_img_1.jpg" style="width: 100%" alt="1" id="selectedImage">
+			      				<input type="text" class="d-none" id="selectedImageNum" name="selectedImageNum" value="1">
+			      			</div>
+			      		</div>
+			      		<div class="row">
+			      			<div class="row m-1 p-1" id="imageSelectList">
+								<c:forEach items="${imageList}" var="image">
+				      				<div class="col-4 p-1">
+				      					<img src="/resources/group_img/group_img_${image}.jpg" style="width: 100%" class="imageSelect" alt="${image}">
+				      				</div>
+								</c:forEach>
+								<!-- 이미지 선택 관련 스크립트 로직 -->
+								<script>
+									$('#imageSelectList').hide()
+									// 이미지 선택창 토글
+									$('#toggleImageSelectBtn').on('click', (e) => {
+										$('#imageSelectList').toggle(100)
+									})
+									// 이미지 리스트에서 이미지 선택 시
+									$('.imageSelect').on('click', (e) => {
+										let imageNum = $(e.target).attr('alt')
+										$('#selectedImage').attr("src", "/resources/group_img/group_img_" + imageNum + ".jpg").attr("alt", 'imageNum')
+										$('#selectedImageNum').val(imageNum)
+										$('#imageSelectList').toggle(100)
+									})
+								</script>
+			      			</div>
+			      		</div>
 			      	</div>
 			      	<div class="modal-footer">
 			        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -164,6 +217,38 @@
 		</div>
 	</form>
 	<!-- 이상 그룹 생성 모달 -->
+	
+	<!-- 이하 그룹 상세 모달 -->
+	<div class="modal fade" id="groupDetailModal" tabindex="-1" aria-labelledby="groupDetailModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+		    <div class="modal-content">
+		        <div class="modal-header">
+		        	<h5 class="modal-title" id="exampleModalLabel">그룹 상세</h5>
+		        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        </div>
+		        <div class="modal-body">
+		        	<input type="text" id="groupDetailSeq" style="display: none">
+		        	<p>
+		        		<span>그룹 이름 : </span><span id="groupDetailName"></span>
+		        	</p>
+		        	<p>
+		        		<span>방장의 한마디 : </span><span id="groupDetailContent"></span>
+		        	</p>
+		        	<p>
+		        		<span>그룹 카테고리 : </span><span id="groupDetailCategory"></span>
+		        	</p>
+		        	<p>
+		        		<span>그룹 현 인원 수 : </span><span id="groupDetailCurNum"></span> / <span id="groupDetailMaxNum"></span>
+		        	</p>
+		        </div>
+		        <div class="modal-footer">
+		        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		        	<button type="button" class="btn btn-primary" id="groupEnterBtn">들어가기</button>
+		        </div>
+		    </div>
+	    </div>
+	</div>
+	<!-- 이상 그룹 상세 모달 -->
 </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
@@ -217,9 +302,21 @@
 			success : (result) => {
 				$('#groupListView').empty()
 				result.forEach((elem) => {
-					let groupDiv = $("<div>").addClass("row text-center")
-					let a = $("<a>").append(elem.group_title).attr("href", "/group/room?group_seq=" + elem.group_seq)
-					groupDiv.append(a)
+					let groupDiv = $("<div>").addClass("row g-0 groupDetail")
+						.css({"border" : "1px solid grey", "width" : "100%", "height" : "200px"})
+					
+					let picDiv = $("<div>").addClass("col-4")
+					let contentDiv = $("<div>").addClass("col-8 align-self-center")
+					
+					let img = $("<img>").attr("src", "/resources/group_img/group_img_" + elem.group_image + ".jpg")
+						.css({"width" : "300px", "height" : "200px"})
+					let groupTitle = $("<h3>").html(elem.group_title)
+					let groupDetailBtn = $("<button>").addClass("btn btn-secondary groupDetailBtn").html("그룹 상세정보")
+					let hiddenInput = $("<input>").attr("type", "text").val(elem.group_seq).css({"display" : "none"})
+					
+					picDiv.append(img)
+					contentDiv.append(groupTitle, groupDetailBtn, hiddenInput)
+					groupDiv.append(picDiv, contentDiv)
 					$('#groupListView').append(groupDiv)
 				})
 			},
@@ -227,6 +324,72 @@
 				console.log(error)
 			}
 		})
+	})
+	
+	// 그룹 상세 버튼 클릭시
+	$(document).on('click', '.groupDetailBtn', (e) => {
+		let group_seq = $(e.target).next().val()
+		$.ajax({
+			url : "/group/getGroupBySeq",
+			type : "get",
+			data : { group_seq : group_seq },
+			success : (result) => {
+				$('#groupDetailSeq').val(group_seq)
+				$('#groupDetailName').html(result.group_title)
+				$('#groupDetailContent').html(result.group_content)
+				$('#groupDetailCategory').html(result.group_std_key)
+				$('#groupDetailCurNum').html(result.group_memCount)
+				$('#groupDetailMaxNum').html(result.group_max)
+			},
+			error : (error) => {
+				console.log(error)
+			}
+		})
+	})
+	
+	// 그룹 들어가기 버튼 클릭 시
+	$('#groupEnterBtn').on('click', (e) => {
+		let group_seq = $('#groupDetailSeq').val()
+		let loginGroup_seq = ${loginSession.group_seq}
+		let mem_seq = ${loginSession.mem_seq}
+		
+		let curNum = parseInt($('#groupDetailCurNum').html())
+		let maxNum = parseInt($('#groupDetailMaxNum').html())
+		
+		if (loginGroup_seq == 0) {
+			let confirmGroupSignin = confirm('그룹에 가입하시겠습니까?')
+			if (confirmGroupSignin) {
+				if (curNum >= maxNum) {
+					alert('방이 꽉 찼습니다.')
+				} else {
+					$.ajax({
+						url : "/group/groupSignin",
+						type : "post",
+						data : { group_seq : group_seq, mem_seq : mem_seq },
+						success : (result) => {
+							if (result === "success") {
+								location.href = "/group/room?group_seq=" + group_seq
+							}
+						},
+						error : (error) => {
+							console.log(error)
+						}
+					})
+				}
+			} else {
+				alert("그룹에 가입하실 수 없습니다.")
+			}
+		} else if (group_seq != loginGroup_seq) {
+			alert('이미 다른 그룹에 가입하셨습니다.')
+			return
+		} else {
+			location.href = "/group/room?group_seq=" + group_seq
+		}
+	})
+	
+	// 내 그룹 가기 버튼 클릭 시
+	$('#goMyGroupBtn').on('click', (e) => {
+		location.href = "/group/room?group_seq=" + ${loginSession.group_seq}
 	})
 </script>
 </body>
