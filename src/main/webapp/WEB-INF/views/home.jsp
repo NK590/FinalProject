@@ -346,7 +346,6 @@ a:hover {
 								<li><a class="dropdown-item" href="#" onclick="sessionCheck();">공부시간 확인하기</a></li>
 							</ul>
 						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-						<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" href="/member/signup">회원가입</a></li>
 					</ul>

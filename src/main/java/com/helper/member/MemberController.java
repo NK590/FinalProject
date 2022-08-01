@@ -198,14 +198,7 @@ public class MemberController {
 			return "redirect:/member/login";
 		}
 		
-		
-		@RequestMapping(value = "/sessionCheck")
-		@ResponseBody
-		public String sessionCheck(HttpSession session) {
-			String sessionEmail = (String)session.getAttribute("sessionEmail");
-			return sessionEmail;
-		}
-	
+
 		
 		
 }
