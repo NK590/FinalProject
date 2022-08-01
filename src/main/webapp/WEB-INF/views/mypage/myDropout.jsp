@@ -27,7 +27,7 @@ body {
 }
 
 #bodylist {
-	width: 450px;
+	width: 515px;
 	padding: 30px;
 	background-color: white;
 	position: absolute;
@@ -67,6 +67,7 @@ body {
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
 					</ul>
@@ -85,41 +86,38 @@ body {
 				
 				<div class="row p-2">		
 					<div class="row withdrawal-input">
-						
-							
-							<div class="row withdrawal-info">
-						<div class="col-12">
-							<p>
-							<h6>회원탈퇴시 다음의 내용을 숙지해 주시기 바랍니다.</h6>
-							</p>
-						</div>
+						<div class="row withdrawal-info">
+						    <div class="col-12">
+						    	<p>
+						    		<h6>회원탈퇴시 다음의 내용을 숙지해 주시기 바랍니다.</h6>
+						    	</p>
+						    </div>
 						<div class="col-12 term-box">
 							<p>1. 탈퇴시 고객님의 정보는 소비자 보호에 관한 법률에 의거한 고객정보 보호 정책에 따라 청약철회에 관한
 								기록, 대금결제 및 재화 등의 기록은 법정 기간에 따라 관리됩니다.</p>
-							<p>2. 탈퇴 후 리뷰 및 문의하기 등의 게시물은 관리가 불가능 하오니, 편집 또는 삭제를 원하시는 경우
+							<p>2. 탈퇴 후 나의 커뮤니티 등의 게시물은 관리가 불가 하오니, 저장을 원하시는 경우
 								탈퇴 전 관리해 주시기 바랍니다.</p>
-							<p>3. 결제 후 진행중인 서비스는 탈퇴로 취소 또는 환불되지않습니다.</p>
+							<p>3. 탈퇴 후 기록관련 서비스는 삭제됩니다.</p>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value=""
-								id="flexCheckDefault"> <label class="form-check-label"
-								for="flexCheckDefault"> 위 내용을 모두 숙지하였습니다. </label>
+						<div class="form-check" style="margin-left:12px">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label"	for="flexCheckDefault"> 위 내용을 모두 숙지하였습니다. </label>
 						</div>
+						</div>
+						<div class ="row p-2">
+							<div class="col-3">
+								<span style="margin-left:5px;">* 비밀번호</span>
 							</div>
-							<div class="col-4">
-							<span>* 비밀번호</span>
-						</div>
-							<div class="col-8">
-								<input type="password" class="form-control withdrawPw"
-									placeholder="비밀번호를 입력해주세요." id="dropoutPw" name="mem_pw">
+							<div class="col-9">
+								<input type="password" class="form-control withdrawPw" placeholder="비밀번호를 입력해주세요." id="dropoutPw" name="mem_pw">
 							</div>
-							
-							<div class="btn-area">
+						</div>	
+							<div class="btn-area d-flex justify-content-center">
 								<button type="button" class="btn btn-light btnCancle" id="btnCancel">취소하기</button>
 								<button type="button" class="btn btn-danger btnWithdraw" id="dropoutBtn">탈퇴하기</button>
 							</div>
 					</div>
-					</div>
+				</div>
 					</div>
 				</div>
 

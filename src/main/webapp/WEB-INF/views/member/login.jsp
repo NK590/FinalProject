@@ -117,7 +117,7 @@ span {
 		</div>
 
 		<div class="row justify-content-around logininput">
-			<input type="text" id="id" name="mem_id" required
+			<input type="text" id="id" name="mem_id" value="${mem_id}" required
 				placeholder="이메일을 입력해주세요.">
 			<div class="nothing"></div>
 			<input type="password" id="password" name="mem_pw" required
@@ -138,8 +138,6 @@ span {
 					<input type="checkbox" id="emailSave" name="emailSave">이메일	저장하기
 				</div>
 		</div>
-
-		<button id="kakaoLogout" onclick="kakaoLogout()">로그아웃</button>
 
 		<p id="token-result"></p>
 
@@ -228,10 +226,6 @@ span {
         </script>
 
 	<script>
-	function kakaoLogout() {
-	    console.log(Kakao.Auth.getAccessToken());
-	  }
-
 	
 	// 카카오
 	window.Kakao.init('1d93d50b4296c95206af1d69936465bf'); // SDK를 초기화 합니다 발급받은 키 중 javascript키를 사용해준다.
@@ -283,11 +277,11 @@ span {
 
 
 	// 아이디, 비밀번호 입력후 엔터키 치면~
-//	$('#id, #password').on('keypress', function(e){ 
-//	    if(e.keyCode == '13'){ 
-//	        $('#loginBtn').click(); 
-//	    }
-//	});
+	$('#id, #password').on('keypress', function(e){ 
+	    if(e.keyCode == '13'){ 
+	        $('#loginBtn').click(); 
+	    }
+	});
 	
 	
 	// 회원가입 버튼 누르면 회원가입 페이지로 이동
@@ -304,7 +298,7 @@ span {
 			alert("아이디 혹은 비밀번호를 입력해주세요.");
 		}else if($('#id').val() == "admin" || $('#password').val() == "admin"){
 			alert("관리자 페이지로 이동합니다.");
-			location.href = "/member/toAdmin";
+			location.href = "/admin/toAdmin";
 		}else{
 			// 아이디, 비밀번호 입력 시 ajax실행
 			$.ajax({
@@ -313,13 +307,17 @@ span {
 				,data :login
 				, success: function(data){
 					console.log(data);
-					if(data == "success"){
+					if(data === "success"){
 						alert("로그인 되었습니다.");
 						saveid();
 						location.href = "/member/toLogin";
-					}else if(data == "fail"){
-						
+					}else if(data === "fail"){
 						alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+						$('#password').val("");
+						return;
+					}else if(data === "blackMem"){
+						alert("블랙회원입니다. 관리자에게 문의해주세요. \n대표번호 : 031-533-8282");
+						return;
 					}
 				}, error : function(e){
 					console.log(e);
@@ -340,7 +338,7 @@ span {
     document.getElementById("passwordSearch").onclick = function () {
         let url = "/member/searchPw"; 
         let name = "비밀번호 찾기"; // 팝업창 이름값
-        let option = "width=650, height=400, left=500, top=300"; // 팝업창 크기, 위치
+        let option = "width=650, height=420, left=500, top=300"; // 팝업창 크기, 위치
         window.open(url, name, option);
     }
 

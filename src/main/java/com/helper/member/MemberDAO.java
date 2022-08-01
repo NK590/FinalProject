@@ -67,8 +67,8 @@ public class MemberDAO {
 	}
 	
 	// 마이페이지 나의 그룹
-	public ArrayList<GroupDTO> myGroup(int group_seq)throws Exception{
-		return (ArrayList)session.selectList("memberMapper.myGroup", group_seq); 
+	public List<GroupDTO> myGroup(int group_seq)throws Exception{
+		return session.selectList("memberMapper.myGroup", group_seq); 
 	}
 	
 	// 그룹 가입 여부 체크

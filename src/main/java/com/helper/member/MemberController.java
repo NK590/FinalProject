@@ -1,8 +1,5 @@
 package com.helper.member;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -97,8 +95,9 @@ public class MemberController {
 		}
 	}
 	
+	// 이메일 인증번호 발송
 	@RequestMapping(value = "/certificationEmail")
-	@ResponseBody// 이메일 인증번호 발송
+	@ResponseBody
 	public int certificationEmail(String mem_id) throws Exception{
 		System.out.println("id : "+ mem_id);
 		System.out.println("왔어?");
@@ -137,7 +136,9 @@ public class MemberController {
 			session.setAttribute("loginSession", dto);
 			System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
 			System.out.println("넘어왔니?");
-			
+			if(dto.getMem_black().equals("Y")) {
+				return "blackMem";
+			}
 			return "success";
 		}
 		return "fail";
@@ -149,11 +150,6 @@ public class MemberController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/toAdmin") // toLogin페이지 요청
-	public String toAdmin() {
-		System.out.println("toAdmin 페이지 요청");
-		return "admin/adminMain";
-	}
 	
 	@RequestMapping(value="/toKakao")
 	public String home(String code) {
@@ -200,6 +196,14 @@ public class MemberController {
 		public String logout() {
 			session.removeAttribute("loginSession");
 			return "redirect:/member/login";
+		}
+		
+		
+		@RequestMapping(value = "/sessionCheck")
+		@ResponseBody
+		public String sessionCheck(HttpSession session) {
+			String sessionEmail = (String)session.getAttribute("sessionEmail");
+			return sessionEmail;
 		}
 	
 		

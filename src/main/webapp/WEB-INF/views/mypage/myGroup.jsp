@@ -50,6 +50,7 @@ body {
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
 					</ul>
