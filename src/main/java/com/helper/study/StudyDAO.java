@@ -2,6 +2,7 @@ package com.helper.study;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,8 @@ public class StudyDAO {
 		return session.selectList("recordMapper.subjectList", mem_seq);
 	}
 
-	public List<Integer> countList(int mem_seq) throws Exception {
-		List<Integer> countList = session.selectList("recordMapper.countList", mem_seq);
-		// 초 > 분 으로 변경
-		for (int i = 0; i < countList.size(); i++) {
-			countList.set(i, countList.get(i) / 60);
-		}
+	public List<Map<String, Object>> countList(int mem_seq) throws Exception {
+		List<Map<String, Object>> countList = session.selectList("recordMapper.countListMap", mem_seq);
 		return countList;
 	}
 

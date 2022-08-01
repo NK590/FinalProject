@@ -279,80 +279,92 @@ a:hover {
 					<button type="button" class="btn-close text-reset"
 						data-bs-dismiss="offcanvas" aria-label="Close"></button>
 				</div>
-				
+
 				<c:choose>
 					<c:when test="${not empty loginSession}">
-				<div class="offcanvas-body">
-					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">홈</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">About
-								us</a></li>
-						<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a>
-						</li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown-item" id="golibrary" href="/librarymap">도서관 위치</a></li>
+						<div class="offcanvas-body">
+							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link active"
+									aria-current="page" href="/">홈</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">About
+										us</a></li>
+								<li class="nav-item"><a class="nav-link" href="/group/">그룹
+										스터디</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
+									<ul class="dropdown-menu"
+										aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="/study/toStudy">공부
+												시작하기</a></li>
+										<li><a class="dropdown-item" id="golibrary"
+											href="/librarymap">도서관 위치</a></li>
+									</ul>
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> Study
+										Helper </a>
+									<ul class="dropdown-menu"
+										aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="/planner/toPlanner">플래너</a></li>
+										<li><a class="dropdown-item" href="/study/toRecord">공부시간
+												확인하기</a></li>
+									</ul>
+								<li class="nav-item"><a class="nav-link"
+									href="/board/toBoard">지식커뮤니티</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/mypage/myPage">마이페이지</a></li>
+								<li class="nav-item"><a class="nav-link" id="logoutBtn"
+									onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
+						</div>
+					</c:when>
+
+					<c:otherwise>
+						<div class="offcanvas-body">
+							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link active"
+									aria-current="page" href="#">홈</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">About
+										us</a></li>
+								<li class="nav-item"><a class="nav-link" href="/group/">그룹
+										스터디</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
+									<ul class="dropdown-menu"
+										aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="/study/toStudy">공부
+												시작하기</a></li>
+										<li><a class="dropdown-item" id="golibrary"
+											href="/librarymap">도서관 위치</a></li>
+									</ul>
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> Study
+										Helper </a>
+									<ul class="dropdown-menu"
+										aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="#"
+											onclick="sessionCheck();">플래너</a></li>
+										<li><a class="dropdown-item" href="#"
+											onclick="sessionCheck();">공부시간 확인하기</a></li>
+									</ul>
+								<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"
+									onclick="sessionCheck();">마이페이지</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/member/login">로그인</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/member/signup">회원가입</a></li>
 							</ul>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> Study Helper
-						</a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="/planner/toPlanner">플래너</a></li>
-								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
-							</ul>
-						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식커뮤니티</a></li>	
-						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
-						<li class="nav-item"><a class="nav-link" id="logoutBtn" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
-				</div>
-				</c:when>
-								
-		            <c:otherwise>
-				<div class="offcanvas-body">
-					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">홈</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">About
-								us</a></li>
-						<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a>
-						</li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown-item" id="golibrary"
-									href="/librarymap">도서관 위치</a></li>
-							</ul>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> Study Helper
-						</a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="#" onclick="sessionCheck();">플래너</a></li>
-								<li><a class="dropdown-item" href="#" onclick="sessionCheck();">공부시간 확인하기</a></li>
-							</ul>
-						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-						<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">마이페이지</a></li>
-						<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="/member/signup">회원가입</a></li>
-					</ul>
-				</div>
-				</c:otherwise>
-		           	</c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</nav>
@@ -428,7 +440,7 @@ a:hover {
 			<p>인내가 꿈을 이루는 날까지 스터디 헬퍼는 여러분과 함께합니다.</p>
 		</div>
 		<br>
-		
+
 		<!-- 일간 Top3 영역 -->
 		<div class="row jusitify-content-center">
 			<div class="col-12 col-md-6 weekend_user">
@@ -485,14 +497,9 @@ a:hover {
 					<div class="row">
 						<div class="col-4 justify-content-center">
 							<div class="new_group_box">
-								<c:if test="${empty groupList[0].group_image}">
-									<!-- 그룹 기본 이미지 -->
-									<img src="/resources/images/group5.jpg">
-								</c:if>
-								<c:if test="${not empty groupList[0].group_image}">
-									<!-- 그룹 이미지 -->
-									<img src="/group/${groupList[0].group_image}">
-								</c:if>
+								<!-- 그룹 이미지 -->
+								<img
+									src="/resources/group_img/group_img_${groupList[0].group_image}.jpg">
 							</div>
 							<c:if test="${groupList.size() == 0}">
 								<span class="topNick">-</span>
@@ -507,14 +514,9 @@ a:hover {
 						</div>
 						<div class="col-4 justify-content-center">
 							<div class="new_group_box">
-								<c:if test="${empty groupList[1].group_image}">
-									<!-- 그룹 기본 이미지 -->
-									<img src="/resources/images/group5.jpg">
-								</c:if>
-								<c:if test="${not empty groupList[1].group_image}">
-									<!-- 그룹 이미지 -->
-									<img src="/group/${groupList[1].group_image}">
-								</c:if>
+								<!-- 그룹 이미지 -->
+								<img
+									src="/resources/group_img/group_img_${groupList[1].group_image}.jpg">
 							</div>
 							<c:if test="${groupList.size() <= 1}">
 								<span class="topNick">-</span>
@@ -529,14 +531,9 @@ a:hover {
 						</div>
 						<div class="col-4 justify-content-center">
 							<div class="new_group_box">
-								<c:if test="${empty groupList[2].group_image}">
-									<!-- 그룹 기본 이미지 -->
-									<img src="/resources/images/group5.jpg">
-								</c:if>
-								<c:if test="${not empty groupList[2].group_image}">
-									<!-- 그룹 이미지 -->
-									<img src="/group/${groupList[2].group_image}">
-								</c:if>
+								<!-- 그룹 이미지 -->
+								<img
+									src="/resources/group_img/group_img_${groupList[2].group_image}.jpg">
 							</div>
 							<c:if test="${groupList.size() <= 2}">
 								<span class="topNick">-</span>
@@ -573,14 +570,15 @@ a:hover {
 <!-- 스크립트 영역 -->
 <script>
 	AOS.init(); //스크롤 애니메이션 명령어
-	
-	function sessionCheck(){
-		let reLogin = confirm('로그인이 필요합니다.' + '\n' + '확인 시 로그인 창으로 이동됩니다.' + '\n' + '취소시 현재 창이 유지됩니다.');
-			if(reLogin){
-				location.href = "/member/login";
-				return;
-			}else{
-				return;
+
+	function sessionCheck() {
+		let reLogin = confirm('로그인이 필요합니다.' + '\n' + '확인 시 로그인 창으로 이동됩니다.'
+				+ '\n' + '취소시 현재 창이 유지됩니다.');
+		if (reLogin) {
+			location.href = "/member/login";
+			return;
+		} else {
+			return;
 		}
 	}
 </script>
