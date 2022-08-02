@@ -58,7 +58,7 @@
         </div>
         <div class="col-3 align-self-center">
         	<button class="btn btn-primary" id="createGroupBtn" data-bs-toggle="modal" data-bs-target="#makeGroupModal">그룹 생성</button>
-        	<c:if test="${loginSession.group_seq ne 0}">
+        	<c:if test="${cur_group_seq ne 0}">
         		<button class="btn btn-secondary" id="goMyGroupBtn">내 그룹</button>
         	</c:if>
         </div>
@@ -125,7 +125,7 @@
 						</div>
 						<div class="col-8 align-self-center">
 					        <h3>${group.group_title}</h3>
-					        <button type="button" class="btn btn-secondary groupDetailBtn" data-bs-toggle="modal" data-bs-target="#groupDetailModal">그룹 상세정보</button>
+					        <button type="button" class="btn btn-secondary groupDetailBtn" data-bs-toggle="modal">그룹 상세정보</button>
 					        <input type="text" value="${group.group_seq}" style="display: none;">
 						</div>
 					</div>
@@ -254,7 +254,6 @@
 
 <!-- 이하 script -->
 <script>
-	
 	// 그룹 생성 처리
 	$('#makeGroupBtn').on('click', (e) => {
 		let makeGroupConfirm = confirm('그룹을 만드시겠습니까?')
@@ -263,6 +262,8 @@
 			let roomNameInput = $('#roomNameInput').val()
 			let roomContentInput = $('#roomContentInput').val()
 			let memberNumberInput = $('#memberNumberInput').val()
+			
+			let mem_seq = parseInt("${loginSession.mem_seq}")
 			
 			if (categoryInput === '') {
 				alert('카테고리를 입력해주세요.')
@@ -276,6 +277,7 @@
 				$.ajax({
 					url : "/group/checkJoinStatus",
 					type : "get",
+					data : { mem_seq : mem_seq },
 					success : (result) => {
 						if (result !== 0) {
 							alert("이미 그룹에 참여중입니다. 그룹을 탈퇴 후 시도해주세요.")
@@ -340,6 +342,8 @@
 				$('#groupDetailCategory').html(result.group_std_key)
 				$('#groupDetailCurNum').html(result.group_memCount)
 				$('#groupDetailMaxNum').html(result.group_max)
+				let groupDetailModal = new bootstrap.Modal(document.getElementById('groupDetailModal'))
+				groupDetailModal.show()
 			},
 			error : (error) => {
 				console.log(error)
@@ -350,46 +354,63 @@
 	// 그룹 들어가기 버튼 클릭 시
 	$('#groupEnterBtn').on('click', (e) => {
 		let group_seq = $('#groupDetailSeq').val()
-		let loginGroup_seq = ${loginSession.group_seq}
 		let mem_seq = ${loginSession.mem_seq}
 		
 		let curNum = parseInt($('#groupDetailCurNum').html())
 		let maxNum = parseInt($('#groupDetailMaxNum').html())
 		
-		if (loginGroup_seq == 0) {
-			let confirmGroupSignin = confirm('그룹에 가입하시겠습니까?')
-			if (confirmGroupSignin) {
-				if (curNum >= maxNum) {
-					alert('방이 꽉 찼습니다.')
-				} else {
-					$.ajax({
-						url : "/group/groupSignin",
-						type : "post",
-						data : { group_seq : group_seq, mem_seq : mem_seq },
-						success : (result) => {
-							if (result === "success") {
-								location.href = "/group/room?group_seq=" + group_seq
+		$.ajax({
+			url : "/group/checkJoinStatus",
+			type : "get",
+			data : { mem_seq : mem_seq },
+			success : (result) => {
+				if (result === 0) {
+					let confirmGroupSignin = confirm('그룹에 가입하시겠습니까?')
+					if (confirmGroupSignin) {
+						$.ajax({
+							url : "/group/groupSignin",
+							type : "post",
+							data : { group_seq : group_seq, mem_seq : mem_seq },
+							success : (re_result) => {
+								if (re_result === "success") {
+									location.href = "/group/room?group_seq=" + group_seq
+								}
+							},
+							error : (er_error) => {
+								console.log(er_error)
 							}
-						},
-						error : (error) => {
-							console.log(error)
-						}
-					})
+						})
+					}
+				} else if (result == group_seq) {
+					location.href = "/group/room?group_seq=" + group_seq
+				} else {
+					alert('이미 다른 그룹에 가입하셨습니다.')
 				}
-			} else {
-				alert("그룹에 가입하실 수 없습니다.")
+			},
+			error : (error) => {
+				console.log(error)
 			}
-		} else if (group_seq != loginGroup_seq) {
-			alert('이미 다른 그룹에 가입하셨습니다.')
-			return
-		} else {
-			location.href = "/group/room?group_seq=" + group_seq
-		}
+		})
 	})
 	
 	// 내 그룹 가기 버튼 클릭 시
 	$('#goMyGroupBtn').on('click', (e) => {
-		location.href = "/group/room?group_seq=" + ${loginSession.group_seq}
+		let mem_seq = ${loginSession.mem_seq}
+		$.ajax({
+			url : "/group/checkJoinStatus",
+			type : "get",
+			data : { mem_seq : mem_seq },
+			success : (result) => {
+				if (mem_seq === 0) {
+					alert('현재 가입 중인 그룹이 없습니다.')
+				} else {
+					location.href = "/group/room?group_seq=" + result
+				}
+			},
+			error : (error) => {
+				console.log(error)
+			}
+		})
 	})
 </script>
 </body>

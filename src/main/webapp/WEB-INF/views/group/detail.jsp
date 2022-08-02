@@ -206,7 +206,7 @@
 	</div>
 	<!-- 여기까지 화원 추방 모달 -->
     <script>
-    	let ws = new WebSocket("ws://211.207.221.23:8099/group/detail")
+    	let ws = new WebSocket("ws://192.168.20.13:8099/group/detail")
     	
     	// 전송 버튼 삭제로 인해 없앰
     	/* document.getElementById('chatSend').addEventListener('click', (e) => {
