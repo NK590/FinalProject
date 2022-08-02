@@ -75,7 +75,7 @@ public class PlannerService {
 		System.out.println(dao.updateModal(dto));
 		return dao.updateModal(dto);
 	}
-	public List<TimeDTO> recordForPlanner(int mem_seq)throws Exception{ // TimeDTO list 출력
+	public List<Map<String,String>> recordForPlanner(int mem_seq)throws Exception{ // TimeDTO list 출력
 		
 		return dao.recordForPlanner(mem_seq);
 	}

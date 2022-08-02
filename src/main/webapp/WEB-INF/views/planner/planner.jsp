@@ -15,7 +15,7 @@
 	rel='stylesheet' />
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-<!-- fullcalendar 언어 CDN -->
+<!-- full calendar 언어 CDN -->
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 <!-- bootstrap -->
@@ -91,6 +91,7 @@ a {
 	color: white !important;
 	border-color: transparent !important;
 }
+
 </style>
 </head>
 <body>
@@ -233,12 +234,13 @@ a {
 	
 			
 			$(function() {
+					
 				
 				// mem_seq 값
 				 let mem = $("#mem_seq").val();
 				 console.log(mem);
 				
-				// calendar element 취득
+				// calendar element 
 
 				var calendarEl = document.getElementById('calendar'); //$('#calendar')[0];
 
@@ -255,9 +257,9 @@ a {
 
 							expandRows : true, // 화면에 맞게 높이 재설정
 
-							slotMinTime : "06:00", // Day 캘린더에서 시작 시간
+							slotMinTime : "05:00", // Day 캘린더에서 시작 시간
 
-							slotMaxTime : "30:00", // Day 캘린더에서 종료 시간
+							slotMaxTime : "29:00", // Day 캘린더에서 종료 시간
 						
 							
 							// title fotmat에 해당 월만 띄워주기
@@ -376,7 +378,7 @@ a {
 		                          	,success : function(data){
 		                          		if(data=="success"){		                          		
 		                          			alert("일정이 추가되었습니다.");
-		                          			/* location.href="/planner/toPlanner+mem";  */
+		                          			location.href="/planner/toPlanner?mem_seq="+mem;
 		                          		}else{
 		                          			alert("일정 등록에 실패했습니다.")
 		                          		}
@@ -438,16 +440,8 @@ a {
 									start : "${dto.plan_start}",
 									end : "${dto.plan_end}",
 									backgroundColor : "${dto.plan_background}",
-									textColor : "black",
+									textColor : "white",
 									borderColor : "${dto.plan_background}",
-									},
-									
-								</c:forEach>
-								<c:forEach items="${timeList}" var="timeDto">
-									{	
-									title : "${timeDto.time_subject}"+" - "+"${timeDto.time_count}",
-									start : "${timeDto.time_date}",
-									allDay : true
 									},
 								</c:forEach>
 							]
@@ -589,7 +583,12 @@ a {
 		})
 		
 		();
-
+		$(document).ready(function(){
+	         $('.flatpickr-time').append("<button id='asdf'>확인</button>");
+	            $('#asdf').click(function(){
+	               alert("시작일이 등록되었습니다.");            
+	            });       
+	         });
 
 	</script>
 </body>

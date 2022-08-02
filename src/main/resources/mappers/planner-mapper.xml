@@ -48,8 +48,10 @@
 		HH24:MI:SS'),plan_content=#{plan_content} where plan_seq = #{plan_seq}
 	</update>
 	<!-- 공부시간 플래너에 띄워주기 -->
-	<select id="recordForPlanner" parameterType="int" resultType="com.helper.study.TimeDTO">
-		select * from tb_timer where mem_seq = #{mem_seq}
+	<select id="recordForPlanner" parameterType="int" resultType="map">
+		SELECT time_subject,TO_CHAR(TRUNC(time_count/3600), 'FM900')
+                  ||':'||TO_CHAR(TRUNC(MOD(time_count, 3600) / 60), 'FM00')
+                  ||':'||TO_CHAR(TRUNC(MOD(time_count, 60  )     ), 'FM00') as count ,TO_CHAR(time_date) as timedate from tb_timer where mem_seq = ${mem_seq}
 	</select>
 </mapper>
 

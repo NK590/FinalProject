@@ -14,6 +14,11 @@ public class ReportDAO {
 	@Autowired
 	private SqlSession session;
 	
+	// 신고 등록
+	public void insert(ReportDTO dto) throws Exception {
+	      session.insert("reportMapper.insert", dto);
+	}
+
 	// 전체 신고 목록
 	public List<ReportDTO> reportList(int start, int end) throws Exception {
 		Map<String, Integer> map = new HashMap<String, Integer>();

@@ -73,6 +73,10 @@
 	<select id="selectByGroupSeq" parameterType="int" resultType="com.helper.board.BoardDTO">
 		select * from tb_member where group_seq = ${group_seq}
 	</select>
+	<!-- 게시글 작성자 정보 조회 -->
+	<select id="selectWriter" parameterType="int" resultType="com.helper.member.MemberDTO">
+	select * from tb_member where mem_seq = #{mem_seq}
+	</select>
 	
 	<!-- 카카오 정보 찾기 
 	<select id="findKakao" parameterType="java.util.HashMap" resultType="com.helper.member.KakaoDTO">
