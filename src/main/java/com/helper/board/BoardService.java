@@ -1,20 +1,23 @@
 package com.helper.board;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.helper.member.MemberDAO;
+import com.helper.member.MemberDTO;
 
 @Service
 public class BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
-
+	@Autowired
+	private MemberDAO dao;
+	
 	public List<BoardDTO> selectAll(int start, int end) throws Exception { // 모든 게시글 조회
 		return boardDAO.selectAll( start, end);
 	}
@@ -95,5 +98,21 @@ public class BoardService {
 		}
 
 	}
+	public MemberDTO writer(int mem_seq)throws Exception{ // 게시물 작성자 정보
+		
+		return dao.writer(mem_seq);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

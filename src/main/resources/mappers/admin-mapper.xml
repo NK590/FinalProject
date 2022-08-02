@@ -73,7 +73,7 @@
 			where group_seq = #{group_seq}
 	</delete>
 	<update id="memGroupSetNull" parameterType="int">
-		update tb_member set group_seq=null 
+		update tb_member set group_seq=0 
 			where group_seq = #{group_seq}
 	</update>
 	
@@ -91,6 +91,7 @@
 			(select sum(time_count) as group_count, group_seq 
 			from tb_member join tb_timer 
 					using(mem_seq)
+					where to_char(sysdate, 'MM/dd') = to_char(time_date, 'MM/dd')
     				group by group_seq 
     				order by group_count desc) join tb_group 
     		using(group_seq)
