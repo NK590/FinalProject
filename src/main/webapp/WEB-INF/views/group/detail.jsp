@@ -437,7 +437,6 @@ font-family: "AppleSDGothicNeoL.ttf";
                 if (message !== '') {
                     ws.send(message)
                     document.getElementById('chatTextInput').value = ''
-
                     let chatContent = document.getElementById('chatContent')
                     chatContent.scrollTop = chatContent.scrollHeight
                 }

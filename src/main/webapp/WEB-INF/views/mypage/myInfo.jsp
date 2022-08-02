@@ -56,6 +56,23 @@ body {
 #changePW{
 	font-size: x-small;
 }
+.checkFalse {
+	color: rgb(248, 26, 26);
+	font-size: xx-small;
+	margin-top: 7px;
+}
+
+.checkNick{
+	color: rgb(248, 26, 26);
+	font-size: xx-small;
+	margin-top: 7px;
+}
+
+.checkTrue {
+	color: rgb(26, 188, 156);
+	font-size: xx-small;
+	margin-top: 7px;
+}
 </style>
 </head>
 <body>
@@ -73,7 +90,7 @@ body {
 					</h3>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 활동내역</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
@@ -112,16 +129,17 @@ body {
 									<label class="form-label">닉네임</label>
 								</div>
 								<div class="col-9" style="padding: 0px;">
-									<div class="check checkFalse" id="nameFalse"
-										style="display: none;">*조건에 맞게 입력해주세요.</div>
-									<div class="check checkTrue" id="nameTrue"
-										style="display: none;">*사용 가능한 닉네임입니다.</div>
+									<div class="check checkFalse" id="nameFalse" style="display: none;">
+									*조건에 맞게 입력해주세요.</div>
+									<div class="check checkTrue" id="nameTrue" style="display: none;">
+									*사용 가능한 닉네임입니다.</div>
+									<div class="check checkNick" id="nameNick" style="display: none;">
+									*중복된 닉네임 입니다.</div>
 								</div>
 								<div class="col-12 mb-2">
-									<input type="text" class="form-control" name="mem_nick" value="${loginSession.mem_nick}"
-										required onkeyup="nameCheck();"> <span
-										style="font-size: 10px;">*3~10자의 영문 대소문자와 숫자, 한글로만
-										입력하세요.</span>
+									<input type="text" class="form-control" id="mem_nick" name="mem_nick" value="${loginSession.mem_nick}"
+										required onkeyup="nameCheck();"> 
+										<span style="font-size: 10px;">*3~10자의 영문 대소문자와 숫자, 한글로만 입력하세요.</span>
 								</div>
 							</div>
 
@@ -179,6 +197,46 @@ body {
 		location.href = "/mypage/myPage"
 	}
 	
+	// 닉네임 유효성 검사 및 중복검사
+	function nameCheck(){
+		 let regExpName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/;
+		 let mem_nick = $('#mem_nick').val();
+		 
+		 
+		 if(!regExpName.test($('#mem_nick').val())){// 이름을 잘못 입력한 경우
+	            $("#nameFalse").attr('style',"display:block");
+	            $("#nameTrue").attr('style',"display:none");
+	            $("#nameNick").attr('style',"display:none");
+	         } else {// 사용 가능 이름
+	            
+	        	 $.ajax({
+	 				url : "/member/nickForm"
+	 				,type : "post"
+	 				,data : {mem_nick}
+	 				, success: function(data){
+	 					console.log(data);
+	 					if(data === "ok"){
+	 						$("#nameTrue").attr('style',"display:block");
+	 						$("#nameNick").attr('style',"display:none");
+	 						$("#nameFalse").attr('style',"display:none");
+	 						return;
+	 					}else if(data === "no" && "${loginSession.mem_nick}" != mem_nick ){
+	 						$("#nameNick").attr('style',"display:block");
+	 						$("#nameTrue").attr('style',"display:none");
+	 						$("#nameFalse").attr('style',"display:none");
+	 						return;
+	 					}
+	 				}, error : function(e){
+	 					console.log(e);
+	 				}
+	 			})
+	        	 
+	         }
+	         if(mem_nick == ""){
+	            $("#nameFalse").attr('style',"display:none");
+	         }
+}
+	
 	 // 수정 버튼을 눌렀을 때 유효성 검사 후 form 제출
 	$("#updateBtn").on("click", function() {
 		let regexName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/; // 닉네임 정규식 3~10자의 영문 대소문자와 숫자, 한글 
@@ -187,7 +245,7 @@ body {
 			alert("형식에 맞지 않는 닉네임입니다.");
 			return;
 		}else if ($("#memStdkey").val() === "선택") {
-			alert("직업을 선택해주세요.");
+			alert("관심분야를 선택해주세요.");
 			return;
 		}
 

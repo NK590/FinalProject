@@ -62,6 +62,7 @@ thead, tbody {
 }
 </style>
 <body>
+<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 head-text">
@@ -114,6 +115,7 @@ thead, tbody {
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	<script>
 		$("#writeBtn").click(function(){
 			location.href="/admin/noticeWrite";

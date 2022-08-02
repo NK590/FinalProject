@@ -308,7 +308,6 @@ a:hover {
 								>로그아웃</a></li>
 						</div>
 					</c:when>
-
 					<c:otherwise>
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -473,14 +472,9 @@ a:hover {
 					<div class="row">
 						<div class="col-4 justify-content-center">
 							<div class="new_group_box">
-								<c:if test="${empty groupList[0].group_image}">
-									<!-- 그룹 기본 이미지 -->
-									<img src="/resources/images/group5.jpg">
-								</c:if>
-								<c:if test="${not empty groupList[0].group_image}">
-									<!-- 그룹 이미지 -->
-									<img src="/group/${groupList[0].group_image}">
-								</c:if>
+								<!-- 그룹 이미지 -->
+								<img
+									src="/resources/group_img/group_img_${groupList[0].group_image}.jpg">
 							</div>
 							<c:if test="${groupList.size() == 0}">
 								<span class="topNick">-</span>
@@ -495,14 +489,9 @@ a:hover {
 						</div>
 						<div class="col-4 justify-content-center">
 							<div class="new_group_box">
-								<c:if test="${empty groupList[1].group_image}">
-									<!-- 그룹 기본 이미지 -->
-									<img src="/resources/images/group5.jpg">
-								</c:if>
-								<c:if test="${not empty groupList[1].group_image}">
-									<!-- 그룹 이미지 -->
-									<img src="/group/${groupList[1].group_image}">
-								</c:if>
+								<!-- 그룹 이미지 -->
+								<img
+									src="/resources/group_img/group_img_${groupList[1].group_image}.jpg">
 							</div>
 							<c:if test="${groupList.size() <= 1}">
 								<span class="topNick">-</span>
@@ -517,14 +506,9 @@ a:hover {
 						</div>
 						<div class="col-4 justify-content-center">
 							<div class="new_group_box">
-								<c:if test="${empty groupList[2].group_image}">
-									<!-- 그룹 기본 이미지 -->
-									<img src="/resources/images/group5.jpg">
-								</c:if>
-								<c:if test="${not empty groupList[2].group_image}">
-									<!-- 그룹 이미지 -->
-									<img src="/group/${groupList[2].group_image}">
-								</c:if>
+								<!-- 그룹 이미지 -->
+								<img
+									src="/resources/group_img/group_img_${groupList[2].group_image}.jpg">
 							</div>
 							<c:if test="${groupList.size() <= 2}">
 								<span class="topNick">-</span>
@@ -560,14 +544,15 @@ a:hover {
 <!-- 스크립트 영역 -->
 <script>
 	AOS.init(); //스크롤 애니메이션 명령어
-	
-	function sessionCheck(){
-		let reLogin = confirm('로그인이 필요합니다.' + '\n' + '확인 시 로그인 창으로 이동됩니다.' + '\n' + '취소시 현재 창이 유지됩니다.');
-			if(reLogin){
-				location.href = "/member/login";
-				return;
-			}else{
-				return;
+
+	function sessionCheck() {
+		let reLogin = confirm('로그인이 필요합니다.' + '\n' + '확인 시 로그인 창으로 이동됩니다.'
+				+ '\n' + '취소시 현재 창이 유지됩니다.');
+		if (reLogin) {
+			location.href = "/member/login";
+			return;
+		} else {
+			return;
 		}
 	}
 </script>

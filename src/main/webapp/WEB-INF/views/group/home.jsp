@@ -153,6 +153,7 @@
 		<!-- 여기까지 그룹 검색창 -->
 
 		<!-- <div class="row text-center">
+
 		<h3>그룹 TOP3</h3>
 	</div>
 	<div class="row">
@@ -325,9 +326,8 @@
 		<!-- 이상 그룹 상세 모달 -->
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
-	<!-- 이하 script -->
-	<script>
+<!-- 이하 script -->
+<script>
 	// 그룹 생성 처리
 	$('#makeGroupBtn').on('click', (e) => {
 		let makeGroupConfirm = confirm('그룹을 만드시겠습니까?')

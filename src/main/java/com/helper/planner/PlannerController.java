@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.helper.member.MemberDTO;
 
 
@@ -26,8 +27,15 @@ public class PlannerController {
 	private HttpSession session;
 	
 	@RequestMapping(value="/toPlanner")
-	public String toPlanner(Model model)throws Exception{	// 플래너 페이지 요청  // mem_seq 값 넘겨주기
-			List<PlannerDTO> list = service.selectAll();
+	public String toPlanner(Model model,int mem_seq)throws Exception{	// 플래너 페이지 요청  // mem_seq 값 넘겨주기
+		List<Map<String,String>> timeList = service.recordForPlanner(mem_seq);
+			System.out.println("timeList : "+timeList);
+//			ObjectMapper mapper = new ObjectMapper();
+//			String jsonStr = mapper.writeValueAsString(timeList);
+//			System.out.println(jsonStr);
+//			model.addAttribute("timeList",jsonStr);
+			
+			List<PlannerDTO> list = service.selectAll(mem_seq);
 			model.addAttribute("list", list);
 		return "/planner/planner";
 	}

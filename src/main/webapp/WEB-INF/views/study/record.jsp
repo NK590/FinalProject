@@ -189,7 +189,7 @@
 				    			if(subjectList[0] == "공부시간 없음"){
 				    				return context.label;
 				    			}
-				    			return context.label+": "+context.formattedValue+"분";
+				    			return context.label+": "+context.formattedValue+"초";
 				    		},
 				    	}
 				    },

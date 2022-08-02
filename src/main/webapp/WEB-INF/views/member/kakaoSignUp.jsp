@@ -210,7 +210,7 @@ body {
 				alert("형식에 맞지 않는 닉네임입니다.");
 				return;
 			}else if ($("#memStdkey").val() === "선택") {
-				alert("직업을 선택해주세요.");
+				alert("관심분야를 선택해주세요.");
 				return;
 			}
 
