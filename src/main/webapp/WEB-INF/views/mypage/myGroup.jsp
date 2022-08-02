@@ -49,7 +49,7 @@ body {
 					</h3>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 활동내역</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
@@ -91,7 +91,7 @@ body {
 													<td>${dto.group_title}</td>
 													<td>${dto.group_std_key}</td>
 													<td>${dto.group_memCount}</td>
-													<td class="d-none groupSeq">${dto.group_seq}</td>
+													<td class="d-none groupSeq" id="groupSeq">${dto.group_seq}</td>
 												</tr>
 											</c:forEach>
 										</c:if>
@@ -100,10 +100,10 @@ body {
 								
 								<div class="row justify-content-center"	style="margin-top: 30px; margin-bottom: 30px;">
 					<div class="col-4 d-flex justify-content-end" style="margin-right: 70px;">
-						<button type="button" id="goGroupStudy" class="w-btn w-btn-indigo">그룹스터디로 Go!</button>
+						<button type="button" id="goGroupStudy" class="w-btn w-btn-indigo">그룹스터디로 이동</button>
 					</div>
 					<div class="col-4 d-flex justify-content-start" style="margin-left: 40px;">
-						<button type="button" id="goChatRoom" class="w-btn w-btn-skin" >나의 채팅방으로 Go!</button>
+						<button type="button" id="goChatRoom" class="w-btn w-btn-skin" >나의 채팅방으로 이동</button>
 					</div>
 				</div>
 							</div>
@@ -125,9 +125,11 @@ body {
 	// "goChatRoom" 버튼 누르면 내가 들어가있는 채팅 페이지로 이동
 	
 	document.getElementById("goChatRoom").onclick = function(){
-		
-		location.href = "/group/room?group_seq="+$(".groupSeq").html();	
-				
+		 if(${loginSession.group_seq } == 0){
+			 alert("가입된 채팅방이 없습니다.");
+		 }else{
+				location.href = "/group/room?group_seq="+$(".groupSeq").html();	
+		 }
 	}
 	</script>
 </body>

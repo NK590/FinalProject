@@ -111,11 +111,13 @@ body{
 		console.log(data);
 		let randomCode = /[0~9]{6}/;
 		let useBtn = document.getElementById("useBtn");
-
+		let certificationBtn = document.getElementById("certificationBtn");
+		
 		console.log("${rs}");
 			if ($("#randomCode").val() == data) {
 				alert("인증성공");
 				useBtn.disabled = false;
+				document.getElementById("certificationBtn").style.display="none";
 		    }else {
 				alert("인증실패");
 				useBtn.disabled = true;

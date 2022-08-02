@@ -36,6 +36,7 @@
 			<exclude-mapping path="/member/popup"/>
 			<exclude-mapping path="/member/checkEmailForm"/>
 			<exclude-mapping path="/member/signupForm"/>
+			<exclude-mapping path="/member/nickForm"/>
 			<exclude-mapping path="/member/loginForm"/>
 			<exclude-mapping path="/member/certificationEmail"/>
 			<exclude-mapping path="/member/searchId"/>
@@ -46,6 +47,7 @@
 			<exclude-mapping path="/member/kakaoSignUp"/>
 			<exclude-mapping path="/member/toKakaoSignUp"/>
 			<exclude-mapping path="/member/logout"/>
+			<exclude-mapping path="/study/*"/>
 			<exclude-mapping path="/admin/*"/>
 			<beans:bean class="com.helper.utils.AuthLoginInterceptor"/>
 		</interceptor>

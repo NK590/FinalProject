@@ -26,6 +26,11 @@ public class MemberService{
 		return dao.checkEmail(mem_id);
 	}
 	
+	// 닉네임 중복확인
+		public MemberDTO nickForm(String mem_nick) throws Exception{
+			return dao.nickForm(mem_nick);
+		}
+	
 	// 로그인
 	public MemberDTO login(String mem_id) throws Exception{
 		return dao.login(mem_id);

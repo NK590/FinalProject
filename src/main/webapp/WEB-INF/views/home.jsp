@@ -323,7 +323,7 @@ a:hover {
 							aria-current="page" href="#">홈</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">About
 								us</a></li>
-						<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a>
+						<li class="nav-item"><a class="nav-link" href="/group/" onclick="sessionCheck();">그룹 스터디</a>
 						</li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
