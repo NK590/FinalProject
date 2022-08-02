@@ -67,76 +67,24 @@ h2, h4 {
 	margin-bottom: 20px;
 }
 
-.replyBox {
-	background: #f2f5f9;
-	border-top: 1px solid #dae0e9;
-	padding: 30px;
-}
-
-.replyBox2 {
-	background: #f2f5f9;
-	padding: 30px;
-}
-
-.replyBox, .replyBox2 {
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-.reply-form textarea {
-	width: inherit;
-	height: 57px;
-	border: 1px solid #dae0e9;
-	color: #999;
-	line-height: 1.5;
-	padding: 5px;
-	resize: none;
-	background: #fff;
-	font-size: 13px;
-}
-
-.reply-btn {
-	line-height: 62px;
-	text-align: center;
-}
-
-.reply-content-area p {
-	margin-bottom: 0%;
-}
-
-.reply-content-area {
-	margin-bottom: 5px;
-	margin-top: 5px;
-	border-bottom: 0.5px dotted rgb(178, 172, 172);
-}
-
-.reply-form {
-	margin-top: 5px;
-}
-
 a {
 	color: black;
 }
-
-.reply-date {
-	font-size: 11px;
-	color: rgb(178, 172, 172);
-}
-
 .mem-nick span, b {
 	margin: 5px;
 }
-
-.noReply {
-	margin-bottom: 0px;
-}
-
 .summerNote {
-	margin-bottom: 20px
+	margin-bottom: 20px;
 }
 
 .bi-trash:hover {
 	cursor: pointer;
+}
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false] {
+    background-color: white;
+}
+.note-resizebar{
+	display:none;
 }
 </style>
 <body>
@@ -348,12 +296,12 @@ a {
 					alert("제목을 입력해주세요")
 					return;
 				}
-				if($("#title2").val().length>20){
-					alert("제목을 20자 이내로 입력해주세요")
+				if($("#title2").val().length>30){
+					alert("제목을 30자 이내로 입력해주세요")
 					return;
 				}
-				if($("#summernote").val().length>200){
-					alert("내용을 200자 이내로 입력해주세요")
+				if($("#summernote").val().length>300){
+					alert("내용을 300자 이내로 입력해주세요")
 					return;
 				}
 				$("#updateForm").submit();

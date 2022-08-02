@@ -100,7 +100,7 @@ a:hover {
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
 								<li><a class="dropdown" href="#">도서관 위치</a></li>
 							</ul></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
@@ -133,7 +133,7 @@ a:hover {
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
 								<li><a class="dropdown" href="#">도서관 위치</a></li>
 							</ul></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"

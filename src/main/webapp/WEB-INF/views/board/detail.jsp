@@ -7,10 +7,17 @@
 <meta charset="UTF-8">
 <script type="text/javascript"
 	src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet"
+	<!-- bootstrap -->
+ <!-- <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
 <script type="text/javascript"
-	src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>  -->
+	<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+   rel="stylesheet">
+<script
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 <!-- include summernote css/js-->
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
@@ -21,13 +28,14 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- bootstrapwatch -->
-<link rel="stylesheet"
+ <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> 
 <!-- bootstrap icon -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+ <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
+
 <title>상세보기 페이지</title>
 </head>
 <style>
@@ -135,9 +143,65 @@ a {
 	margin-bottom: 20px
 }
 
-.bi-trash:hover {
+.bi-trash,.bi-flag-fill:hover {
 	cursor: pointer;
 }
+/* 모달 */
+    .text-area {
+        font-size: 13px;
+        margin-bottom: 10px;
+        color: rgb(137, 133, 133);
+    }
+
+    .title-area {
+        font-size: 15px;
+    }
+    .title-area{
+        margin-bottom: 20px;
+    }
+
+    .reason-area {
+        font-size: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        margin-top: 10px;
+        resize: none;
+        width: 100%;
+        height: 150px;
+    }
+
+    .reason-area-head {
+        margin-bottom: 10px;
+    }
+
+    .reason-area-head>span:first-child {
+        margin-right: 20px;
+    }
+
+    .reason-area-head>span:nth-child(2) {
+        font-size: 13px;
+        color: rgb(137, 133, 133);
+    }
+
+    .reportArea {
+        border: 1px solid rgb(200, 197, 197);
+        padding: 20px;
+        padding-bottom: 10px;
+    }
+
+    .foot-text-area {
+        font-size: 13px;
+        color: rgb(137, 133, 133);
+    }
+    .detail{
+        margin-top: 15px;
+    }
+    .reportCol{
+    	margin-left : 20px;
+    }
 </style>
 <body>
 	<form action="/board/update" method="post" id="updateForm">
@@ -166,6 +230,10 @@ a {
 					<span>작성자&nbsp<b>${dto.mem_nick}&nbsp</b></span> <span> |
 						&nbsp</span> <span>작성일&nbsp<b>${dto.bo_date}&nbsp</b></span> <span>
 						| &nbsp</span> <span>조회수&nbsp<b>${dto.view_count}</b></span>
+				</div>
+				<!-- 신고버튼 -->
+				<div class = "col">
+					<i class="bi bi-flag-fill" id="report"></i>
 				</div>
 			</div>
 			<!-- 게시글 내용 -->
@@ -222,14 +290,149 @@ a {
 			</div>
 		</div>
 		<div>
-			<input type="text" name="bo_seq" value="${dto.bo_seq}" id="bo_seq"
-				class="d-none"> <input type="text" name="mem_nick"
-				value="${dto.mem_nick}" class="d-none"> <input type="text"
-				name="mem_seq" value="${dto.mem_seq}" class="d-none"> <input
-				type="text" name="img_src" id="img_src" class="d-none">
+				<input type="text" name="bo_seq" value="${dto.bo_seq}" id="bo_seq"class="d-none"> 
+				<input type="text" name="mem_nick" value="${dto.mem_nick}" class="d-none" id="writerNick"> 
+				<input type="text" name="mem_seq" value="${dto.mem_seq}" class="d-none" id="writer"> 
+				<input type="text" name="img_src" id="img_src" class="d-none">
+				<input type="text" id="mem_id"  class = "d-none" value="${mDto.mem_id}">
+				<input type="text" id="mem_std_key"  class = "d-none" value="${mDto.mem_std_key}"> 
+
 		</div>
 	</form>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">게시글 신고</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-area">
+                        <span> 게시물 신고는 study hepler 이용수칙에 맞지 않는 글을 신고하는 기능이며
+                            반대 의견을 표시하는 것이 아닙니다. 사용자님의 관심과 신고가 건전하고 올바른 study helper
+                            문화를 만듭니다. 허위신고의 경우 신고자가 제재받을 수 있음을 유념해주세요.
+                        </span>
+                    </div>
+                    <div class="reportArea">
+                        <div class="title-area">
+                            <label class="label" for="title"><span>게시글 제목</span></label>
+                            <input type="text" class="form-control" id="title" name="title" value="${dto.bo_title}"
+                                readonly>
+                            <label class="label" for="report_nick"><span>작성자</span></label>
+                            <input type="text" class="form-control" id="report_nick" name="report_nick"
+                                value="${loginSession.mem_nick}" readonly>
+                        </div>
+                        <div class="reason-area">
+                            <div class="reason-area-head">
+                                <span><b>신고사유</b></span><span>여러 사유에 해당하는 경우 대표적인 사유1개를 선택해주세요</span>
+                            </div>
+                            <div class="row reportRow">
+                                <div class="col reportCol">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio1" value="영리목적/홍보성" checked>
+                                        <label class="form-check-label" for="inlineRadio1">영리목적/홍보성</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio2" value="개인정보노출">
+                                        <label class="form-check-label" for="inlineRadio2">개인정보노출</label>
+                                    </div>
+                                </div>
+                                <div class="col reportCol">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio3" value="음란성/선정성">
+                                        <label class="form-check-label" for="inlineRadio3">음란성/선정성</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio4" value="욕설/인신공격">
+                                        <label class="form-check-label" for="inlineRadio4">욕설/인신공격</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row reportRow">
+                                <div class="col reportCol">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio5" value="같은 내용 반복(도배)">
+                                        <label class="form-check-label" for="inlineRadio5">같은 내용 반복(도배)</label>
+                                    </div>
+                                </div>
+                                <div class="col reportCol">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio6" value="기타">
+                                        <label class="form-check-label" for="inlineRadio6">기타</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row detail reportRow">
+                                <div class="col">
+                                    <label class="form-check-label" for="textArea">상세내용(선택)</label>
+                                    <textarea id="detail-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-area">
+                            <span> 권리침해/저작권위반 등은 권리침해 신고센터를 통해 문의해주세요.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reportCancelBtn">취소</button>
+                    <button type="button" class="btn btn-danger" id="reportBtn">신고하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 	<script>
+		// 신고 아이콘을 눌렀을 때
+	  	$(".bi-flag-fill").on("click",function(){
+	  		let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+	  		if(confirm("해당 게시글을 신고하시겠습니까?")){
+				exampleModal.show();	
+	
+			}
+		}) 
+	
+		// 신고 완료 버튼을 눌렀을때 
+		 $("#reportBtn").on("click",function(){
+		            let reportReason = $(".form-check-input:checked").val() +"  "+ $("#detail-textarea").val();// 신고이유
+		           	let memId = $("#mem_id").val();
+		           	let memStdKey = $("#mem_std_key").val();
+		           	let reportNick = "${loginSession.mem_nick}";
+		           	let memSeq = $("#writer").val();
+		           	let memNick = $("#writerNick").val();
+		           	if(confirm("해당 게시글을 신고하시겠습니까?")){
+		           	$.ajax({
+		           		url:"/report/reportInsert",
+		           		type:"post",
+		           		data : {"mem_id":memId,"mem_std_key":memStdKey,"report_reason":reportReason,"report_nick":reportNick,"mem_seq":memSeq,"mem_nick":memNick},
+		           		success : function(data){
+		           			if(data=="success"){
+		           				alert("신고가 처리되었습니다.");
+		           				let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+		           				exampleModal.hide();
+		           			}
+		           			
+		           		},
+		           		error : function(e){
+		           			console.log(e);
+		           		}
+		           		
+		           	})
+		           	}
+		        })
+	      
+	
+	
+
 		 	// 목록 버튼
 			document.getElementById("toBack").onclick = function(){
 				location.href = "/board/toBoard";
@@ -458,7 +661,6 @@ a {
 							,type:"post"
 							,data : {"bo_seq":$("#bo_seq").val(), "reply_content":$("#reply-area").val()}
 							,success : function(data){
-								console.log(data);	
 									makeReply(data);
 							}
 							,error : function(e){
@@ -470,17 +672,15 @@ a {
 				})
 			// 휴지통 누르면 댓글 삭제
 				$(document).on("click",".bi-trash",function(){
-					/*  console.log(this.value);*/
-					console.log($(this).next(".getSeq"));
+					// 동적으로 생성된 요소에게 이벤트를 주기위해서는 선택자가 중요하다. 
+				if(confirm("댓글을 삭제하시겠습니까?")){					
 					let reply_seq = $(this).next(".getSeq").val();
 					let bo_seq = $("#bo_seq").val();
-					console.log(bo_seq);
 					 $.ajax({
 						 url : "/reply/delete"
 						 ,type : "post"
 						 ,data : {"reply_seq":reply_seq}
 						 ,success : function(data){
-							 console.log(data);
 							if(data=="success"){
 								$.ajax({
 									url:"/reply/select"
@@ -501,7 +701,8 @@ a {
 					 	 ,error : function(e){
 					 		 console.log(e);
 					 	 }
-					 }) 
+					 })
+					}
 				})
 		
 				function makeReply(data){
@@ -513,7 +714,6 @@ a {
 									$(".replyBox").append(div);
 							 }else{ // 댓글이 있다면 
 								 for(let reply of data){ // 동적으로 댓글 뿌려주기
-									 console.log(reply.reply_seq);
 									 let div = $("<div>").addClass("reply-content-area");
 									let b = $("<b>").html(reply.mem_nick);
 									let span = $("<span>").addClass("reply-date").html(reply.reply_date);

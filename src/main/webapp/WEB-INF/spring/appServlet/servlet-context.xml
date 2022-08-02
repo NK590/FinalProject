@@ -25,7 +25,7 @@
       
    <context:component-scan base-package="com.helper.*" />
    	 
-	 <interceptors>
+	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/"/>
@@ -49,6 +49,7 @@
 			<exclude-mapping path="/member/logout"/>
 			<exclude-mapping path="/study/*"/>
 			<exclude-mapping path="/admin/*"/>
+			<exclude-mapping path="/study/*"/>
 			<beans:bean class="com.helper.utils.AuthLoginInterceptor"/>
 		</interceptor>
 	</interceptors>

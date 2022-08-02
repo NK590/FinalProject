@@ -90,4 +90,16 @@ public class MemberDAO {
 	public List<MemberDTO> selectByGroupSeq(int group_seq) throws Exception {
 		return session.selectList("memberMapper.selectByGroupSeq", group_seq);
 	}
+	// 게시글 작성자 정보 출력
+	public MemberDTO writer(int mem_seq)throws Exception{
+		return session.selectOne("memberMapper.selectWriter",mem_seq);
+	}
 }
+
+
+
+
+
+
+
+

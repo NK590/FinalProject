@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.helper.study.TimeDTO;
+
 @Repository
 public class PlannerDAO {
 	@Autowired
@@ -18,9 +20,9 @@ public class PlannerDAO {
 	public int planInsert(PlannerDTO dto)throws Exception{ // 일정 추가
 		return session.insert("plannerMapper.insert",dto);
 	}
-	public List<PlannerDTO> selectAll()throws Exception{ // 일정 출력
+	public List<PlannerDTO> selectAll(int mem_seq)throws Exception{ // 일정 출력
 		
-		return session.selectList("plannerMapper.selectAll");
+		return session.selectList("plannerMapper.selectAll",mem_seq);
 	}
 //	public Date getToDate (String date)throws Exception{ // String을 Date형으로 변
 //		
@@ -44,6 +46,11 @@ public class PlannerDAO {
 	public int updateModal(PlannerDTO dto)throws Exception{ // modal로 일정수정하기
 		System.out.println("dto : "+dto);
 		return session.update("plannerMapper.updateModal",dto);
+	}
+	public List<Map<String,String>> recordForPlanner(int mem_seq)throws Exception{ // TimeDTO list 출력
+		
+		System.out.println("list : "+session.selectList("plannerMapper.recordForPlanner", mem_seq));
+		return session.selectList("plannerMapper.recordForPlanner", mem_seq);
 	}
 	
 }

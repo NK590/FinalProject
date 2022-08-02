@@ -19,4 +19,7 @@ public class SubjectDAO {
 	public List<SubjectDTO> selectall(int mem_seq)throws Exception{
 		return session.selectList("studyMapper.selectall",mem_seq);
 	}
+	public int selectSubjectAll(int mem_seq)throws Exception{
+		return session.selectOne("studyMapper.selectSubjectAll",mem_seq);
+	}
 }

@@ -9,12 +9,15 @@
 		</foreach>
 	</update>
 	<select id="selectrecord" resultType="int" parameterType="int">
-		SELECT COUNT(*)FROM tb_subject
- 			WHERE mem_seq= #{mem_seq}
+		SELECT COUNT(*)FROM tb_timer
+ 			WHERE mem_seq= #{mem_seq} and TRUNC (time_date) = TRUNC (SYSDATE)
 	</select>
 	<select id="selectsubject" resultType="int" parameterType="com.helper.study.TimeDTO">
 		SELECT COUNT(*)FROM tb_timer
  			WHERE TRUNC (time_date) = TRUNC (SYSDATE) and time_subject = #{time_subject} and mem_seq= #{mem_seq}
+	</select>
+	<select id="selectSubjectAll" resultType="int" parameterType="int">
+		SELECT COUNT(*)FROM tb_subject where mem_seq = #{mem_seq}
 	</select>
 	<insert id="insertOne" parameterType="com.helper.study.TimeDTO">
 		INSERT INTO TB_TIMER VALUES (#{mem_seq}, #{time_subject},#{time_count},DEFAULT)
