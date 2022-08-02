@@ -583,12 +583,6 @@ a {
 		})
 		
 		();
-		$(document).ready(function(){
-	         $('.flatpickr-time').append("<button id='asdf'>확인</button>");
-	            $('#asdf').click(function(){
-	               alert("시작일이 등록되었습니다.");            
-	            });       
-	         });
 
 	</script>
 </body>

@@ -75,7 +75,6 @@ body {
           		  if (data != "no"){
           		  alert(data);
           		opener.document.getElementById("id").value = data;
-    			self.close();
           			return "/member/idSearch";  
           		  }else{
           			  alert("등록된 닉네임이 없습니다.");

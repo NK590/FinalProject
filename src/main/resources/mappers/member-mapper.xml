@@ -9,6 +9,11 @@
 		select * from tb_member where mem_id = #{mem_id}
 	</select>
 	
+	<!-- 닉네임 중복확인 -->
+	<select id="nickForm" parameterType="String" resultType="com.helper.member.MemberDTO">
+		select * from tb_member where mem_nick = #{mem_nick}
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="insert" parameterType="com.helper.member.MemberDTO">
 		insert into tb_member values(mem_seq.nextval, #{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_std_key}, 'N', 0, sysdate)

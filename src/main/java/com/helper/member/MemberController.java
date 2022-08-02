@@ -108,7 +108,24 @@ public class MemberController {
 		return randomNumber;
 	}
 	
-	
+	// 닉네임 중복확인 요청
+		@RequestMapping(value = "/nickForm")
+		@ResponseBody
+		public String nickForm(String mem_nick) throws Exception{
+			System.out.println(mem_nick);
+			MemberDTO dto = null;
+			dto = service.nickForm(mem_nick);
+			if(dto != null) {
+				
+				return "no";
+				
+			} else {
+				return "ok";
+			}
+		}
+
+		
+
 	@RequestMapping(value = "/signupForm") // 회원가입 요청
 	public String signupForm(MemberDTO dto, HttpSession session) throws Exception{
 		if(dto.getMem_pw() != null) {
@@ -198,14 +215,7 @@ public class MemberController {
 			return "redirect:/member/login";
 		}
 		
-		
-		@RequestMapping(value = "/sessionCheck")
-		@ResponseBody
-		public String sessionCheck(HttpSession session) {
-			String sessionEmail = (String)session.getAttribute("sessionEmail");
-			return sessionEmail;
-		}
-	
+
 		
 		
 }

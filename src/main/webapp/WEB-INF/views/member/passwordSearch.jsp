@@ -177,6 +177,7 @@ body {
 								if ($("#randomCode").val() == data) {
 									alert("인증성공");
 									mem_pw.disabled = false;
+									document.getElementById("certificationBtn").style.display="none";
 							    }else {
 									alert("인증실패");
 									mem_pw.disabled = true;
@@ -217,6 +218,7 @@ body {
 					return;
 				}else if(confirm("변경하시겠습니까?")){
 					alert("비밀번호가 변경되었습니다.");
+					document.getElementById("ranNumCheck").style.display="none";
 					$("#mem_pw").attr("readonly",true);
 					return;
 				}
