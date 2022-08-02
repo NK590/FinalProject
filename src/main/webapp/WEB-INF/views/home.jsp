@@ -306,7 +306,7 @@ a:hover {
 						</a>
 							<ul class="dropdown-menu"
 								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="/planner/toPlanner">플래너</a></li>
+								<li><a class="dropdown-item" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
 								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
 							</ul>
 						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식커뮤니티</a></li>	
