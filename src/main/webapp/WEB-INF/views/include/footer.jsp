@@ -17,7 +17,7 @@
 	crossorigin="anonymous"></script>
 <style>
 .footer>* {
-	background-color: rgb(255, 255, 255);
+	background-color: none;
 	padding: 20px;
 	position: relative;
 }
