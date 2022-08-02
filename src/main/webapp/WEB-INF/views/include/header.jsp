@@ -110,7 +110,7 @@ a:hover {
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
 								<li><a class="dropdown" href="#">플래너</a></li>
-								<li><a class="dropdown" href="#">나의 공부시간</a></li>
+								<li><a class="dropdown" href="/study/toRecord">나의 공부시간</a></li>
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="#">지식 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav" href="#">문의하기</a></li>
@@ -120,7 +120,6 @@ a:hover {
 				</div>
 			</c:when>	
 			<c:otherwise>	
-				
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
@@ -152,7 +151,6 @@ a:hover {
 						<li class="nav-item"><a class="nav" href="#">회원가입</a></li>
 					</ul>
 				</div>
-				
 				</c:otherwise>
 				</c:choose>
 				
