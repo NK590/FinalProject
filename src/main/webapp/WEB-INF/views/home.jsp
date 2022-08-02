@@ -282,89 +282,75 @@ a:hover {
 
 				<c:choose>
 					<c:when test="${not empty loginSession}">
-						<div class="offcanvas-body">
-							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="/">홈</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">About
-										us</a></li>
-								<li class="nav-item"><a class="nav-link" href="/group/">그룹
-										스터디</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#"
-									id="offcanvasNavbarDropdown" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
-									<ul class="dropdown-menu"
-										aria-labelledby="offcanvasNavbarDropdown">
-										<li><a class="dropdown-item" href="/study/toStudy">공부
-												시작하기</a></li>
-										<li><a class="dropdown-item" id="golibrary"
-											href="/librarymap">도서관 위치</a></li>
-									</ul>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#"
-									id="offcanvasNavbarDropdown" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> Study
-										Helper </a>
-									<ul class="dropdown-menu"
-										aria-labelledby="offcanvasNavbarDropdown">
-										<li><a class="dropdown-item" href="/planner/toPlanner">플래너</a></li>
-										<li><a class="dropdown-item" href="/study/toRecord">공부시간
-												확인하기</a></li>
-									</ul>
-								<li class="nav-item"><a class="nav-link"
-									href="/board/toBoard">지식커뮤니티</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/mypage/myPage">마이페이지</a></li>
-								<li class="nav-item"><a class="nav-link" id="logoutBtn"
-									onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
-						</div>
-					</c:when>
-
-					<c:otherwise>
-						<div class="offcanvas-body">
-							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">홈</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">About
-										us</a></li>
-								<li class="nav-item"><a class="nav-link" href="/group/">그룹
-										스터디</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#"
-									id="offcanvasNavbarDropdown" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
-									<ul class="dropdown-menu"
-										aria-labelledby="offcanvasNavbarDropdown">
-										<li><a class="dropdown-item" href="/study/toStudy">공부
-												시작하기</a></li>
-										<li><a class="dropdown-item" id="golibrary"
-											href="/librarymap">도서관 위치</a></li>
-									</ul>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#"
-									id="offcanvasNavbarDropdown" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> Study
-										Helper </a>
-									<ul class="dropdown-menu"
-										aria-labelledby="offcanvasNavbarDropdown">
-										<li><a class="dropdown-item" href="#"
-											onclick="sessionCheck();">플래너</a></li>
-										<li><a class="dropdown-item" href="#"
-											onclick="sessionCheck();">공부시간 확인하기</a></li>
-									</ul>
-								<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-								<li class="nav-item"><a class="nav-link" href="#"
-									onclick="sessionCheck();">마이페이지</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/member/login">로그인</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/member/signup">회원가입</a></li>
+				<div class="offcanvas-body">
+					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="#">홈</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">About
+								us</a></li>
+						<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a>
+						</li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="offcanvasNavbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
+							<ul class="dropdown-menu"
+								aria-labelledby="offcanvasNavbarDropdown">
+								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
+								<li><a class="dropdown-item" id="golibrary" href="/librarymap">도서관 위치</a></li>
 							</ul>
-						</div>
-					</c:otherwise>
-				</c:choose>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="offcanvasNavbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> Study Helper
+						</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="offcanvasNavbarDropdown">
+								<li><a class="dropdown-item" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
+								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
+							</ul>
+						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식커뮤니티</a></li>	
+						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" id="logoutBtn" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
+				</div>
+				</c:when>			
+		    <c:otherwise>
+				<div class="offcanvas-body">
+					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="#">홈</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">About
+								us</a></li>
+						<li class="nav-item"><a class="nav-link" href="/group/" onclick="sessionCheck();">그룹 스터디</a>
+						</li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="offcanvasNavbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
+							<ul class="dropdown-menu"
+								aria-labelledby="offcanvasNavbarDropdown">
+								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
+								<li><a class="dropdown-item" id="golibrary"
+									href="/librarymap">도서관 위치</a></li>
+							</ul>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="offcanvasNavbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> Study Helper
+						</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="offcanvasNavbarDropdown">
+								<li><a class="dropdown-item" href="#" onclick="sessionCheck();">플래너</a></li>
+								<li><a class="dropdown-item" href="#" onclick="sessionCheck();">공부시간 확인하기</a></li>
+							</ul>
+						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+						<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="/member/signup">회원가입</a></li>
+					</ul>
+				</div>
+				</c:otherwise>
+		    </c:choose>
 			</div>
 		</div>
 	</nav>

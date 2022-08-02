@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.helper.member.MemberDTO;
 import com.helper.reply.ReplyDTO;
 import com.helper.reply.ReplyService;
 
@@ -66,7 +68,11 @@ public class BoardController {
 	@RequestMapping(value="/toDetail") // 상세보기 페이지
 	public String toDetail(int bo_seq,Model model)throws Exception{
 		BoardDTO dto = service.selectOne(bo_seq);
-		model.addAttribute("dto",dto);
+		int mem_seq = dto.getMem_seq();
+		MemberDTO mDto = service.writer(mem_seq);
+		
+		model.addAttribute("mDto",mDto); // 글쓴이의 정보 불러오기
+		model.addAttribute("dto",dto); // board의 정보 불러오기
 		List<ReplyDTO> list = replyService.selectReply(bo_seq);  // 해당 페이지의 댓글 불러오기 
 		model.addAttribute("list",list);
 		
@@ -134,6 +140,7 @@ public class BoardController {
 		
 		return"a image is deleted";
 	}
+
 	@ExceptionHandler // 에러 처리
 	public String toError(Exception e) {
 		e.printStackTrace();
