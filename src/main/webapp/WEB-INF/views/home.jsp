@@ -1,21 +1,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"
+>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"
+></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -251,8 +250,7 @@ a:hover {
 	<!--메인 배너-->
 	<div class="container-fluid banner">
 		<div class="col" style="text-align: center;">
-			<img src="/resources/images/SH_logo2.png" class="logo"> <br>
-			<br>
+			<img src="/resources/images/SH_logo2.png" class="logo"> <br> <br>
 			<p class="logo_text">함께 공부하는 즐거움</p>
 			<br>
 			<div class="gostudy">
@@ -266,91 +264,78 @@ a:hover {
 	<nav class="navbar navbar-light fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"></a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-				aria-controls="offcanvasNavbar">
+			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+				data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+			>
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="offcanvas offcanvas-end" tabindex="-1"
-				id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+			<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+				aria-labelledby="offcanvasNavbarLabel"
+			>
 				<div class="offcanvas-header">
-					<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Study
-						Helper</h5>
-					<button type="button" class="btn-close text-reset"
-						data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Study Helper</h5>
+					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+						aria-label="Close"
+					></button>
 				</div>
 
 				<c:choose>
 					<c:when test="${not empty loginSession}">
-				<div class="offcanvas-body">
-					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">홈</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">About
-								us</a></li>
-						<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a>
-						</li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown-item" id="golibrary" href="/librarymap">도서관 위치</a></li>
+						<div class="offcanvas-body">
+							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">홈</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">About us</a></li>
+								<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a></li>
+								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+								> 공부하기 </a>
+									<ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
+										<li><a class="dropdown-item" href="/librarymap/librarymap">도서관 위치</a></li>
+									</ul>
+								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+								> Study Helper </a>
+									<ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="/planner/toPlanner">플래너</a></li>
+										<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
+									</ul>
+								<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식커뮤니티</a></li>
+								<li class="nav-item"><a class="nav-link" href="/inquiry/inquiry">문의하기</a></li>
+								<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
+								<li class="nav-item"><a class="nav-link" id="logoutBtn" onClick="alert('로그아웃 되었습니다.')"
+									href="/member/logout"
+								>로그아웃</a></li>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="offcanvas-body">
+							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+								<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">홈</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">About us</a></li>
+								<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a></li>
+								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+								> 공부하기 </a>
+									<ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
+										<li><a class="dropdown-item" href="/librarymap/librarymap">도서관 위치</a></li>
+									</ul>
+								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+									id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+								> Study Helper </a>
+									<ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+										<li><a class="dropdown-item" href="#" onclick="sessionCheck();">플래너</a></li>
+										<li><a class="dropdown-item" href="#" onclick="sessionCheck();">공부시간 확인하기</a></li>
+									</ul>
+								<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+								<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">마이페이지</a></li>
+								<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
+								<li class="nav-item"><a class="nav-link" href="/member/signup">회원가입</a></li>
 							</ul>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> Study Helper
-						</a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
-								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
-							</ul>
-						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식커뮤니티</a></li>	
-						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
-						<li class="nav-item"><a class="nav-link" id="logoutBtn" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
-				</div>
-				</c:when>			
-		    <c:otherwise>
-				<div class="offcanvas-body">
-					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">홈</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">About
-								us</a></li>
-						<li class="nav-item"><a class="nav-link" href="/group/" onclick="sessionCheck();">그룹 스터디</a>
-						</li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown-item" id="golibrary"
-									href="/librarymap">도서관 위치</a></li>
-							</ul>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="offcanvasNavbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> Study Helper
-						</a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li><a class="dropdown-item" href="#" onclick="sessionCheck();">플래너</a></li>
-								<li><a class="dropdown-item" href="#" onclick="sessionCheck();">공부시간 확인하기</a></li>
-							</ul>
-						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-						<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="/member/signup">회원가입</a></li>
-					</ul>
-				</div>
-				</c:otherwise>
-		    </c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</nav>
@@ -358,71 +343,75 @@ a:hover {
 <!--메인 영역-->
 <body>
 	<!--상단 텍스트-->
-	<div class="container-fluid top_text" data-aos="fade-up"
-		data-aos-offset="200" data-aos-easing="ease-out-cubic"
-		data-aos-duration="2000">
+	<div class="container-fluid top_text" data-aos="fade-up" data-aos-offset="200"
+		data-aos-easing="ease-out-cubic" data-aos-duration="2000"
+	>
 		<br> 혹시 그거 아세요?<br>우리의 인내는 우리의 힘보다 더 많은 것을 성취한다는 것을.
 	</div>
 	<!--메인 랜딩페이지-->
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
-				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+			<div class="col-6" data-aos="fade-up" data-aos-offset="250" data-aos-easing="ease-out-cubic"
+				data-aos-duration="2000"
+			>
 				<img class="image_left" src="/resources/images/11.jpg">
 			</div>
-			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
-				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+			<div class="col-6" data-aos="fade-up" data-aos-offset="250" data-aos-easing="ease-out-cubic"
+				data-aos-duration="2000"
+			>
 				<p class="main_text">
 					perfectly planned timer for you <br> 스케줄 관리로 학습의 효율성을 극대화
 				</p>
 				<p class="sub_text">
-					공부는 첫단추는 시간 관리입니다.<br> 오늘 나의 공부 시간은 얼마인지,<br> 어제의 나는 얼마나
-					공부했는지,<br> 이번주에 가장 오래 공부했던 날은 언제였는지.<br> 내 컨디션을 체크하고 공부
-					패턴도 만들 수 있습니다.<br> 스터디 헬퍼는 통계를 통해 여러분의 공부량을 알려드려요. <br> <br>
+					공부는 첫단추는 시간 관리입니다.<br> 오늘 나의 공부 시간은 얼마인지,<br> 어제의 나는 얼마나 공부했는지,<br> 이번주에 가장 오래
+					공부했던 날은 언제였는지.<br> 내 컨디션을 체크하고 공부 패턴도 만들 수 있습니다.<br> 스터디 헬퍼는 통계를 통해 여러분의 공부량을 알려드려요.
+					<br> <br>
 					<button class="fastbtn" type="button">바로가기</button>
 				</p>
 			</div>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-6" data-aos="fade-up" data-aos-offset="200"
-				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+			<div class="col-6" data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic"
+				data-aos-duration="2000"
+			>
 				<p class="main_text">
 					study together <br> 우리의 규칙으로 만들어가는 그룹 스터디
 				</p>
 				<p class="sub_text">
-					더이상 고독한 싸움은 그만하세요.<br> 같은 곳을 향해 걷는 나의 길동무들이 있습니다. <br>
-					그룹마다 좋은 능률을 위해 규칙을 만들고<br> 자칫 나태해질 수 있는 나의 마음을 잡아보아요.<br>
-					또한 내가 알지 못했던 정보를 얻을 수도 있습니다.<br> <br>
+					더이상 고독한 싸움은 그만하세요.<br> 같은 곳을 향해 걷는 나의 길동무들이 있습니다. <br> 그룹마다 좋은 능률을 위해 규칙을 만들고<br>
+					자칫 나태해질 수 있는 나의 마음을 잡아보아요.<br> 또한 내가 알지 못했던 정보를 얻을 수도 있습니다.<br> <br>
 					<button class="fastbtn" type="button">바로가기</button>
 				</p>
 			</div>
-			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
-				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+			<div class="col-6" data-aos="fade-up" data-aos-offset="250" data-aos-easing="ease-out-cubic"
+				data-aos-duration="2000"
+			>
 				<img class="image_left" src="/resources/images/12.jpg">
 			</div>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
-				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+			<div class="col-6" data-aos="fade-up" data-aos-offset="250" data-aos-easing="ease-out-cubic"
+				data-aos-duration="2000"
+			>
 				<img class="image_left" src="/resources/images/2.jpg">
 			</div>
-			<div class="col-6" data-aos="fade-up" data-aos-offset="200"
-				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+			<div class="col-6" data-aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic"
+				data-aos-duration="2000"
+			>
 				<p class="main_text">
 					What's wrong? <br> 홀릴 듯이 난 너를 자극해 (Pop pop pop)
 				</p>
 				<p class="sub_text">
-					이미 넌 나를 벗어날 수가 없어<br> 떨린 그 눈빛, 티 나는 몸짓 Baby<br> 터뜨리고 싶은 너
-					설렘이 멎기 전에<br> I wanna make it<br> Pop pop pop, you want
-					it<br> Pop pop pop 터지길 원해<br> <br>
+					이미 넌 나를 벗어날 수가 없어<br> 떨린 그 눈빛, 티 나는 몸짓 Baby<br> 터뜨리고 싶은 너 설렘이 멎기 전에<br> I wanna
+					make it<br> Pop pop pop, you want it<br> Pop pop pop 터지길 원해<br> <br>
 					<button class="fastbtn" type="button">바로가기</button>
 				</p>
 			</div>
 		</div>
 		<!--하단 텍스트 및 회원 그룹 랭크-->
-		<div class="container-fluid bottom_text" data-aos="fade-up"
-			data-aos-offset="200" data-aos-easing="ease-out-cubic"
-			data-aos-duration="2000">
+		<div class="container-fluid bottom_text" data-aos="fade-up" data-aos-offset="200"
+			data-aos-easing="ease-out-cubic" data-aos-duration="2000"
+		>
 			<p>인내가 꿈을 이루는 날까지 스터디 헬퍼는 여러분과 함께합니다.</p>
 		</div>
 		<br>
@@ -546,8 +535,7 @@ a:hover {
 			<ul class="ft-ul">
 				<li>StudyHelper Inc.</li>
 				<li>대표 : 스터디헬퍼 사업자등록번호 : 777-77-77777</li>
-				<li>대표번호 : +82)-777-7777 팩스번호 : +82)-1234-5678 홈페이지 :
-					Studyhelper.com</li>
+				<li>대표번호 : +82)-777-7777 팩스번호 : +82)-1234-5678 홈페이지 : Studyhelper.com</li>
 				<li>CopyrightⓒStudyHelper Inc. All Rights Reserved.</li>
 			</ul>
 		</div>

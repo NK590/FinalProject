@@ -1,97 +1,159 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>그룹 리스트</title>
 <style>
-    #createGroupBtn {
-    	margin: 10px;
-        width: 40%;
-        height: 60%;
-    }
-    #goMyGroupBtn {
-    	margin: 10px;
-        width: 40%;
-        height: 60%;
-    }
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+
+#createGroupBtn {
+	margin: 10px;
+	width: 125px;
+	border: 1px solid rgb(196, 196, 196);
+	font-size: 17px;
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+#goMyGroupBtn {
+	margin: 10px;
+	width: 120px;
+	border: 1px solid rgb(196, 196, 196);
+	font-size: 17px;
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+.btnGroup {
+	margin: 20px;
+}
+
+.message_box {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 17px;
+}
+
+.main_text {
+	font-size: 25px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+
+.noGroup {
+	padding-top: 70px;
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+.category {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 14pt;
+}
+
+.groupDetailBtn {
+	border-radius: 15px;
+	border: white; -webkit-appearance : none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: transparent;
+	font-size: 13pt;
+	font-family: "AppleSDGothicNeoL.ttf";
+	-webkit-appearance: none;
+}
+
+.groupDetail {
+	margin-top: 20px;
+	border-radius: 15px;
+}
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
-<div class="container">
-	<!-- 그룹 검색창 -->
-    <div class="row">
-        <c:if test="${not empty loginSession}">
-        <div class="col-9">
-            <div class="row text-center">
-                <h3>그룹 검색</h3>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    <select class="form-select" id="searchCategoryInput">
-                        <option selected value="">그룹 선택</option>
-                        <option value="초등학생">초등학생</option>
-                        <option value="중학생">중학생</option>
-                        <option value="고등학생">고등학생</option>
-                        <option value="수능/N수">수능/N수</option>
-                        <option value="자격증">자격증</option>
-                        <option value="취준생">취준생</option>
-                        <option value="기타">기타</option>
-                    </select>
-                </div>
-                <div class="col-9">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="그룹명 입력" id="searchGroupInput">
-                        <button class="btn btn-outline-secondary" type="button" id="searchGroupBtn">검색</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-3 align-self-center">
-        	<button class="btn btn-primary" id="createGroupBtn" data-bs-toggle="modal" data-bs-target="#makeGroupModal">그룹 생성</button>
-        	<c:if test="${cur_group_seq ne 0}">
-        		<button class="btn btn-secondary" id="goMyGroupBtn">내 그룹</button>
-        	</c:if>
-        </div>
-        </c:if>
-        <c:if test="${empty loginSession}">
-        	<div class="row text-center">
-                <h3>그룹 검색</h3>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    <select class="form-select" id="searchCategoryInput">
-                        <option selected value="">그룹 선택</option>
-                        <option value="초등학생">초등학생</option>
-                        <option value="중학생">중학생</option>
-                        <option value="고등학생">고등학생</option>
-                        <option value="수능/N수">수능/N수</option>
-                        <option value="자격증">자격증</option>
-                        <option value="취준생">취준생</option>
-                        <option value="기타">기타</option>
-                    </select>
-                </div>
-                <div class="col-9">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="그룹명 입력" id="searchGroupInput">
-                        <button class="btn btn-outline-secondary" type="button" id="searchGroupBtn">검색</button>
-                    </div>
-                </div>
-            </div>
-        </c:if>
-    </div>
-    <!-- 여기까지 그룹 검색창 -->
-    
-	<!-- <div class="row text-center">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<div class="container">
+		<div class="group_banner">
+			<p class="main_text">그룹 스터디👯‍♂️</p>
+		</div>
+		<p class="message_box">
+			스터디 헬퍼는 그룹스터디를 지원합니다.<br> 같은 목표를 향해 달리는 사람들과 포부를 나눠요. 각 방의 규칙과 목표를 정하고 채팅을 통해 서로 정보를 공유할 수도
+			있습니다.
+		</p>
+	</div>
+	<div class="container">
+		<!-- 그룹 검색창 -->
+		<div class="row">
+			<c:if test="${not empty loginSession}">
+				<div class="col-9">
+					<div class="row">
+						<div class="col-3">
+							<select class="form-select" id="searchCategoryInput">
+								<option selected value="">그룹 선택</option>
+								<option value="초등학생">초등학생</option>
+								<option value="중학생">중학생</option>
+								<option value="고등학생">고등학생</option>
+								<option value="수능/N수">수능/N수</option>
+								<option value="자격증">자격증</option>
+								<option value="취준생">취준생</option>
+								<option value="기타">기타</option>
+							</select>
+						</div>
+						<div class="col-9">
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" placeholder="검색하고 싶은 그룹명을 입력해주세요."
+									id="searchGroupInput"
+								>
+								<button class="btn btn-outline-secondary" type="button" id="searchGroupBtn">검색</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center btnGroup">
+					<button class="btn" id="createGroupBtn" data-bs-toggle="modal" data-bs-target="#makeGroupModal">그룹
+						만들기🏠</button>
+					<c:if test="${cur_group_seq ne 0}">
+						<button class="btn" id="goMyGroupBtn">나의 그룹👋🏻️</button>
+					</c:if>
+				</div>
+			</c:if>
+			<c:if test="${empty loginSession}">
+				<div class="row">
+					<div class="col-3">
+						<select class="form-select" id="searchCategoryInput">
+							<option selected value="">그룹 선택</option>
+							<option value="초등학생">초등학생</option>
+							<option value="중학생">중학생</option>
+							<option value="고등학생">고등학생</option>
+							<option value="수능/N수">수능/N수</option>
+							<option value="자격증">자격증</option>
+							<option value="취준생">취준생</option>
+							<option value="기타">기타</option>
+						</select>
+					</div>
+					<div class="col-9">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="검색하고 싶은 그룹명을 입력해주세요."
+								id="searchGroupInput"
+							>
+							<button class="btn btn-outline-secondary" type="button" id="searchGroupBtn">검색</button>
+						</div>
+					</div>
+				</div>
+			</c:if>
+		</div>
+		<!-- 여기까지 그룹 검색창 -->
+
+		<!-- <div class="row text-center">
+
 		<h3>그룹 TOP3</h3>
 	</div>
 	<div class="row">
@@ -105,93 +167,104 @@
             결과
         </div>
 	</div> -->
-	
-	<!-- 그룹 리스트 -->
-	<div class="row text-center">
-		<h3>그룹 리스트</h3>
-	</div>
-	<div id="groupListView">
-		<c:choose>
-			<c:when test="${empty groupList}">
-				<div class="row text-center">
-					<h4>생성된 그룹이 없습니다.</h4>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${groupList}" var="group">
-					<div class="row g-0 groupDetail" style="border: 1px solid grey; width: 100%; height: 200px">
-						<div class="col-4">
-							<img src="/resources/group_img/group_img_${group.group_image}.jpg" style="width: 300px; height: 200px">
-						</div>
-						<div class="col-8 align-self-center">
-					        <h3>${group.group_title}</h3>
-					        <button type="button" class="btn btn-secondary groupDetailBtn" data-bs-toggle="modal">그룹 상세정보</button>
-					        <input type="text" value="${group.group_seq}" style="display: none;">
-						</div>
+
+		<!-- 그룹 리스트 -->
+		<div id="groupListView">
+			<c:choose>
+				<c:when test="${empty groupList}">
+					<div class="row text-center noGroup">
+						<h4>생성된 그룹이 없습니다.</h4>
 					</div>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</div>
-	<!-- 이하 그룹 생성 모달 -->
-	<form action="/group/makeRoom" method='post' id='makeGroupForm'>
-		<div class="modal fade" id="makeGroupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-			    <div class="modal-content">
-		      		<div class="modal-header">
-			        	<h5 class="modal-title">그룹 생성</h5>
-			        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      	</div>
-			      	<div class="modal-body">
-			      		<div class="row">
-			      			<span>카테고리</span>
-		                    <select class="form-select" id="categoryInput" name="categoryInput">
-		                        <option selected value="">그룹 선택</option>
-		                        <option value="초등학생">초등학생</option>
-		                        <option value="중학생">중학생</option>
-		                        <option value="고등학생">고등학생</option>
-		                        <option value="수능/N수">수능/N수</option>
-		                        <option value="자격증">자격증</option>
-		                        <option value="취준생">취준생</option>
-		                        <option value="기타">기타</option>
-		                    </select>
-			      		</div>
-			      		<div class="row">
-			      			<span>방 이름</span>
-			      			<input type='text' class='form-control' id='roomNameInput' name='roomNameInput'>
-			      		</div>
-			      		<div class="row">
-			      			<span>방장의 한마디</span>
-			      			<input type='text' class='form-control' id='roomContentInput' name='roomContentInput'>
-			      		</div>
-			      		<div class="row">
-			      			<span>방 인원수</span>
-		                    <select class="form-select" id='memberNumberInput' name='memberNumberInput'>
-		                        <option selected value="0">인원수 선택</option>
-		                        <option value="2">2</option>
-		                        <option value="3">3</option>
-		                        <option value="4">4</option>
-		                        <option value="5">5</option>
-		                    </select>
-			      		</div>
-			      		<div class="row">
-			      			<div class="col-4 align-self-center">
-			      				<button type="button" class="btn btn-primary" id="toggleImageSelectBtn">그룹 이미지</button>
-			      			</div>
-			      			<div class="col-8" id="selectedImageDiv">
-			      				<img src="/resources/group_img/group_img_1.jpg" style="width: 100%" alt="1" id="selectedImage">
-			      				<input type="text" class="d-none" id="selectedImageNum" name="selectedImageNum" value="1">
-			      			</div>
-			      		</div>
-			      		<div class="row">
-			      			<div class="row m-1 p-1" id="imageSelectList">
-								<c:forEach items="${imageList}" var="image">
-				      				<div class="col-4 p-1">
-				      					<img src="/resources/group_img/group_img_${image}.jpg" style="width: 100%" class="imageSelect" alt="${image}">
-				      				</div>
-								</c:forEach>
-								<!-- 이미지 선택 관련 스크립트 로직 -->
-								<script>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${groupList}" var="group">
+						<div class="row g-0 groupDetail"
+							style="border: 1px solid rgb(216, 216, 216); width: 100%; height: 200px"
+						>
+							<div class="col-4">
+								<img src="/resources/group_img/group_img_${group.group_image}.jpg"
+									style="width: 300px; height: 200px; border-top-left-radius: 15px; border-bottom-left-radius: 15px;"
+								>
+							</div>
+							<div class="col-8 align-self-center">
+								<h3>${group.group_title}</h3>
+								<p class="category">카테고리 | ${group.group_std_key}</p>
+								<button type="button" class="groupDetailBtn" data-bs-toggle="modal">그룹 상세정보🔍</button>
+								<input type="text" value="${group.group_seq}" style="display: none;">
+							</div>
+						</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<!-- 이하 그룹 생성 모달 -->
+		<form action="/group/makeRoom" method='post' id='makeGroupForm'>
+			<div class="modal fade" id="makeGroupModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">그룹 만들기</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<span>카테고리</span>
+								<select class="form-select" id="categoryInput" name="categoryInput">
+									<option selected value="">그룹 선택</option>
+									<option value="초등학생">초등학생</option>
+									<option value="중학생">중학생</option>
+									<option value="고등학생">고등학생</option>
+									<option value="수능/N수">수능/N수</option>
+									<option value="자격증">자격증</option>
+									<option value="취준생">취준생</option>
+									<option value="기타">기타</option>
+								</select>
+							</div>
+							<div class="row">
+								<span>방 이름</span> <input type='text' class='form-control' id='roomNameInput'
+									name='roomNameInput'
+								>
+							</div>
+							<div class="row">
+								<span>방장의 한마디</span> <input type='text' class='form-control' id='roomContentInput'
+									name='roomContentInput'
+								>
+							</div>
+							<div class="row">
+								<span>방 인원수</span>
+								<select class="form-select" id='memberNumberInput' name='memberNumberInput'>
+									<option selected value="0">인원수 선택</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							<div class="row">
+								<div class="col-4 align-self-center">
+									<button type="button" class="btn btn-primary" id="toggleImageSelectBtn">그룹 이미지</button>
+								</div>
+								<div class="col-8" id="selectedImageDiv">
+									<img src="/resources/group_img/group_img_1.jpg" style="width: 100%" alt="1"
+										id="selectedImage"
+									> <input type="text" class="d-none" id="selectedImageNum" name="selectedImageNum"
+										value="1"
+									>
+								</div>
+							</div>
+							<div class="row">
+								<div class="row m-1 p-1" id="imageSelectList">
+									<c:forEach items="${imageList}" var="image">
+										<div class="col-4 p-1">
+											<img src="/resources/group_img/group_img_${image}.jpg" style="width: 100%"
+												class="imageSelect" alt="${image}"
+											>
+										</div>
+									</c:forEach>
+									<!-- 이미지 선택 관련 스크립트 로직 -->
+									<script>
 									$('#imageSelectList').hide()
 									// 이미지 선택창 토글
 									$('#toggleImageSelectBtn').on('click', (e) => {
@@ -205,53 +278,54 @@
 										$('#imageSelectList').toggle(100)
 									})
 								</script>
-			      			</div>
-			      		</div>
-			      	</div>
-			      	<div class="modal-footer">
-			        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-			        	<button type="button" class="btn btn-primary" id="makeGroupBtn">그룹 생성</button>
-			      	</div>
-			    </div>
-		    </div>
-		</div>
-	</form>
-	<!-- 이상 그룹 생성 모달 -->
-	
-	<!-- 이하 그룹 상세 모달 -->
-	<div class="modal fade" id="groupDetailModal" tabindex="-1" aria-labelledby="groupDetailModalLabel" aria-hidden="true">
-	    <div class="modal-dialog">
-		    <div class="modal-content">
-		        <div class="modal-header">
-		        	<h5 class="modal-title" id="exampleModalLabel">그룹 상세</h5>
-		        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		        </div>
-		        <div class="modal-body">
-		        	<input type="text" id="groupDetailSeq" style="display: none">
-		        	<p>
-		        		<span>그룹 이름 : </span><span id="groupDetailName"></span>
-		        	</p>
-		        	<p>
-		        		<span>방장의 한마디 : </span><span id="groupDetailContent"></span>
-		        	</p>
-		        	<p>
-		        		<span>그룹 카테고리 : </span><span id="groupDetailCategory"></span>
-		        	</p>
-		        	<p>
-		        		<span>그룹 현 인원 수 : </span><span id="groupDetailCurNum"></span> / <span id="groupDetailMaxNum"></span>
-		        	</p>
-		        </div>
-		        <div class="modal-footer">
-		        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		        	<button type="button" class="btn btn-primary" id="groupEnterBtn">들어가기</button>
-		        </div>
-		    </div>
-	    </div>
-	</div>
-	<!-- 이상 그룹 상세 모달 -->
-</div>
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary" id="makeGroupBtn">그룹 생성</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- 이상 그룹 생성 모달 -->
 
+		<!-- 이하 그룹 상세 모달 -->
+		<div class="modal fade" id="groupDetailModal" tabindex="-1"
+			aria-labelledby="groupDetailModalLabel" aria-hidden="true"
+		>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">그룹 상세</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input type="text" id="groupDetailSeq" style="display: none">
+						<p>
+							<span>그룹 이름 : </span><span id="groupDetailName"></span>
+						</p>
+						<p>
+							<span>방장의 한마디 : </span><span id="groupDetailContent"></span>
+						</p>
+						<p>
+							<span>그룹 카테고리 : </span><span id="groupDetailCategory"></span>
+						</p>
+						<p>
+							<span>그룹 현 인원 수 : </span><span id="groupDetailCurNum"></span> / <span id="groupDetailMaxNum"></span>
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary" id="groupEnterBtn">들어가기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 이상 그룹 상세 모달 -->
+	</div>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!-- 이하 script -->
 <script>
 	// 그룹 생성 처리
@@ -313,7 +387,7 @@
 					let img = $("<img>").attr("src", "/resources/group_img/group_img_" + elem.group_image + ".jpg")
 						.css({"width" : "300px", "height" : "200px"})
 					let groupTitle = $("<h3>").html(elem.group_title)
-					let groupDetailBtn = $("<button>").addClass("btn btn-secondary groupDetailBtn").html("그룹 상세정보")
+					let groupDetailBtn = $("<button>").addClass("groupDetailBtn").html("그룹 상세정보🔍")
 					let hiddenInput = $("<input>").attr("type", "text").val(elem.group_seq).css({"display" : "none"})
 					
 					picDiv.append(img)

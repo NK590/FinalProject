@@ -59,11 +59,32 @@ a {
 	font-family: "AppleSDGothicNeoL.ttf";
 	font-size: 15px;
 }
+
+.nav{
+color: black;
+text-decoration-line: none;
+}
 a:hover {
 	color: rgb(20, 62, 177);
 }
 .dropdown {
 	font-size: 14px;
+	color: black;
+	text-decoration-line: none;
+}
+.dropdown-menu{
+color: black;
+}
+
+.dropdown-toggle{
+color: black;
+text-decoration-line: none;
+
+}
+.nav-item{
+color: black;
+text-decoration-line: none;
+
 }
 </style>
 <title>Insert title here</title>
@@ -100,8 +121,8 @@ a:hover {
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown" href="#">도서관 위치</a></li>
+								<li><a class="dropdown" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
 							</ul></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							style="margin-left: -20px" href="#" id="navbarDropdownMenuLink"
@@ -113,7 +134,7 @@ a:hover {
 								<li><a class="dropdown" href="/study/toRecord">나의 공부시간</a></li>
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="#">지식 커뮤니티</a></li>
-						<li class="nav-item"><a class="nav" href="#">문의하기</a></li>
+						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
 						<li class="nav-item"><a class="nav" href="#">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/logout" onClick="alert('로그아웃 되었습니다.')">로그아웃</a></li>
 					</ul>
@@ -132,8 +153,8 @@ a:hover {
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown" href="#">도서관 위치</a></li>
+								<li><a class="dropdown" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
 							</ul></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							style="margin-left: -20px" href="#" id="navbarDropdownMenuLink"
@@ -145,7 +166,7 @@ a:hover {
 								<li><a class="dropdown" href="#">나의 공부시간</a></li>
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="#">지식 커뮤니티</a></li>
-						<li class="nav-item"><a class="nav" href="#">문의하기</a></li>
+						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
 						<li class="nav-item"><a class="nav" href="#">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/login">로그인</a></li>
 						<li class="nav-item"><a class="nav" href="#">회원가입</a></li>
