@@ -3,5 +3,6 @@ ver1: header footer(include 파일 안에 있음)/ 패키지명 폴더명 만들
 ver2: 모든 폴더에 dao dto controller 추가됨/home.jsp파일(랜딩페이지 생김)/ git ignore 에 root cotext 추가
 ver3: 로그인화면구현/admin패키지에 admindao groupdao등 생성 /study.jsp에 단어검색, 카운트다운 생성 
 ver4: 마이페이지, 플래너 페이지 생성됨 , 그룹방 만들기 가능, 블랙리스트 관리 페이지 생성
-ver5: 관리자 페이지의 메인페이지 생성, 공부하기에 총 공부시간 기능 생성, 마이페이지 생성 ->현재
-ver6: 도서관map.jsp 생성, 그룹생성시 그룹 사진 선택 가능, 그룹채팅 ui 다듬어짐 -> 현재
+ver5: 관리자 페이지의 메인페이지 생성, 공부하기에 총 공부시간 기능 생성, 마이페이지 생성 
+ver6: 도서관map.jsp 생성, 그룹생성시 그룹 사진 선택 가능, 그룹채팅 ui 다듬어짐
+ver7: 전반적인 ui 변경(group study ui가 완전 바뀜) -> 현재
