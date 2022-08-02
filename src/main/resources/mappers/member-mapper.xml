@@ -75,7 +75,7 @@
 	</update>
 	
 	<!-- 특정 그룹 번호에 가입된 회원 조회 -->
-	<select id="selectByGroupSeq" parameterType="int" resultType="com.helper.board.BoardDTO">
+	<select id="selectByGroupSeq" parameterType="int" resultType="com.helper.member.MemberDTO">
 		select * from tb_member where group_seq = ${group_seq}
 	</select>
 	<!-- 게시글 작성자 정보 조회 -->
