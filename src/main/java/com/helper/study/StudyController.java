@@ -3,6 +3,7 @@ package com.helper.study;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpSession;
@@ -113,22 +114,25 @@ public class StudyController {
 	public String toRecord(Model model) throws Exception {
 	    MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginSession");
 
-	    List<String> time_subjectList = service.subjectList(memberDTO.getMem_seq()); // 과목 list
-	    List<Integer> time_countList = service.countList(memberDTO.getMem_seq()); // 과목별 시간 list
+	    List<String> time_subjectList = new ArrayList<String>();
+	    List<Integer> time_countList = new ArrayList<Integer>();
+	    List<Map<String, Object>> time_list =service.countList(memberDTO.getMem_seq());
 	    List<Integer> time_weekList = service.myWeekList(memberDTO.getMem_seq()); // 이번주 월-금 시간List
 	    List<Integer> time_LastWeekList = service.myLastWeekList(memberDTO.getMem_seq()); // 저번주 월-금 시간List
 	    List<Integer> time_countListSec = service.countListSec(memberDTO.getMem_seq());
 	    List<Integer> time_weekListSec = service.myWeekListSec(memberDTO.getMem_seq());
 	    int dayTotalTime = 0;
 		int weekTotalTime = 0;
-		System.out.println(time_countList);
+		for(Map<String, Object> sub : time_list) {
+			time_subjectList.add((String)sub.get("time_subject"));
+			time_countList.add(Integer.parseInt(String.valueOf(sub.get("time_count"))));
+		}
 		for (int i : time_countListSec) {
 			dayTotalTime += i;
 		}
 		for (int i : time_weekListSec) {
 			weekTotalTime += i;
 		}
-
 		model.addAttribute("subjectList", time_subjectList);
 		model.addAttribute("countList", time_countList);
 		model.addAttribute("weekList", time_weekList);

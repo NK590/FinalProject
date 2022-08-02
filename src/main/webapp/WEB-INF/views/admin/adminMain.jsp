@@ -135,7 +135,6 @@
 			
 			let countArray = new Array();
 			let memSign = new Array();
-			console.log(${memberJoinCount});
 			for(let joinCount of ${memberJoinCount}){
 				countArray.push(joinCount.count);
 				memSign.push((joinCount.mem_sign).substr(3,7));

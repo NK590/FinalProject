@@ -57,6 +57,7 @@ h2, h4 {
 </style>
 
 <body>
+	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 	<form action="/admin/write" method="post" enctype="multipart/form-data"
 		id="writeForm">
 		<div class="container">
@@ -87,6 +88,7 @@ h2, h4 {
 			<input type="text"name="img_src" id="img_src" style="display:none">
 		</div>
 	</form>
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	<script>
 		 	// 뒤로 가기 버튼
 			document.getElementById("toBack").onclick = function(){
