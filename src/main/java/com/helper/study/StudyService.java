@@ -51,6 +51,9 @@ public class StudyService {
 	public List<SubjectDTO> selectall(int mem_seq) throws Exception {
 		return subjectdao.selectall(mem_seq);
 	}
+	public int selectSubjectAll(int mem_seq)throws Exception{
+		return subjectdao.selectSubjectAll(mem_seq);
+	}
 
 	// 오늘 공부한 과목들
 	public List<String> subjectList(int mem_seq) throws Exception {

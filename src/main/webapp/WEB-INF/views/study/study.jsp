@@ -16,13 +16,26 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>공부하기</title>
 <style>
+@font-face {
+	src: url("/resources/fonts/GothicA1-Regular.ttf");
+	font-family: "GothicA1-Regular.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+
 .stopwatch {
 	display: inline-block;
-	background-color: white;
+	background-color: none;
 	margin-bottom: 40px;
 	margin-top: 30px;
 }
@@ -40,6 +53,7 @@
 	height: 40px;
 	margin-top: 10px;
 	margin-right: 10px;
+	text-align: left;
 }
 
 .stopwatch a i {
@@ -59,34 +73,39 @@ a:nth-child(5) {
 }
 
 #alert2 {
-	display:none;
+	display: none;
 	position: relative;
-	left: 360px;
+	left: 650px;
 	width: 600px;
 	height: 150px;
 }
 
 #alert {
-	display:none;
+	display: none;
 	position: relative;
-	left: 450px;
+	left: 650px;
 	width: 400px;
 	height: 170px;
 }
 
-.fa-play { /*스탑워치의 재생버튼 스타일*/
-	color: blue;
+.fa-play {
+	/*스탑워치의 재생버튼 스타일*/
+	color: black;
 	font-size: 20pt;
 }
 
-.fa-pause { /*스탑워치의 일시정지버튼 스타일*/
-	color: blue;
+.fa-pause {
+	/*스탑워치의 일시정지버튼 스타일*/
+	color: black;
 	font-size: 20pt;
 }
-.fa-stop { /*스탑워치의정지버튼 스타일*/
-	color: blue;
+
+.fa-stop {
+	/*스탑워치의정지버튼 스타일*/
+	color: black;
 	font-size: 20pt;
 }
+
 .fa-circle-minus {
 	margin-top: 10px;
 }
@@ -99,23 +118,29 @@ body {
 .crawl-container {
 	display: inline-block;
 	padding-top: 50px;
-	width: 350px;
+	width: 450px;
 	height: 300px;
 }
 
 .crawl-display {
-	width: 350px;
+	width: 300px;
 	height: 200px;
 	border: 1px solid black;
 	overflow: scroll;
 	overflow-x: auto;
+	margin-top: 20px;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+.crawl-input {
+	margin-left: 18px;
 	margin-top: 10px;
-	padding:10px;
 }
 
 #queryBtn {
+	background-color: white;
 	border: none;
-	background-color:white;
 }
 
 .fa-book-atlas {
@@ -146,201 +171,325 @@ button {
 	display: none;
 }
 
-#pause-button {/*일시정지버튼 스타일*/
+#pause-button {
+	/*일시정지버튼 스타일*/
 	background-color: white;
 	border: none;
 }
 
-#resume-button {/*재생버튼 스타일*/
+#resume-button {
+	/*재생버튼 스타일*/
 	background-color: white;
 	border: none;
 }
 
-#reset-button {/*정지버튼 스타일*/
+#reset-button {
+	/*정지버튼 스타일*/
 	background-color: white;
 	border: none;
 }
 
 .countdown {
-	border: 1px solid black;
 	width: 380px;
+	background-color: rgb(255, 255, 255);
 }
 
-#hourDisplay {/*스탑워치 시*/
+#hourDisplay {
+	/*스탑워치 시*/
 	font-size: x-large
 }
 
-#minuteDisplay {/*스탑워치 분*/
+#minuteDisplay {
+	/*스탑워치 분*/
 	font-size: x-large
 }
 
-#secondDisplay {/*스탑워치 초*/
+#secondDisplay {
+	/*스탑워치 초*/
 	font-size: x-large
 }
-#sumTime{/*총공부시간*/
+
+#sumTime {
+	/*총공부시간*/
 	font-size: 20pt;
 	font-weight: bold;
+}
+
+.watchgroup {
+	text-align: center;
+	margin: 0 auto;
+	padding: 30px;
+	width: 100%;
+	background: url("/resources/images/back5.jpg") no-repeat center;
+	background-size: cover;
+}
+
+.stdMsg {
+	font-size: 15px;
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-style: italic;
+}
+
+.message_box {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 17px;
+}
+
+.main_text {
+	font-size: 25px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+
+.timesave {
+	color: white;
+}
+
+.btn-spt {
+	margin: 0 auto;
+	text-align: center;
+	margin: 20px;
+}
+
+#btn-spt {
+	background-color: white;
+	border: 1px solid rgb(0, 17, 84);
+	border-radius: 15px;
+	font-size: 20px;
+}
+
+.stdTime {
+	font-size: 19px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+
+.subjectName {
+	float: left;
+}
+
+#start-button {
+	border: 1px solid rgb(0, 17, 84);
+	border-radius: 15px;
 }
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<div class="container">
+		<div class="study_banner">
+			<p class="main_text">공부 시작하기✍🏻</p>
+		</div>
+		<p class="message_box">
+			스터디헬퍼가 여러분의 공부를 도와줄게요.<br> 공부할 과목을 입력하고 시간을 기록해보아요. 필요한만큼 타이머를
+			삭제하고 추가할 수도 있어요.<br> Study Supporters엔 시험 대비를 위한 카운트 다운과 기록에 지장을
+			주지 않는 사전 검색 기능도 있어요.
+		</p>
+	</div>
 	<input type="text" id="hour" style="display: none;">
 	<input type="text" id="min" style="display: none;">
 	<input type="text" id="sec" style="display: none;">
-	<div class="container">
-		<div class="modal" id="myModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h4 class="modal-title">정말 삭제하시겠습니까?</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
 
-					<!-- Modal body -->
-					<div class="modal-body">지금 삭제하시면 시간 기록도 사라집니다.</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-dark" data-bs-dismiss="modal"
-							id="modalclose">취소</button>
-						<button type="button" class="btn btn-primary" id="modalokay">확인</button>
-					</div>
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">정말 삭제하시겠습니까?</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">지금 삭제하시면 시간 기록도 사라집니다.</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal"
+						id="modalclose">취소</button>
+					<button type="button" class="btn btn-dark" id="modalokay">확인</button>
 				</div>
 			</div>
 		</div>
-		<div class="modal" id="myModal2">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h5 class="modal-title">타이머는 최대 5개까지 등록 가능합니다.</h5>
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" id="modalokay2">확인</button>
-					</div>
+	</div>
+	<div class="modal" id="myModal2">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">타이머는 최대 5개까지 등록 가능합니다.</h5>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" id="modalokay2">확인</button>
 				</div>
 			</div>
 		</div>
-		<div class="modal" id="myModal3">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h5 class="modal-title">시간이 종료됐습니다.</h5>
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" id="modalokay3">확인</button>
-					</div>
+	</div>
+	<div class="modal" id="myModal3">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">시간이 종료됐습니다.</h5>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" id="modalokay3">확인</button>
 				</div>
 			</div>
 		</div>
-		<div class="modal" id="myModal4">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h5 class="modal-title">분은 59분 초는 59초를 넘길 수 없습니다.</h5>
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" id="modalokay4">확인</button>
-					</div>
+	</div>
+	<div class="modal" id="myModal4">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title">분은 59분 초는 59초를 넘길 수 없습니다.</h5>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" id="modalokay4">확인</button>
 				</div>
 			</div>
 		</div>
-		<div class="row" id="alert2">
-			<div class="alert alert-warning text-center" role="alert">
-				<h4 class="alert-heading">과목의 이름을 지정해 주세요</h4>
-				<p>과목의 이름이 지정되지 않은 타이머가 있습니다.</p>
+	</div>
+	<div class="modal" id="myModal5">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">로그인 해야 기록 저장이 됩니다.</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">로그인 하시겠습니까?</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal"
+						id="modalclose5">취소</button>
+					<button type="button" class="btn btn-dark" id="modalokay5">확인</button>
+				</div>
 			</div>
 		</div>
-		<div class="row" id="alert">
-			<div class="alert alert-success" role="alert">
-				<h4 class="alert-heading">1분후 모든 타이머가 리셋 됩니다!</h4>
-				<p>자정에 모든 타이머가 리셋됩니다. 그전에 공부시간을 저장하지 않으면 공부시간이 모두 사리집니다 서둘러
-					공부시간을 저장해 주세요!!</p>
-			</div>
+	</div>
+	<div class="row" id="alert2">
+		<div class="alert alert-warning text-center" role="alert">
+			<h4 class="alert-heading">과목의 이름을 지정해 주세요</h4>
+			<p>과목의 이름이 지정되지 않은 타이머가 있습니다.</p>
 		</div>
-		<!-- 사전시작 -->
-		<div class="row row-cols-2">
-			<div class="col-lg-4 col-12">
-				<div class="crawl-container">
-					<h4><i class="fa-solid fa-book-atlas"></i> 사전</h4>
-					<div class="crawl-display">
-						<!-- 여기에 검색결과 뜸 -->
-					</div>
-					<div class="crawl-input">
-						<select id="languageSelect">
-							<option value="en">영어</option>
-							<option value="jp">일본어</option>
-							<option value="cn">중국어</option>
-						</select> <input type="text" name="queryInput" id="queryInput"
-							style="width: 235px; height:24px" >
-						<button type="button" id="queryBtn">
-							<i class="fa-solid fa-magnifying-glass"></i>
+	</div>
+	<div class="row" id="alert">
+		<div class="alert alert-success" role="alert">
+			<h4 class="alert-heading">1분후 모든 타이머가 리셋 됩니다!</h4>
+			<p>자정에 모든 타이머가 리셋됩니다. 그전에 공부시간을 저장하지 않으면 공부시간이 모두 사리집니다 서둘러 공부시간을
+				저장해 주세요!!</p>
+		</div>
+	</div>
+	<!-- 사전시작 -->
+	<div class="btn-spt">
+		<div class="stdTime">오늘 나의 공부 시간⏰</div>
+		<div class="d-flex justify-content-center" id="sumTime"></div>
+		<button type="btn btn-dark" id="btn-spt" data-bs-toggle="offcanvas"
+			data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Study
+			Supporters️</button>
+	</div>
+	<div class="offcanvas offcanvas-start" tabindex="-1"
+		id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+		<div class="offcanvas-header">
+			<h2 class="offcanvas-title" id="offcanvasExampleLabel">Study
+				Supporters🏋🏻‍♀️</h2>
+			<button type="button" class="btn-close text-reset"
+				data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div>
+				<div class="row dic-timer">
+					<h5>
+						<i class="fa-solid fa-stopwatch"></i>카운트 다운 타이머
+					</h5>
+					<p>
+						시험과 모의고사를 대비하여 타이머를 이용해보세요.<br> 타이머를 이용해도 공부시간은 계속 누적됩니다.
+					</p>
+					<div class="countdown text-center" style="padding-top: 20px;">
+						<div id="form">
+							<input type="number" placeholder="HH" min="0" id="hourValue">
+							<p>:</p>
+							<input type="number" placeholder="MM" min="0" max="59"
+								id="minuteValue">
+							<p>:</p>
+							<input type="number" placeholder="SS" min="0" max="59"
+								id="secondValue">
+							<button id="start-button" class="btn"
+								style="margin-bottom: 10px;">START⏱</button>
+						</div>
+						<div id="timeDisplay" style="display: none">
+							<p id="hourDisplay"></p>
+							<span>:</span>
+							<p id="minuteDisplay"></p>
+							<span>:</span>
+							<p id="secondDisplay"></p>
+						</div>
+						<button class="hidden" id="pause-button">
+							<i class="pausebtn2 fa fa-pause" aria-hidden="true"></i>
+						</button>
+						<button class="hidden" id="resume-button">
+							<i class="fa-solid fa-play" aria-hidden="true"></i>
+						</button>
+						<button class="hidden" id="reset-button">
+							<i class='stopbtn2 fa fa-stop' aria-hidden='true'></i>
 						</button>
 					</div>
 				</div>
-				<!-- 카운트다운 타이머 시작 -->
-				<h4 style="margin-top: 40px;">
-					<i class="fa-solid fa-stopwatch"></i> 타이머
-				</h4>
-				<div class="countdown text-center" style="padding-top: 20px;">
-					<div id="form">
-						<input type="number" placeholder="HH" min="0" id="hourValue">
-						<p>:</p>
-						<input type="number" placeholder="MM" min="0" max="59"
-							id="minuteValue">
-						<p>:</p>
-						<input type="number" placeholder="SS" min="0" max="59"
-							id="secondValue">
-						<button id="start-button" class="btn btn-primary"
-							style="margin-bottom: 10px;">START</button>
+				<div class="col-lg-12 col-12">
+					<div class="crawl-container-fluid">
+						<h5>
+							<i class="fa-solid fa-book-atlas"></i> 사전
+						</h5>
+						<p>
+							모르는 단어도 스터디헬퍼에서 해결하세요<br> 화면 전환 없이도 기록하며 단어를 검색할 수 있습니다.
+						</p>
+						<div class="crawl-display">
+							<!-- 여기에 검색결과 뜸 -->
+						</div>
+						<div class="crawl-input">
+							<select id="languageSelect">
+								<option value="en">영어</option>
+								<option value="jp">일본어</option>
+								<option value="cn">중국어</option>
+							</select> <input type="text" name="queryInput" id="queryInput"
+								style="width: 235px; height: 24px">
+							<button type="button" id="queryBtn">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</button>
+						</div>
 					</div>
-					<div id="timeDisplay" style="display: none">
-						<p id="hourDisplay"></p>
-						<span>:</span>
-						<p id="minuteDisplay"></p>
-						<span>:</span>
-						<p id="secondDisplay"></p>
-					</div>
-					<button class="hidden" id="pause-button">
-						<i class="pausebtn2 fa fa-pause" aria-hidden="true"></i>
-					</button>
-					<button class="hidden" id="resume-button">
-						<i class="fa-solid fa-play" aria-hidden="true"></i>
-					</button>
-					<button class="hidden" id="reset-button">
-						<i class='stopbtn2 fa fa-stop' aria-hidden='true'></i>
-					</button>
-				</div>
-			</div>
-			<!-- 타이머 시작 -->
-			<div class="col-lg-8 col-auto watchgroup">
-				<div class="d-flex justify-content-center" id="sumTime"></div>
-				<div class="basic stopwatch d-flex justify-content-center"></div>
-				<div class="basic stopwatch d-flex justify-content-center"></div>
-				<div class="basic stopwatch d-flex justify-content-center"></div>
-				<div class="basic stopwatch d-flex justify-content-center"></div>
-				<div class="basic stopwatch d-flex justify-content-center"></div>
-				<div class="d-flex justify-content-center">
-					<button type="button" class="btn btn-success" id="result"
-						style="margin-right: 20px; margin-left: 40px;">기록 저장</button>
-					<button type="button" class="btn btn-success" id="deletebtn"
-						style="margin-right: 20px;">타이머 삭제</button>
-					<button type="button" class="btn btn-success" id="deleteEndBtn"
-						style="display: none; margin-right: 20px;">삭제 완료</button>
-					<button type="button" class="btn btn-success" id="addTimerBtn">타이머
-						추가</button>
 				</div>
 			</div>
 		</div>
-		<input type="text" value="${loginSession.mem_seq}"
-			style="display: none" id="mem_seq">
 	</div>
+	<!-- 타이머 시작 -->
+	<div class="col-auto watchgroup">
+
+		<div class="stdMsg">
+			<p class="stdMsg">
+				나는 폭풍이 두렵지 않다<br>나의 배로 항해하는 법을 배우고 있으니깐.
+			</p>
+			<br>-헬렌켈러-
+		</div>
+		<div class="basic stopwatch d-flex justify-content-center"></div>
+		<div class="basic stopwatch d-flex justify-content-center"></div>
+		<div class="basic stopwatch d-flex justify-content-center"></div>
+		<div class="d-flex justify-content-center">
+			<button type="button" class="btn btn-dark" id="result"
+				style="margin-right: 20px; margin-left: 40px;">기록 저장</button>
+			<button type="button" class="btn btn-dark" id="deletebtn"
+				style="margin-right: 20px;">타이머 삭제</button>
+			<button type="button" class="btn btn-light" id="deleteEndBtn"
+				style="display: none; margin-right: 20px;">삭제 완료</button>
+			<button type="button" class="btn btn-dark" id="addTimerBtn">타이머
+				추가</button>
+		</div>
+	</div>
+	<input type="text" value="${loginSession.mem_seq}"
+		style="display: none" id="mem_seq">
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
     let docV = document.documentElement;
@@ -348,7 +497,7 @@ button {
         deletebutton = createButton('<i class="fa-solid fa-circle-minus fa-lg" aria-hidden="true"></i>',click);
     let inputText = createText();
     let timer = createTimer(),
-        startButton = createButton('<i class="startbtn2 fa fa-play" aria-hidden="true"></i>', start),
+    	startButton = createButton('<i class="startbtn2 fa fa-play" aria-hidden="true"></i>', start),
         stopButton = createButton("<i class='pausebtn2 fa fa-pause' aria-hidden='true'></i>", stop),
         resetButton = createButton('<div class="resetbtn">', reset),
         offset,
@@ -376,22 +525,27 @@ button {
       // initialize
       reset();
 
-      function click(){
+      function click(){//타이머 하나씩 - 버튼 클릭시 삭제하기
         let dv = event.currentTarget;
-        console.log(dv.parentNode.children[1].value);
-        console.log(dv.parentNode.children[5].innerHTML);
-        if(dv.parentNode.children[5].innerHTML=="00:00:00"){
-          dv.parentNode.remove();
+        if($(".basic").length==1){
+        	$("#alert2").fadeTo(2000, 400).slideUp(400, function () {
+                $("#alert2").slideUp(400)
+                })
         }else{
-          $("#myModal").show()
-          $("#modalclose").on("click",function(){
-            $("#myModal").hide();
-          });
-          $("#modalokay").on("click",function(){
-            $("#myModal").hide();
-            dv.parentNode.remove();
-          });
-        } 
+        	if(dv.parentNode.children[5].innerHTML=="00:00:00"){
+                dv.parentNode.remove();
+              }else{//타이머에 시분초 기록되어있을경우 modal창 띄워주기
+                $("#myModal").show()
+                $("#modalclose").on("click",function(){
+                  $("#myModal").hide();
+                });
+                $("#modalokay").on("click",function(){
+                  $("#myModal").hide();
+                  dv.parentNode.remove();
+                });
+              } 
+        }
+        
       }
 
       // private functions
@@ -493,63 +647,76 @@ button {
     }
     
     $("#result").on("click", function () {//시간 기록 버튼
-      for (let i=0; i<5;i++){
-        if($(".basic").children("span:eq("+i+")").html()!=="00:00:00"&& $(".basic").children(".subjectName:eq("+i+")").val()==""){
-          $("#alert2").fadeTo(2000, 400).slideUp(400, function () {
-          $("#alert2").slideUp(400)
-          })
-          return;
-        }
-        continue;
-      }
-      let list = [];
-      let list2 = [];
-      let bt1 = document.querySelectorAll(".basic");
-      for (let i=0; i<bt1.length;i++){
-        if($(".basic").children(".subjectName:eq("+i+")").val()!=""){
-          let timeRecord = $(".basic").children("span:eq("+i+")").html()
-          const [hours, minutes, seconds] = timeRecord.split(":");//00:00:00 seconds로 변환 
-          const totalSeconds = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
-          let data = {
-        		   "time_subject" : $(".basic").children(".subjectName:eq("+i+")").val().trim(),
-        		   "time_count"  : totalSeconds,
-        		   "mem_seq":$("#mem_seq").val()
-        		}
-          list.push(data);
-        }
-      } 
-      if(list.length>0){//공부기록 저장
-			$.ajax({
-				url : "/study/record"
-				, type: "post"
-				, data:JSON.stringify(list)
-				, contentType: "application/json"
-				, success:function(){
-					location.href="/study/toStudy"
-				}, error:function(e){
-					console.log(e);
-				}
-			})
-			$.ajax({//타이머 과목이름만 저장
-				url : "/study/recordSubject"
-				, type: "post"
-				, data:JSON.stringify(list)
-				, contentType: "application/json"
-				, success:function(){
-					location.href="/study/toStudy"
-				}, error:function(e){
-					console.log(e);
-				}
-			})
-		}else{
-			alert("저장할 기록이 없습니다.")
-		}
-      console.log(list2)    
-      let bt = document.querySelectorAll(".resetbtn"); // get all buttons with the class 모든타이머00으로
-      for (var i = 0; i < bt.length; i++) { // newer browsers can use forEach
-        bt[i].click();
-      }
-      closeFullScreenMode();//전체화면닫기
+      
+    	  for (let i=0; i<5;i++){
+    	        if($(".basic").children("span:eq("+i+")").html()!=="00:00:00"&& $(".basic").children(".subjectName:eq("+i+")").val()==""){
+    	          $("#alert2").fadeTo(2000, 400).slideUp(400, function () {
+    	          $("#alert2").slideUp(400)
+    	          })
+    	          return;
+    	        }
+    	        continue;
+    	      }
+    	      let list = [];
+    	      let list2 = [];
+    	      let bt1 = document.querySelectorAll(".basic");
+    	      for (let i=0; i<bt1.length;i++){
+    	        if($(".basic").children(".subjectName:eq("+i+")").val()!=""){
+    	        	if($("#mem_seq").val().length == 0){//로그인세션값이 없을때 
+    	        		$("#myModal5").show()
+    	                $("#modalclose5").on("click",function(){//모달창 바꿀예정 
+    	                  $("#myModal5").hide();
+    	                });
+    	                $("#modalokay5").on("click",function(){
+    	                  $("#myModal5").hide();
+    	                  location.href="/member/login"
+    	                });
+    	                return false;
+    	        	}else{
+    	        		let timeRecord = $(".basic").children("span:eq("+i+")").html()
+    	    	          const [hours, minutes, seconds] = timeRecord.split(":");//00:00:00 seconds로 변환 
+    	    	          const totalSeconds = (+hours) * 60 * 60 + (+minutes) * 60 + (+seconds);
+    	    	          let data = {
+    	    	        		   "time_subject" : $(".basic").children(".subjectName:eq("+i+")").val().trim(),
+    	    	        		   "time_count"  : totalSeconds,
+    	    	        		   "mem_seq":$("#mem_seq").val()
+    	    	        		}
+    	    	          list.push(data);
+    	    	        }
+    	        	}
+    	      } 
+    	      if(list.length>0){//공부기록 저장
+    				$.ajax({
+    					url : "/study/record"
+    					, type: "post"
+    					, data:JSON.stringify(list)
+    					, contentType: "application/json"
+    					, success:function(){
+    						location.href="/study/toStudy"
+    					}, error:function(e){
+    						console.log(e);
+    					}
+    				})
+    				$.ajax({//타이머 과목이름만 저장
+    					url : "/study/recordSubject"
+    					, type: "post"
+    					, data:JSON.stringify(list)
+    					, contentType: "application/json"
+    					, success:function(){
+    						location.href="/study/toStudy"
+    					}, error:function(e){
+    						console.log(e);
+    					}
+    				})
+    			}else{
+    				alert("저장할 기록이 없습니다.")
+    			}   
+    	      let bt = document.querySelectorAll(".resetbtn"); // get all buttons with the class 모든타이머00으로
+    	      for (var i = 0; i < bt.length; i++) { // newer browsers can use forEach
+    	        bt[i].click();
+    	      }
+    	      closeFullScreenMode();//전체화면닫기
+    	  
     })
     function time(seconds) {
 			var hour = parseInt(seconds/3600) < 10 ? '0'+ parseInt(seconds/3600) : parseInt(seconds/3600);
@@ -557,7 +724,7 @@ button {
 			var sec = seconds % 60 < 10 ? '0'+seconds % 60 : seconds % 60;
 			return hour+":"+min+":" + sec;
 			}	
-    	document.getElementById("sumTime").innerText = '오늘 공부 시간 : ' + time(${record});
+    	document.getElementById("sumTime").innerText = time(${record});
         let seconds = ${record};
 		let active = false;
         $(".startbtn2").parent().on('click', function (){ //시작버튼 누르면 다른 시작버튼은 눌리지 않게 막아둠
@@ -578,7 +745,7 @@ button {
     			    	seconds++;
     			    	 // 값을 출력
     				     document.getElementById("sumTime").innerText =
-    				        '오늘 공부 시간 : '+ time(seconds)
+    				        time(seconds)
     				    }, 1000);
     				  }
     				$(".pausebtn2").click(function() {
@@ -644,6 +811,7 @@ button {
     })
     $(".btn-close").on("click",function(){//모달엑스버튼
       $("#myModal").hide();
+      $("#myModal5").hide();
     })
     $("#deleteEndBtn").on("click",function(){//삭제완료버튼
     	let bt = document.querySelectorAll(".fa-circle-minus"); // get all buttons with the class 모든타이머00으로
@@ -662,7 +830,6 @@ button {
       }else{//basicdiv를 먼저 만들고 그 안에 타이머 추가
         let elems = document.getElementsByClassName("basic");
         let last = elems[elems.length-1];
-        console.log(last);
         let div = document.createElement ("div");
         div.className="basic stopwatch d-flex justify-content-center"
         last.after(div);

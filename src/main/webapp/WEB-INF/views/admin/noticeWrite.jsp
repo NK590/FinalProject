@@ -51,6 +51,9 @@ h2, h4 {
 	margin-top: 30px;
 	margin-bottom: 10px;
 }
+.note-resizebar{
+	display:none;
+}
 </style>
 
 <body>
@@ -147,12 +150,12 @@ h2, h4 {
 					alert("제목을 입력해주세요")
 					return;
 				}
-				if($("#title").val().length>20){
-					alert("제목을 20자 이내로 입력해주세요")
+				if($("#title").val().length>30){
+					alert("제목을 30자 이내로 입력해주세요")
 					return;
 				}
-				if($("#summernote").val().length>200){
-					alert("내용을 200자 이내로 입력해주세요")
+				if($("#summernote").val().length>300){
+					alert("내용을 300자 이내로 입력해주세요")
 					return;
 				}
 				$("#writeForm").submit();
