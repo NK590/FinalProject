@@ -80,7 +80,7 @@ body {
 	<div class="container sidelist">
 		<div class="row p-2">
 			<!-- 사이드 내비바 -->
-			<div class="col-3">
+			<div class="col-2">
 				<div class="sidebar">
 					<h2>
 						<span>${loginSession.mem_nick}</span><span>님</span>
@@ -99,7 +99,7 @@ body {
 			</div>
 			<!-- content body -->
 
-			<div class="col-9">
+			<div class="col-10">
 				<p>
 				<h3>회원정보 수정</h3>
 				</p>
@@ -255,5 +255,6 @@ body {
 	})
 		
 	</script>
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

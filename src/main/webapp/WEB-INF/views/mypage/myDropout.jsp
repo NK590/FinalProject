@@ -50,13 +50,17 @@ body {
 	height: 650px;
 	position: relative;
 }
+.nav-link{
+	font-size: 20px;
+}
 </style>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" />
 	<div class="container sidelist">
 		<div class="row p-2">
 			<!-- 사이드 내비바 -->
-			<div class="col-3">
+			<div class="col-2">
 				<div class="sidebar">
 					<h2>
 						<span>${loginSession.mem_nick}</span><span>님</span>
@@ -75,7 +79,7 @@ body {
 			</div>
 			<!-- content body -->
 
-			<div class="col-9">
+			<div class="col-10">
 				<p>
 				<h3>회원탈퇴</h3>
 				</p>
@@ -211,5 +215,7 @@ body {
 		});
 		});
 	</script>
+	
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
