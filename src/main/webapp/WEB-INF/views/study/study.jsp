@@ -79,7 +79,13 @@ a:nth-child(5) {
 	width: 600px;
 	height: 150px;
 }
-
+#alert3 {
+	display: none;
+	position: relative;
+	left: 650px;
+	width: 600px;
+	height: 150px;
+}
 #alert {
 	display: none;
 	position: relative;
@@ -383,6 +389,12 @@ button {
 				저장해 주세요!!</p>
 		</div>
 	</div>
+	<div class="row" id="alert3">
+		<div class="alert alert-success" role="alert">
+			<h4 class="alert-heading">타이머를 모두 삭제 할 수 없습니다.</h4>
+			<p>삭제할 수 없는 타이머 입니다.</p>
+		</div>
+	</div>
 	<!-- 사전시작 -->
 	<div class="btn-spt">
 		<div class="stdTime">오늘 나의 공부 시간⏰</div>
@@ -528,8 +540,8 @@ button {
       function click(){//타이머 하나씩 - 버튼 클릭시 삭제하기
         let dv = event.currentTarget;
         if($(".basic").length==1){
-        	$("#alert2").fadeTo(2000, 400).slideUp(400, function () {
-                $("#alert2").slideUp(400)
+        	$("#alert3").fadeTo(2000, 400).slideUp(400, function () {
+                $("#alert3").slideUp(400)
                 })
         }else{
         	if(dv.parentNode.children[5].innerHTML=="00:00:00"){
@@ -728,13 +740,13 @@ button {
         let seconds = ${record};
 		let active = false;
         $(".startbtn2").parent().on('click', function (){ //시작버튼 누르면 다른 시작버튼은 눌리지 않게 막아둠
-    	$(this).children(".startbtn2").css("color","red")
+    	$(this).children(".startbtn2").css("color", "rgb(0, 17, 84)")
     	$(".startbtn2").parent().not(this).css({ 'pointer-events': 'none' });
     	$(".startbtn2").parent().not(this).next().css({ 'pointer-events': 'none' });
     	$(this).next().on('click',function(){
     		$('.startbtn2').parent().not(this).next().css({ 'pointer-events': 'auto' });
     		$('.startbtn2').parent().not(this).css({ 'pointer-events': 'auto' });
-    		$(this).prev().children("i").css("color","blue");
+    		$(this).prev().children("i").css("color", "black");
     	})
     	openFullScreenMode();
     				if(active==false){
@@ -930,7 +942,7 @@ button {
             	return;
             }
 
-            countDown = setInterval(function () {
+            countDown = setInterval(function () {// 카운트다운 타이머
                 if (!isPause) {
                     if (
                         inputValues.hour.value === "0" &&
