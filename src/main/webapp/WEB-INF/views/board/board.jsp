@@ -18,9 +18,7 @@
 <title>게시판</title>
 </head>
 <style>
-.container {
-	margin-top: 100px;
-}
+
 
 .btn-default {
 	border: 1px solid #ced4da;
@@ -76,6 +74,7 @@ thead, tbody {
 }
 </style>
 <body>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 head-text">
