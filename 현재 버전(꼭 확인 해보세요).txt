@@ -5,4 +5,6 @@ ver3: 로그인화면구현/admin패키지에 admindao groupdao등 생성 /study
 ver4: 마이페이지, 플래너 페이지 생성됨 , 그룹방 만들기 가능, 블랙리스트 관리 페이지 생성
 ver5: 관리자 페이지의 메인페이지 생성, 공부하기에 총 공부시간 기능 생성, 마이페이지 생성 
 ver6: 도서관map.jsp 생성, 그룹생성시 그룹 사진 선택 가능, 그룹채팅 ui 다듬어짐
-ver7: 전반적인 ui 변경(group study ui가 완전 바뀜) -> 현재
+ver7: 전반적인 ui 변경(group study ui가 완전 바뀜) 
+ver8 : mypage ui 변경, 네비바 보여주는 방식이 바뀜, notLogin.jsp 생성 -> 현재
+ 

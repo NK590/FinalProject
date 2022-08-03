@@ -27,6 +27,15 @@
 	src: url("/resources/fonts/GothicA1-Regular.ttf");
 	font-family: "GothicA1-Regular.ttf";
 }
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
 
 .container {
 	width: 1000px;

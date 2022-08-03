@@ -10,12 +10,13 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"
+></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://kit.fontawesome.com/c370500c98.js"
 	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
 <title>공부하기</title>
 <style>
 @font-face {
@@ -79,7 +80,13 @@ a:nth-child(5) {
 	width: 600px;
 	height: 150px;
 }
-
+#alert3 {
+	display: none;
+	position: relative;
+	left: 650px;
+	width: 600px;
+	height: 150px;
+}
 #alert {
 	display: none;
 	position: relative;
@@ -273,7 +280,7 @@ button {
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<jsp:include page="../include/header.jsp" />
 	<div class="container">
 		<div class="study_banner">
 			<p class="main_text">공부 시작하기✍🏻</p>
@@ -383,6 +390,12 @@ button {
 				저장해 주세요!!</p>
 		</div>
 	</div>
+	<div class="row" id="alert3">
+		<div class="alert alert-success" role="alert">
+			<h4 class="alert-heading">타이머를 모두 삭제 할 수 없습니다.</h4>
+			<p>삭제할 수 없는 타이머 입니다.</p>
+		</div>
+	</div>
 	<!-- 사전시작 -->
 	<div class="btn-spt">
 		<div class="stdTime">오늘 나의 공부 시간⏰</div>
@@ -477,6 +490,8 @@ button {
 		<div class="basic stopwatch d-flex justify-content-center"></div>
 		<div class="basic stopwatch d-flex justify-content-center"></div>
 		<div class="basic stopwatch d-flex justify-content-center"></div>
+		<div class="basic stopwatch d-flex justify-content-center"></div>
+		<div class="basic stopwatch d-flex justify-content-center"></div>
 		<div class="d-flex justify-content-center">
 			<button type="button" class="btn btn-dark" id="result"
 				style="margin-right: 20px; margin-left: 40px;">기록 저장</button>
@@ -528,8 +543,8 @@ button {
       function click(){//타이머 하나씩 - 버튼 클릭시 삭제하기
         let dv = event.currentTarget;
         if($(".basic").length==1){
-        	$("#alert2").fadeTo(2000, 400).slideUp(400, function () {
-                $("#alert2").slideUp(400)
+        	$("#alert3").fadeTo(2000, 400).slideUp(400, function () {
+                $("#alert3").slideUp(400)
                 })
         }else{
         	if(dv.parentNode.children[5].innerHTML=="00:00:00"){
@@ -728,13 +743,13 @@ button {
         let seconds = ${record};
 		let active = false;
         $(".startbtn2").parent().on('click', function (){ //시작버튼 누르면 다른 시작버튼은 눌리지 않게 막아둠
-    	$(this).children(".startbtn2").css("color","red")
+    	$(this).children(".startbtn2").css("color", "rgb(0, 17, 84)")
     	$(".startbtn2").parent().not(this).css({ 'pointer-events': 'none' });
     	$(".startbtn2").parent().not(this).next().css({ 'pointer-events': 'none' });
     	$(this).next().on('click',function(){
     		$('.startbtn2').parent().not(this).next().css({ 'pointer-events': 'auto' });
     		$('.startbtn2').parent().not(this).css({ 'pointer-events': 'auto' });
-    		$(this).prev().children("i").css("color","blue");
+    		$(this).prev().children("i").css("color", "black");
     	})
     	openFullScreenMode();
     				if(active==false){
@@ -930,7 +945,7 @@ button {
             	return;
             }
 
-            countDown = setInterval(function () {
+            countDown = setInterval(function () {// 카운트다운 타이머
                 if (!isPause) {
                     if (
                         inputValues.hour.value === "0" &&

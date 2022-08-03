@@ -1,29 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"
+>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"
+></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"
+></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <title>Insert title here</title>
 <style>
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+
 body {
 	box-sizing: border-box;
 	margin-top: 60px;
 }
 
+#certificationBtn {
+	border-radius: 10px;
+	border: 1px solid black;
+	margin-left: 23px;
+	background-color: white;
+	width: 150px;
+}
+
+#ranNumCheck {
+	border-radius: 10px;
+	border: 1px solid black;
+	margin-left: 23px;
+	background-color: white;
+	width: 150px;
+}
+
+#changePw {
+	border-radius: 10px;
+	border: 1px solid black;
+	margin-left: 23px;
+	background-color: white;
+	width: 150px;
+}
+
+#loginButton {
+	background-color: rgb(8, 0, 83);
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
+	border-radius: 10px;
+	font-size: 16px;
+	margin-top: 20px;
+}
+
+#abcde {
+	margin-top: -40px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
 </style>
 </head>
 
@@ -32,46 +78,51 @@ body {
 		<form id="findPasswordForm">
 			<div class="row">
 				<div class="col-12 mb-5 d-flex justify-content-center">
-					<h2 id="abcde">비밀번호 찾기</h2>     
-				</div>                
+					<h2 id="abcde">비밀번호 찾기</h2>
+				</div>
 			</div>
-            <div id="abab">*비밀번호는 가입시 입력하신 이메일을 통해 변경 할 수 있습니다.</div>
+			<div id="abab">비밀번호는 가입시 입력하신 이메일을 통해 변경 할 수 있습니다.</div>
 
 			<div class="row p-2">
-				<label for="nick" class="form-label" id="cdcd">이메일</label>
-				<div class="col-7" style="margin-top:6px;">
-					<input type="text" class="form-control" id="mem_id" name="mem_id" value="${mem_id}" placeholder="이메일을 입력하세요.">
+				<label for="nick" class="form-label" id="cdcd"></label>
+				<div class="col-7" style="margin-top: 6px;">
+					<input type="text" class="form-control" id="mem_id" name="mem_id" value="${mem_id}"
+						placeholder="이메일을 입력하세요."
+					>
 				</div>
-				<div class="col-5" style="margin-bottom:6px;" id="checkNumSend">
+				<div class="col-5" style="margin-bottom: 6px;" id="checkNumSend">
 					<button type="button" id="certificationBtn">인증번호발송</button>
 				</div>
 			</div>
 			<div class="row p-2">
 				<div class="col-7">
 					<input type="text" class="form-control" id="randomCode" maxlength="6"
-						placeholder="인증번호를 입력하세요.">
+						placeholder="인증번호를 입력하세요."
+					>
 				</div>
 				<div class="col-5">
 					<button type="button" id="ranNumCheck">확인</button>
 				</div>
 			</div>
-			
+
 			<div class="row p-2">
-				<div class="col-7" style="margin-top:6px;">
-					<input type="password" class="form-control" id="mem_pw" name="mem_pw" value="${mem_pw}" disabled placeholder="변경할 비밀번호를 입력하세요.">
+				<div class="col-7" style="margin-top: 6px;">
+					<input type="password" class="form-control" id="mem_pw" name="mem_pw" value="${mem_pw}"
+						disabled placeholder="변경할 비밀번호를 입력하세요."
+					>
 				</div>
-				<div class="col-5" style="margin-top:6px;">
+				<div class="col-5" style="margin-top: 6px;">
 					<button type="button" id="changePw">비밀번호 변경</button>
 				</div>
 			</div>
-            <div class="row justify-content-center">
-                <div class="col-3 d-flex justify-content-center">
-                    <button type="button" id="loginButton" class="btn btn-primary">로그인</button>
-            </div>
-            </div>
+			<div class="row justify-content-center">
+				<div class="col-3 d-flex justify-content-center">
+					<button type="button" id="loginButton" class="btn">로그인</button>
+				</div>
+			</div>
 		</form>
 	</div>
-		<script>
+	<script>
 		// 이메일 가입확인 요청
 		/*
 		document.getElementById("checkIdBtn").onclick = function(){
@@ -238,7 +289,7 @@ body {
 		
 
 		</script>
-		
-		
+
+
 </body>
 </html>

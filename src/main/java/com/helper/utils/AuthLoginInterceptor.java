@@ -16,7 +16,7 @@ public class AuthLoginInterceptor implements HandlerInterceptor{
 			// 사용자 로그인이 안되어있음.
 			System.out.println("로그인 안됨");
 			// 로그인이 안되어있으면 /로 redirect 시켜버릴 것 
-			response.sendRedirect("/");
+			response.sendRedirect("/notLogin");
 			return false;
 		}
 		return true;

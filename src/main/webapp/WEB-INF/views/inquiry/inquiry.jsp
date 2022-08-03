@@ -82,7 +82,7 @@
 				<label for="title">제목</label> <input type="text" class="form-control" name="title" id="title"
 					placeholder="제목을 입력해주세요"
 				> <label for="email">문의 유형</label>
-				<select class="form-control" name="category" id="category" style="width: 100px">
+				<select class="form-control" name="category" id="category" style="width: 110px">
 					<option value="select" selected>선택하세요</option>
 					<option value="member">가입 관련 문의</option>
 					<option value="group">그룹 스터디 문의</option>

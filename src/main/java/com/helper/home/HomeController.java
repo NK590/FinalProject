@@ -25,17 +25,21 @@ public class HomeController {
 		adminService.visitCount();
 		List<Map<String, Object>> todayList = adminService.selectTopMem();
 		List<Map<String, Object>> groupList = adminService.selectTopGroup();
+		System.out.println(groupList);
 		model.addAttribute("todayList", todayList);
 		model.addAttribute("groupList",groupList);
 		return "home";
 	}
 	
+	@RequestMapping(value = "/notLogin")
+	public String notLogin() throws Exception {
+		System.out.println("로그인 풀림");
+		return "notLogin";
+	}
 	   @ExceptionHandler
 	   public String errorerror(Exception e) {
 	      System.out.println("예외 발생");
 	      e.printStackTrace();
 	      return "redirect:/error";
 	   }
-
-	
 }

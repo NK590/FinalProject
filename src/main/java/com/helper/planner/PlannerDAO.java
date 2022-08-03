@@ -47,7 +47,7 @@ public class PlannerDAO {
 		System.out.println("dto : "+dto);
 		return session.update("plannerMapper.updateModal",dto);
 	}
-	public List<Map<String,String>> recordForPlanner(int mem_seq)throws Exception{ // TimeDTO list 출력
+	public List<TimeDTO> recordForPlanner(int mem_seq)throws Exception{ // TimeDTO list 출력
 		
 		System.out.println("list : "+session.selectList("plannerMapper.recordForPlanner", mem_seq));
 		return session.selectList("plannerMapper.recordForPlanner", mem_seq);
