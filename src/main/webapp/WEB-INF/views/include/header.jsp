@@ -112,7 +112,7 @@ text-decoration-line: none;
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
-							aria-current="page" href="#">홈</a></li>
+							aria-current="page" href="/">홈</a></li>
 						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav"
 							style="margin-right: -20px" href="/group/">그룹 스터디</a></li>
@@ -144,7 +144,7 @@ text-decoration-line: none;
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
-							aria-current="page" href="#">홈</a></li>
+							aria-current="page" href="/">홈</a></li>
 						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav"
 							style="margin-right: -20px" href="/group/">그룹 스터디</a></li>

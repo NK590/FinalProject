@@ -25,6 +25,7 @@ public class HomeController {
 		adminService.visitCount();
 		List<Map<String, Object>> todayList = adminService.selectTopMem();
 		List<Map<String, Object>> groupList = adminService.selectTopGroup();
+		System.out.println(groupList);
 		model.addAttribute("todayList", todayList);
 		model.addAttribute("groupList",groupList);
 		return "home";
