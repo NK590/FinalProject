@@ -64,7 +64,7 @@ a {
 color: black;
 text-decoration-line: none;
 }
-a:hover {
+li>a:hover {
 	color: rgb(20, 62, 177);
 }
 .dropdown {
@@ -121,7 +121,7 @@ text-decoration-line: none;
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
 								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
 							</ul></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
@@ -133,7 +133,7 @@ text-decoration-line: none;
 								<li><a class="dropdown" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
 								<li><a class="dropdown" href="/study/toRecord">나의 공부시간</a></li>
 							</ul></li>
-						<li class="nav-item"><a class="nav" href="/board/toBoard">지식 게시판</a></li>
+						<li class="nav-item"><a class="nav" href="/board/toBoard">지식 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
 						<li class="nav-item"><a class="nav" href="#">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/logout" onClick="alert('로그아웃 되었습니다.')">로그아웃</a></li>

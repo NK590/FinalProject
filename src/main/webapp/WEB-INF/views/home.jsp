@@ -360,10 +360,11 @@
 								<li><a class="dropdown-item" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
 								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
 							</ul>
-						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식 </a></li>	
+						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식 커뮤니티</a></li>	
 						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" id="logoutBtn" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
+					</ul>
 				</div>
 				</c:when>
 					<c:otherwise>
@@ -399,6 +400,7 @@
 										<li><a class="dropdown-item" href="#"
 											onclick="sessionCheck();">공부시간 확인하기</a></li>
 									</ul>
+								<li class="nav-item"><a class="nav-link" href="#">지식 커뮤니티</a></li>
 								<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
 								<li class="nav-item"><a class="nav-link" href="#"
 									onclick="sessionCheck();">마이페이지</a></li>
