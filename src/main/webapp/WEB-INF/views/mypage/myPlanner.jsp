@@ -50,13 +50,17 @@ body {
 	height: 650px;
 	position: relative;
 }
+.nav-link{
+	font-size: 20px;
+}
 </style>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" />
 	<div class="container sidelist">
 		<div class="row p-2">
 			<!-- 사이드 내비바 -->
-			<div class="col-3">
+			<div class="col-2">
 				<div class="sidebar">
 					<h2>
 						<span>${loginSession.mem_nick}</span><span>님</span>
@@ -66,7 +70,7 @@ body {
 					</h3>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 활동내역</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
@@ -75,7 +79,7 @@ body {
 			</div>
 			<!-- content body -->
 
-			<div class="col-9">
+			<div class="col-10">
 				<p>
 				<h3>나의 플래너</h3>
 				</p>
@@ -95,5 +99,8 @@ body {
 	
 	
 	</script>
+	
+	<jsp:include page="../include/footer.jsp" />
+	
 </body>
 </html>
