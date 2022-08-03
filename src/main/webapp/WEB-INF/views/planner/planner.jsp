@@ -53,10 +53,10 @@ html, body {
 	padding-right: 1em;
 }
 
-a {
+/* a {
 	text-decoration: none;
 	color: black;
-}
+} */
 
 .planContent {
 	resize: none;
@@ -91,7 +91,6 @@ a {
 	color: white !important;
 	border-color: transparent !important;
 }
-
 </style>
 </head>
 <body>
@@ -102,70 +101,74 @@ a {
 	</div>
 	<!-- modal -->
 	<div id='datepicker'></div>
-<form id="plannerForm">
-	<div class="modal insertModal fade" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">일정 등록</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="row inputRow">
-						<label class="col label" for="title"><span>일정명</span></label> <input
-							type="text" class="form-control col-6" id="title" name="title"
-							placeholder="15자 이내로 입력해주세요.">
+	<form id="plannerForm">
+		<div class="modal insertModal fade" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">일정 등록</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
 					</div>
-					<div class="row">
-					
-					<label class="col label" for="eventType"><span>Type</span></label>
-					<div class="col-12">
-					<div class="form-check form-check-inline">
-  <input class="form-check-input eventType" type="radio" name="eventType" id="study" value="#6666FF" checked>
-  <label class="form-check-label" for="inlineRadio1">Study</label>
-</div>
-						<div class="form-check form-check-inline">
-  <input class="form-check-input eventType" type="radio" name="eventType" id="appointment" value="#66FFCC">
-  <label class="form-check-label" for="inlineRadio1">Appointment</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input eventType" type="radio" name="eventType" id="event" value="#FFFF99">
-  <label class="form-check-label" for="inlineRadio2">Event</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input eventType" type="radio" name="eventType" id="important" value="#FF6666">
-  <label class="form-check-label" for="inlineRadio3">Important</label>
-</div>
-</div>
+					<div class="modal-body">
+						<div class="row inputRow">
+							<label class="col label" for="title"><span>일정명</span></label> <input
+								type="text" class="form-control col-6" id="title" name="title"
+								placeholder="20자 이내로 입력해주세요.">
+						</div>
+						<div class="row">
+
+							<label class="col label" for="eventType"><span>Type</span></label>
+							<div class="col-12">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input eventType" type="radio"
+										name="eventType" id="study" value="#6666FF" checked> <label
+										class="form-check-label" for="inlineRadio1">Study</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input eventType" type="radio"
+										name="eventType" id="appointment" value="#66FFCC"> <label
+										class="form-check-label" for="inlineRadio1">Appointment</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input eventType" type="radio"
+										name="eventType" id="event" value="#FFFF99"> <label
+										class="form-check-label" for="inlineRadio2">Event</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input eventType" type="radio"
+										name="eventType" id="important" value="#FF6666"> <label
+										class="form-check-label" for="inlineRadio3">Important</label>
+								</div>
+							</div>
+						</div>
+						<div class="row inputRow">
+							<label class="col label" for="start"><span>시작일</span></label> <input
+								type="datetime-local" class="form-control col-6" id="start"
+								name="start" placeholder="시작일 선택">
+						</div>
+						<div class="row inputRow">
+							<label class="col label" for="end"><span>종료일</span></label> <input
+								type="datetime-local" class="form-control col-6" id="end"
+								name="end" placeholder="종료일 선택">
+						</div>
+						<div class="row inputRow">
+							<label class="col label" for="content"><span>내용</span></label>
+							<textarea id="content" class="planContent" name="content"
+								placeholder="30자 이내로 입력해주세요."></textarea>
+						</div>
 					</div>
-					<div class="row inputRow">
-						<label class="col label" for="start"><span>시작일</span></label> <input
-							type="datetime-local" class="form-control col-6" id="start" name="start"
-							placeholder="시작일 선택">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal" id="cancel">취소</button>
+						<button type="button" class="btn btn-primary" id="saveBtn">저장</button>
 					</div>
-					<div class="row inputRow">
-						<label class="col label" for="end"><span>종료일</span></label> <input
-							type="datetime-local" class="form-control col-6" id="end" name="end"
-							placeholder="종료일 선택">
-					</div>
-					<div class="row inputRow">
-						<label class="col label" for="content"><span>내용</span></label>
-						<textarea id="content" class="planContent" name="content"
-							placeholder="30자 이내로 입력해주세요."></textarea>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal" id="cancel">취소</button>
-					<button type="button" class="btn btn-primary" id="saveBtn">저장</button>
 				</div>
 			</div>
 		</div>
-	</div>
 	</form>
 	<!-- 수정삭제 모달 -->
-		<div class="modal updateModal fade" tabindex="-1">
+	<div class="modal updateModal fade" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -175,41 +178,49 @@ a {
 				</div>
 				<div class="modal-body">
 					<div class="row inputRow">
-						<label class="col label" for="updateTitle"><span>일정명</span></label> <input
-							type="text" class="form-control col-6" id="updateTitle" name="title"
-							placeholder="15자 이내로 입력해주세요." readonly>
+						<label class="col label" for="updateTitle"><span>일정명</span></label>
+						<input type="text" class="form-control col-6" id="updateTitle"
+							name="title" placeholder="15자 이내로 입력해주세요." readonly>
 					</div>
 					<div class="row">
-					
-					<label class="col label" for="updateEventType"><span>Type</span></label>
-					<div class="col-12">
-					<div class="form-check form-check-inline">
-  <input class="form-check-input updateEventType" type="radio" name="updateEventType" id="updateStudy" value="#6666FF" disabled>
-  <label class="form-check-label" for="inlineRadio1">Study</label>
-</div>
-						<div class="form-check form-check-inline">
-  <input class="form-check-input updateEventType" type="radio" name="updateEventType" id="updateAppointment" value="#66FFCC" disabled>
-  <label class="form-check-label" for="inlineRadio1">Appointment</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input updateEventType" type="radio" name="updateEventType" id="updateEvent" value="#FFFF99" disabled>
-  <label class="form-check-label" for="inlineRadio2">Event</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input updateEventType" type="radio" name="updateEventType" id="updateImportant" value="#FF6666" disabled>
-  <label class="form-check-label" for="inlineRadio3">Important</label>
-</div>
-</div>
+
+						<label class="col label" for="updateEventType"><span>Type</span></label>
+						<div class="col-12">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input updateEventType" type="radio"
+									name="updateEventType" id="updateStudy" value="#6666FF"
+									disabled> <label class="form-check-label"
+									for="inlineRadio1">Study</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input updateEventType" type="radio"
+									name="updateEventType" id="updateAppointment" value="#66FFCC"
+									disabled> <label class="form-check-label"
+									for="inlineRadio1">Appointment</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input updateEventType" type="radio"
+									name="updateEventType" id="updateEvent" value="#FFFF99"
+									disabled> <label class="form-check-label"
+									for="inlineRadio2">Event</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input updateEventType" type="radio"
+									name="updateEventType" id="updateImportant" value="#FF6666"
+									disabled> <label class="form-check-label"
+									for="inlineRadio3">Important</label>
+							</div>
+						</div>
 					</div>
 					<div class="row inputRow">
-						<label class="col label" for="updateStart"><span>시작일</span></label> <input
-							type="datetime-local" class="form-control col-6" id="updateStart" name="start"
-							placeholder="시작일 선택" disabled>
+						<label class="col label" for="updateStart"><span>시작일</span></label>
+						<input type="datetime-local" class="form-control col-6"
+							id="updateStart" name="start" placeholder="시작일 선택" disabled>
 					</div>
 					<div class="row inputRow">
-						<label class="col label" for="updateEnd"><span>종료일</span></label> <input
-							type="datetime-local" class="form-control col-6" id="updateEnd" name="end"
-							placeholder="종료일 선택" disabled>
+						<label class="col label" for="updateEnd"><span>종료일</span></label>
+						<input type="datetime-local" class="form-control col-6"
+							id="updateEnd" name="end" placeholder="종료일 선택" disabled>
 					</div>
 					<div class="row inputRow">
 						<label class="col label" for="updateContent"><span>내용</span></label>
@@ -217,13 +228,15 @@ a {
 							placeholder="30자 이내로 입력해주세요." readonly></textarea>
 					</div>
 				</div>
-				<div class="modal-footer">	
+				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal" id="updateCancel">취소</button>
 					<button type="button" class="btn btn-default" id="updateBtn">수정</button>
-					<button type="button" class="btn btn-primary d-none" id="completeBtn">완료</button>
+					<button type="button" class="btn btn-primary d-none"
+						id="completeBtn">완료</button>
 					<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
-					<input type="text" class="d-none" id="mem_seq" value="${loginSession.mem_seq}">
+					<input type="text" class="d-none" id="mem_seq"
+						value="${loginSession.mem_seq}">
 				</div>
 			</div>
 		</div>
@@ -232,20 +245,22 @@ a {
 	
 		(function() {
 	
-			
+			// 공부시간 변환 
 			$(function() {
-					
+				function time(seconds) {
+			         var hour = parseInt(seconds/3600) < 10 ? '0'+ parseInt(seconds/3600) : parseInt(seconds/3600);
+			         var min = parseInt((seconds%3600)/60) < 10 ? '0'+ parseInt((seconds%3600)/60) : parseInt((seconds%3600)/60);
+			         var sec = seconds % 60 < 10 ? '0'+seconds % 60 : seconds % 60;
+			         return hour+":"+min+":" + sec;
+			         }   			
 				
 				// mem_seq 값
-				 let mem = $("#mem_seq").val();
-				 console.log(mem);
+				 let mem = $("#mem_seq").val();			
 				
 				// calendar element 
-
 				var calendarEl = document.getElementById('calendar'); //$('#calendar')[0];
-
+				
 				// full-calendar 생성하기
-
 				var calendar = new FullCalendar.Calendar(
 						calendarEl,
 						{	
@@ -305,18 +320,8 @@ a {
 							locale : 'ko', // 한국어 설정
 
 							select : function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-									
-								
-								
- 								/* let title = prompt("일정을 입력해주세요.");
-								let str_space = /\s/;
-								if(str_space.exec(title)|| title==""){
-									alert("일정명을 입력해주세요."); return;
-								}else if (title!=null){ */
-	
-									
-														
-								calendar.unselect();
+							
+							calendar.unselect();
 
 							},
 							unselect:function(){
@@ -326,17 +331,13 @@ a {
 							eventClick : function(plan) { // 일정 수정 및 삭제
 								if(!plan.event.allDay){
 							console.log(plan);
- 								//if (confirm("'"+plan.event.title+"' 일정을 수정하시겠습니까?")) { }
 									$(".updateModal").modal("show");
 									let data = plan.event._def.publicId;
-									console.log(data);
 									$.ajax({
 										url:"/planner/selectPublicId",
 										type:"get",
 										data:{"plan_seq":data},
 										success:function(data){
-											
-										console.log(data);
 											$("#updateTitle").val(data.plan_title);
 											$(":radio[name='updateEventType'][value='"+data.plan_background+"']").attr("checked",true);
 											$("#updateStart").val(data.plan_start);
@@ -350,11 +351,7 @@ a {
 										}
 									
 									})
-								}
-									
-									
-									
-	
+								}			
 							},
 
  							eventAdd : function(plan) { // 일정추가
@@ -364,8 +361,7 @@ a {
  								event.plan_content = plan.event._def.extendedProps.description; // 일정 내용
  								event.plan_background = plan.event.backgroundColor; // 배경 색상
  								event.plan_start = plan.event._instance.range.start; // 시작 시간
-								event.plan_end =  plan.event._instance.range.end; // 마치는 시간
-								//event.plan_allDay = plan.event._def.allDay; // 하루종일 여부  
+								event.plan_end =  plan.event._instance.range.end; // 마치는 시간  
 								let jsonData = JSON.stringify(event);  // 객체를 json으로 변환하는 이유는ㄴ controller단에 날짜형식을 parse하기 위함이다
 								console.log(event);
 								console.log(jsonData); 
@@ -378,6 +374,7 @@ a {
 		                          	,success : function(data){
 		                          		if(data=="success"){		                          		
 		                          			alert("일정이 추가되었습니다.");
+		                          			 $(".insertModal").modal("hide");
 		                          			location.href="/planner/toPlanner?mem_seq="+mem;
 		                          		}else{
 		                          			alert("일정 등록에 실패했습니다.")
@@ -412,9 +409,11 @@ a {
 				                          		if(data=="success"){
 				                          			alert("일정이 변경되었습니다.");
 				                          		/* 	location.href="/planner/toPlanner?mem_seq="+mem; */
-				                          		}else{
+				                          		}else if(plan.event.allDay){
 				                          			alert("공부기록은 변경할 수 없습니다.");
 				                          			location.href="/planner/toPlanner?mem_seq="+mem;
+				                          		}else{
+				                          			alert("새로고침후 일정을 변경해주세요");
 				                          		}
 				                          	}
 											, error : function(e){
@@ -425,14 +424,14 @@ a {
 							},
 
 							eventRemove : function(plan) { // 이벤트가 삭제되면 발생하는 이벤트
-
+								console.log(plan);
 								plan.event.remove();
 							},
 
 							// 등록된 이벤트 띄워주기
 
 							events : [ 
-								<c:forEach items="${list}" var="dto">
+									<c:forEach items="${list}" var="dto">
 									{	
 									id : "${dto.plan_seq}",  /* plan_seq id값에 담아주기 */
 									title : "${dto.plan_title}",
@@ -443,7 +442,14 @@ a {
 									textColor : "white",
 									borderColor : "${dto.plan_background}",
 									},
-								</c:forEach>
+									</c:forEach>							
+									<c:forEach items="${timeList}" var="timeDto">
+									{
+									title : "${timeDto.time_subject}"+" - "+ time("${timeDto.time_count}"),
+									start : "${timeDto.time_date}",
+									allDay : true
+									},
+									</c:forEach>
 							]
 						});
 				// 캘린더 랜더링
@@ -472,13 +478,51 @@ a {
 				 let start = $("#start").val();
 				 let end = $("#end").val();
 				 let content = $("#content").val();				
- 					
-				 // 정규식, formValidation 추가하기
+				 let regexTitle = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,20}$/;
+				let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,50}$/;
+			
+				 
+				 if(title == ""){
+						alert("제목을 입력해주세요");
+						return;
+					}
+					if(!regexTitle.test(title)){
+						alert("일정명은 20자이내로 작성해주세요.");
+						$("#title").val("");
+						$("#title").focus();
+						return;
+					}if(start==""){
+						alert("시작일을 등록해주세요.");
+						$("#start").focus();
+						return;
+					}if(end ==""){
+						alert("종료일을 등록해주세요.");
+						$("#end").focus();
+						return;
+					}
+					if(content==""){
+						alert("내용을 입력해주세요.");
+						return;
+					}
+					if(!regexContent.test(content)){
+						alert("내용은 50자이내로 작성해주세요.");
+						$("#content").val("");
+						$("#content").focus();
+						return;
+					}
+					if(title != ""){
+						$("#start").focus();
+					}if(start != ""){
+						$("#end").focus();
+					}if(end != ""){
+						$("#content").focus();
+					}
+				
 				 if(start>end){
 							alert("올바른 종료일을 입력해주세요.");
 							return;
 				}
-				 $(".insertModal").modal("hide");
+				
 				 // 일정 등록
 				 calendar.addEvent({
 
@@ -493,11 +537,9 @@ a {
 						start : start,
 						
 						end : end,
-						
-						textColor : "black"
 
 					}) 											
-				 
+				
 			 })
 				// 수정 버튼을 클릭할 때
 				$("#updateBtn").on("click",function(){
@@ -529,12 +571,43 @@ a {
 					let plan_content = $("#updateContent").val();
 					let plan_seq = $("#completeBtn").val();
 					let mem_seq = $("#updateBtn").val();
-					 $(".updateModal").modal("hide");
-					 // 정규식, formValidation 추가하기
-					 if(plan_start>plan_end){
-								alert("올바른 종료일을 입력해주세요.");
+					
+					 let regexTitle = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,20}$/;
+						let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,50}$/;
+					
+						 
+						 if(plan_title == ""){
+								alert("제목을 입력해주세요");
 								return;
-					 }
+							}
+							if(!regexTitle.test(plan_title)){
+								alert("일정명은 20자이내로 작성해주세요.");
+								$("#title").val("");
+								$("#title").focus();
+								return;
+							}if(plan_start==""){
+								alert("시작일을 등록해주세요.");
+								$("#start").focus();
+								return;
+							}if(plan_end ==""){
+								alert("종료일을 등록해주세요.");
+								$("#end").focus();
+								return;
+							}
+							if(plan_content==""){
+								alert("내용을 입력해주세요.");
+								return;
+							}
+							if(!regexContent.test(plan_content)){
+								alert("내용은 50자이내로 작성해주세요.");
+								$("#content").val("");
+								$("#content").focus();
+								return;
+							}
+					if(plan_start>plan_end){
+						alert("올바른 종료일을 입력해주세요.");
+						return;
+			 			} 	 
 					$.ajax({
 						url:"/planner/planUpdateModal"
 						,type:"post"
@@ -542,7 +615,8 @@ a {
                       	,success : function(data){
                       		if(data=="success"){
                       			alert("일정이 변경되었습니다.");
-                      			 location.href="/planner/toPlanner?mem_seq="+mem; 
+                      			$(".updateModal").modal("hide");
+                      			location.href="/planner/toPlanner?mem_seq="+mem; 
                       		}else{
                       			alert("일정 수정에 실패했습니다.");
                       		}
@@ -566,7 +640,7 @@ a {
                       		if(data=="success"){
                       			$(".updateModal").modal("hide");
                       			alert("일정이 삭제되었습니다.");
-                      			location.href="/planner/toPlanner?mem_seq="+mem;
+                      			 location.href="/planner/toPlanner?mem_seq="+mem; 
                       		}else{
                       			alert("일정 삭제에 실패했습니다.");
                       		}
@@ -583,7 +657,12 @@ a {
 		})
 		
 		();
-
+		/* $(document).ready(function(){
+	         $('.flatpickr-time').append("<button id='asdf'>확인</button>");
+	            $('#asdf').click(function(){
+	               alert("시작일이 등록되었습니다.");            
+	            });       
+	         }); */
 	</script>
 </body>
 </html>
