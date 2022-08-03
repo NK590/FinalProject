@@ -27,7 +27,7 @@ body {
 }
 
 #bodylist {
-	width: 450px;
+	width: 600px;
 	padding: 30px;
 	background-color: white;
 	position: absolute;
@@ -36,23 +36,17 @@ body {
 	transform: translate(-50%, -50%);
 }
 
-.sidebar {
-	margin-top: 100px;
-}
-
 .line {
 	border-bottom: 2px solid black;
 }
 
 #allbody {
-	background-color: aliceblue;
+	background-color: white;
 	width: 100%;
-	height: 650px;
+	height: 500px;
 	position: relative;
 }
-.nav-link{
-	font-size: 20px;
-}
+
 #changePW{
 	font-size: x-small;
 }
@@ -73,6 +67,58 @@ body {
 	font-size: xx-small;
 	margin-top: 7px;
 }
+.nav-item {
+	font-size: 20px;
+	margin: 8px;
+	text-decoration-line: none;
+	color: black;
+}
+
+#txtSt {
+	color: black;
+	font-size: 20px;
+	text-decoration-line: none;
+	color: black;
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+@font-face {
+	src: url("/resources/fonts/GothicA1-Regular.ttf");
+	font-family: "GothicA1-Regular.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+.infoMsg{
+font-family: "AppleSDGothicNeoL.ttf";
+font-size: 14pt;
+text-align:center;
+text-decoration: underline;
+}
+#btnCancel{
+background-color: orange;
+	color: white;
+	border: 3px solid orange;
+	border-radius: 10px;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+#updateBtn{
+background-color: rgb(8, 0, 83);
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
+	border-radius: 10px;
+	font-size: 16px;
+	margin-bottom: 20px;
+
+}
 </style>
 </head>
 <body>
@@ -80,20 +126,24 @@ body {
 	<div class="container sidelist">
 		<div class="row p-2">
 			<!-- 사이드 내비바 -->
-			<div class="col-3">
+			<div class="col-3 menubar">
 				<div class="sidebar">
 					<h2>
 						<span>${loginSession.mem_nick}</span><span>님</span>
+
 					</h2>
 					<h3>
 						<span>안녕하세요.</span>
+						<br>
+						<br>
 					</h3>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 활동내역</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
+						<li class="nav-item"><a class="nav-link active" id="txtSt" aria-current="page"
+							href="/mypage/myPage"
+						>나의 그룹👨‍👩‍👧‍👦</a></li>
+						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myBoard">나의 활동내역✍🏻</a></li>
+						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myInfo">회원정보 수정✏️</a></li>
+						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myDropout">회원탈퇴👋</a></li>
 					</ul>
 				</div>
 			</div>
@@ -112,6 +162,7 @@ body {
 
 
 							<div class="row p-2">
+							<div class="infoMsg">아이디는 변경할 수 없습니다. <br> 관심있는 공부는 꼭 체크해주세요!</div>
 								<div class="col-5">
 									<label for="id" class="form-label">아이디 (이메일)</label>
 								</div>
@@ -191,6 +242,7 @@ body {
 
 		</div>
 	</div>
+		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 	// 취소하기 버튼 누르면 마이페이지->나의그룹 페이지로 이동
 	document.getElementById("btnCancel").onclick = function(){

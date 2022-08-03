@@ -35,41 +35,70 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
-.sidebar {
-	margin-top: 100px;
-}
-
-.line {
-	border-bottom: 2px solid black;
-}
-
 #allbody {
-	background-color: aliceblue;
+	background-color: white;
 	width: 100%;
 	height: 650px;
 	position: relative;
 }
+.line {
+	border-bottom: 2px solid black;
+}
+.nav-item {
+	font-size: 20px;
+	margin: 8px;
+	text-decoration-line: none;
+	color: black;
+}
+
+#txtSt {
+	color: black;
+	font-size: 20px;
+	text-decoration-line: none;
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+@font-face {
+	src: url("/resources/fonts/GothicA1-Regular.ttf");
+	font-family: "GothicA1-Regular.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+.btn-area{
+padding-top:20px;
+}
 </style>
 </head>
 <body>
+	<jsp:include page="../include/header.jsp" />
 	<div class="container sidelist">
 		<div class="row p-2">
 			<!-- 사이드 내비바 -->
-			<div class="col-3">
+			<div class="col-3 menubar">
 				<div class="sidebar">
 					<h2>
 						<span>${loginSession.mem_nick}</span><span>님</span>
+
 					</h2>
 					<h3>
 						<span>안녕하세요.</span>
+						<br>
+						<br>
 					</h3>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/mypage/myPage">나의 그룹</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myBoard">나의 활동내역</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myPlanner">나의 플래너</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myInfo">회원정보 수정</a></li>
-						<li class="nav-item"><a class="nav-link" href="/mypage/myDropout">회원탈퇴</a></li>
+						<li class="nav-item"><a class="nav-link active" id="txtSt" aria-current="page"
+							href="/mypage/myPage"
+						>나의 그룹👨‍👩‍👧‍👦</a></li>
+						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myBoard">나의 활동내역✍🏻</a></li>
+						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myInfo">회원정보 수정✏️</a></li>
+						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myDropout">회원탈퇴👋</a></li>
 					</ul>
 				</div>
 			</div>
@@ -141,6 +170,7 @@ body {
 
 		</div>
 	</div>
+		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 	// 취소하기 버튼 누르면 마이페이지->나의그룹 페이지로 이동
 	document.getElementById("btnCancel").onclick = function(){
