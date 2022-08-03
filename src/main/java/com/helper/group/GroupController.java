@@ -8,14 +8,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.helper.admin.ReportDTO;
 import com.helper.chat.ChatDTO;
 import com.helper.chat.ChatService;
 import com.helper.member.MemberDTO;
 import com.helper.member.MemberService;
+import com.helper.report.ReportService;
 
 @Controller
 @RequestMapping(value="/group")
@@ -26,6 +27,8 @@ public class GroupController {
 	private ChatService chatService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ReportService reportService;
 	@Autowired
 	private HttpSession session;
 	
@@ -193,7 +196,7 @@ public class GroupController {
 		return "success";
 	}
 	
-	// 그룹 멤버 추방 체크 ajax
+	// 그룹 멤버 추방 체크 ajax (현재 그룹 방에 해당 닉네임 유저가 있는지 체크)
 	@ResponseBody
 	@RequestMapping(value="/kickoutCheck")
 	public String kickoutCheck(String mem_nick) throws Exception {
@@ -208,5 +211,19 @@ public class GroupController {
 		} else {
 			return "same_room";
 		}
+	}
+	
+	// 유저 신고 ajax
+	@ResponseBody
+	@RequestMapping(value="/report")
+	public String report(String mem_nick, String report_nick, String report_reason, String report_reason_detail) throws Exception {
+		System.out.println("신고하는 유저 : " + report_nick);
+		System.out.println("신고당한 유저 : " + mem_nick);
+		System.out.println("신고 사유 : " + report_reason);
+		System.out.println("신고 사유 상세 : " + report_reason_detail);
+		
+		MemberDTO memberDto = memberService.findNickname(mem_nick);
+		reportService.insert(new ReportDTO(0, memberDto.getMem_seq(), memberDto.getMem_std_key(), memberDto.getMem_id(), mem_nick, report_reason + "  " + report_reason_detail, report_nick));
+		return "success";
 	}
 }

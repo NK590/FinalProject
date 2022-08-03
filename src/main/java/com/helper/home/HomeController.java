@@ -26,4 +26,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/notLogin")
+	public String notLogin() throws Exception {
+		System.out.println("로그인 풀림");
+		return "notLogin";
+	}
 }
