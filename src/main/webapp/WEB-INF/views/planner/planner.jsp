@@ -663,7 +663,6 @@ html, body {
 	               alert("시작일이 등록되었습니다.");            
 	            });       
 	         }); */
-		
 	</script>
 </body>
 </html>

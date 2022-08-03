@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,9 +36,12 @@ public class GroupController {
 	@RequestMapping(value="/")
 	public String home(Model model) throws Exception {
 		List<GroupDTO> groupList = service.selectAll();
+		String mem_nick = ((MemberDTO)session.getAttribute("loginSession")).getMem_nick();
+		int cur_group_seq = (memberService.findNickname(mem_nick)).getGroup_seq();
 		
 		model.addAttribute("groupList", groupList);
 		model.addAttribute("imageList", imageList);
+		model.addAttribute("cur_group_seq", cur_group_seq);
 		
 		return "group/home";
 	}
@@ -109,8 +113,8 @@ public class GroupController {
 	// 그룹 가입 번호 ajax
 	@ResponseBody
 	@RequestMapping(value="/checkJoinStatus")
-	public int checkJoinStatus(Model model) throws Exception {
-		int group_seq = memberService.checkJoinStatus(((MemberDTO)session.getAttribute("loginSession")).getMem_seq());
+	public int checkJoinStatus(int mem_seq, Model model) throws Exception {
+		int group_seq = memberService.checkJoinStatus(mem_seq);
 		System.out.println("현재 가입중인 그룹 번호 : " + group_seq);
 		return group_seq;
 	}

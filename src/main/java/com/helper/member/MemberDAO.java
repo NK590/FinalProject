@@ -26,6 +26,11 @@ public class MemberDAO {
 		return session.selectOne("memberMapper.checkEmail", mem_id);
 	}
 	
+	// 닉네임 중복확인
+		public MemberDTO nickForm(String mem_nick) throws Exception {
+			return session.selectOne("memberMapper.nickForm", mem_nick);
+	}
+	
 	// 로그인
 	public MemberDTO login(String mem_id) throws Exception {
 		return session.selectOne("memberMapper.login", mem_id);

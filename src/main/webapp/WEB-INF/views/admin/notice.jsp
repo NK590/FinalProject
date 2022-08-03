@@ -14,7 +14,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
-<title>Insert title here</title>
+<title>공지사항</title>
 </head>
 <style>
 .container {
@@ -62,6 +62,7 @@ thead, tbody {
 }
 </style>
 <body>
+<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 head-text">
@@ -114,6 +115,7 @@ thead, tbody {
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	<script>
 		$("#writeBtn").click(function(){
 			location.href="/admin/noticeWrite";

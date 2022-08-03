@@ -15,8 +15,15 @@
 	<!-- 오늘 하루 공부시간 List 가져오기 / 합산까지 해결 -->
 	<select id="countList" parameterType="int" resultType="int">
 		select time_count from tb_timer
- 			where mem_seq = #{mem_seq} 
+ 			where mem_seq = #{mem_seq}
  			and to_char(sysdate, 'MM/dd') = to_char(time_date,'MM/dd')
+	</select>
+	<select id="countListMap" parameterType="int" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
+		select time_subject, sum(time_count) as time_count from tb_timer
+ 			where mem_seq = #{mem_seq}
+ 			and to_char(sysdate, 'MM/dd') = to_char(time_date,'MM/dd')
+            group by time_subject
+            order by time_count
 	</select>
 	
 	<!-- 이번주 요일별 총 공부시간 -->

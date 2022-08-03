@@ -62,6 +62,12 @@ body {
 	margin-top: 7px;
 }
 
+.checkNick{
+	color: rgb(248, 26, 26);
+	font-size: xx-small;
+	margin-top: 7px;
+}
+
 .checkTrue {
 	color: rgb(26, 188, 156);
 	font-size: xx-small;
@@ -140,9 +146,11 @@ body {
 						맞게 입력해주세요.</div>
 					<div class="check checkTrue" id="nameTrue" style="display: none;">*사용
 						가능한 닉네임입니다.</div>
+					<div class="check checkNick" id="nameNick" style="display: none;">*중복된
+						닉네임 입니다.</div>
 				</div>
 				<div class="col-12 mb-2">
-					<input type="text" class="form-control" name="mem_nick" required
+					<input type="text" class="form-control" id ="mem_nick" name="mem_nick" required
 						onkeyup="nameCheck();"> <span style="font-size: 10px;">*3~10자의
 						영문 대소문자와 숫자, 한글로만 입력하세요.</span>
 				</div>
@@ -219,8 +227,6 @@ body {
             } else { // 사용가능한 비밀번호
                $("#checkPwdFalse").attr('style',"display:none");
                $("#checkPwdTrue").attr('style', "display:block");
-               let ok1 = "Y";
-               return ok1;
             }
          } else { // 비밀번호 빈 문자열일 경우
             $("#checkPwdFalse").attr('style',"display:none");
@@ -239,8 +245,6 @@ body {
             } else{   // 비밀번호와 비밀번호 확인 일치
                $("#samePwdFalse").attr('style',"display:none");
                $("#samePwdTrue").attr('style',"display:block");
-               let ok2 = "Y";
-               return ok2;
             }
          } else { // 비밀번호가 사용불가능(안보여줘도된다.)
             $("#samePwdFalse").attr('style',"display:none");
@@ -250,6 +254,7 @@ body {
       }
 
 		 // 닉네임
+		 /*
          function nameCheck(){
         	 let $mem_nick = $("#memberForm input[name=mem_nick]");
         	 let regExpName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/;
@@ -259,23 +264,59 @@ body {
          } else {// 사용 가능 이름
             $("#nameFalse").attr('style',"display:none");
             $("#nameTrue").attr('style',"display:block");
-            let ok3 = "Y";
-            return ok3;
          }
          if($mem_nick.val() == ""){
             $("#nameFalse").attr('style',"display:none");
          }
       }
+		 */
 		 
+function nameCheck(){
+			 let regExpName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/;
+			 let mem_nick = $('#mem_nick').val();
+			 
+			 if(!regExpName.test($('#mem_nick').val())){// 이름을 잘못 입력한 경우
+		            $("#nameFalse").attr('style',"display:block");
+		            $("#nameTrue").attr('style',"display:none");
+		            $("#nameNick").attr('style',"display:none");
+		         } else {// 사용 가능 이름
+		            
+		        	 $.ajax({
+		 				url : "/member/nickForm"
+		 				,type : "post"
+		 				,data : {mem_nick}
+		 				, success: function(data){
+		 					console.log(data);
+		 					if(data === "ok"){
+		 						$("#nameTrue").attr('style',"display:block");
+		 						$("#nameNick").attr('style',"display:none");
+		 						$("#nameFalse").attr('style',"display:none");
+		 						return;
+		 					}else if(data === "no"){
+		 						$("#nameNick").attr('style',"display:block");
+		 						$("#nameTrue").attr('style',"display:none");
+		 						$("#nameFalse").attr('style',"display:none");
+		 						return;
+		 					}
+		 				}, error : function(e){
+		 					console.log(e);
+		 				}
+		 			})
+		        	 
+		         }
+		         if(mem_nick == ""){
+		            $("#nameFalse").attr('style',"display:none");
+		         }
+}	 
       
 
 		
 		 // 가입 버튼을 눌렀을 때 유효성 검사 후 form 제출
 		$("#submitBtn").on("click", function() {
 			let regExpPwd = /^(?=.*\d)(?=.*[!@*])([^\s]){6,12}$|^(?=.*\d)(?=.*[a-zA-Z])([^\s]){6,12}$|^(?=.*[a-zA-Z])(?=.*[!@*])([^\s]){6,12}$|^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@*])([^\s]){6,12}$/;
-			//let regExpPwd = /^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?=[0-9]+))$)[A-Za-z\d~!@#$%^&*()_+=]{6,12}$/; // 비밀번호 정규식 (영문자, 숫자,~!@#$%^&* 6~10자리)
 			let regexName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/; // 닉네임 정규식 3~10자의 영문 대소문자와 숫자, 한글 
 			// 유효성 검사
+			
 			if ($('input[name=mem_id]').val() === "") {
 				alert("이메일을 입력해 주세요.");
 				return;
@@ -288,8 +329,8 @@ body {
 			} else if (!regexName.test($('input[name=mem_nick]').val())) {
 				alert("형식에 맞지 않는 닉네임입니다.");
 				return;
-			}else if ($("#memStdkey").val() === "선택") {
-				alert("직업을 선택해주세요.");
+			} else if ($("#memStdkey").val() === "선택") {
+				alert("관심분야를 선택해주세요.");
 				return;
 			}
 
@@ -298,6 +339,51 @@ body {
 			document.getElementById("memberForm").submit();
 		})
 		
+		
+		/*
+		document.getElementById("submitBtn").onclick = function(){
+			let signForm = $("#signForm").serialize();
+			let regExpPwd = /^(?=.*\d)(?=.*[!@*])([^\s]){6,12}$|^(?=.*\d)(?=.*[a-zA-Z])([^\s]){6,12}$|^(?=.*[a-zA-Z])(?=.*[!@*])([^\s]){6,12}$|^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@*])([^\s]){6,12}$/;
+			let regexName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/; // 닉네임 정규식 3~10자의 영문 대소문자와 숫자, 한글 
+			
+			if ($('input[name=mem_id]').val() === "") {
+				alert("이메일을 입력해 주세요.");
+			} else if (!regExpPwd.test($('input[name=mem_pw]').val())) {
+				alert("형식에 맞지 않는 비밀번호입니다.");
+			} else if ($("#pwCheck").val() !== $("#mem_pw").val()) {
+				alert("비밀번호와 비밀번호 확인창의 값이 일치하지 않습니다.");
+			} else if (!regexName.test($('input[name=mem_nick]').val())) {
+				alert("형식에 맞지 않는 닉네임입니다.");
+			} else if ($("#memStdkey").val() === "선택") {
+				alert("직업을 선택해주세요.");
+			}else{
+				$.ajax({
+					url : "/member/signForm"
+					,type : "post"
+					,data :signForm
+					, success: function(data){
+						console.log(data);
+						if(data === "success"){
+							alert("로그인 되었습니다.");
+							saveid();
+							location.href = "/member/toLogin";
+						}else if(data === "fail"){
+							alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+							$('#password').val("");
+							return;
+						}else if(data === "blackMem"){
+							alert("블랙회원입니다. 관리자에게 문의해주세요. \n대표번호 : 031-533-8282");
+							return;
+						}
+					}, error : function(e){
+						console.log(e);
+					}
+				})
+			}
+			
+			
+			
+		}*/
 	</script>
 </body>
 </html>

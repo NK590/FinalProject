@@ -3,6 +3,7 @@ package com.helper.study;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpSession;
@@ -45,8 +46,12 @@ public class StudyController {
 
 	@RequestMapping(value = "/toStudy")
 	public String toStudy(Model model)throws Exception{
-		System.out.println("공부하기 페이지 요청");
 		MemberDTO memdto = (MemberDTO)session.getAttribute("loginSession");
+		if(memdto == null) {
+			model.addAttribute("record",0);
+			return "study/study";
+		}
+		System.out.println("공부하기 페이지 요청");
 		int mem_seq = memdto.getMem_seq();
 		List<SubjectDTO> subjectlist = service.selectall(mem_seq);
 		if(weekservice.selectIsRecord(mem_seq)!=0) {			
@@ -77,11 +82,12 @@ public class StudyController {
 		service.insertWeek(weekdto);
 		if(service.selectrecord(mem_seq)==0) {
 			service.insertAll(list);
+			
 		}else {
 			for(TimeDTO dto : list) {
-				if(service.selectsubject(dto)==0) {//오늘 시간 기록을 한적 없다.
+				if(service.selectsubject(dto)==0) {//겹치는 과목명이 없다
 					service.insertOne(dto);
-				}else {//오늘 시간기록을 한적 있다.
+				}else {//겹치는 과목명이 있다.
 					service.updatetime(dto);
 				}
 			} 
@@ -93,13 +99,13 @@ public class StudyController {
 	public String recordSubjcet(@RequestBody List<SubjectDTO> list)throws Exception{
 		int mem_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
 		
-			if(service.selectrecord(mem_seq)==0) {
+			if(service.selectSubjectAll(mem_seq)==0) {//미리저장된 과목 기록이 없다
 				service.insertsubject(list);	
-			}else {
+			}else {//미리저장된 과목 기록이 있다
 				for(SubjectDTO dto : list) {
-				service.deletesubject(dto.getMem_seq());
+				service.deletesubject(dto.getMem_seq());//저장된거 지우고
 				}
-				service.insertsubject(list);
+				service.insertsubject(list);//list에 넣자
 			}			
 		return "success";
 	}
@@ -108,22 +114,25 @@ public class StudyController {
 	public String toRecord(Model model) throws Exception {
 	    MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginSession");
 
-	    List<String> time_subjectList = service.subjectList(memberDTO.getMem_seq()); // 과목 list
-	    List<Integer> time_countList = service.countList(memberDTO.getMem_seq()); // 과목별 시간 list
+	    List<String> time_subjectList = new ArrayList<String>();
+	    List<Integer> time_countList = new ArrayList<Integer>();
+	    List<Map<String, Object>> time_list =service.countList(memberDTO.getMem_seq());
 	    List<Integer> time_weekList = service.myWeekList(memberDTO.getMem_seq()); // 이번주 월-금 시간List
 	    List<Integer> time_LastWeekList = service.myLastWeekList(memberDTO.getMem_seq()); // 저번주 월-금 시간List
 	    List<Integer> time_countListSec = service.countListSec(memberDTO.getMem_seq());
 	    List<Integer> time_weekListSec = service.myWeekListSec(memberDTO.getMem_seq());
 	    int dayTotalTime = 0;
 		int weekTotalTime = 0;
-		System.out.println(time_countList);
+		for(Map<String, Object> sub : time_list) {
+			time_subjectList.add((String)sub.get("time_subject"));
+			time_countList.add(Integer.parseInt(String.valueOf(sub.get("time_count"))));
+		}
 		for (int i : time_countListSec) {
 			dayTotalTime += i;
 		}
 		for (int i : time_weekListSec) {
 			weekTotalTime += i;
 		}
-
 		model.addAttribute("subjectList", time_subjectList);
 		model.addAttribute("countList", time_countList);
 		model.addAttribute("weekList", time_weekList);

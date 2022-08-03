@@ -24,7 +24,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
-<title>공지사항</title>
+<title>공지사항 글쓰기</title>
 </head>
 <style>
 .row>* {
@@ -51,9 +51,13 @@ h2, h4 {
 	margin-top: 30px;
 	margin-bottom: 10px;
 }
+.note-resizebar{
+	display:none;
+}
 </style>
 
 <body>
+	<%@ include file="/WEB-INF/views/include/adminHeader.jsp"%>
 	<form action="/admin/write" method="post" enctype="multipart/form-data"
 		id="writeForm">
 		<div class="container">
@@ -84,6 +88,7 @@ h2, h4 {
 			<input type="text"name="img_src" id="img_src" style="display:none">
 		</div>
 	</form>
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	<script>
 		 	// 뒤로 가기 버튼
 			document.getElementById("toBack").onclick = function(){
@@ -147,12 +152,12 @@ h2, h4 {
 					alert("제목을 입력해주세요")
 					return;
 				}
-				if($("#title").val().length>20){
-					alert("제목을 20자 이내로 입력해주세요")
+				if($("#title").val().length>30){
+					alert("제목을 30자 이내로 입력해주세요")
 					return;
 				}
-				if($("#summernote").val().length>200){
-					alert("내용을 200자 이내로 입력해주세요")
+				if($("#summernote").val().length>300){
+					alert("내용을 300자 이내로 입력해주세요")
 					return;
 				}
 				$("#writeForm").submit();
