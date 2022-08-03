@@ -74,6 +74,9 @@ body {
 .btn-area{
 padding-top:20px;
 }
+.nav-link{
+	font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -104,7 +107,7 @@ padding-top:20px;
 			</div>
 			<!-- content body -->
 
-			<div class="col-9">
+			<div class="col-10">
 				<p>
 				<h3>회원탈퇴</h3>
 				</p>
@@ -241,5 +244,7 @@ padding-top:20px;
 		});
 		});
 	</script>
+	
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

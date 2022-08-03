@@ -120,10 +120,10 @@ public class BoardController {
 		System.out.println(category+" : "+keyword + " : "+curPage);
 		// 검색한 게시글의 리스트
 		List<BoardDTO> list = service.search(category,keyword,(curPage*10)-9,curPage*10);
-		
-		
+			
 		// 검색한 게시글의 개수
 		int listCount = service.searchPaging(category, keyword);
+		// 클릭한 페이지, 총 게시글 수 전달
 		BoardPagingDTO bpd = BoardPagination.getPageInfo(curPage, listCount);
 		
 		System.out.println(list);

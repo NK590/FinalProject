@@ -77,6 +77,9 @@ body {
 	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
 	font-family: "AppleSDGothicNeoB.ttf";
 }
+.nav-link{
+	font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -85,10 +88,8 @@ body {
 		<div class="row p-2">
 			<!-- 사이드 내비바 -->
 			<div class="col-3 menubar">
-				<div class="sidebar">
 					<h2>
 						<span>${loginSession.mem_nick}</span><span>님</span>
-
 					</h2>
 					<h3>
 						<span>안녕하세요.</span>
@@ -107,9 +108,9 @@ body {
 			</div>
 			<!-- content body -->
 
-			<div class="col-9">
+			<div class="col-10">
 				<p>
-				<h3>나의 커뮤니티</h3>
+				<h3>나의 활동내역</h3>
 				</p>
 				<div class="line"></div>
 				<div class="col-sm-10 wrap" id="allbody">
@@ -162,5 +163,7 @@ body {
 	<script>
 		
 	</script>
+	
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

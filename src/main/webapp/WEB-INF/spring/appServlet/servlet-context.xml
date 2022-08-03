@@ -49,6 +49,7 @@
 			<exclude-mapping path="/member/logout"/>
 			<exclude-mapping path="/study/*"/>
 			<exclude-mapping path="/admin/*"/>
+			<exclude-mapping path="/notLogin"/>
 			<beans:bean class="com.helper.utils.AuthLoginInterceptor"/>
 		</interceptor>
 	</interceptors>

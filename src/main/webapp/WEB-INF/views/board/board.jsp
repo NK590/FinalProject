@@ -14,11 +14,29 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
+	<!-- 해더 -->
+ 
 
 <title>게시판</title>
 </head>
 <style>
 
+@font-face {
+   src: url("/resources/fonts/GothicA1-Regular.ttf");
+   font-family: "GothicA1-Regular.ttf";
+}
+@font-face {
+   src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+   font-family: "AppleSDGothicNeoL.ttf";
+}
+@font-face {
+   src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+   font-family: "AppleSDGothicNeoB.ttf";
+}
+.boardContainer {
+	margin-top: 50px;
+	font-family: "GothicA1-Regular.ttf";
+}
 
 .btn-default {
 	border: 1px solid #ced4da;
@@ -32,13 +50,9 @@ input:first-child {
 	display: none;
 }
 
-a {
-	text-decoration: none;
-	color: black;
-}
-
 .head-text {
 	border-bottom: 1px solid #ced4da;
+	margin-bottom : 50px;
 }
 
 .row>* {
@@ -72,18 +86,27 @@ thead, tbody {
 	margin-top: 40px;
 	justify-content: end;
 }
+.boardCol{
+margin-bottom : 50px;
+}
+
+ .aTag {
+	text-decoration: none;
+	color: black;
+}
+
 </style>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 head-text">
-				<h2>지식 커뮤니티</h2>
+				<h2>질문 게시판</h2>
 			</div>
 		</div>
 		<form id="searchForm">
 			<div class="row searchInput">
-				<div class="col-1 mb-3 searchInput1">
+				<div class="col-2 mb-3 searchInput1">
 					<div class="form-group">
 						<select class="form-select" id="exampleSelect1" name="category">
 							<option selected value="all">전체</option>
@@ -104,7 +127,7 @@ thead, tbody {
 
 		</form>
 		<div class="row">
-			<div class="col-12">
+			<div class="col-12 boardCol">
 				<table class="table">
 					<colgroup>
 						<col style="width: 10%">
@@ -132,7 +155,7 @@ thead, tbody {
 							<c:forEach items="${list}" var="dto">
 								<tr class="tr">
 									<th scope="row">${dto.bo_seq}</th>
-									<td><a href="/board/toDetail?bo_seq=${dto.bo_seq}">${dto.bo_title}</a></td>
+									<td><a href="/board/toDetail?bo_seq=${dto.bo_seq}" id="aTag">${dto.bo_title}</a></td>
 									<td>${dto.mem_nick }</td>
 									<td>${dto.bo_date}</td>
 									<td>${dto.view_count}</td>
@@ -149,18 +172,18 @@ thead, tbody {
 				<ul class="pagination justify-content-center">
 					<c:if test="${naviMap.needPrev eq true }">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${naviMap.startNavi-1}"><</a></li>
+							href="/board/toBoard?curPage=${naviMap.startNavi-1}" id="aTag"><</a></li>
 					</c:if>
 
 					<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 						end="${naviMap.endNavi}" step="1">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${pageNum}">${pageNum}</a></li>
+							href="/board/toBoard?curPage=${pageNum}"id="aTag">${pageNum}</a></li>
 					</c:forEach>
 
 					<c:if test="${naviMap.needNext eq true }">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${naviMap.endNavi+1}">></a></li>
+							href="/board/toBoard?curPage=${naviMap.endNavi+1}"id="aTag">></a></li>
 					</c:if>
 				</ul>
 
@@ -231,8 +254,7 @@ thead, tbody {
 							
 						} */
 						
-						
-						
+
 						/* <ul class="pagination justify-content-center">
 						<c:if test="${naviMap.needPrev eq true }">
 							<li class="page-item"><a class="page-link"
@@ -260,6 +282,7 @@ thead, tbody {
 				}
 		})
 	</script>
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
 

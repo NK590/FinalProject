@@ -22,7 +22,6 @@ public class MemberController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
-	
 	@RequestMapping(value = "/login") //로그인 페이지 요청
 	public String login() throws Exception{		
 		return "member/login";

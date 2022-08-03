@@ -24,20 +24,36 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
+	<!-- 해더 -->
+	<jsp:include page="../include/header.jsp" />
+	
 <title>글쓰기</title>
 </head>
 <style>
+@font-face {
+   src: url("/resources/fonts/GothicA1-Regular.ttf");
+   font-family: "GothicA1-Regular.ttf";
+}
+@font-face {
+   src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+   font-family: "AppleSDGothicNeoL.ttf";
+}
+@font-face {
+   src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+   font-family: "AppleSDGothicNeoB.ttf";
+}
 .row>* {
 	padding: 0%;
 }
 
-.container {
-	margin-top: 100px;
-	margin-bottom: 100px;
+.boardContainer {
+	margin-top: 50px;
+	font-family: "GothicA1-Regular.ttf";
 }
 
 .head-text {
 	border-bottom: 2px solid black;
+	margin-bottom: 50px;
 }
 
 h2 {
@@ -51,11 +67,23 @@ h2, h4 {
 	margin-top: 30px;
 	margin-bottom: 10px;
 }
+.note-resizebar{
+   display:none;
+}
+.boardCol{
+margin-bottom : 50px;
+} 
+.summerNote {
+	margin-bottom: 20px;
+}
+.btnArea {
+	margin-top : 50px;
+}
 </style>
 <body>
 	<form action="/board/write" method="post" enctype="multipart/form-data"
 		id="writeForm">
-		<div class="container">
+		<div class="container boardContainer">
 			<div class="row">
 				<div class="col-12 head-text">
 					<h2>지식 커뮤니티</h2>
@@ -72,8 +100,8 @@ h2, h4 {
 					<textarea id="summernote" name="bo_content" rows="10"></textarea>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col d-flex justify-content-center">
+			<div class="row btnArea">
+				<div class="col d-flex justify-content-center ">
 					<button type="button" class="btn btn-secondary m-1" id="toBack">목록</button>
 					<button type="button" class="btn btn-outline-primary m-1" id="writeBtn">등록</button>
 				</div>
@@ -162,7 +190,7 @@ h2, h4 {
             		$("#title").val("");
             		return;
             	}else if(!regexContent.test($("#summernote").val())){
-            		alert("내용을 200자 이내로 입력해주세요.");
+            		alert("내용을 300자 이내로 입력해주세요.");
             		$('#summernote').summernote({focus:true})
             		$("#summernote").val("");
             		return;
@@ -215,7 +243,8 @@ h2, h4 {
 						 
 				
 		</script>
-
+<!-- 푸터 -->
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
 

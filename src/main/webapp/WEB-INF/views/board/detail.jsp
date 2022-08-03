@@ -36,20 +36,32 @@
  <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 
-<title>상세보기 페이지</title>
+<title>게시글 상세보기</title>
 </head>
 <style>
+@font-face {
+   src: url("/resources/fonts/GothicA1-Regular.ttf");
+   font-family: "GothicA1-Regular.ttf";
+}
+@font-face {
+   src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+   font-family: "AppleSDGothicNeoL.ttf";
+}
+@font-face {
+   src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+   font-family: "AppleSDGothicNeoB.ttf";
+}
 .row>* {
 	padding: 0%;
 }
 
-.container {
-	margin-top: 100px;
-	margin-bottom: 100px;
+.boardContainer {
+	margin-top: 50px;
 }
 
 .head-text {
-	border-bottom: 2px solid black;
+	border-bottom: 1px solid #ced4da;
+	margin-bottom : 50px;
 }
 
 h2 {
@@ -140,7 +152,7 @@ a {
 }
 
 .summerNote {
-	margin-bottom: 20px
+	margin-bottom: 20px;
 }
 
 .bi-trash,.bi-flag-fill:hover {
@@ -202,10 +214,19 @@ a {
     .reportCol{
     	margin-left : 20px;
     }
+    /* summernote style update */
+    .note-editor.note-frame .note-editing-area .note-editable[contenteditable=false] {
+    background-color: white;
+	}
+	.note-resizebar{
+	   display:none;
+	}
 </style>
 <body>
+<!-- 해더 -->
+<jsp:include page="../include/header.jsp" />
 	<form action="/board/update" method="post" id="updateForm">
-		<div class="container">
+		<div class="container boardContainer">
 			<div class="row">
 				<div class="col-12 head-text">
 					<h2>지식 커뮤니티</h2>
@@ -305,7 +326,7 @@ a {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">게시글 신고</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalXBtn"></button>
                 </div>
                 <div class="modal-body">
                     <div class="text-area">
@@ -385,21 +406,30 @@ a {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reportCancelBtn">취소</button>
-                    <button type="button" class="btn btn-danger" id="reportBtn">신고하기</button>
+                     <button type="button" class="btn btn-danger" id="reportBtn">신고하기</button>
                 </div>
             </div>
         </div>
     </div>
     
 	<script>
+		let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
 		// 신고 아이콘을 눌렀을 때
 	  	$(".bi-flag-fill").on("click",function(){
-	  		let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'))
 	  		if(confirm("해당 게시글을 신고하시겠습니까?")){
 				exampleModal.show();	
-	
+
 			}
-		}) 
+		})
+		// 모달 X 버튼을 눌렀을 때
+		$("#modalXBtn").on("click",function(){
+			$("#detail-textarea").val("");
+		})
+		// 신고취소버튼을 눌렀을 때
+		$("#reportCancelBtn").on("click",function(){
+			$("#detail-textarea").val("");
+		})
 	
 		// 신고 완료 버튼을 눌렀을때 
 		 $("#reportBtn").on("click",function(){
@@ -417,15 +447,15 @@ a {
 		           		success : function(data){
 		           			if(data=="success"){
 		           				alert("신고가 처리되었습니다.");
-		           				let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'))
 		           				exampleModal.hide();
+		           				$("#detail-textarea").val("");
+		           				$(":radio[name='report_reason'][value='영리목적/홍보성']").attr("checked",true);
 		           			}
 		           			
 		           		},
 		           		error : function(e){
 		           			console.log(e);
 		           		}
-		           		
 		           	})
 		           	}
 		        })
@@ -736,6 +766,8 @@ a {
 			
 				
 		</script>
+			<!-- 푸터 -->
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
 

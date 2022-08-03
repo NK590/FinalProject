@@ -149,7 +149,7 @@ background-color: rgb(8, 0, 83);
 			</div>
 			<!-- content body -->
 
-			<div class="col-9">
+			<div class="col-10">
 				<p>
 				<h3>회원정보 수정</h3>
 				</p>
@@ -307,5 +307,6 @@ background-color: rgb(8, 0, 83);
 	})
 		
 	</script>
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

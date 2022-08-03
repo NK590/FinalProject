@@ -61,20 +61,6 @@ body {
 	color: black;
 	font-family: "AppleSDGothicNeoL.ttf";
 }
-@font-face {
-	src: url("/resources/fonts/GothicA1-Regular.ttf");
-	font-family: "GothicA1-Regular.ttf";
-}
-
-@font-face {
-	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
-	font-family: "AppleSDGothicNeoL.ttf";
-}
-
-@font-face {
-	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
-	font-family: "AppleSDGothicNeoB.ttf";
-}
 #goGroupStudy{
 	background-color: rgb(8, 0, 83);
 	color: white;
@@ -109,6 +95,7 @@ body {
 						<br>
 						<br>
 					</h3>
+					<div id="blank"></div>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link active" id="txtSt" aria-current="page"
 							href="/mypage/myPage"
@@ -121,7 +108,7 @@ body {
 			</div>
 			<!-- content body -->
 
-			<div class="col-9">
+			<div class="col-10">
 				<p>
 				<h3>나의 그룹</h3>
 				</p>
@@ -197,5 +184,7 @@ body {
 		 }
 	}
 	</script>
+	
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
