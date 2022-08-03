@@ -303,18 +303,22 @@
 					</div>
 					<div class="modal-body">
 						<input type="text" id="groupDetailSeq" style="display: none">
-						<p>
-							<span>그룹 이름 : </span><span id="groupDetailName"></span>
-						</p>
-						<p>
-							<span>방장의 한마디 : </span><span id="groupDetailContent"></span>
-						</p>
-						<p>
-							<span>그룹 카테고리 : </span><span id="groupDetailCategory"></span>
-						</p>
-						<p>
-							<span>그룹 현 인원 수 : </span><span id="groupDetailCurNum"></span> / <span id="groupDetailMaxNum"></span>
-						</p>
+						<div class="row">
+							<div class="col-3">그룹 이름 : </div>
+							<div class="col-9" id="groupDetailName"></div>
+						</div>
+						<div class="row">
+							<div class="col-3">방장 한마디 : </div>
+							<div class="col-9" id="groupDetailContent"></div>
+						</div>
+						<div class="row">
+							<div class="col-3">카테고리 : </div>
+							<div class="col-9" id="groupDetailCategory"></div>
+						</div>
+						<div class="row">
+							<div class="col-3">인원 수 : </div>
+							<div class="col-9"><span id="groupDetailCurNum"></span> / <span id="groupDetailMaxNum"></span></div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -439,21 +443,25 @@
 			data : { mem_seq : mem_seq },
 			success : (result) => {
 				if (result === 0) {
-					let confirmGroupSignin = confirm('그룹에 가입하시겠습니까?')
-					if (confirmGroupSignin) {
-						$.ajax({
-							url : "/group/groupSignin",
-							type : "post",
-							data : { group_seq : group_seq, mem_seq : mem_seq },
-							success : (re_result) => {
-								if (re_result === "success") {
-									location.href = "/group/room?group_seq=" + group_seq
+					if (curNum >= maxNum) {
+						alert('이미 방이 꽉 찼습니다.')
+					} else {
+						let confirmGroupSignin = confirm('그룹에 가입하시겠습니까?')
+						if (confirmGroupSignin) {
+							$.ajax({
+								url : "/group/groupSignin",
+								type : "post",
+								data : { group_seq : group_seq, mem_seq : mem_seq },
+								success : (re_result) => {
+									if (re_result === "success") {
+										location.href = "/group/room?group_seq=" + group_seq
+									}
+								},
+								error : (er_error) => {
+									console.log(er_error)
 								}
-							},
-							error : (er_error) => {
-								console.log(er_error)
-							}
-						})
+							})
+						}
 					}
 				} else if (result == group_seq) {
 					location.href = "/group/room?group_seq=" + group_seq

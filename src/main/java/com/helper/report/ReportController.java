@@ -12,14 +12,11 @@ import com.helper.admin.ReportDTO;
 public class ReportController {
 	@Autowired
 	private ReportService service;
+	
 	@RequestMapping(value="/reportInsert")
 	@ResponseBody
 	public String insert(ReportDTO dto)throws Exception{
-		
 		service.insert(dto);
-		
 		return "success";
 	}
-	
-	
 }
