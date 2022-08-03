@@ -204,6 +204,58 @@ border: 1px solid orange;
 color: white;
 font-family: "AppleSDGothicNeoL.ttf";
 }
+    .text-area {
+        font-size: 13px;
+        margin-bottom: 10px;
+        color: rgb(137, 133, 133);
+    }
+
+    .title-area {
+        font-size: 15px;
+    }
+    .title-area{
+        margin-bottom: 20px;
+    }
+
+    .reason-area {
+        font-size: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        margin-top: 10px;
+        resize: none;
+        width: 100%;
+        height: 150px;
+    }
+
+    .reason-area-head {
+        margin-bottom: 10px;
+    }
+
+    .reason-area-head>span:first-child {
+        margin-right: 20px;
+    }
+
+    .reason-area-head>span:nth-child(2) {
+        font-size: 13px;
+        color: rgb(137, 133, 133);
+    }
+
+    .reportArea {
+        border: 1px solid rgb(200, 197, 197);
+        padding: 20px;
+        padding-bottom: 10px;
+    }
+
+    .foot-text-area {
+        font-size: 13px;
+        color: rgb(137, 133, 133);
+    }
+    .detail{
+        margin-top: 15px;
+    }
 </style>
 <body>
     <%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -213,9 +265,7 @@ font-family: "AppleSDGothicNeoL.ttf";
         <div class="col-3 title"><p titleTxt>${groupDto.group_title}</p></div>
          <div class="col-2 category"><p categoryTxt>카테고리 | ${groupDto.group_std_key}</p></div>
            <div class="col-1 member"><p memberTxt>인원 | ${groupDto.group_memCount} / ${groupDto.group_max}</p></div>
-            <c:if test="${loginSession.mem_seq eq groupDto.mem_seq}">
            <div class="col groupListbtn"><button class="btn" id="goBackBtn">그룹 리스트 🔙</button></div>
-            </c:if>
            </div>
         <div class="row box">
             <div class="col-3 listBox">
@@ -258,7 +308,8 @@ font-family: "AppleSDGothicNeoL.ttf";
             </div>
             <!-- 채팅창 -->
             <div class="col-9 chatBox">
-                <p class="chatMsg">실시간 채팅 💬</p>
+                <span class="chatMsg">실시간 채팅 💬</span>
+                <span><button type="button" class="btn btn-secondary" id="reportBtn">유저 신고하기</button></span>
                 <div class="chat-grid">
                     <div class="chat-content" id='chatContent'>
                         <c:if test="${not empty chatList}">
@@ -349,8 +400,98 @@ font-family: "AppleSDGothicNeoL.ttf";
         </div>
     </div>
     <!-- 여기까지 화원 추방 모달 -->
+    
+	<!-- 이하 신고 처리 모달 -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">그룹 유저 신고</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-area">
+                        <span> 유저 신고는 study hepler 이용수칙에 맞지 않는 유저를 신고하는 기능이며
+                            반대 의견을 표시하는 것이 아닙니다. 사용자님의 관심과 신고가 건전하고 올바른 study helper
+                            문화를 만듭니다. 허위신고의 경우 신고자가 제재받을 수 있음을 유념해주세요.<br>
+                            또한, 보안상의 이유로 현재 그룹 내에 존재하는 유저만 신고가 가능합니다.
+                        </span>
+                    </div>
+                    <div class="reportArea">
+                        <div class="title-area">
+                            <label class="label" for="title"><span>신고할 유저 닉네임</span></label>
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+                        <div class="reason-area">
+                            <div class="reason-area-head">
+                                <span><b>신고사유</b></span><span>여러 사유에 해당하는 경우 대표적인 사유 1개만 선택해 주세요.</span>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio1" value="영리목적/홍보성" checked>
+                                        <label class="form-check-label" for="inlineRadio1">영리목적/홍보성</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio2" value="개인정보노출">
+                                        <label class="form-check-label" for="inlineRadio2">개인정보노출</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio3" value="음란성/선정성">
+                                        <label class="form-check-label" for="inlineRadio3">음란성/선정성</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio4" value="욕설/인신공격">
+                                        <label class="form-check-label" for="inlineRadio4">욕설/인신공격</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio5" value="같은 내용 반복(도배)">
+                                        <label class="form-check-label" for="inlineRadio5">같은 내용 반복(도배)</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio6" value="기타">
+                                        <label class="form-check-label" for="inlineRadio6">기타</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row detail">
+                                <div class="col">
+                                    <label class="form-check-label" for="textArea">상세내용(선택)</label>
+                                    <textarea id="detail-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-area">
+                            <span> 권리침해/저작권위반 등은 권리침해 신고센터를 통해 문의해주세요.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reportCancelBtn">취소</button>
+                    <button type="button" class="btn btn-danger" id="reportSubmitBtn">신고하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 이상 신고 처리 모달 -->
     <script>
-        let ws = new WebSocket("ws://172.31.99.45/group/detail")
+        let ws = new WebSocket("ws://211.207.221.23:8099/group/detail")
         
         // 전송 버튼 삭제로 인해 없앰
          document.getElementById('chatSend').addEventListener('click', (e) => {
@@ -539,6 +680,64 @@ font-family: "AppleSDGothicNeoL.ttf";
                 })
             }
         })
+    
+    // 신고 모달 객체 전역변수로 선언
+    let reportModal = new bootstrap.Modal(document.getElementById('reportModal'))
+        
+    // 신고 모달 버튼 눌렀을 시
+    $('#reportBtn').on('click', (e) => {
+    	reportModal.show()
+    })
+    
+    // 신고 제출 버튼 눌렀을 시
+    $('#reportSubmitBtn').on('click', (e) => {
+    	let mem_nick = $('#title').val()
+    	let report_nick = "${loginSession.mem_nick}"
+        let report_reason = $(".form-check-input:checked").val();
+        let report_reason_detail = $("#detail-textarea").val();
+        
+       	if (mem_nick === "") {
+       		alert('신고할 유저 닉네임을 입력해주세요.')
+       	} else {
+       		$.ajax({
+       			url : "/group/kickoutCheck",
+       			type : "get",
+       			data : { mem_nick : mem_nick },
+       			success : (result) => {
+       				if (result === 'no_data') {
+       					alert('해당 유저가 존재하지 않습니다.')
+       				} else if (result === 'not_same_room') {
+       					alert('현재 그룹 내에 존재하는 유저를 신고해주세요.')
+       				} else if (result === 'same_room') {
+       					if (mem_nick === report_nick) {
+       						alert('자기 자신을 신고할 수 없습니다.')
+       					} else {
+       						let reportConfirm = confirm('정말 해당 유저를 신고하시겠습니까?')
+       						if (reportConfirm) {
+       							$.ajax({
+       								url : "/group/report",
+       								type : "post",
+       								data : { mem_nick : mem_nick, report_nick : report_nick, report_reason : report_reason, report_reason_detail : report_reason_detail },
+       								success : (re_result) => {
+       									if (re_result === 'success') {
+       										alert('신고가 완료되었습니다.')
+           							    	reportModal.hide()
+       									}
+       								},
+       								error : (er_error) => {
+       									console.log(er_error)
+       								}
+       							})
+       						}
+       					}
+       				}
+       			},
+       			error : (error) => {
+       				console.log(error)
+       			}
+       		})
+       	}
+    })
     </script>
     <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

@@ -30,12 +30,15 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/notLogin")
+	public String notLogin() throws Exception {
+		System.out.println("로그인 풀림");
+		return "notLogin";
+	}
 	   @ExceptionHandler
 	   public String errorerror(Exception e) {
 	      System.out.println("예외 발생");
 	      e.printStackTrace();
 	      return "redirect:/error";
 	   }
-
-	
 }
