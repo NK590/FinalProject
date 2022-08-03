@@ -20,6 +20,7 @@
 <title>게시판</title>
 </head>
 <style>
+
 @font-face {
    src: url("/resources/fonts/GothicA1-Regular.ttf");
    font-family: "GothicA1-Regular.ttf";
@@ -96,8 +97,8 @@ margin-bottom : 50px;
 
 </style>
 <body>
-<jsp:include page="../include/header.jsp" />
-	<div class="container boardContainer">
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<div class="container">
 		<div class="row">
 			<div class="col-12 head-text">
 				<h2>질문 게시판</h2>

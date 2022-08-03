@@ -21,39 +21,43 @@
 	crossorigin="anonymous"></script>
 <title>signup</title>
 <style>
+@font-face {
+	src: url("/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+
+@font-face {
+	src: url("/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
 body {
 	box-sizing: border-box;
 }
 
 #checkIdBtn {
-	border-radius: 10px;
-	border: 1px solid black;
+
+	border: 1px solid white;
+	background-color: white;
+	color: solid rgb(8, 0, 83);
+
 }
 
 #btnCancel {
-	background-color: rgb(164, 166, 248);
-	position: relative;
-	border: none;
-	display: inline-block;
-	padding: 15px 25px;
+	background-color: black;
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
 	border-radius: 15px;
-	text-decoration: none;
-	font-weight: bold;
-	margin-right: 25px;
-	height:50px;
+	font-size: 17px;
+	margin-bottom: 20px;
 }
 
 #submitBtn {
-	background-color: #6cb6f7;
-	position: relative;
-	border: none;
-	display: inline-block;
-	padding: 15px 25px;
+	background-color: rgb(8, 0, 83);
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
 	border-radius: 15px;
-	text-decoration: none;
-	font-weight: bold;
-	margin-left: 25px;
-	height:50px;
+	font-size: 17px;
+	margin-bottom: 20px;
 }
 
 .checkFalse {
@@ -78,16 +82,21 @@ body {
 	font-size: xx-small;
 	margin-top: 7px;
 }
+.signTxt{
+font-family: "AppleSDGothicNeoB.ttf";
+font-size: 25px;
 
+}
 </style>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="container"
-		style="border-radius: 30px; width: 450px; border: 3px solid #1e8ae972">
+		style="border-radius: 30px; width: 450px;">
 		<form id="memberForm" action="/member/signupForm" method="post">
 			<div class="row m-3" >
 				<div class="col d-flex justify-content-center">
-					<h2>회원가입</h2>
+					<p class="signTxt">회원가입👨‍👩‍👧‍👦</p>
 				</div>
 			</div>
 
@@ -100,7 +109,7 @@ body {
 						readonly>
 				</div>
 				<div class="col-4">
-					<button type="button" id="checkIdBtn">이메일 확인</button>
+					<button type="button" id="checkIdBtn">이메일 확인✔️</button>
 				</div>
 			</div>
 
@@ -192,7 +201,7 @@ body {
 			<button type="button" id="submitBtn" class="w-btn w-btn-skin">가입하기</button>
 		</div>
 	</div>
-
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 
 	<script>
 		// 취소하기 버튼 누르면 로그인 페이지로 이동
