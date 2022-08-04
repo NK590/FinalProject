@@ -296,7 +296,7 @@
 			aria-labelledby="groupDetailModalLabel" aria-hidden="true"
 		>
 			<div class="modal-dialog">
-				<div class="modal-content">
+				<div class="modal-content" style="font-family: 'AppleSDGothicNeoL.ttf'">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">그룹 상세</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -304,20 +304,28 @@
 					<div class="modal-body">
 						<input type="text" id="groupDetailSeq" style="display: none">
 						<div class="row">
-							<div class="col-3">그룹 이름 : </div>
-							<div class="col-9" id="groupDetailName"></div>
+							<div class="col-3">그룹 이름</div>
+							<div class="col-9">
+								<span id="groupDetailName"></span>
+							</div>
 						</div>
 						<div class="row">
-							<div class="col-3">방장 한마디 : </div>
-							<div class="col-9" id="groupDetailContent"></div>
+							<div class="col-3">방장 한마디</div>
+							<div class="col-9">
+								<span id="groupDetailContent"></span>
+							</div>
 						</div>
 						<div class="row">
-							<div class="col-3">카테고리 : </div>
-							<div class="col-9" id="groupDetailCategory"></div>
+							<div class="col-3">카테고리</div>
+							<div class="col-9">
+								<span id="groupDetailCategory"></span>
+							</div>
 						</div>
 						<div class="row">
-							<div class="col-3">인원 수 : </div>
-							<div class="col-9"><span id="groupDetailCurNum"></span> / <span id="groupDetailMaxNum"></span></div>
+							<div class="col-3">인원 수</div>
+							<div class="col-9">
+								<span id="groupDetailCurNum"></span> / <span id="groupDetailMaxNum"></span>
+							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -391,11 +399,12 @@
 					let img = $("<img>").attr("src", "/resources/group_img/group_img_" + elem.group_image + ".jpg")
 						.css({"width" : "300px", "height" : "200px"})
 					let groupTitle = $("<h3>").html(elem.group_title)
+					let groupCategory = $("<p>").addClass('category').html('카테고리 | ' + elem.group_std_key)
 					let groupDetailBtn = $("<button>").addClass("groupDetailBtn").html("그룹 상세정보🔍")
 					let hiddenInput = $("<input>").attr("type", "text").val(elem.group_seq).css({"display" : "none"})
 					
 					picDiv.append(img)
-					contentDiv.append(groupTitle, groupDetailBtn, hiddenInput)
+					contentDiv.append(groupTitle, groupCategory, groupDetailBtn, hiddenInput)
 					groupDiv.append(picDiv, contentDiv)
 					$('#groupListView').append(groupDiv)
 				})
@@ -427,6 +436,46 @@
 				console.log(error)
 			}
 		})
+	})
+	
+	// 그룹 검색 엔터 입력시
+	$(document).ready(() => {
+		document.getElementById('searchGroupInput').addEventListener('keyup', (e) => {
+            if (event.keyCode === 13) {
+        		let searchGroupInput = $('#searchGroupInput').val()
+        		let searchCategoryInput = $('#searchCategoryInput').val()
+        		$.ajax({
+        			url : "/group/getGroupByName",
+        			type : "get",
+        			data : { group_title : searchGroupInput, group_std_key : searchCategoryInput },
+        			success : (result) => {
+        				$('#groupListView').empty()
+        				result.forEach((elem) => {
+        					let groupDiv = $("<div>").addClass("row g-0 groupDetail")
+        						.css({"border" : "1px solid grey", "width" : "100%", "height" : "200px"})
+        					
+        					let picDiv = $("<div>").addClass("col-4")
+        					let contentDiv = $("<div>").addClass("col-8 align-self-center")
+        					
+        					let img = $("<img>").attr("src", "/resources/group_img/group_img_" + elem.group_image + ".jpg")
+        						.css({"width" : "300px", "height" : "200px"})
+        					let groupTitle = $("<h3>").html(elem.group_title)
+        					let groupCategory = $("<p>").addClass('category').html('카테고리 | ' + elem.group_std_key)
+        					let groupDetailBtn = $("<button>").addClass("groupDetailBtn").html("그룹 상세정보🔍")
+        					let hiddenInput = $("<input>").attr("type", "text").val(elem.group_seq).css({"display" : "none"})
+        					
+        					picDiv.append(img)
+        					contentDiv.append(groupTitle, groupCategory, groupDetailBtn, hiddenInput)
+        					groupDiv.append(picDiv, contentDiv)
+        					$('#groupListView').append(groupDiv)
+        				})
+        			},
+        			error : (error) => {
+        				console.log(error)
+        			}
+        		})
+            }
+        })
 	})
 	
 	// 그룹 들어가기 버튼 클릭 시

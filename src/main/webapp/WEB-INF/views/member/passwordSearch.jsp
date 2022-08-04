@@ -16,7 +16,7 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"
 ></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
 <style>
 @font-face {
 	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
