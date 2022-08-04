@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<title>Document</title>
+<title>Study Helper</title>
 <style>
 /* 드롭다운 열릴때 모션 */
 @-webkit-keyframes scale-in-ver-top {

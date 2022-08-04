@@ -91,7 +91,7 @@ a:nth-child(5) {
 	display: none;
 	position: relative;
 	left: 650px;
-	width: 400px;
+	width: 500px;
 	height: 170px;
 }
 
@@ -678,7 +678,7 @@ button {
     	        if($(".basic").children(".subjectName:eq("+i+")").val()!=""){
     	        	if($("#mem_seq").val().length == 0){//로그인세션값이 없을때 
     	        		$("#myModal5").show()
-    	                $("#modalclose5").on("click",function(){//모달창 바꿀예정 
+    	                $("#modalclose5").on("click",function(){
     	                  $("#myModal5").hide();
     	                });
     	                $("#modalokay5").on("click",function(){
