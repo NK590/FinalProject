@@ -40,11 +40,11 @@ public class SendMail {
 //		sb.append("<h4>↓↓↓↓↓↓</h4>");
 //		sb.append(randomNumber);
 	    sb.append("<div style='background-image:url(https://img.freepik.com/premium-photo/teenager-student-girl-over-yellow-wall-pointing-with-the-index-finger-a-great-idea_1368-49455.jpg); width:600px; height: 520px; background-size: cover; border-radius: 100px;'>\r\n"
-	    		+ "			<div style=\"font-weight: bolder; padding-top: 20px; padding-left: 85px; font-size: larger;\"><안녕하세요. StudyHelper입니다.></div>\r\n"
+	    		+ "			<div><p style=\"font-weight: bolder; padding-top: 20px; padding-left: 85px; font-size: 200%;\"><안녕하세요. StudyHelper입니다.></p></div>\r\n"
 	    		+ "			<span style=\"margin-left: 240px;\"></span>\r\n"
-	    		+ "			<div style=\"font-weight: bold; margin-bottom: 15px; padding-left: 20px;\"><span style=\"margin-left: 100px;\"></span>해당 인증번호를 입력해 주세요.</div>\r\n"
-	    		+ "			<span style=\"margin-left: 270px; margin-top:30px; padding-top:30px;\"></span>			\r\n"
-	    		+ randomNumber +"</div>");
+	    		+ "			<div><p style=\"font-weight: bold; margin-bottom: 15px; padding-left: 20px;\"><span style=\"margin-left: 130px;\"></span>해당 인증번호를 입력해 주세요.</p></div>\r\n"
+	    		+ "			<span style=\"margin-left: 270px; margin-top: 10px;\"></span>			\r\n"
+	    		+ randomNumber +"			</div>");
 		
 		String html = sb.toString();
 		// 메일 옵션 설정
