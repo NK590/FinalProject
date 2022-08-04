@@ -220,9 +220,9 @@ font-size: 30px;
 							<div class="row p-2">
 								<div id="changePW">*비밀번호 변경은 비밀번호 찾기를 통해 변경이 가능합니다.</div>
 								<div id="changePW" style="margin-left:4px;">비밀번호 찾기로 이동하려면
-										<a href="/member/login" style="font-size: x-small; color: #0d6efd; padding: 0px;">여기</a>
-													를 클릭해주세요.</div>
+										<a href="/member/login" style="font-size: x-small; color: #0d6efd; padding: 0px;">여기</a>를 클릭해주세요.</div>
 								
+								<div id="changePW" style="margin-top:15px;">*카카오 회원은 관리자에게 문의해 주시기 바랍니다. <a href="/inquiry/inquiry">문의하기</a></div>
 							</div>
 
 						</form>

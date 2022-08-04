@@ -75,19 +75,22 @@
 	font-size: 20px;
 	margin-left:-80px;
 	padding-top:30px;
+	color:white;
 }
 
 .weekTime {
 	font-family: "AppleSDGothicNeoL.ttf";
 	font-size: 20px;
 	padding-top:30px;
+	color:white;
 }
 #chartDiv{
-	background-color: rgb(3, 0, 58);
-	color:white;
+	background-color: rgb(8, 0, 83);
+	color:black;
 	border-radius:15px;
 
 }
+
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -204,7 +207,7 @@
 				colorList.push(getColor());
 			}
 			if(colorList.length == 0){
-				colorList = ["rgba(255, 150, 90, 0.5)"];
+				colorList = ["rgba(255, 125, 90, 0.5)"];
 			}
 			
 			// Pie
@@ -216,6 +219,7 @@
 					data : countList,
 					backgroundColor : colorList,
 					borderWidth : 2
+					
 				} ]
 			}
 			
@@ -226,9 +230,10 @@
 				        formatter: function (value, context) {
 				            return Math.round(value / context.chart.getDatasetMeta(0).total * 100) + "%";
 				        },
-				        color: 'white',
+				        color: '#ffffff',
 				        font: {
 				        	size: "15"
+				        	
 				        },
 				        align: 'top',
 				    },
@@ -247,6 +252,8 @@
 				    		usePointStyle: true,
 				    		boxWidth: 20,
 				    		fontSize: 12,
+				    		color: "#ffffff"
+				    		
 				    	},
 				    	position: "right"
 				    }
@@ -269,13 +276,18 @@
 			// line
 			// line data
 			var dataLine = {
-					labels: ["월요일" , "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
+					labels: 
+						["월요일" , "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
 					datasets : [{
 						label: "이번주",
 						data: weekList,
 						fill: false,
 						borderColor: getColor2(),
-						tension: 0.4
+						tension: 0.4,
+						
+						
+						
+						
 						
 					},{
 						label: "저번주",
@@ -295,7 +307,8 @@
 								pointStyle: 'line',
 								boxWidth: 30,
 								fontSize: 12,
-								fontColor: '#ffffff'
+								color: "#ffffff"
+			
 							}
 						},
 						tooltip: { // 마우스 호버 툴팁
@@ -310,8 +323,13 @@
 						y: {
 							ticks: {
 								min: 0,
-								stepSize: 1
+								stepSize: 1,
+								color: "#ffffff"
 							}
+						},x:{
+							ticks: {
+							color: "#ffffff"
+						}
 						}
 					}
 			}

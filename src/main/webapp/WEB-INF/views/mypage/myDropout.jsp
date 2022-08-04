@@ -27,7 +27,7 @@ body {
 }
 
 #bodylist {
-	width: 515px;
+	width: 545px;
 	padding: 30px;
 	background-color: white;
 	position: absolute;
@@ -135,24 +135,31 @@ text-decoration: underline;
 						    
 						    </div>
 						<div class="col-12 term-box">
-						
-							<div class="row p-2">
+							
+							<div class="row p-2">	
 							<div class="col-1">1.</div>
+							 <div class="col-11">카카오 회원은 관리자에게 문의해 주시기 바랍니다. <a href="/inquiry/inquiry">문의하기</a></div>
+							 </div>
+							
+							<div class="row p-2">
+							<div class="col-1">2.</div>
 							 <div class="col-11">탈퇴시 고객님의 정보는 소비자 보호에 관한 법률에 의거한 고객정보 보호 정책에 따라 청약철회에 관한
 								기록, 대금결제 및 재화 등의 기록은 법정 기간에 따라 관리됩니다.</div>
 							</div>	
 							
 							<div class="row p-2">
-							<div class="col-1">2.</div>
+							<div class="col-1">3.</div>
 							 <div class="col-11">탈퇴 후 나의 커뮤니티 등의 게시물은 관리가 불가 하오니, 저장을 원하시는 경우
 								탈퇴 전 관리해 주시기 바랍니다.</div>
 							</div>	
 							
 							<div class="row p-2">	
-							<div class="col-1">3.</div>
+							<div class="col-1">4.</div>
 							 <div class="col-11">탈퇴 후 기록관련 서비스는 삭제됩니다.</div>
 							 </div>
+							 
 						</div>
+						
 						<div class="row p-2 d-flex justify-content-end" style="margin-left:0px;">
 							<div class="col-1"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></div>
 							<div class="col-11"><label class="form-check-label"	for="flexCheckDefault"> 위 내용을 모두 숙지하였습니다. </label></div>
