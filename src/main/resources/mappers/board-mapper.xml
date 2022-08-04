@@ -96,6 +96,12 @@
 		delete from tb_reply 
 			where reply_seq = #{reply_seq}
 	</delete>
+	<!-- 공지사항 -->
+	<select id="selectNotice" resultType="com.helper.admin.NoticeDTO">
+	 select * from (select  tb_notice.*, row_number() over (order by notice_seq desc ) as num
+			from tb_notice 
+		  ) where num between 1 and 3
+	</select>
 </mapper>
    
    

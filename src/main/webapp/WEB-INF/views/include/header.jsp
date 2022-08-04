@@ -135,7 +135,7 @@ text-decoration-line: none;
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="/board/toBoard">지식 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
-						<li class="nav-item"><a class="nav" href="#">마이 페이지</a></li>
+						<li class="nav-item"><a class="nav" href="/mypage/myGroup">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/logout" onClick="alert('로그아웃 되었습니다.')">로그아웃</a></li>
 					</ul>
 				</div>
@@ -162,12 +162,12 @@ text-decoration-line: none;
 								Study Helper </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="#">플래너</a></li>
+								<li><a class="dropdown" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
 								<li><a class="dropdown" href="#">나의 공부시간</a></li>
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="#">지식 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
-						<li class="nav-item"><a class="nav" href="#">마이 페이지</a></li>
+						<li class="nav-item"><a class="nav" href="/mypage/myGroup">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/login">로그인</a></li>
 						<li class="nav-item"><a class="nav" href="#">회원가입</a></li>
 					</ul>
