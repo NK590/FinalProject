@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -225,5 +226,12 @@ public class GroupController {
 		MemberDTO memberDto = memberService.findNickname(mem_nick);
 		reportService.insert(new ReportDTO(0, memberDto.getMem_seq(), memberDto.getMem_std_key(), memberDto.getMem_id(), mem_nick, report_reason + "  " + report_reason_detail, report_nick));
 		return "success";
+	}
+
+	@ExceptionHandler
+	public String toError(Exception e) {
+		System.out.println("예외발생");
+		e.printStackTrace();
+		return "redirect:/toError";
 	}
 }
