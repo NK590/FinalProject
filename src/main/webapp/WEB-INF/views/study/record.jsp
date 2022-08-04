@@ -206,7 +206,7 @@
 				    	labels: {
 				    		usePointStyle: true,
 				    		boxWidth: 20,
-				    		fontSize: 12
+				    		fontSize: 12,
 				    	},
 				    	position: "right"
 				    }

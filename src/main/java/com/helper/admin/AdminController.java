@@ -34,15 +34,15 @@ public class AdminController {
 		List<ReportDTO> reportList = service.reportList(curPage*10-9, curPage*10);
 		
 		// 페이징 Map
-		Map<String, Object> map = service.getBleckPageNavi(curPage);
+		Map<String, Object> map = service.getBlackPageNavi(curPage);
 		model.addAttribute("reportList", reportList);
 		model.addAttribute("naviMap", map);
 		return "admin/blacklist";
 	}
 	
 	@RequestMapping(value = "/addBlack")
-	public String addBleck(int mem_seq) throws Exception {
-		service.addBleck(mem_seq);
+	public String addBlack(int mem_seq) throws Exception {
+		service.addBlack(mem_seq);
 		return "redirect:/admin/toBlacklist?curPage=1";
 	}
 	
