@@ -22,12 +22,12 @@
 <title>로그인 페이지</title>
 <style>
 @font-face {
-	src: url("/fonts/AppleSDGothicNeoL.ttf");
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
 	font-family: "AppleSDGothicNeoL.ttf";
 }
 
 @font-face {
-	src: url("/fonts/AppleSDGothicNeoB.ttf");
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
 	font-family: "AppleSDGothicNeoB.ttf";
 }
 
