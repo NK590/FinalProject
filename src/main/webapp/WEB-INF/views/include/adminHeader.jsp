@@ -50,7 +50,7 @@
 	margin: 0 auto;
 	background-color: none;
 }
-a {
+li>a {
 	text-decoration: none;
 	padding: 20px;
 	color: black;

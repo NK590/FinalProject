@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.helper.admin.NoticeDTO;
 import com.helper.member.MemberDAO;
 import com.helper.member.MemberDTO;
 
@@ -101,6 +102,9 @@ public class BoardService {
 	public MemberDTO writer(int mem_seq)throws Exception{ // 게시물 작성자 정보
 		
 		return dao.writer(mem_seq);
+	}
+	public List<NoticeDTO> selectNotice()throws Exception{ // 공지사항 출력
+		return boardDAO.selectNotice();
 	}
 
 }
