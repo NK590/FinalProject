@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.helper.admin.NoticeDTO;
 import com.helper.member.MemberDTO;
 import com.helper.reply.ReplyDTO;
 import com.helper.reply.ReplyService;
@@ -30,15 +31,19 @@ public class BoardController {
 	
 	@RequestMapping(value="/toBoard") 	 // board페이지 요청  // 게시글 전체 조회
 	public String toBoard(Model model,@RequestParam(value="curPage", defaultValue = "1")int curPage) throws Exception{
+		// 공지사랑
+		List<NoticeDTO> noticeList = service.selectNotice();
 		
 		// 게시글 총 개수
 		int listCount = service.getListCnt();
+		
 		// 클릭한 페이지, 총 게시글 수 전달
 		BoardPagingDTO bpd = BoardPagination.getPageInfo(curPage, listCount);
 		System.out.println(curPage +" : "+listCount);
 		//  게시글 목록
 		List<BoardDTO> list = service.selectAll((curPage*10)-9,curPage*10);
 		
+		model.addAttribute("noticeList",noticeList);
 		model.addAttribute("naviMap",bpd);
 		model.addAttribute("list",list);
 		return "/board/board";

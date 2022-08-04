@@ -162,7 +162,7 @@ text-decoration-line: none;
 								Study Helper </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="#">플래너</a></li>
+								<li><a class="dropdown" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
 								<li><a class="dropdown" href="#">나의 공부시간</a></li>
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="#">지식 커뮤니티</a></li>
