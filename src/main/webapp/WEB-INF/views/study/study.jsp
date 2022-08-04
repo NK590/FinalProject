@@ -43,6 +43,7 @@
 
 .stopwatch span {
 	padding-right: 30px;
+	padding-left: 20px;
 	padding-top: 10px;
 	font-weight: bold;
 	font-size: 20pt;
@@ -91,7 +92,7 @@ a:nth-child(5) {
 	display: none;
 	position: relative;
 	left: 650px;
-	width: 400px;
+	width: 500px;
 	height: 170px;
 }
 
@@ -115,6 +116,7 @@ a:nth-child(5) {
 
 .fa-circle-minus {
 	margin-top: 10px;
+	padding-right: 10px;
 }
 
 body {
@@ -280,7 +282,7 @@ button {
 </style>
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" />
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="container">
 		<div class="study_banner">
 			<p class="main_text">공부 시작하기✍🏻</p>
@@ -362,7 +364,7 @@ button {
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title">로그인 해야 기록 저장이 됩니다.</h4>
+					<h4 class="modal-title">로그인 해야 기록이 저장 됩니다.</h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 
@@ -494,7 +496,7 @@ button {
 		<div class="basic stopwatch d-flex justify-content-center"></div>
 		<div class="d-flex justify-content-center">
 			<button type="button" class="btn btn-dark" id="result"
-				style="margin-right: 20px; margin-left: 40px;">기록 저장</button>
+				style="margin-right: 20px;">기록 저장</button>
 			<button type="button" class="btn btn-dark" id="deletebtn"
 				style="margin-right: 20px;">타이머 삭제</button>
 			<button type="button" class="btn btn-light" id="deleteEndBtn"
@@ -662,7 +664,6 @@ button {
     }
     
     $("#result").on("click", function () {//시간 기록 버튼
-      
     	  for (let i=0; i<5;i++){
     	        if($(".basic").children("span:eq("+i+")").html()!=="00:00:00"&& $(".basic").children(".subjectName:eq("+i+")").val()==""){
     	          $("#alert2").fadeTo(2000, 400).slideUp(400, function () {
@@ -679,7 +680,7 @@ button {
     	        if($(".basic").children(".subjectName:eq("+i+")").val()!=""){
     	        	if($("#mem_seq").val().length == 0){//로그인세션값이 없을때 
     	        		$("#myModal5").show()
-    	                $("#modalclose5").on("click",function(){//모달창 바꿀예정 
+    	                $("#modalclose5").on("click",function(){
     	                  $("#myModal5").hide();
     	                });
     	                $("#modalokay5").on("click",function(){
@@ -729,9 +730,9 @@ button {
     	      let bt = document.querySelectorAll(".resetbtn"); // get all buttons with the class 모든타이머00으로
     	      for (var i = 0; i < bt.length; i++) { // newer browsers can use forEach
     	        bt[i].click();
-    	      }
+    	      }  	      
     	      closeFullScreenMode();//전체화면닫기
-    	  
+    	      
     })
     function time(seconds) {
 			var hour = parseInt(seconds/3600) < 10 ? '0'+ parseInt(seconds/3600) : parseInt(seconds/3600);

@@ -31,11 +31,6 @@
 	padding: 0%;
 }
 
-.container {
-	margin-top: 100px;
-	margin-bottom: 100px;
-}
-
 .head-text {
 	border-bottom: 2px solid black;
 }

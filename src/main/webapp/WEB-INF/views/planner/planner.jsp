@@ -42,8 +42,8 @@
 <title>플래너</title>
 <style>
 html, body {
-	overflow: hidden;
 	font-size: 14px;
+	font-family: "AppleSDGothicNeoL.ttf";
 }
 
 /* 캘린더 위의 해더 스타일(날짜가 있는 부분) */
@@ -53,10 +53,10 @@ html, body {
 	padding-right: 1em;
 }
 
-/* a {
+ a {
 	text-decoration: none;
 	color: black;
-} */
+} 
 
 .planContent {
 	resize: none;
@@ -94,11 +94,14 @@ html, body {
 </style>
 </head>
 <body>
-	<div class="container" id="calendar-container">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<!-- 플래너 -->
+	<div class="container plannerContainer" id="calendar-container">
 		<div class="row">
-			<div id="calendar"></div>
+			<div id="calendar"></div>	
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<!-- modal -->
 	<div id='datepicker'></div>
 	<form id="plannerForm">
@@ -657,12 +660,6 @@ html, body {
 		})
 		
 		();
-		/* $(document).ready(function(){
-	         $('.flatpickr-time').append("<button id='asdf'>확인</button>");
-	            $('#asdf').click(function(){
-	               alert("시작일이 등록되었습니다.");            
-	            });       
-	         }); */
 	</script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 	<select id="blackPage" resultType="int">
 		select count(*) as totalCnt from tb_report re join tb_member me
     		on re.mem_seq = me.mem_seq
-    		where me.mem_black = 'N'
+    		where me.mem_black = 'N' 
 	</select>
 	<!-- 신고 목록 -->
 	<select id="reportList" parameterType="map" resultType="com.helper.admin.ReportDTO">
@@ -22,7 +22,7 @@
     		where num between #{start} and #{end}
 	</select>
 	<!-- 신고 추가/삭제 -->
-	<update id="addBleck" parameterType="int">
+	<update id="addBlack" parameterType="int">
 		update tb_member set mem_black = 'Y' 
 			where mem_seq = #{mem_seq}
 	</update>

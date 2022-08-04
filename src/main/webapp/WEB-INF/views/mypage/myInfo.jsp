@@ -19,7 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>myInfo</title>
+<title>회원 정보 수정</title>
 <style>
 body {
 	box-sizing: border-box;
@@ -67,7 +67,7 @@ body {
 	font-size: xx-small;
 	margin-top: 7px;
 }
-.nav-item {
+.navItem {
 	font-size: 20px;
 	margin: 8px;
 	text-decoration-line: none;
@@ -119,37 +119,39 @@ background-color: rgb(8, 0, 83);
 	margin-bottom: 20px;
 
 }
+.nickDeco{
+font-family: "AppleSDGothicNeoB.ttf";
+font-size: 30px;
+
+}
 </style>
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" />
-	<div class="container sidelist">
-		<div class="row p-2">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
+	<div class="container">
+		  <div class="row justify-content-center">
 			<!-- 사이드 내비바 -->
 			<div class="col-3 menubar">
-				<div class="sidebar">
-					<h2>
-						<span>${loginSession.mem_nick}</span><span>님</span>
-
-					</h2>
-					<h3>
-						<span>안녕하세요.</span>
+					<p class="nickDeco">
+						<span>${loginSession.mem_nick}</span><span> 님,</span>
+		<br>
+						<span>오늘도 화이팅!💪🏻</span>
 						<br>
 						<br>
-					</h3>
+					</p>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active" id="txtSt" aria-current="page"
+						<li class="nav-item navItem"><a class="nav-link active" id="txtSt" aria-current="page"
 							href="/mypage/myPage"
 						>나의 그룹👨‍👩‍👧‍👦</a></li>
-						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myBoard">나의 활동내역✍🏻</a></li>
-						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myInfo">회원정보 수정✏️</a></li>
-						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myDropout">회원탈퇴👋</a></li>
+						<li class="nav-item navItem"><a class="nav-link" id="txtSt" href="/mypage/myBoard">나의 활동내역✍🏻</a></li>
+						<li class="nav-item navItem"><a class="nav-link" id="txtSt" href="/mypage/myInfo">회원정보 수정✏️</a></li>
+						<li class="nav-item navItem"><a class="nav-link" id="txtSt" href="/mypage/myDropout">회원탈퇴👋</a></li>
 					</ul>
 				</div>
-			</div>
 			<!-- content body -->
 
-			<div class="col-10">
+			<div class="col-9">
 				<p>
 				<h3>회원정보 수정</h3>
 				</p>
@@ -307,6 +309,5 @@ background-color: rgb(8, 0, 83);
 	})
 		
 	</script>
-	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

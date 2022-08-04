@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<title>Document</title>
+<title>Study Helper</title>
 <style>
 /* 드롭다운 열릴때 모션 */
 @-webkit-keyframes scale-in-ver-top {
@@ -155,7 +155,6 @@
 .footer>* {
 	background-color: none;
 	padding: 20px;
-	position: relative;
 }
 
 .ft-ul {
@@ -312,7 +311,7 @@
 		</div>
 	</div>
 	<div class="top_icon">
-		<a href="#header">맨 위로 이동</a>
+		<a href="#header" style="z-index: 99">맨 위로 이동</a>
 	</div>
 	<nav class="navbar navbar-light fixed-top">
 		<div class="container-fluid">
@@ -334,9 +333,10 @@
 				<c:choose>
 					<c:when test="${not empty loginSession}">
 				<div class="offcanvas-body">
+					<div id="underbar"></div>
 					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">홈</a></li>
+							aria-current="page" href="/">홈</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">About
 								us</a></li>
 						<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a>
@@ -358,10 +358,10 @@
 							<ul class="dropdown-menu"
 								aria-labelledby="offcanvasNavbarDropdown">
 								<li><a class="dropdown-item" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
-								<li><a class="dropdown-item" href="#">공부시간 확인하기</a></li>
+								<li><a class="dropdown-item" href="/study/toRecord">공부시간 확인하기</a></li>
 							</ul>
 						<li class="nav-item"><a class="nav-link" href="/board/toBoard">지식 커뮤니티</a></li>	
-						<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+						<li class="nav-item"><a class="nav-link" href="/inquiry/inquiry">문의하기</a></li>
 						<li class="nav-item"><a class="nav-link" href="/mypage/myPage">마이페이지</a></li>
 						<li class="nav-item"><a class="nav-link" id="logoutBtn" onClick="alert('로그아웃 되었습니다.')" href="/member/logout">로그아웃</a></li>
 					</ul>
@@ -372,10 +372,10 @@
 							<div id="underbar"></div>
 							<ul class="navbar-nav">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">홈</a></li>
+									aria-current="page" href="/">홈</a></li>
 								<li class="nav-item"><a class="nav-link" href="#">About
 										us</a></li>
-								<li class="nav-item"><a class="nav-link" href="/group/">그룹
+								<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">그룹
 										스터디</a></li>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#"
@@ -400,8 +400,8 @@
 										<li><a class="dropdown-item" href="#"
 											onclick="sessionCheck();">공부시간 확인하기</a></li>
 									</ul>
-								<li class="nav-item"><a class="nav-link" href="#">지식 커뮤니티</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
+								<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">지식 커뮤니티</a></li>
+								<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">문의하기</a></li>
 								<li class="nav-item"><a class="nav-link" href="#"
 									onclick="sessionCheck();">마이페이지</a></li>
 								<li class="nav-item"><a class="nav-link"
@@ -440,7 +440,7 @@
 					공부는 첫단추는 시간 관리입니다.<br> 오늘 나의 공부 시간은 얼마인지,<br> 어제의 나는 얼마나
 					공부했는지,<br> 이번주에 가장 오래 공부했던 날은 언제였는지.<br> 내 컨디션을 체크하고 공부
 					패턴도 만들 수 있습니다.<br> 스터디 헬퍼는 통계를 통해 여러분의 공부량을 알려드려요. <br> <br>
-					<button class="fastbtn" type="button">바로가기</button>
+					<button class="fastbtn" type="button" id="gotoPlannerBtn">바로가기</button>
 				</p>
 			</div>
 		</div>
@@ -454,7 +454,7 @@
 					더이상 고독한 싸움은 그만하세요.<br> 같은 곳을 향해 걷는 나의 길동무들이 있습니다. <br>
 					그룹마다 좋은 능률을 위해 규칙을 만들고<br> 자칫 나태해질 수 있는 나의 마음을 잡아보아요.<br>
 					또한 내가 알지 못했던 정보를 얻을 수도 있습니다.<br> <br>
-					<button class="fastbtn" type="button">바로가기</button>
+					<button class="fastbtn" type="button" id="gotoGroupBtn">바로가기</button>
 				</p>
 			</div>
 			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
@@ -476,7 +476,7 @@
 					이미 넌 나를 벗어날 수가 없어<br> 떨린 그 눈빛, 티 나는 몸짓 Baby<br> 터뜨리고 싶은 너
 					설렘이 멎기 전에<br> I wanna make it<br> Pop pop pop, you want
 					it<br> Pop pop pop 터지길 원해<br> <br>
-					<button class="fastbtn" type="button">바로가기</button>
+					<button class="fastbtn" type="button" id="gotoStatsBtn">바로가기</button>
 				</p>
 			</div>
 		</div>
@@ -673,6 +673,24 @@
     
     navbarToggle.addEventListener("click",(e)=>navheadEvent())
     textReset.addEventListener("click",(e)=>navheadEventDelete())
-        
+       
+    // 플래너 이동 버튼 매핑
+    document.getElementById('gotoPlannerBtn').addEventListener('click', (e) => {
+    	location.href = "/planner/toPlanner?mem_seq=" + "${loginSession.mem_seq}"
+    })
+    
+    // 그룹 이동 버튼 매핑
+    document.getElementById('gotoGroupBtn').addEventListener('click', (e) => {
+    	location.href = "/group/"
+    })
+    
+    // 통계 이동 버튼 매핑
+    document.getElementById('gotoStatsBtn').addEventListener('click', (e) => {
+    	if ("${loginSession}" === "") {
+    		location.href = "/notLogin"
+    	} else {
+        	location.href = "/study/toRecord"
+    	}
+    })
 </script>
 </html>

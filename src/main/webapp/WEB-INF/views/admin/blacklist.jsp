@@ -206,7 +206,7 @@
 				let mem_seq = this.value;
 				let answer = confirm("블랙리스트에 추가하시겠습니까?");
 				if(answer){
-					location.href = "/admin/addBleck?mem_seq="+mem_seq;
+					location.href = "/admin/addBlack?mem_seq="+mem_seq;
 				} else {
 					return;
 				}

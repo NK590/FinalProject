@@ -15,7 +15,7 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"
 ></script>
-<title>Document</title>
+<title>문의하기</title>
 <style>
 @font-face {
 	src: url("/fonts/GothicA1-Regular.ttf");

@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"
 ></script>
-<title>popup</title>
+<title>이메일 인증</title>
 <style>
 body {
 	margin: 30px;

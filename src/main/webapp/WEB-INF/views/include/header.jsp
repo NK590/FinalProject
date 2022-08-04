@@ -51,19 +51,19 @@
 	margin: 0 auto;
 	background-color: none;
 }
-a {
-	text-decoration: none;
-	padding: 20px;
+
+.nav, .dropdown{
 	color: black;
-	margin-top: -20px;
+	text-decoration-line: none;
+	text-decoration: none;
+	color: black;
 	font-family: "AppleSDGothicNeoL.ttf";
 	font-size: 15px;
 }
-
-.nav{
-color: black;
-text-decoration-line: none;
+.nav:hover {
+	color: black;
 }
+
 li>a:hover {
 	color: rgb(20, 62, 177);
 }
@@ -71,9 +71,25 @@ li>a:hover {
 	font-size: 14px;
 	color: black;
 	text-decoration-line: none;
+	margin-left: 10px;
+	border: none;
 }
+
 .dropdown-menu{
-color: black;
+	border: none;
+	-webkit-animation: scale-in-ver-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-ver-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+#underbar {
+	position: absolute;
+	width: 0;
+	background-color: rgb(66, 112, 252);
+	top: 30px;
+	left: 0;
+	height: 4px;
+	border-radius: 3px;
+	transition: 0.5s;
 }
 
 .dropdown-toggle{
@@ -84,7 +100,9 @@ text-decoration-line: none;
 .nav-item{
 color: black;
 text-decoration-line: none;
-
+margin: 1em;
+justify-content: center;
+vertical-align: top;
 }
 </style>
 <title>Insert title here</title>
@@ -110,12 +128,12 @@ text-decoration-line: none;
 		<c:choose>
 			<c:when test="${not empty loginSession}">				
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<div id="underbar"></div>
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
 							aria-current="page" href="/">홈</a></li>
 						<li class="nav-item"><a class="nav" href="#">About us</a></li>
-						<li class="nav-item"><a class="nav"
-							style="margin-right: -20px" href="/group/">그룹 스터디</a></li>
+						<li class="nav-item"><a class="nav" href="/group/">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
@@ -124,8 +142,7 @@ text-decoration-line: none;
 								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
 								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
 							</ul></li>
-						<li class="nav-item dropdown"><a class="dropdown-toggle"
-							style="margin-left: -20px" href="#" id="navbarDropdownMenuLink"
+						<li class="nav-item dropdown"><a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Study Helper </a>
 							<ul class="dropdown-menu"
@@ -135,48 +152,68 @@ text-decoration-line: none;
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="/board/toBoard">지식 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
-						<li class="nav-item"><a class="nav" href="#">마이 페이지</a></li>
+						<li class="nav-item"><a class="nav" href="/mypage/myPage">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/logout" onClick="alert('로그아웃 되었습니다.')">로그아웃</a></li>
 					</ul>
 				</div>
 			</c:when>	
 			<c:otherwise>	
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<div id="underbar"></div>
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
 							aria-current="page" href="/">홈</a></li>
 						<li class="nav-item"><a class="nav" href="#">About us</a></li>
-						<li class="nav-item"><a class="nav"
-							style="margin-right: -20px" href="/group/">그룹 스터디</a></li>
+						<li class="nav-item"><a class="nav" onclick="loginAlert()">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="#">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
 								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
 							</ul></li>
-						<li class="nav-item dropdown"><a class="dropdown-toggle"
-							style="margin-left: -20px" href="#" id="navbarDropdownMenuLink"
+						<li class="nav-item dropdown"><a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Study Helper </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown" href="#">플래너</a></li>
-								<li><a class="dropdown" href="#">나의 공부시간</a></li>
+								<li><a class="dropdown" href="#" onclick="loginAlert()">플래너</a></li>
+								<li><a class="dropdown" href="#" onclick="loginAlert()">나의 공부시간</a></li>
 							</ul></li>
-						<li class="nav-item"><a class="nav" href="#">지식 커뮤니티</a></li>
-						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
-						<li class="nav-item"><a class="nav" href="#">마이 페이지</a></li>
+						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">지식 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">문의하기</a></li>
+						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/login">로그인</a></li>
-						<li class="nav-item"><a class="nav" href="#">회원가입</a></li>
+						<li class="nav-item"><a class="nav" href="/member/signup">회원가입</a></li>
 					</ul>
 				</div>
 				</c:otherwise>
 				</c:choose>
-				
 			</div>
 		</nav>
 	</header>
+	
+	<script>
+		function loginAlert(){
+			alert("로그인후 이용가능합니다.");
+			return;
+		}
+	
+		let underbar = document.getElementById("underbar");
+		let homeNav = document.querySelectorAll("li[class='nav-item']");
+		function indicator(e){
+			underbar.style.left = e.offsetLeft+"px";
+			underbar.style.width = e.offsetWidth+"px";
+			underbar.style.top = e.offsetTop + e.offsetHeight + "px";
+		}
+		
+		homeNav.forEach((menu)=>
+			menu.addEventListener("mouseover",(e)=>indicator(e.currentTarget)));
+	
+		
+	
+	</script>
+	
 </body>
 </html>

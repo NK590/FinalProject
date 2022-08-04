@@ -12,14 +12,14 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<title>myBoard</title>
+<title>나의 활동내역</title>
 <style>
 body {
 	box-sizing: border-box;
@@ -49,7 +49,7 @@ body {
 .tr:hover {
 	background-color: aliceblue;
 	}
-.nav-item {
+.navItem {
 	font-size: 20px;
 	margin: 8px;
 	text-decoration-line: none;
@@ -80,35 +80,39 @@ body {
 .nav-link{
 	font-size: 20px;
 }
+.nickDeco{
+font-family: "AppleSDGothicNeoB.ttf";
+font-size: 30px;
+
+}
 </style>
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" />
-	<div class="container sidelist">
-		<div class="row p-2">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
+	<div class="container">
+		  <div class="row justify-content-center">
 			<!-- 사이드 내비바 -->
 			<div class="col-3 menubar">
-					<h2>
-						<span>${loginSession.mem_nick}</span><span>님</span>
-					</h2>
-					<h3>
-						<span>안녕하세요.</span>
+					<p class="nickDeco">
+						<span>${loginSession.mem_nick}</span><span> 님,</span>
+		<br>
+						<span>오늘도 화이팅!💪🏻</span>
 						<br>
 						<br>
-					</h3>
+					</p>
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link active" id="txtSt" aria-current="page"
+						<li class="nav-item navItem"><a class="nav-link active" id="txtSt" aria-current="page"
 							href="/mypage/myPage"
 						>나의 그룹👨‍👩‍👧‍👦</a></li>
-						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myBoard">나의 활동내역✍🏻</a></li>
-						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myInfo">회원정보 수정✏️</a></li>
-						<li class="nav-item"><a class="nav-link" id="txtSt" href="/mypage/myDropout">회원탈퇴👋</a></li>
+						<li class="nav-item navItem"><a class="nav-link" id="txtSt" href="/mypage/myBoard">나의 활동내역✍🏻</a></li>
+						<li class="nav-item navItem"><a class="nav-link" id="txtSt" href="/mypage/myInfo">회원정보 수정✏️</a></li>
+						<li class="nav-item navItem"><a class="nav-link" id="txtSt" href="/mypage/myDropout">회원탈퇴👋</a></li>
 					</ul>
 				</div>
-			</div>
 			<!-- content body -->
 
-			<div class="col-10">
+			<div class="col-9">
 				<p>
 				<h3>나의 활동내역</h3>
 				</p>
@@ -158,8 +162,6 @@ body {
 				</div>
 			</div>
 		</div>
-	</div>
-		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 		
 	</script>

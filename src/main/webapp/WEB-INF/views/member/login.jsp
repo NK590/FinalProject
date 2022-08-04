@@ -19,15 +19,15 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"
 ></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<title>login</title>
+<title>로그인 페이지</title>
 <style>
 @font-face {
-	src: url("/fonts/AppleSDGothicNeoL.ttf");
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
 	font-family: "AppleSDGothicNeoL.ttf";
 }
 
 @font-face {
-	src: url("/fonts/AppleSDGothicNeoB.ttf");
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
 	font-family: "AppleSDGothicNeoB.ttf";
 }
 

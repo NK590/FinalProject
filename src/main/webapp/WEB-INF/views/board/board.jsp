@@ -18,9 +18,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
-	<!-- 해더 -->
- 
-
+	<!-- bootstrap icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <title>게시판</title>
 </head>
 <style>
@@ -98,16 +97,40 @@ margin-bottom : 50px;
 	text-decoration: none;
 	color: black;
 }
+.message_box {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 17px;
+}
 
+.main_text {
+	font-size: 25px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+#writeBtn{
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
+	border-radius: 10px;
+	font-size: 16px;
+	margin-bottom: 20px;
+	background-color: rgb(8, 0, 83);
+	font-family: "AppleSDGothicNeoB.ttf";
+
+}
 </style>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 head-text">
-				<h2>질문 게시판</h2>
-			</div>
+		<div class="study_banner">
+			<p class="main_text">질문 커뮤니티🙋🏻‍♀️🙋🏻‍♂️</p>
+<!-- 게시판 -->
 		</div>
+		<p class="message_box">
+			스터디헬퍼에서는 회원들과 여러가지 정보를 공유할 수 있습니다.<br> 문제를 공유하고 머리를 맞대어 문제를 푸는 기쁨을 누려요. 혹은 공부하는 일상을 서로 공유해요.
+			<br>
+		</p>
+		<br>
+	</div>
+	<div class="container">
 		<form id="searchForm">
 			<div class="row searchInput">
 				<div class="col-2 mb-3 searchInput1">
@@ -124,7 +147,7 @@ margin-bottom : 50px;
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="검색어를 입력하세요"
 							id="keyword" aria-describedby="button-addon2" name="keyword">
-						<button class="btn btn-dark" type="button" id="searchBtn">검색</button>
+						<button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
 					</div>
 				</div>
 			</div>
@@ -150,6 +173,20 @@ margin-bottom : 50px;
 						</tr>
 					</thead>
 					<tbody>
+						<%-- 공지사항 --%>
+						<c:if test="${noticeList.size() > 0}">
+							<c:forEach items="${noticeList}" var="nDto">
+								<tr class="noticeTr">
+									<th scope="row"><i class="bi bi-megaphone-fill"></i>&nbsp공지</th>		
+									<td><a href="/admin//toNoticeDetail?notice_seq=${nDto.notice_seq}" class="aTag">${nDto.notice_title}</a></td>
+									<td>관리자</td>
+									<td>${nDto.notice_date}</td>
+									<td>${nDto.view_count}</td>
+									<td class="td">${nDto.notice_content}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<%-- 게시글 목록 --%>
 						<c:if test="${list.size() == 0}">
 							<tr>
 								<th colspan="5" class="textNo">등록된 게시물이 없습니다.</th>
@@ -159,7 +196,7 @@ margin-bottom : 50px;
 							<c:forEach items="${list}" var="dto">
 								<tr class="tr">
 									<th scope="row">${dto.bo_seq}</th>
-									<td><a href="/board/toDetail?bo_seq=${dto.bo_seq}" id="aTag">${dto.bo_title}</a></td>
+									<td><a href="/board/toDetail?bo_seq=${dto.bo_seq}" class="aTag">${dto.bo_title}</a></td>
 									<td>${dto.mem_nick }</td>
 									<td>${dto.bo_date}</td>
 									<td>${dto.view_count}</td>
@@ -176,18 +213,17 @@ margin-bottom : 50px;
 				<ul class="pagination justify-content-center">
 					<c:if test="${naviMap.needPrev eq true }">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${naviMap.startNavi-1}" id="aTag"><</a></li>
+							href="/board/toBoard?curPage=${naviMap.startNavi-1}" class="aTag"><</a></li>
 					</c:if>
-
 					<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 						end="${naviMap.endNavi}" step="1">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${pageNum}"id="aTag">${pageNum}</a></li>
+							href="/board/toBoard?curPage=${pageNum}"class="aTag"">${pageNum}</a></li>
 					</c:forEach>
 
 					<c:if test="${naviMap.needNext eq true }">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${naviMap.endNavi+1}"id="aTag">></a></li>
+							href="/board/toBoard?curPage=${naviMap.endNavi+1}"class="aTag">></a></li>
 					</c:if>
 				</ul>
 
@@ -195,10 +231,11 @@ margin-bottom : 50px;
 		</div>
 		<div class="row writeBtn">
 			<div class="col-12">
-				<button type="button" class="btn btn-warning" id="writeBtn">질문하기</button>
+				<button type="button" class="btn" id="writeBtn">질문하기</button>
 			</div>
 		</div>
-	</div>
+		<!-- 푸터 -->
+		<jsp:include page="../include/footer.jsp" />
 	<script>
 		$("#writeBtn").on("click", function() { // 글쓰기로 페이지 이동
 			location.href = "/board/toWrite";
@@ -216,12 +253,17 @@ margin-bottom : 50px;
 				success : function(data) {
 					console.log(data)
 					 $("tbody").empty();
-					if(data.length == 0){
+					if(data.length == 0){ // 검색 결과가 없을때 
 						let tr = $("<tr>");
 						let td = $("<td colspan=5>").append("등록된 게시물이 없습니다.").addClass("textNo");
 						tr.append(td);
 						tr.appendTo("tbody");
-					} else{
+						// 네비바
+						 $(".colNavi").empty();
+						 liOne.append(one);
+							ul.append(liOne);
+							$(".colNavi").append(ul);
+					} else{	 // 검색결과가 있을때
 						for(dto of data){
 						let tr = $("<tr>").addClass("tr");
 						let th = $("<th>").append(dto.bo_seq).attr("scope","row");
@@ -243,40 +285,48 @@ margin-bottom : 50px;
 						let a2 = $("<a>").addClass("page-link").attr("href","/board/toBoard?curPage=${pageNum}").val("${pageNum}");
 						
 						let liOne = $("<li>").addClass("page-item");
-						let one = $("<a>").addClass("page-link").attr("href","/board/toBoard?curPage=1").val("1");
+						let one = $("<a>").addClass("page-link aTag").attr("href","/board/toBoard?curPage=1").val("목록");
 						
 						let liNext = $("<li>").addClass("page-item");
 						let a3 = $("<a>").addClass("page-link").attr("href","/board/toBoard?curPage=${naviMap.startNavi+1}").html(">");
 						
 						// 네비바 비동기로 만들어 주기
-						/* $(".colNavi").empty();
+						 $(".colNavi").empty();
 						if(data.length <= 10){// 게시글이 10개 이하 일때
-							liOne.append(one);
+/* 							liOne.append(one);
 							ul.append(liOne);
-							$(".colNavi").append(ul);
-						} *//* else{ // 게시글이 10개 이상일때
-							
-						} */
+							$(".colNavi").append(ul); */
+						} else{ // 게시글이 10개 이상일때
+							/*  $(".colNavi").empty();
+							 liOne.append(one);
+								ul.append(liOne);
+								$(".colNavi").append(ul); */
+						} 
 						
+/*
+						<div class="row navi">
+						<div class="col-12 colNavi">
+							<ul class="pagination justify-content-center">
+								<c:if test="${naviMap.needPrev eq true }">
+									<li class="page-item"><a class="page-link"
+										href="/board/toBoard?curPage=${naviMap.startNavi-1}" id="aTag"><</a></li>
+								</c:if>
 
-						/* <ul class="pagination justify-content-center">
-						<c:if test="${naviMap.needPrev eq true }">
-							<li class="page-item"><a class="page-link"
-								href="/board/toBoard?curPage=${naviMap.startNavi-1}"><</a></li>
-						</c:if>
+								<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+									end="${naviMap.endNavi}" step="1">
+									<li class="page-item"><a class="page-link"
+										href="/board/toBoard?curPage=${pageNum}"id="aTag">${pageNum}</a></li>
+								</c:forEach>
 
-						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
-							end="${naviMap.endNavi}" step="1">
-							<li class="page-item"><a class="page-link"
-								href="/board/toBoard?curPage=${pageNum}">${pageNum}</a></li>
-						</c:forEach>
+								<c:if test="${naviMap.needNext eq true }">
+									<li class="page-item"><a class="page-link"
+										href="/board/toBoard?curPage=${naviMap.endNavi+1}"id="aTag">></a></li>
+								</c:if>
+							</ul>
 
-						<c:if test="${naviMap.needNext eq true }">
-							<li class="page-item"><a class="page-link"
-								href="/board/toBoard?curPage=${naviMap.endNavi+1}">></a></li>
-						</c:if>
-					</ul> */
-						
+						</div>
+					</div>
+						*/
 					}  
 				},
 				error : function(e) {
@@ -286,7 +336,6 @@ margin-bottom : 50px;
 				}
 		})
 	</script>
-	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
 
