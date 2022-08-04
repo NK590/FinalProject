@@ -1,76 +1,69 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-	<!-- bootstrap -->
- <!-- <link rel="stylesheet"
+<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- bootstrap -->
+<!-- <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
 <script type="text/javascript"
 	src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>  -->
-	<link
-   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-   rel="stylesheet">
-<script
-   src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- include summernote css/js-->
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet"
+>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- bootstrapwatch -->
- <link rel="stylesheet"
+<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
-	crossorigin="anonymous"> 
+	crossorigin="anonymous"
+>
 <!-- bootstrap icon -->
- <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
+>
 
 <title>게시글 상세보기</title>
 </head>
 <style>
 @font-face {
-   src: url("/resources/fonts/GothicA1-Regular.ttf");
-   font-family: "GothicA1-Regular.ttf";
+	src: url("/resources/fonts/GothicA1-Regular.ttf");
+	font-family: "GothicA1-Regular.ttf";
 }
+
 @font-face {
-   src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
-   font-family: "AppleSDGothicNeoL.ttf";
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
 }
+
 @font-face {
-   src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
-   font-family: "AppleSDGothicNeoB.ttf";
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
 }
+
 .row>* {
 	padding: 0%;
 }
 
-.boardContainer {
-	margin-top: 50px;
-	font-family: "AppleSDGothicNeoL.ttf";
-}
-
 .head-text {
 	border-bottom: 1px solid #ced4da;
-	margin-bottom : 50px;
+	margin-bottom: 50px;
 }
 
-#h2{
-	font-weight: bolder;
+h2 {
 	margin-bottom: 20px;
 }
 
-h4 {
+h2, h4 {
 	font-weight: 800;
 }
 
@@ -81,23 +74,26 @@ h4 {
 .mem-nick {
 	border-bottom: 1px solid #d8dfe9;
 	border-top: 1px solid #d8dfe9;
-	text-align: center;
 	line-height: 50px;
 	height: 50px;
-	background-color: #f2f5f9;
+	background-color: rgb(8, 0, 83);
 	margin-top: 20px;
 	margin-bottom: 20px;
+	color:white;
+	text-align:left;
+	border-radius: 15px;
 }
 
 .replyBox {
-	background: #f2f5f9;
+	background: #white;
 	border-top: 1px solid #dae0e9;
-	padding: 30px;
+
 }
 
 .replyBox2 {
-	background: #f2f5f9;
-	padding: 30px;
+	height: 80px;
+
+	border-radius: 15px;
 }
 
 .replyBox, .replyBox2 {
@@ -106,20 +102,21 @@ h4 {
 }
 
 .reply-form textarea {
-	width: inherit;
-	height: 57px;
-	border: 1px solid #dae0e9;
+	height: 38px;
+	border: 1px solid grey;
 	color: #999;
 	line-height: 1.5;
 	padding: 5px;
 	resize: none;
 	background: #fff;
 	font-size: 13px;
+	border-radius: 15px;
 }
 
 .reply-btn {
-	line-height: 62px;
+	/* line-height: 62px; */
 	text-align: center;
+	
 }
 
 .reply-content-area p {
@@ -143,6 +140,7 @@ a {
 .reply-date {
 	font-size: 11px;
 	color: rgb(178, 172, 172);
+	magin:5px;
 }
 
 .mem-nick span, b {
@@ -157,138 +155,162 @@ a {
 	margin-bottom: 20px;
 }
 
-.bi-trash,.bi-flag-fill,.textReport:hover {
+.bi-trash, .bi-flag-fill:hover {
 	cursor: pointer;
 }
 /* 모달 */
-    .text-area {
-        font-size: 13px;
-        margin-bottom: 10px;
-        color: rgb(137, 133, 133);
-    }
+.text-area {
+	font-size: 13px;
+	margin-bottom: 10px;
+	color: rgb(137, 133, 133);
+}
 
-    .title-area {
-        font-size: 15px;
-    }
-    .title-area{
-        margin-bottom: 20px;
-    }
+.title-area {
+	font-size: 15px;
+}
 
-    .reason-area {
-        font-size: 15px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+.title-area {
+	margin-bottom: 20px;
+}
 
-    #detail-textarea{
-        margin-top: 10px;
-        resize: none;
-        width: 100%;
-        height: 150px;
-    }
+.reason-area {
+	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
-    .reason-area-head {
-        margin-bottom: 10px;
-    }
+textarea {
+	margin-top: 10px;
+	resize: none;
+	width: 100%;
+	height: 150px;
+}
 
-    .reason-area-head>span:first-child {
-        margin-right: 20px;
-    }
+.reason-area-head {
+	margin-bottom: 10px;
+}
 
-    .reason-area-head>span:nth-child(2) {
-        font-size: 13px;
-        color: rgb(137, 133, 133);
-    }
+.reason-area-head>span:first-child {
+	margin-right: 20px;
+}
 
-    .reportArea {
-        border: 1px solid rgb(200, 197, 197);
-        padding: 20px;
-        padding-bottom: 10px;
-    }
+.reason-area-head>span:nth-child(2) {
+	font-size: 13px;
+	color: rgb(137, 133, 133);
+}
 
-    .foot-text-area {
-        font-size: 13px;
-        color: rgb(137, 133, 133);
-    }
-    .detail{
-        margin-top: 15px;
-    }
-    .reportCol{
-    	margin-left : 20px;
-    }
-    .reply-form{
-    	text-align : center;
-    }
-    #replyBtn{
-    	width : 100%;
-    }
-    .reply-btn{
-    	line-height : 50px;
-    }
+.reportArea {
+	border: 1px solid rgb(200, 197, 197);
+	padding: 20px;
+	padding-bottom: 10px;
+}
 
-    /* summernote style update */
-    .note-editor.note-frame .note-editing-area .note-editable[contenteditable=false] {
-    background-color: white;
-	}
-	.note-resizebar{
-	   display:none;
-	}
-	.reportFlag span{
-		font-size : 15px;
-		font-width : border;
-	}
-	.reportFlag {
-		text-align : end;
-	}
-	.updateTitleInput{
-		margin-bottom : 20px;
-	}
+.foot-text-area {
+	font-size: 13px;
+	color: rgb(137, 133, 133);
+}
+
+.detail {
+	margin-top: 15px;
+}
+
+.reportCol {
+	margin-left: 20px;
+}
+/* summernote style update */
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false]
+	{
+	background-color: white;
+	width:100%;
+}
+
+.note-resizebar {
+	display: none;
+}
+
+.message_box {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 17px;
+}
+
+.main_text {
+	font-size: 25px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+#report{
+	float: right;
+	color: white;
+	border: none;
+	background-color: rgb(8, 0, 83);
+	height: 40px;
 	
+}
+#replyBtn{
+width:90px;
+background-color: rgb(8, 0, 83);
+	color: white;
+}
+.btnGroup button{
+margin: 50px;
+}
+#toBack{
+	color: white;
+	background-color: rgb(184, 184, 184);
+}
+#updateBtn{
+border: none;
+background-color:rgb(8, 0, 83);
+color: white;
+}
+#deleteBtn{
+background-color:grey;
+color: white;
+}
+#completeBtn{
+background-color: rgb(8, 0, 83);
+color: white;
+}
 </style>
 <body>
-<!-- 해더 -->
-<jsp:include page="../include/header.jsp" />
-<!-- 게시판 -->
+	<!-- 해더 -->
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<div class="container">
+		<div class="study_banner">
+			<p class="main_text">질문 커뮤니티🙋🏻‍♀️🙋🏻‍♂️</p>
+		</div>
+		<p class="message_box">
+			스터디헬퍼에서는 회원들과 여러가지 정보를 공유할 수 있습니다.<br> 문제를 공유하고 머리를 맞대어 문제를 푸는 기쁨을 누려요. 혹은 공부하는 일상을 서로 공유해요.
+			<br>
+		</p>
+		<br>
+	</div>
 	<form action="/board/update" method="post" id="updateForm">
 		<div class="container boardContainer">
-			<div class="row">
-				<div class="col-12 head-text">
-					<h2 id="h2">지식 커뮤니티</h2>
-				</div>
-			</div>
-			<!-- 신고버튼 -->
-			<c:if test="${loginSession.mem_seq != dto.mem_seq}">
-			<div class="row">
-			<span class = "col-12 reportFlag">
-					<span class = "clickArea">
-					<i class="bi bi-flag-fill" id="report"></i>
-					<span class ="textReport">신고하기</span>
-					</span>
-			</span>
-			</div>
-			</c:if>
+
 			<!-- 게시글 제목 -->
 			<div class="row bo-title1">
 				<div class="col d-flex justify-content-center" id="title">
-					<h4>${dto.bo_title}</h4>
+					<h5>🐚 ${dto.bo_title}</h5>
 				</div>
 			</div>
 			<div class="row bo-title2 d-none">
 				<!-- 수정을 했을때 d-none을 풀어준다 -->
-				<div class="col d-flex justify-content-center updateTitleInput">
-					<input type="text" class="form-control" id="title1" name="bo_title"
-						value="${dto.bo_title}" placeholder="제목을 입력해주세요">
+				<div class="col d-flex justify-content-center">
+					<input type="text" class="form-control" id="title1" name="bo_title" value="${dto.bo_title}"
+						placeholder="제목을 입력해주세요"
+					>
 				</div>
 			</div>
 			<!-- 게시글 정보 띄워주기 -->
 			<div class="row mem-nick">
 				<div class="col">
-					<span>작성자&nbsp<b>${dto.mem_nick}&nbsp</b></span> <span> |
-						&nbsp</span> <span>작성일&nbsp<b>${dto.bo_date}&nbsp</b></span> <span>
-						| &nbsp</span> <span>조회수&nbsp<b>${dto.view_count}</b></span>
+					<span>작성자&nbsp<b>${dto.mem_nick}&nbsp</b></span> <span> | &nbsp</span> <span>작성일&nbsp<b>${dto.bo_date}&nbsp</b></span>
+					<span> | &nbsp</span> <span>조회수&nbsp<b>${dto.view_count}</b></span>
 				</div>
 				<!-- 신고버튼 -->
-
+				<div class="col">
+					<button type="button" id="report">신고하기🚨</button> 
+				</div>
 			</div>
 			<!-- 게시글 내용 -->
 			<div class="row summerNote">
@@ -308,9 +330,11 @@ a {
 					<c:forEach items="${list}" var="reDto">
 						<div class="reply-content-area">
 							<p>
-								<b>${reDto.mem_nick}</b><span class="reply-date">${reDto.reply_date}</span><c:if test="${loginSession.mem_seq == reDto.mem_seq}"><i class="bi bi-trash"></i><!--  mem_seq와 댓글 쓴사람의 seq가 같을 때 삭제 버튼을 띄우준다.  -->
-									<input type="text" class="d-none getSeq"
-										value="${reDto.reply_seq}" name="reply_seq">
+								<b>${reDto.mem_nick}</b><span class="reply-date">${reDto.reply_date}</span>
+								<c:if test="${loginSession.mem_seq == reDto.mem_seq}">
+									<i class="bi bi-trash"></i>
+									<!--  mem_seq와 댓글 쓴사람의 seq가 같을 때 삭제 버튼을 띄우준다.  -->
+									<input type="text" class="d-none getSeq" value="${reDto.reply_seq}" name="reply_seq">
 								</c:if>
 							</p>
 							<p>${reDto.reply_content}</p>
@@ -318,139 +342,136 @@ a {
 					</c:forEach>
 				</c:if>
 			</div>
- 			<div class="row replyBox2">
+			<div class="row replyBox2">
 				<div class="col-11 reply-form">
-					<textarea name="reply_content" id="reply-area"
-						placeholder="50자 이내로 입력해주세요"></textarea>
+					<textarea name="reply_content" id="reply-area" placeholder="50자 이내로 입력해주세요"></textarea>
 				</div>
 				<div class="col-1 reply-btn">
-					<button type="button" class="btn btn-outline-secondary"
-						id="replyBtn">등록</button>
+					<button type="button" class="btn btn-outline-secondary" id="replyBtn">등록</button>
 				</div>
 
-			</div> 
-			
+			</div>
 			<!-- 버튼 -->
 			<div class="row">
-				<div class="col d-flex justify-content-center">
-					<button type="button" class="btn btn-secondary m-2" id="toBack">목록</button>
+				<div class="col d-flex justify-content-center btnGroup">
+					<button type="button" class="btn" id="toBack">목록</button>
 					<c:if test="${dto.mem_seq == loginSession.mem_seq}">
 						<!-- loginSession.mem_seq 값으로 대체하기 -->
-						<button type="button" class="btn btn-defualt m-2" id="updateBtn">수정</button>
-						<button type="button" class="btn btn-dark m-2" id="deleteBtn">삭제</button>
-						<button type="button" class="btn btn-defualt m-2 d-none"
-							id="completeBtn">완료</button>
+						<button type="button" class="btn" id="updateBtn">수정</button>
+						<button type="button" class="btn" id="deleteBtn">삭제</button>
+						<button type="button" class="btn d-none" id="completeBtn">완료</button>
 					</c:if>
 				</div>
 			</div>
 		</div>
 		<div>
-				<input type="text" name="bo_seq" value="${dto.bo_seq}" id="bo_seq"class="d-none"> 
-				<input type="text" name="mem_nick" value="${dto.mem_nick}" class="d-none" id="writerNick"> 
-				<input type="text" name="mem_seq" value="${dto.mem_seq}" class="d-none" id="writer"> 
-				<input type="text" name="img_src" id="img_src" class="d-none">
-				<input type="text" id="mem_id"  class = "d-none" value="${mDto.mem_id}">
-				<input type="text" id="mem_std_key"  class = "d-none" value="${mDto.mem_std_key}"> 
+			<input type="text" name="bo_seq" value="${dto.bo_seq}" id="bo_seq" class="d-none"> <input
+				type="text" name="mem_nick" value="${dto.mem_nick}" class="d-none" id="writerNick"
+			> <input type="text" name="mem_seq" value="${dto.mem_seq}" class="d-none" id="writer">
+			<input type="text" name="img_src" id="img_src" class="d-none"> <input type="text"
+				id="mem_id" class="d-none" value="${mDto.mem_id}"
+			> <input type="text" id="mem_std_key" class="d-none" value="${mDto.mem_std_key}">
 
 		</div>
 	</form>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">게시글 신고</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalXBtn"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-area">
-                        <span> 게시물 신고는 study hepler 이용수칙에 맞지 않는 글을 신고하는 기능이며
-                            반대 의견을 표시하는 것이 아닙니다. 사용자님의 관심과 신고가 건전하고 올바른 study helper
-                            문화를 만듭니다. 허위신고의 경우 신고자가 제재받을 수 있음을 유념해주세요.
-                        </span>
-                    </div>
-                    <div class="reportArea">
-                        <div class="title-area">
-                            <label class="label" for="title"><span>게시글 제목</span></label>
-                            <input type="text" class="form-control" id="title" name="title" value="${dto.bo_title}"
-                                readonly>
-                            <label class="label" for="report_nick"><span>작성자</span></label>
-                            <input type="text" class="form-control" id="report_nick" name="report_nick"
-                                value="${loginSession.mem_nick}" readonly>
-                        </div>
-                        <div class="reason-area">
-                            <div class="reason-area-head">
-                                <span><b>신고사유</b></span><span>여러 사유에 해당하는 경우 대표적인 사유1개를 선택해주세요</span>
-                            </div>
-                            <div class="row reportRow">
-                                <div class="col reportCol">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="report_reason"
-                                            id="inlineRadio1" value="영리목적/홍보성" checked>
-                                        <label class="form-check-label" for="inlineRadio1">영리목적/홍보성</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="report_reason"
-                                            id="inlineRadio2" value="개인정보노출">
-                                        <label class="form-check-label" for="inlineRadio2">개인정보노출</label>
-                                    </div>
-                                </div>
-                                <div class="col reportCol">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="report_reason"
-                                            id="inlineRadio3" value="음란성/선정성">
-                                        <label class="form-check-label" for="inlineRadio3">음란성/선정성</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="report_reason"
-                                            id="inlineRadio4" value="욕설/인신공격">
-                                        <label class="form-check-label" for="inlineRadio4">욕설/인신공격</label>
-                                    </div>
-                                </div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">게시글 신고</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+						id="modalXBtn"
+					></button>
+				</div>
+				<div class="modal-body">
+					<div class="text-area">
+						<span> 게시물 신고는 study hepler 이용수칙에 맞지 않는 글을 신고하는 기능이며 반대 의견을 표시하는 것이 아닙니다. 사용자님의 관심과 신고가
+							건전하고 올바른 study helper 문화를 만듭니다. 허위신고의 경우 신고자가 제재받을 수 있음을 유념해주세요. </span>
+					</div>
+					<div class="reportArea">
+						<div class="title-area">
+							<label class="label" for="title"><span>게시글 제목</span></label> <input type="text"
+								class="form-control" id="title" name="title" value="${dto.bo_title}" readonly
+							> <label class="label" for="report_nick"><span>작성자</span></label> <input type="text"
+								class="form-control" id="report_nick" name="report_nick" value="${loginSession.mem_nick}"
+								readonly
+							>
+						</div>
+						<div class="reason-area">
+							<div class="reason-area-head">
+								<span><b>신고사유</b></span><span>여러 사유에 해당하는 경우 대표적인 사유1개를 선택해주세요</span>
+							</div>
+							<div class="row reportRow">
+								<div class="col reportCol">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio1"
+											value="영리목적/홍보성" checked
+										> <label class="form-check-label" for="inlineRadio1">영리목적/홍보성</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio2"
+											value="개인정보노출"
+										> <label class="form-check-label" for="inlineRadio2">개인정보노출</label>
+									</div>
+								</div>
+								<div class="col reportCol">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio3"
+											value="음란성/선정성"
+										> <label class="form-check-label" for="inlineRadio3">음란성/선정성</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio4"
+											value="욕설/인신공격"
+										> <label class="form-check-label" for="inlineRadio4">욕설/인신공격</label>
+									</div>
+								</div>
 
-                            </div>
-                            <div class="row reportRow">
-                                <div class="col reportCol">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="report_reason"
-                                            id="inlineRadio5" value="같은 내용 반복(도배)">
-                                        <label class="form-check-label" for="inlineRadio5">같은 내용 반복(도배)</label>
-                                    </div>
-                                </div>
-                                <div class="col reportCol">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="report_reason"
-                                            id="inlineRadio6" value="기타">
-                                        <label class="form-check-label" for="inlineRadio6">기타</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row detail reportRow">
-                                <div class="col">
-                                    <label class="form-check-label" for="textArea">상세내용(선택)</label>
-                                    <textarea id="detail-textarea"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-area">
-                            <span> 권리침해/저작권위반 등은 권리침해 신고센터를 통해 문의해주세요.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reportCancelBtn">취소</button>
-                     <button type="button" class="btn btn-danger" id="reportBtn">신고하기</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+							</div>
+							<div class="row reportRow">
+								<div class="col reportCol">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio5"
+											value="같은 내용 반복(도배)"
+										> <label class="form-check-label" for="inlineRadio5">같은 내용 반복(도배)</label>
+									</div>
+								</div>
+								<div class="col reportCol">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio6"
+											value="기타"
+										> <label class="form-check-label" for="inlineRadio6">기타</label>
+									</div>
+								</div>
+							</div>
+							<div class="row detail reportRow">
+								<div class="col">
+									<label class="form-check-label" for="textArea">상세내용(선택)</label>
+									<textarea id="detail-textarea"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="text-area">
+							<span> 권리침해/저작권위반 등은 권리침해 신고센터를 통해 문의해주세요. </span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reportCancelBtn">취소</button>
+					<button type="button" class="btn btn-danger" id="reportBtn">신고하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script>
 		let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
 		// 신고 아이콘을 눌렀을 때
-	  	$(".clickArea").on("click",function(){
+	  	$("#report").on("click",function(){
 	  		if(confirm("해당 게시글을 신고하시겠습니까?")){
 				exampleModal.show();	
 
@@ -514,7 +535,7 @@ a {
 						    ['insert', ['picture']]
 					   ],
 				placeholder : "300자 이내의 내용을 입력해주세요.",
- 				tabsize : 2, 
+				tabsize : 2,
 				minHeight : 400,
 				maxHeight : $(this).children().prop("height"),
 				height : $(this).children().prop("height"),  // 높이 속성을 자식의 높이 값으로 한다.
@@ -647,7 +668,7 @@ a {
 			$("#completeBtn").on("click",function(){
 				// 정규표현식
 				let regexTitle = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,20}$/;
-				let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,1000}$/;
+				let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,300}$/;
 				
 				if($("#title1").val()==""){
             		alert("제목을 입력해주세요."); 
@@ -676,7 +697,6 @@ a {
 					"value": updateFile}).css("display", "none");
 				$("#updateForm").append(files);
 				$("#updateForm").submit();
-				alert("게시글이 수정되었습니다.");
 			}) 
 			
 			
@@ -801,7 +821,7 @@ a {
 			
 				
 		</script>
-			<!-- 푸터 -->
+	<!-- 푸터 -->
 	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
