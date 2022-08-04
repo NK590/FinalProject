@@ -43,7 +43,7 @@
 
 .stopwatch span {
 	padding-right: 30px;
-	padding-left: 20px;
+	padding-left: 30px;
 	padding-top: 10px;
 	font-weight: bold;
 	font-size: 20pt;
@@ -51,10 +51,11 @@
 	float: left;
 }
 
+
 .subjectName {
 	height: 40px;
 	margin-top: 10px;
-	margin-right: 10px;
+	margin-right: 20px;
 	text-align: left;
 }
 
@@ -256,10 +257,7 @@ button {
 .btn-spt {
 	margin: 0 auto;
 	text-align: center;
-	margin: 20px; 
-}
-#btn-spt:hover{
-	background-color:#97C2D2;
+	margin: 20px;
 }
 
 #btn-spt {
@@ -499,7 +497,7 @@ button {
 		<div class="basic stopwatch d-flex justify-content-center"></div>
 		<div class="d-flex justify-content-center">
 			<button type="button" class="btn btn-dark" id="result"
-				style="margin-right: 20px;">기록 저장</button>
+				style="margin-right: 20px; margin-left: 30px;">기록 저장</button>
 			<button type="button" class="btn btn-dark" id="deletebtn"
 				style="margin-right: 20px;">타이머 삭제</button>
 			<button type="button" class="btn btn-light" id="deleteEndBtn"
