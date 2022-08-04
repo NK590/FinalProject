@@ -140,7 +140,7 @@ vertical-align: top;
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
 								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
+							<!-- 	<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li> -->
 							</ul></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -150,7 +150,7 @@ vertical-align: top;
 								<li><a class="dropdown" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
 								<li><a class="dropdown" href="/study/toRecord">나의 공부시간</a></li>
 							</ul></li>
-						<li class="nav-item"><a class="nav" href="/board/toBoard">지식 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav" href="/board/toBoard">질문 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
 						<li class="nav-item"><a class="nav" href="/mypage/myPage">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/logout" onClick="alert('로그아웃 되었습니다.')">로그아웃</a></li>
