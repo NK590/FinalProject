@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="/resources/js/pop.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
@@ -12,6 +13,28 @@
 <title>그룹 상세</title>
 </head>
 <style>
+/* pop */
+@keyframes slide-in {
+	 0% {
+		 transform: scale(2) rotate(60deg);
+		 opacity: 0;
+	}
+}
+ @keyframes bump-in {
+	 0% {
+		 transform: scale(0);
+		 opacity: 0;
+	}
+}
+ particule {
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 border-radius: 50%;
+	 width: 30px;
+	 height: 30px;
+	 box-shadow: 1px 1px 4px #eb6383;
+}
 @font-face {
 	src: url("/resources/fonts/GothicA1-Regular.ttf");
 	font-family: "GothicA1-Regular.ttf";
@@ -458,97 +481,97 @@ textarea {
 	<!-- 여기까지 화원 추방 모달 -->
 
 	<!-- 이하 신고 처리 모달 -->
-	<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-		aria-hidden="true"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">그룹 유저 신고</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="text-area">
-						<span> 유저 신고는 study hepler 이용수칙에 맞지 않는 유저를 신고하는 기능이며 반대 의견을 표시하는 것이 아닙니다. 사용자님의 관심과 신고가
-							건전하고 올바른 study helper 문화를 만듭니다. 허위신고의 경우 신고자가 제재받을 수 있음을 유념해주세요.<br> 또한, 보안상의 이유로 현재 그룹
-							내에 존재하는 유저만 신고가 가능합니다.
-						</span>
-					</div>
-					<div class="reportArea">
-						<div class="title-area">
-							<label class="label" for="title"><span>신고할 유저 닉네임</span></label> <input type="text"
-								class="form-control" id="title" name="title"
-							>
-						</div>
-						<div class="reason-area">
-							<div class="reason-area-head">
-								<span><b>신고사유</b></span><span>여러 사유에 해당하는 경우 대표적인 사유 1개만 선택해 주세요.</span>
-							</div>
-							<div class="row">
-								<div class="col">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio1"
-											value="영리목적/홍보성" checked
-										> <label class="form-check-label" for="inlineRadio1">영리목적/홍보성</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio2"
-											value="개인정보노출"
-										> <label class="form-check-label" for="inlineRadio2">개인정보노출</label>
-									</div>
-								</div>
-								<div class="col">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio3"
-											value="음란성/선정성"
-										> <label class="form-check-label" for="inlineRadio3">음란성/선정성</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio4"
-											value="욕설/인신공격"
-										> <label class="form-check-label" for="inlineRadio4">욕설/인신공격</label>
-									</div>
-								</div>
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">그룹 유저 신고</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-area">
+                        <span> 유저 신고는 study hepler 이용수칙에 맞지 않는 유저를 신고하는 기능이며
+                            반대 의견을 표시하는 것이 아닙니다. 사용자님의 관심과 신고가 건전하고 올바른 study helper
+                            문화를 만듭니다. 허위신고의 경우 신고자가 제재받을 수 있음을 유념해주세요.<br>
+                            또한, 보안상의 이유로 현재 그룹 내에 존재하는 유저만 신고가 가능합니다.
+                        </span>
+                    </div>
+                    <div class="reportArea">
+                        <div class="title-area">
+                            <label class="label" for="title"><span>신고할 유저 닉네임</span></label>
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+                        <div class="reason-area">
+                            <div class="reason-area-head">
+                                <span><b>신고사유</b></span><span>여러 사유에 해당하는 경우 대표적인 사유 1개만 선택해 주세요.</span>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio1" value="영리목적/홍보성" checked>
+                                        <label class="form-check-label" for="inlineRadio1">영리목적/홍보성</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio2" value="개인정보노출">
+                                        <label class="form-check-label" for="inlineRadio2">개인정보노출</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio3" value="음란성/선정성">
+                                        <label class="form-check-label" for="inlineRadio3">음란성/선정성</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio4" value="욕설/인신공격">
+                                        <label class="form-check-label" for="inlineRadio4">욕설/인신공격</label>
+                                    </div>
+                                </div>
 
-							</div>
-							<div class="row">
-								<div class="col">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio5"
-											value="같은 내용 반복(도배)"
-										> <label class="form-check-label" for="inlineRadio5">같은 내용 반복(도배)</label>
-									</div>
-								</div>
-								<div class="col">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="report_reason" id="inlineRadio6"
-											value="기타"
-										> <label class="form-check-label" for="inlineRadio6">기타</label>
-									</div>
-								</div>
-							</div>
-							<div class="row detail">
-								<div class="col">
-									<label class="form-check-label" for="textArea">상세내용(선택)</label>
-									<textarea id="detail-textarea"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="text-area">
-							<span> 권리침해/저작권위반 등은 권리침해 신고센터를 통해 문의해주세요. </span>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reportCancelBtn">취소</button>
-					<button type="button" class="btn btn-danger" id="reportSubmitBtn">신고하기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 이상 신고 처리 모달 -->
-	<script>
-        let ws = new WebSocket("ws://211.207.221.23:8099/group/detail")
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio5" value="같은 내용 반복(도배)">
+                                        <label class="form-check-label" for="inlineRadio5">같은 내용 반복(도배)</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="report_reason"
+                                            id="inlineRadio6" value="기타">
+                                        <label class="form-check-label" for="inlineRadio6">기타</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row detail">
+                                <div class="col">
+                                    <label class="form-check-label" for="textArea">상세내용(선택)</label>
+                                    <textarea id="detail-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-area">
+                            <span> 권리침해/저작권위반 등은 권리침해 신고센터를 통해 문의해주세요.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reportCancelBtn">취소</button>
+                    <button type="button" class="btn btn-danger" id="reportSubmitBtn">신고하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 이상 신고 처리 모달 -->
+    <script>
+    	
+        let ws = new WebSocket("ws://192.168.20.12/group/detail")
         
         // 전송 버튼 삭제로 인해 없앰
          document.getElementById('chatSend').addEventListener('click', (e) => {
@@ -624,7 +647,12 @@ textarea {
                 $('#chatContent').append(containerDiv)
             }
             
-            let chatContent = document.getElementById('chatContent')
+            let chatContent = document.getElementById('chatContent');
+            if(messageData.message === "축하" || messageData.message === "추카" || messageData.message === "축하해" || messageData.message === "축하해요" || messageData.message === "ㅊㅋㅊㅋ"){
+        		pop();
+        		window.setTimeout(render, 700);
+        		messageDiv.attr({onclick : "pop()"});
+           	}
             chatContent.scrollTop = chatContent.scrollHeight
         }
         
