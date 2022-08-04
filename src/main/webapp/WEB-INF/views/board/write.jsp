@@ -19,9 +19,6 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
-<!-- 해더 -->
-<jsp:include page="../include/header.jsp" />
-
 <title>글쓰기</title>
 </head>
 <style>
@@ -179,7 +176,8 @@ text-decoration-line: none;
 }
 </style>
 <body>
-	<jsp:include page="../include/header.jsp" />
+<!-- 해더 -->
+<jsp:include page="../include/header.jsp" />
 	<div class="container">
 		<div class="study_banner">
 			<p class="main_text">지식 커뮤니티🙋🏻‍♀️🙋🏻‍♂️</p>

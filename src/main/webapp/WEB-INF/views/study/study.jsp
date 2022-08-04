@@ -43,6 +43,7 @@
 
 .stopwatch span {
 	padding-right: 30px;
+	padding-left: 20px;
 	padding-top: 10px;
 	font-weight: bold;
 	font-size: 20pt;
@@ -115,6 +116,7 @@ a:nth-child(5) {
 
 .fa-circle-minus {
 	margin-top: 10px;
+	padding-right: 10px;
 }
 
 body {
@@ -494,7 +496,7 @@ button {
 		<div class="basic stopwatch d-flex justify-content-center"></div>
 		<div class="d-flex justify-content-center">
 			<button type="button" class="btn btn-dark" id="result"
-				style="margin-right: 20px; margin-left: 40px;">기록 저장</button>
+				style="margin-right: 20px;">기록 저장</button>
 			<button type="button" class="btn btn-dark" id="deletebtn"
 				style="margin-right: 20px;">타이머 삭제</button>
 			<button type="button" class="btn btn-light" id="deleteEndBtn"
