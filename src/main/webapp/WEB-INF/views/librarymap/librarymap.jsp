@@ -11,7 +11,7 @@
 >
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=349d86361dd700855e6b4d0b28aacfa9&libraries=clusterer"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=411a396e5d828e40f9f079fe1b5891e8&libraries=clusterer"
 	></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"

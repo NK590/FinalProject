@@ -348,7 +348,7 @@
 							<ul class="dropdown-menu"
 								aria-labelledby="offcanvasNavbarDropdown">
 								<li><a class="dropdown-item" href="/study/toStudy">공부 시작하기</a></li>
-								<li><a class="dropdown-item" id="golibrary" href="/librarymap">도서관 위치</a></li>
+								<li><a class="dropdown-item" id="golibrary" href="/librarymap/librarymap">도서관 위치</a></li>
 							</ul>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
