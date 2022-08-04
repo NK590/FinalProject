@@ -42,13 +42,13 @@ public class AdminService {
 	}
 
 	// 블랙리스트 추가
-	public int addBleck(int mem_seq) throws Exception {
+	public int addBlack(int mem_seq) throws Exception {
 		return reportDAO.addBlack(mem_seq);
 	}
 
 	// 블랙리스트 페이징
-	public Map<String, Object> getBleckPageNavi(int curPage) throws Exception {
-		return reportDAO.getBleckPageNavi(curPage);
+	public Map<String, Object> getBlackPageNavi(int curPage) throws Exception {
+		return reportDAO.getBlackPageNavi(curPage);
 	}
 
 	// 블랙리스트 유저 아이디로 찾기

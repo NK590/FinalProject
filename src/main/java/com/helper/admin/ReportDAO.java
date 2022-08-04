@@ -30,11 +30,11 @@ public class ReportDAO {
 	// 블랙리스트 추가
 	public int addBlack(int mem_seq) throws Exception {
 		session.delete("adminMapper.deleteBlack", mem_seq);
-		return session.update("adminMapper.addBleck", mem_seq);
+		return session.update("adminMapper.addBlack", mem_seq);
 	}
 
 	// 블랙리스트 페이징
-	public Map<String, Object> getBleckPageNavi(int curPage) throws Exception {
+	public Map<String, Object> getBlackPageNavi(int curPage) throws Exception {
 
 		int totalCnt = session.selectOne("adminMapper.blackPage"); // 전체 게시글 개수
 		int recordCntPerPage = 10; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
