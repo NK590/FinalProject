@@ -57,6 +57,7 @@
 
 .boardContainer {
 	margin-top: 50px;
+	font-family: "AppleSDGothicNeoL.ttf";
 }
 
 .head-text {
@@ -64,11 +65,12 @@
 	margin-bottom : 50px;
 }
 
-h2 {
+#h2{
+	font-weight: bolder;
 	margin-bottom: 20px;
 }
 
-h2, h4 {
+h4 {
 	font-weight: 800;
 }
 
@@ -155,7 +157,7 @@ a {
 	margin-bottom: 20px;
 }
 
-.bi-trash,.bi-flag-fill:hover {
+.bi-trash,.bi-flag-fill,.textReport:hover {
 	cursor: pointer;
 }
 /* 모달 */
@@ -178,7 +180,7 @@ a {
         margin-bottom: 10px;
     }
 
-    textarea {
+    #detail-textarea{
         margin-top: 10px;
         resize: none;
         width: 100%;
@@ -214,6 +216,16 @@ a {
     .reportCol{
     	margin-left : 20px;
     }
+    .reply-form{
+    	text-align : center;
+    }
+    #replyBtn{
+    	width : 100%;
+    }
+    .reply-btn{
+    	line-height : 50px;
+    }
+
     /* summernote style update */
     .note-editor.note-frame .note-editing-area .note-editable[contenteditable=false] {
     background-color: white;
@@ -221,17 +233,40 @@ a {
 	.note-resizebar{
 	   display:none;
 	}
+	.reportFlag span{
+		font-size : 15px;
+		font-width : border;
+	}
+	.reportFlag {
+		text-align : end;
+	}
+	.updateTitleInput{
+		margin-bottom : 20px;
+	}
+	
 </style>
 <body>
 <!-- 해더 -->
 <jsp:include page="../include/header.jsp" />
+<!-- 게시판 -->
 	<form action="/board/update" method="post" id="updateForm">
 		<div class="container boardContainer">
 			<div class="row">
 				<div class="col-12 head-text">
-					<h2>지식 커뮤니티</h2>
+					<h2 id="h2">지식 커뮤니티</h2>
 				</div>
 			</div>
+			<!-- 신고버튼 -->
+			<c:if test="${loginSession.mem_seq != dto.mem_seq}">
+			<div class="row">
+			<span class = "col-12 reportFlag">
+					<span class = "clickArea">
+					<i class="bi bi-flag-fill" id="report"></i>
+					<span class ="textReport">신고하기</span>
+					</span>
+			</span>
+			</div>
+			</c:if>
 			<!-- 게시글 제목 -->
 			<div class="row bo-title1">
 				<div class="col d-flex justify-content-center" id="title">
@@ -240,7 +275,7 @@ a {
 			</div>
 			<div class="row bo-title2 d-none">
 				<!-- 수정을 했을때 d-none을 풀어준다 -->
-				<div class="col d-flex justify-content-center">
+				<div class="col d-flex justify-content-center updateTitleInput">
 					<input type="text" class="form-control" id="title1" name="bo_title"
 						value="${dto.bo_title}" placeholder="제목을 입력해주세요">
 				</div>
@@ -253,9 +288,7 @@ a {
 						| &nbsp</span> <span>조회수&nbsp<b>${dto.view_count}</b></span>
 				</div>
 				<!-- 신고버튼 -->
-				<div class = "col">
-					<i class="bi bi-flag-fill" id="report"></i>
-				</div>
+
 			</div>
 			<!-- 게시글 내용 -->
 			<div class="row summerNote">
@@ -285,7 +318,7 @@ a {
 					</c:forEach>
 				</c:if>
 			</div>
-			<div class="row replyBox2">
+ 			<div class="row replyBox2">
 				<div class="col-11 reply-form">
 					<textarea name="reply_content" id="reply-area"
 						placeholder="50자 이내로 입력해주세요"></textarea>
@@ -295,7 +328,8 @@ a {
 						id="replyBtn">등록</button>
 				</div>
 
-			</div>
+			</div> 
+			
 			<!-- 버튼 -->
 			<div class="row">
 				<div class="col d-flex justify-content-center">
@@ -416,7 +450,7 @@ a {
 		let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
 		// 신고 아이콘을 눌렀을 때
-	  	$(".bi-flag-fill").on("click",function(){
+	  	$(".clickArea").on("click",function(){
 	  		if(confirm("해당 게시글을 신고하시겠습니까?")){
 				exampleModal.show();	
 
@@ -480,7 +514,7 @@ a {
 						    ['insert', ['picture']]
 					   ],
 				placeholder : "300자 이내의 내용을 입력해주세요.",
-				tabsize : 2,
+ 				tabsize : 2, 
 				minHeight : 400,
 				maxHeight : $(this).children().prop("height"),
 				height : $(this).children().prop("height"),  // 높이 속성을 자식의 높이 값으로 한다.
@@ -613,7 +647,7 @@ a {
 			$("#completeBtn").on("click",function(){
 				// 정규표현식
 				let regexTitle = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,20}$/;
-				let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,300}$/;
+				let regexContent = /^(?!\s*$)[a-zA-Zㄱ-힣0-9 ,\W\w]{1,1000}$/;
 				
 				if($("#title1").val()==""){
             		alert("제목을 입력해주세요."); 
@@ -642,6 +676,7 @@ a {
 					"value": updateFile}).css("display", "none");
 				$("#updateForm").append(files);
 				$("#updateForm").submit();
+				alert("게시글이 수정되었습니다.");
 			}) 
 			
 			
