@@ -280,7 +280,7 @@ button {
 </style>
 </head>
 <body>
-	<jsp:include page="../include/header.jsp" />
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="container">
 		<div class="study_banner">
 			<p class="main_text">공부 시작하기✍🏻</p>
@@ -662,7 +662,6 @@ button {
     }
     
     $("#result").on("click", function () {//시간 기록 버튼
-      
     	  for (let i=0; i<5;i++){
     	        if($(".basic").children("span:eq("+i+")").html()!=="00:00:00"&& $(".basic").children(".subjectName:eq("+i+")").val()==""){
     	          $("#alert2").fadeTo(2000, 400).slideUp(400, function () {

@@ -17,10 +17,6 @@
 <title>공지사항</title>
 </head>
 <style>
-.container {
-	margin-top: 100px;
-}
-
 .btn-default {
 	border: 1px solid #ced4da;
 }
@@ -29,7 +25,7 @@
 	display: none;
 }
 
-a {
+td>a {
 	text-decoration: none;
 	color: black;
 }
@@ -56,7 +52,12 @@ h2 {
 	text-align: center;
 	border-bottom: 0ch;
 }
-
+#writeBtn{
+	background-color: rgb(8, 0, 83);
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
+	border-radius: 5px;
+}
 thead, tbody {
 	text-align: center;
 }
@@ -111,7 +112,7 @@ thead, tbody {
 		</div>
 		<div class="row writeBtn">
 			<div class="col-12">
-				<button type="button" class="btn btn-warning" id="writeBtn">글쓰기</button>
+				<button type="button" id="writeBtn">글쓰기</button>
 			</div>
 		</div>
 	</div>
