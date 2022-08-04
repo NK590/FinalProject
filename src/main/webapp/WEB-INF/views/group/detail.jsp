@@ -492,7 +492,7 @@ font-family: "AppleSDGothicNeoL.ttf";
     <!-- 이상 신고 처리 모달 -->
     <script>
 
-        let ws = new WebSocket("ws://192.168.1.198/group/detail")
+        let ws = new WebSocket("ws://192.168.20.24/group/detail")
 
         
         // 전송 버튼 삭제로 인해 없앰
