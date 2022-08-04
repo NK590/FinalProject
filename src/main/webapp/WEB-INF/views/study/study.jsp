@@ -256,7 +256,10 @@ button {
 .btn-spt {
 	margin: 0 auto;
 	text-align: center;
-	margin: 20px;
+	margin: 20px; 
+}
+#btn-spt:hover{
+	background-color:#97C2D2;
 }
 
 #btn-spt {
@@ -386,14 +389,14 @@ button {
 		</div>
 	</div>
 	<div class="row" id="alert">
-		<div class="alert alert-success" role="alert">
+		<div class="alert alert-success text-center" role="alert">
 			<h4 class="alert-heading">1분후 모든 타이머가 리셋 됩니다!</h4>
 			<p>자정에 모든 타이머가 리셋됩니다. 그전에 공부시간을 저장하지 않으면 공부시간이 모두 사리집니다 서둘러 공부시간을
 				저장해 주세요!!</p>
 		</div>
 	</div>
 	<div class="row" id="alert3">
-		<div class="alert alert-success" role="alert">
+		<div class="alert alert-success text-center" role="alert">
 			<h4 class="alert-heading">타이머를 모두 삭제 할 수 없습니다.</h4>
 			<p>삭제할 수 없는 타이머 입니다.</p>
 		</div>

@@ -63,7 +63,9 @@
 .nav:hover {
 	color: black;
 }
-
+a{
+	display:block;
+}
 li>a:hover {
 	color: rgb(20, 62, 177);
 }
