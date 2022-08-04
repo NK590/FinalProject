@@ -218,7 +218,9 @@ button {
 	/*스탑워치 초*/
 	font-size: x-large
 }
-
+#btn-spt:hover{
+	background-color:#97C2D2;
+}
 #sumTime {
 	/*총공부시간*/
 	font-size: 20pt;
