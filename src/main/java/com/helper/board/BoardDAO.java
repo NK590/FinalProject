@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.helper.admin.NoticeDTO;
+
 @Repository
 public class BoardDAO {
 	@Autowired
@@ -67,6 +69,10 @@ public class BoardDAO {
 		map.put("keyword", keyword);
 		int rs = session.selectOne("boardMapper.searchPaging", map);
 		return rs; 
+	}
+	// 공지사항
+	public List<NoticeDTO> selectNotice()throws Exception{
+		return session.selectList("boardMapper.selectNotice");
 	}
 }
 

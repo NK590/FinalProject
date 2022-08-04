@@ -113,7 +113,6 @@ public class StudyController {
 	@RequestMapping(value = "/toRecord")
 	public String toRecord(Model model) throws Exception {
 	    MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginSession");
-
 	    List<String> time_subjectList = new ArrayList<String>();
 	    List<Integer> time_countList = new ArrayList<Integer>();
 	    List<Map<String, Object>> time_list =service.countList(memberDTO.getMem_seq());

@@ -18,9 +18,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
-	<!-- 해더 -->
- 
-
+	<!-- bootstrap icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <title>게시판</title>
 </head>
 <style>
@@ -39,7 +38,7 @@
 }
 .boardContainer {
 	margin-top: 50px;
-	font-family: "GothicA1-Regular.ttf";
+	font-family: "AppleSDGothicNeoL.ttf";
 }
 
 .btn-default {
@@ -56,7 +55,7 @@ input:first-child {
 
 .head-text {
 	border-bottom: 1px solid #ced4da;
-	margin-bottom : 50px;
+	
 }
 
 .row>* {
@@ -66,6 +65,7 @@ input:first-child {
 h2 {
 	font-weight: bolder;
 	margin-bottom: 20px;
+	padding-left : 12px;
 }
 
 .writeBtn {
@@ -91,21 +91,111 @@ thead, tbody {
 	justify-content: end;
 }
 .boardCol{
-margin-bottom : 50px;
+margin-bottom : 30px;
 }
 
  .aTag {
 	text-decoration: none;
 	color: black;
 }
+.noticeTr{
+	background-color : #f2f5f9;
+}
+/* 푸터 */
+.footer>* {
+	background-color: none;
+	padding: 20px;
+	position: relative;
+}
 
+.ft-ul {
+	list-style: none;
+	text-align: center;
+	height: 100%;
+	padding-top: 28px;
+	color: black;
+	font-size: 12px;
+	z-index: 1;
+}
+/* 헤더 */
+@font-face {
+	src: url("/resources/fonts/GothicA1-Regular.ttf");
+	font-family: "GothicA1-Regular.ttf";
+}
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL.ttf";
+}
+@font-face {
+	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+.banner {
+	position: relative;
+	height: 15vh;
+	background: url("/resources/images/4.jpg") no-repeat center;
+	background-size: cover;
+	border-top-left-radius: 35px;
+	border-top-right-radius: 35px;
+}
+.logo {
+	margin-top: 25px;
+	position: relative;
+	width: 280px;
+	height: 50px;
+	z-index: 1;
+}
+.navbar-toggler {
+	border: none;
+}
+.navbar-nav {
+	margin: 0 auto;
+	background-color: none;
+}
+a {
+	text-decoration: none;
+	padding: 20px;
+	color: black;
+	margin-top: -20px;
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 15px;
+}
+
+.nav{
+color: black;
+text-decoration-line: none;
+}
+li>a:hover {
+	color: rgb(20, 62, 177);
+}
+.dropdown {
+	font-size: 14px;
+	color: black;
+	text-decoration-line: none;
+}
+.dropdown-menu{
+color: black;
+}
+
+.dropdown-toggle{
+color: black;
+text-decoration-line: none;
+
+}
+.nav-item{
+color: black;
+text-decoration-line: none;
+
+}
 </style>
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
-	<div class="container">
+
+	<jsp:include page="../include/header.jsp" />
+<!-- 게시판 -->
+	<div class="container boardContainer">
 		<div class="row">
 			<div class="col-12 head-text">
-				<h2>질문 게시판</h2>
+				<h2>질문 게시판</h2> 
 			</div>
 		</div>
 		<form id="searchForm">
@@ -150,6 +240,20 @@ margin-bottom : 50px;
 						</tr>
 					</thead>
 					<tbody>
+						<%-- 공지사항 --%>
+						<c:if test="${noticeList.size() > 0}">
+							<c:forEach items="${noticeList}" var="nDto">
+								<tr class="noticeTr">
+									<th scope="row"><i class="bi bi-megaphone-fill"></i>&nbsp공지</th>		
+									<td><a href="/admin//toNoticeDetail?notice_seq=${nDto.notice_seq}" class="aTag">${nDto.notice_title}</a></td>
+									<td>관리자</td>
+									<td>${nDto.notice_date}</td>
+									<td>${nDto.view_count}</td>
+									<td class="td">${nDto.notice_content}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<%-- 게시글 목록 --%>
 						<c:if test="${list.size() == 0}">
 							<tr>
 								<th colspan="5" class="textNo">등록된 게시물이 없습니다.</th>
@@ -159,7 +263,7 @@ margin-bottom : 50px;
 							<c:forEach items="${list}" var="dto">
 								<tr class="tr">
 									<th scope="row">${dto.bo_seq}</th>
-									<td><a href="/board/toDetail?bo_seq=${dto.bo_seq}" id="aTag">${dto.bo_title}</a></td>
+									<td><a href="/board/toDetail?bo_seq=${dto.bo_seq}" class="aTag">${dto.bo_title}</a></td>
 									<td>${dto.mem_nick }</td>
 									<td>${dto.bo_date}</td>
 									<td>${dto.view_count}</td>
@@ -176,18 +280,18 @@ margin-bottom : 50px;
 				<ul class="pagination justify-content-center">
 					<c:if test="${naviMap.needPrev eq true }">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${naviMap.startNavi-1}" id="aTag"><</a></li>
+							href="/board/toBoard?curPage=${naviMap.startNavi-1}" class="aTag"><</a></li>
 					</c:if>
 
 					<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 						end="${naviMap.endNavi}" step="1">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${pageNum}"id="aTag">${pageNum}</a></li>
+							href="/board/toBoard?curPage=${pageNum}"class="aTag"">${pageNum}</a></li>
 					</c:forEach>
 
 					<c:if test="${naviMap.needNext eq true }">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${naviMap.endNavi+1}"id="aTag">></a></li>
+							href="/board/toBoard?curPage=${naviMap.endNavi+1}"class="aTag">></a></li>
 					</c:if>
 				</ul>
 
@@ -198,7 +302,8 @@ margin-bottom : 50px;
 				<button type="button" class="btn btn-warning" id="writeBtn">질문하기</button>
 			</div>
 		</div>
-	</div>
+		<!-- 푸터 -->
+		<jsp:include page="../include/footer.jsp" />
 	<script>
 		$("#writeBtn").on("click", function() { // 글쓰기로 페이지 이동
 			location.href = "/board/toWrite";
@@ -216,12 +321,17 @@ margin-bottom : 50px;
 				success : function(data) {
 					console.log(data)
 					 $("tbody").empty();
-					if(data.length == 0){
+					if(data.length == 0){ // 검색 결과가 없을때 
 						let tr = $("<tr>");
 						let td = $("<td colspan=5>").append("등록된 게시물이 없습니다.").addClass("textNo");
 						tr.append(td);
 						tr.appendTo("tbody");
-					} else{
+						// 네비바
+						 $(".colNavi").empty();
+						 liOne.append(one);
+							ul.append(liOne);
+							$(".colNavi").append(ul);
+					} else{	 // 검색결과가 있을때
 						for(dto of data){
 						let tr = $("<tr>").addClass("tr");
 						let th = $("<th>").append(dto.bo_seq).attr("scope","row");
@@ -243,40 +353,48 @@ margin-bottom : 50px;
 						let a2 = $("<a>").addClass("page-link").attr("href","/board/toBoard?curPage=${pageNum}").val("${pageNum}");
 						
 						let liOne = $("<li>").addClass("page-item");
-						let one = $("<a>").addClass("page-link").attr("href","/board/toBoard?curPage=1").val("1");
+						let one = $("<a>").addClass("page-link aTag").attr("href","/board/toBoard?curPage=1").val("목록");
 						
 						let liNext = $("<li>").addClass("page-item");
 						let a3 = $("<a>").addClass("page-link").attr("href","/board/toBoard?curPage=${naviMap.startNavi+1}").html(">");
 						
 						// 네비바 비동기로 만들어 주기
-						/* $(".colNavi").empty();
+						 $(".colNavi").empty();
 						if(data.length <= 10){// 게시글이 10개 이하 일때
-							liOne.append(one);
+/* 							liOne.append(one);
 							ul.append(liOne);
-							$(".colNavi").append(ul);
-						} *//* else{ // 게시글이 10개 이상일때
-							
-						} */
+							$(".colNavi").append(ul); */
+						} else{ // 게시글이 10개 이상일때
+							/*  $(".colNavi").empty();
+							 liOne.append(one);
+								ul.append(liOne);
+								$(".colNavi").append(ul); */
+						} 
 						
+/*
+						<div class="row navi">
+						<div class="col-12 colNavi">
+							<ul class="pagination justify-content-center">
+								<c:if test="${naviMap.needPrev eq true }">
+									<li class="page-item"><a class="page-link"
+										href="/board/toBoard?curPage=${naviMap.startNavi-1}" id="aTag"><</a></li>
+								</c:if>
 
-						/* <ul class="pagination justify-content-center">
-						<c:if test="${naviMap.needPrev eq true }">
-							<li class="page-item"><a class="page-link"
-								href="/board/toBoard?curPage=${naviMap.startNavi-1}"><</a></li>
-						</c:if>
+								<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+									end="${naviMap.endNavi}" step="1">
+									<li class="page-item"><a class="page-link"
+										href="/board/toBoard?curPage=${pageNum}"id="aTag">${pageNum}</a></li>
+								</c:forEach>
 
-						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
-							end="${naviMap.endNavi}" step="1">
-							<li class="page-item"><a class="page-link"
-								href="/board/toBoard?curPage=${pageNum}">${pageNum}</a></li>
-						</c:forEach>
+								<c:if test="${naviMap.needNext eq true }">
+									<li class="page-item"><a class="page-link"
+										href="/board/toBoard?curPage=${naviMap.endNavi+1}"id="aTag">></a></li>
+								</c:if>
+							</ul>
 
-						<c:if test="${naviMap.needNext eq true }">
-							<li class="page-item"><a class="page-link"
-								href="/board/toBoard?curPage=${naviMap.endNavi+1}">></a></li>
-						</c:if>
-					</ul> */
-						
+						</div>
+					</div>
+						*/
 					}  
 				},
 				error : function(e) {
@@ -286,7 +404,6 @@ margin-bottom : 50px;
 				}
 		})
 	</script>
-	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>
 
