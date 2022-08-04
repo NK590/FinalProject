@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,13 @@ public class MemberController {
 	private HttpSession session;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	@ExceptionHandler
+	   public String errorerror(Exception e) {
+	      System.out.println("예외 발생");
+	      e.printStackTrace();
+	      return "redirect:/error";
+	   }
 	
 	@RequestMapping(value = "/login") //로그인 페이지 요청
 	public String login() throws Exception{		
