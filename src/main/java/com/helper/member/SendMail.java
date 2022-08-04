@@ -35,10 +35,17 @@ public class SendMail {
 
 		// 메일에 출력할 텍스트
 		StringBuffer sb = new StringBuffer();
-		sb.append("<h2>안녕하세요. StudyHelper입니다.^^</h4>");
-		sb.append("<h4>해당 인증번호를 입력해 주세요~</h4>");
-	      sb.append("<div style='background-image:url(https://lh3.googleusercontent.com/NiIqeDVC2d9Oa6PRq-sx-n3ZppparWAES6fXhiHb8x58yVTwtaltcZ_rrgqcGFsFfzlpHZvzIRMMeTAGwf8u0n8ucu_4zqiFfKi7r0N7fY3kuLYSMe2SEXk9NKJpmy1U1CxAx9xDNF6qSa_1UJVI349-_eaPjBQunLiPvA2BVZmfrobp7YdlKCovAfMQLbLyAGX3qETfXSg-XKYOiw5YDfrRNff9W5nOSMfiKC7ISx7qe_kemL_wPIHky0YN0Fw5aA4LsSEjNVmqZIk0kSRgpQrEybxEpZeKcy2AxMuG_Uu6rL1e3LcPkyooYtksaogHHoYls_CgK-9MV1Ek5xAuzEiipZA2G0WNU0SAHQe97djumbWgnmdZiXQ1i-HkCWcKM_E1L_Bvn9dlBFoAgtnHoyLRbfYJVGU37ngXYV0XkG0vfEWaHVCWKtGAs8KZkNdIHf34LdHvdgj0x08SdQlr-cezrrAuyQaHAdfriepG02CaPxCCXvy-WGbHGL2MVOkwXgNzKgC4mi_SPzW6rBZbuobhKBYJlpskguyJSIosanmCQdPIQNhWLqERUiqJfqYQr9VuFuPRsMjZ0EWSCWoY95PSOr3pHJN8LwZyuwqnwCXWvCa_iOftan3eIbFiBTHBnNhbZY9EjSMsWvkXJ315bm5HUSBQj66KqQjIoKdwtPrgJT_F1auW0_mUC_eYHTFj4TQvnKf-RmXNbCFf8HZxaDB8CfOPMoPN6iKxbqsWC9LecqiTcZAGvYbKiaU=w1152-h736-no?authuser=0)'>헬퍼도착했습니까??</div>");
-		sb.append(randomNumber);
+//		sb.append("<h2><strong><안녕하세요. StudyHelper입니다.></strong></h4>");
+//		sb.append("<h4>해당 인증번호를 입력해 주세요.</h4>");
+//		sb.append("<h4>↓↓↓↓↓↓</h4>");
+//		sb.append(randomNumber);
+	    sb.append("<div style='background-image:url(https://img.freepik.com/premium-photo/teenager-student-girl-over-yellow-wall-pointing-with-the-index-finger-a-great-idea_1368-49455.jpg); width:600px; height: 520px; background-size: cover; border-radius: 100px;'>\r\n"
+	    		+ "			<div style=\"font-weight: bolder; padding-top: 20px; padding-left: 85px; font-size: larger;\"><안녕하세요. StudyHelper입니다.></div>\r\n"
+	    		+ "			<span style=\"margin-left: 240px;\"></span>\r\n"
+	    		+ "			<div style=\"font-weight: bold; margin-bottom: 15px; padding-left: 20px;\"><span style=\"margin-left: 100px;\"></span>해당 인증번호를 입력해 주세요.</div>\r\n"
+	    		+ "			<span style=\"margin-left: 270px; margin-top:30px; padding-top:30px;\"></span>			\r\n"
+	    		+ randomNumber +"</div>");
+		
 		String html = sb.toString();
 		// 메일 옵션 설정
 		Properties props = new Properties();

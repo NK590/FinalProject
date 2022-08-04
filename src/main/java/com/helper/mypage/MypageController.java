@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,6 +28,13 @@ public class MypageController {
 	private HttpSession session;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	@ExceptionHandler
+	   public String errorerror(Exception e) {
+	      System.out.println("예외 발생");
+	      e.printStackTrace();
+	      return "redirect:/error";
+	   }
 	
 	//마이페이지 -> 나의 그룹 요청
 	@RequestMapping(value = "/myPage") 
