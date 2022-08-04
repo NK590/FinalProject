@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="/resources/js/pop.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 >
@@ -12,6 +13,28 @@
 <title>그룹 상세</title>
 </head>
 <style>
+/* pop */
+@keyframes slide-in {
+	 0% {
+		 transform: scale(2) rotate(60deg);
+		 opacity: 0;
+	}
+}
+ @keyframes bump-in {
+	 0% {
+		 transform: scale(0);
+		 opacity: 0;
+	}
+}
+ particule {
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 border-radius: 50%;
+	 width: 30px;
+	 height: 30px;
+	 box-shadow: 1px 1px 4px #eb6383;
+}
 @font-face {
 	src: url("/resources/fonts/GothicA1-Regular.ttf");
 	font-family: "GothicA1-Regular.ttf";
@@ -547,8 +570,8 @@ textarea {
     </div>
     <!-- 이상 신고 처리 모달 -->
     <script>
-
-        let ws = new WebSocket("ws://192.168.20.24/group/detail")
+    	
+        let ws = new WebSocket("ws://192.168.20.12/group/detail")
         
         // 전송 버튼 삭제로 인해 없앰
          document.getElementById('chatSend').addEventListener('click', (e) => {
@@ -624,7 +647,12 @@ textarea {
                 $('#chatContent').append(containerDiv)
             }
             
-            let chatContent = document.getElementById('chatContent')
+            let chatContent = document.getElementById('chatContent');
+            if(messageData.message === "축하" || messageData.message === "추카" || messageData.message === "축하해" || messageData.message === "축하해요" || messageData.message === "ㅊㅋㅊㅋ"){
+        		pop();
+        		window.setTimeout(render, 700);
+        		messageDiv.attr({onclick : "pop()"});
+           	}
             chatContent.scrollTop = chatContent.scrollHeight
         }
         
