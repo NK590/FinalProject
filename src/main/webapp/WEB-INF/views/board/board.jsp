@@ -98,16 +98,39 @@ margin-bottom : 50px;
 	text-decoration: none;
 	color: black;
 }
+.message_box {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 17px;
+}
 
+.main_text {
+	font-size: 25px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+#writeBtn{
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
+	border-radius: 10px;
+	font-size: 16px;
+	margin-bottom: 20px;
+	background-color: rgb(8, 0, 83);
+	font-family: "AppleSDGothicNeoB.ttf";
+
+}
 </style>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 head-text">
-				<h2>질문 게시판</h2>
-			</div>
+		<div class="study_banner">
+			<p class="main_text">지식 커뮤니티🙋🏻‍♀️🙋🏻‍♂️</p>
 		</div>
+		<p class="message_box">
+			스터디헬퍼에서는 회원들과 여러가지 정보를 공유할 수 있습니다.<br> 문제를 공유하고 머리를 맞대어 문제를 푸는 기쁨을 누려요. 혹은 공부하는 일상을 서로 공유해요.
+			<br>
+		</p>
+		<br>
+	</div>
+	<div class="container">
 		<form id="searchForm">
 			<div class="row searchInput">
 				<div class="col-2 mb-3 searchInput1">
@@ -124,7 +147,7 @@ margin-bottom : 50px;
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="검색어를 입력하세요"
 							id="keyword" aria-describedby="button-addon2" name="keyword">
-						<button class="btn btn-dark" type="button" id="searchBtn">검색</button>
+						<button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
 					</div>
 				</div>
 			</div>
@@ -176,7 +199,7 @@ margin-bottom : 50px;
 				<ul class="pagination justify-content-center">
 					<c:if test="${naviMap.needPrev eq true }">
 						<li class="page-item"><a class="page-link"
-							href="/board/toBoard?curPage=${naviMap.startNavi-1}" id="aTag"><</a></li>
+							href="/board/toBoard?curPage=${naviMap.startNavi-1}" id="aTag"></a></li>
 					</c:if>
 
 					<c:forEach var="pageNum" begin="${naviMap.startNavi}"
@@ -195,7 +218,7 @@ margin-bottom : 50px;
 		</div>
 		<div class="row writeBtn">
 			<div class="col-12">
-				<button type="button" class="btn btn-warning" id="writeBtn">질문하기</button>
+				<button type="button" class="btn" id="writeBtn">질문하기</button>
 			</div>
 		</div>
 	</div>

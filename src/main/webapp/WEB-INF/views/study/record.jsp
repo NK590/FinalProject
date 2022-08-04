@@ -1,25 +1,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"
+></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"
+>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"
+></script>
 <title>통계</title>
 </head>
 <style>
@@ -27,6 +24,7 @@
 	src: url("/resources/fonts/GothicA1-Regular.ttf");
 	font-family: "GothicA1-Regular.ttf";
 }
+
 @font-face {
 	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
 	font-family: "AppleSDGothicNeoL.ttf";
@@ -39,6 +37,7 @@
 
 .container {
 	width: 1000px;
+	
 }
 
 /* 바디 영역 */
@@ -47,22 +46,63 @@
 }
 
 .totalDiv>* {
-	font-family: "GothicA1-Regular.ttf";
+	font-family: "AppleSDGothicNeoB.ttf";
+	font-size: 24px;
 }
 
 .totalDiv>span {
-	font-size: 25px;
-	color: orange;
+	font-size: 23px;
+	color: rgb(8, 0, 83);
+	font-family: "AppleSDGothicNeoL.ttf";
 }
 
 #viewTime {
 	width: 20%;
 }
+
+.message_box {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 17px;
+}
+
+.main_text {
+	font-size: 25px;
+	font-family: "AppleSDGothicNeoB.ttf";
+}
+
+.sbujectTime {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 20px;
+	margin-left:-80px;
+	padding-top:30px;
+}
+
+.weekTime {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 20px;
+	padding-top:30px;
+}
+#chartDiv{
+	background-color: rgb(3, 0, 58);
+	color:white;
+	border-radius:15px;
+
+}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="container">
-		<!-- 바디 시작 -->
+		<div class="study_banner">
+			<p class="main_text">나의 공부시간🕒</p>
+		</div>
+		<p class="message_box">
+			스터디헬퍼에서 공부하면 나의 누적 공부시간을 확인할 수 있어요<br> 과목별로 공부한 시간을 확인해서 부족한 과목 공부를 체크하고, 이번주엔 얼마나 공부했는지 확인할
+			수 있어요. <br>
+		</p>
+		<br>
+	</div>
+	<!-- 바디 시작 -->
+	<div class="container">
 		<div class="row bodyContainer">
 			<select class="form-select" id="viewTime">
 				<option value="hour">시간으로 보기</option>
@@ -96,12 +136,12 @@
 			</div>
 			<div class="row" id="chartDiv">
 				<div class="col-12 col-lg-5 text-center" id="pieDiv">
-					<h4>과목별 공부시간</h4>
+					<p class="sbujectTime">과목별 공부시간📚</p>
 					<canvas id="chartPie"></canvas>
 				</div>
 				<div class="col-12 col-lg-7 text-center" id="lineDiv">
-					<h4>주간 공부 그래프</h4>
-					<canvas id="chartLine"></canvas>
+					<p class="weekTime">주간 공부 그래프📈</p>
+					<canvas id="chartLine" height="200"></canvas>
 				</div>
 			</div>
 		</div>
@@ -186,7 +226,7 @@
 				        formatter: function (value, context) {
 				            return Math.round(value / context.chart.getDatasetMeta(0).total * 100) + "%";
 				        },
-				        color: 'black',
+				        color: 'white',
 				        font: {
 				        	size: "15"
 				        },
@@ -206,7 +246,8 @@
 				    	labels: {
 				    		usePointStyle: true,
 				    		boxWidth: 20,
-				    		fontSize: 12
+				    		fontSize: 12,
+				    		
 				    	},
 				    	position: "right"
 				    }
@@ -236,6 +277,7 @@
 						fill: false,
 						borderColor: getColor2(),
 						tension: 0.4
+						
 					},{
 						label: "저번주",
 						data: lastWeekList,
@@ -253,7 +295,8 @@
 								usePointStyle: true,
 								pointStyle: 'line',
 								boxWidth: 30,
-								fontSize: 12
+								fontSize: 12,
+								fontColor: '#ffffff'
 							}
 						},
 						tooltip: { // 마우스 호버 툴팁
