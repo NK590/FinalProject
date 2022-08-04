@@ -38,7 +38,7 @@
 }
 .boardContainer {
 	margin-top: 50px;
-	font-family: "AppleSDGothicNeoL.ttf";
+	font-family: "GothicA1-Regular.ttf";
 }
 
 .btn-default {
@@ -55,7 +55,7 @@ input:first-child {
 
 .head-text {
 	border-bottom: 1px solid #ced4da;
-	
+	margin-bottom : 50px;
 }
 
 .row>* {
@@ -65,7 +65,6 @@ input:first-child {
 h2 {
 	font-weight: bolder;
 	margin-bottom: 20px;
-	padding-left : 12px;
 }
 
 .writeBtn {
@@ -91,113 +90,47 @@ thead, tbody {
 	justify-content: end;
 }
 .boardCol{
-margin-bottom : 30px;
+margin-bottom : 50px;
 }
 
  .aTag {
 	text-decoration: none;
 	color: black;
 }
-.noticeTr{
-	background-color : #f2f5f9;
-}
-/* 푸터 */
-.footer>* {
-	background-color: none;
-	padding: 20px;
-	position: relative;
+.message_box {
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 17px;
 }
 
-.ft-ul {
-	list-style: none;
-	text-align: center;
-	height: 100%;
-	padding-top: 28px;
-	color: black;
-	font-size: 12px;
-	z-index: 1;
-}
-/* 헤더 */
-@font-face {
-	src: url("/resources/fonts/GothicA1-Regular.ttf");
-	font-family: "GothicA1-Regular.ttf";
-}
-@font-face {
-	src: url("/resources/fonts/AppleSDGothicNeoL.ttf");
-	font-family: "AppleSDGothicNeoL.ttf";
-}
-@font-face {
-	src: url("/resources/fonts/AppleSDGothicNeoB.ttf");
+.main_text {
+	font-size: 25px;
 	font-family: "AppleSDGothicNeoB.ttf";
 }
-.banner {
-	position: relative;
-	height: 15vh;
-	background: url("/resources/images/4.jpg") no-repeat center;
-	background-size: cover;
-	border-top-left-radius: 35px;
-	border-top-right-radius: 35px;
-}
-.logo {
-	margin-top: 25px;
-	position: relative;
-	width: 280px;
-	height: 50px;
-	z-index: 1;
-}
-.navbar-toggler {
-	border: none;
-}
-.navbar-nav {
-	margin: 0 auto;
-	background-color: none;
-}
-a {
-	text-decoration: none;
-	padding: 20px;
-	color: black;
-	margin-top: -20px;
-	font-family: "AppleSDGothicNeoL.ttf";
-	font-size: 15px;
-}
-
-.nav{
-color: black;
-text-decoration-line: none;
-}
-li>a:hover {
-	color: rgb(20, 62, 177);
-}
-.dropdown {
-	font-size: 14px;
-	color: black;
-	text-decoration-line: none;
-}
-.dropdown-menu{
-color: black;
-}
-
-.dropdown-toggle{
-color: black;
-text-decoration-line: none;
-
-}
-.nav-item{
-color: black;
-text-decoration-line: none;
+#writeBtn{
+	color: white;
+	border: 3px solid rgb(8, 0, 83);
+	border-radius: 10px;
+	font-size: 16px;
+	margin-bottom: 20px;
+	background-color: rgb(8, 0, 83);
+	font-family: "AppleSDGothicNeoB.ttf";
 
 }
 </style>
 <body>
-
-	<jsp:include page="../include/header.jsp" />
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<div class="container">
+		<div class="study_banner">
+			<p class="main_text">질문 커뮤니티🙋🏻‍♀️🙋🏻‍♂️</p>
 <!-- 게시판 -->
-	<div class="container boardContainer">
-		<div class="row">
-			<div class="col-12 head-text">
-				<h2>질문 게시판</h2> 
-			</div>
 		</div>
+		<p class="message_box">
+			스터디헬퍼에서는 회원들과 여러가지 정보를 공유할 수 있습니다.<br> 문제를 공유하고 머리를 맞대어 문제를 푸는 기쁨을 누려요. 혹은 공부하는 일상을 서로 공유해요.
+			<br>
+		</p>
+		<br>
+	</div>
+	<div class="container">
 		<form id="searchForm">
 			<div class="row searchInput">
 				<div class="col-2 mb-3 searchInput1">
@@ -214,7 +147,7 @@ text-decoration-line: none;
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="검색어를 입력하세요"
 							id="keyword" aria-describedby="button-addon2" name="keyword">
-						<button class="btn btn-dark" type="button" id="searchBtn">검색</button>
+						<button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
 					</div>
 				</div>
 			</div>
@@ -282,7 +215,6 @@ text-decoration-line: none;
 						<li class="page-item"><a class="page-link"
 							href="/board/toBoard?curPage=${naviMap.startNavi-1}" class="aTag"><</a></li>
 					</c:if>
-
 					<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 						end="${naviMap.endNavi}" step="1">
 						<li class="page-item"><a class="page-link"
@@ -299,7 +231,7 @@ text-decoration-line: none;
 		</div>
 		<div class="row writeBtn">
 			<div class="col-12">
-				<button type="button" class="btn btn-warning" id="writeBtn">질문하기</button>
+				<button type="button" class="btn" id="writeBtn">질문하기</button>
 			</div>
 		</div>
 		<!-- 푸터 -->
