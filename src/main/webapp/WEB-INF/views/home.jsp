@@ -282,10 +282,13 @@
 	font-size: 30px;
 }
 
-.top_icon {
+#top_icon {
 	position: fixed;
 	bottom: 5px;
 	right: 5px;
+	text-decoration : none;
+	color:white;
+	background-color: rgb(8, 0, 83);
 }
 
 .fastbtn {
@@ -311,7 +314,7 @@
 		</div>
 	</div>
 	<div class="top_icon">
-		<a href="#header" style="z-index: 99">맨 위로 이동</a>
+		<a href="#header" id="top_icon" style="z-index: 99">맨 위로 이동</a>
 	</div>
 	<nav class="navbar navbar-light fixed-top">
 		<div class="container-fluid">
@@ -434,12 +437,12 @@
 			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
 				<p class="main_text">
-					perfectly planned timer for you <br> 스케줄 관리로 학습의 효율성을 극대화
+					Perfectly Planned Timer For You <br> 스케줄 관리로 학습의 효율성을 극대화
 				</p>
 				<p class="sub_text">
 					공부는 첫단추는 시간 관리입니다.<br> 오늘 나의 공부 시간은 얼마인지,<br> 어제의 나는 얼마나
 					공부했는지,<br> 이번주에 가장 오래 공부했던 날은 언제였는지.<br> 내 컨디션을 체크하고 공부
-					패턴도 만들 수 있습니다.<br> 스터디 헬퍼는 통계를 통해 여러분의 공부량을 알려드려요. <br> <br>
+					패턴도 만들 수 있습니다.<br><br>
 					<button class="fastbtn" type="button" id="gotoPlannerBtn">바로가기</button>
 				</p>
 			</div>
@@ -448,7 +451,7 @@
 			<div class="col-6" data-aos="fade-up" data-aos-offset="200"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
 				<p class="main_text">
-					study together <br> 우리의 규칙으로 만들어가는 그룹 스터디
+					Study Together <br> 우리의 규칙으로 만들어가는 그룹 스터디
 				</p>
 				<p class="sub_text">
 					더이상 고독한 싸움은 그만하세요.<br> 같은 곳을 향해 걷는 나의 길동무들이 있습니다. <br>
@@ -465,17 +468,17 @@
 		<div class="row justify-content-center">
 			<div class="col-6" data-aos="fade-up" data-aos-offset="250"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-				<img class="image_left" src="/resources/images/2.jpg">
+				<img class="image_left" src="/resources/images/chart.jpg">
 			</div>
 			<div class="col-6" data-aos="fade-up" data-aos-offset="200"
 				data-aos-easing="ease-out-cubic" data-aos-duration="2000">
 				<p class="main_text">
-					What's wrong? <br> 홀릴 듯이 난 너를 자극해 (Pop pop pop)
+				Manage By Chart <br> 그래프로 볼 수 있는 나의 공부 상태
 				</p>
 				<p class="sub_text">
-					이미 넌 나를 벗어날 수가 없어<br> 떨린 그 눈빛, 티 나는 몸짓 Baby<br> 터뜨리고 싶은 너
-					설렘이 멎기 전에<br> I wanna make it<br> Pop pop pop, you want
-					it<br> Pop pop pop 터지길 원해<br> <br>
+					더이상 스탑워치를 켰다 껐다 할 필요 없어요.<br> 스터디헬퍼는 최적의 공부를 위해 통계를 제공합니다.
+			<br>과목별 시간은 물론, 주간 공부 시간까지 <br>더욱 효율적인 시간관리를 위해 지금 바로 사용해보세요.
+					<br> <br>
 					<button class="fastbtn" type="button" id="gotoStatsBtn">바로가기</button>
 				</p>
 			</div>
