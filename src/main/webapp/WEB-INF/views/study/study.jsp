@@ -282,10 +282,207 @@ button {
 	border: 1px solid rgb(0, 17, 84);
 	border-radius: 15px;
 }
+.banner {
+	position: relative;
+	height: 15vh;
+	background: url("/resources/images/4.jpg") no-repeat center;
+	background-size: cover;
+	border-top-left-radius: 35px;
+	border-top-right-radius: 35px;
+}
+.logo {
+	margin-top: 25px;
+	position: relative;
+	width: 280px;
+	height: 50px;
+	z-index: 1;
+}
+.navbar-toggler {
+	border: none;
+}
+.navbar-nav {
+	margin: 0 auto;
+	background-color: none;
+}
+
+.nav, .dropdown{
+	color: black;
+	text-decoration-line: none;
+	text-decoration: none;
+	color: black;
+	font-family: "AppleSDGothicNeoL.ttf";
+	font-size: 15px;
+}
+.nav:hover {
+	color: black;
+}
+li>a{
+	display:block;
+}
+li>a:hover {
+	color: rgb(20, 62, 177);
+}
+.dropdown {
+	font-size: 14px;
+	color: black;
+	text-decoration-line: none;
+	margin-left: 10px;
+	border: none;
+}
+
+.dropdown-menu{
+	border: none;
+	-webkit-animation: scale-in-ver-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-ver-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+#underbar {
+	position: absolute;
+	width: 0;
+	background-color: rgb(66, 112, 252);
+	top: 30px;
+	left: 0;
+	height: 4px;
+	border-radius: 3px;
+	transition: 0.5s;
+}
+
+.dropdown-toggle{
+color: black;
+text-decoration-line: none;
+
+}
+.nav-item{
+color: black;
+text-decoration-line: none;
+margin: 1em;
+justify-content: center;
+vertical-align: top;
+}
+.footer>* {
+	background-color: none;
+	padding: 20px;
+	position: relative;
+}
+
+.ft-ul {
+	list-style: none;
+	text-align: center;
+	height: 100%;
+	padding-top: 28px;
+	color: black;
+	font-size: 12px;
+	z-index: 1;
+}
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<header>
+		<!--메인 배너-->
+		<div class="container-fluid banner">
+			<div class="col" style="text-align: center;">
+				<img src="/resources/images/SH_logo2.png" class="logo">
+			</div>
+		</div>
+		<!--메뉴-->
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container">
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+					aria-controls="navbarNavDropdown" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+		<c:choose>
+			<c:when test="${not empty loginSession}">				
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<div id="underbar"></div>
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav" alink="navy"
+							aria-current="page" href="/">홈</a></li>
+						<li class="nav-item"><a class="nav" href="#">About us</a></li>
+						<li class="nav-item"><a class="nav" href="/group/">그룹 스터디</a></li>
+						<li class="nav-item dropdown"><a class="dropdown-toggle"
+							href="#" id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
+							</ul></li>
+						<li class="nav-item dropdown"><a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Study Helper </a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown" href="/planner/toPlanner?mem_seq=${loginSession.mem_seq}">플래너</a></li>
+								<li><a class="dropdown" href="/study/toRecord">나의 공부시간</a></li>
+							</ul></li>
+						<li class="nav-item"><a class="nav" href="/board/toBoard">질문 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav" href="/inquiry/inquiry">문의하기</a></li>
+						<li class="nav-item"><a class="nav" href="/mypage/myPage">마이 페이지</a></li>
+						<li class="nav-item"><a class="nav" href="/member/logout" onClick="alert('로그아웃 되었습니다.')">로그아웃</a></li>
+					</ul>
+				</div>
+			</c:when>	
+			<c:otherwise>	
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<div id="underbar"></div>
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav" alink="navy"
+							aria-current="page" href="/">홈</a></li>
+						<li class="nav-item"><a class="nav" href="#">About us</a></li>
+						<li class="nav-item"><a class="nav" onclick="loginAlert()">그룹 스터디</a></li>
+						<li class="nav-item dropdown"><a class="dropdown-toggle"
+							href="#" id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> 공부하기 </a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
+								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
+							</ul></li>
+						<li class="nav-item dropdown"><a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Study Helper </a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown" href="#" onclick="loginAlert()">플래너</a></li>
+								<li><a class="dropdown" href="#" onclick="loginAlert()">나의 공부시간</a></li>
+							</ul></li>
+						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">지식 커뮤니티</a></li>
+						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">문의하기</a></li>
+						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">마이 페이지</a></li>
+						<li class="nav-item"><a class="nav" href="/member/login">로그인</a></li>
+						<li class="nav-item"><a class="nav" href="/member/signup">회원가입</a></li>
+					</ul>
+				</div>
+				</c:otherwise>
+				</c:choose>
+			</div>
+		</nav>
+	</header>
+	
+	<script>
+		function loginAlert(){
+			alert("로그인후 이용가능합니다.");
+			return;
+		}
+	
+		let underbar = document.getElementById("underbar");
+		let homeNav = document.querySelectorAll("li[class='nav-item']");
+		function indicator(e){
+			underbar.style.left = e.offsetLeft+"px";
+			underbar.style.width = e.offsetWidth+"px";
+			underbar.style.top = e.offsetTop + e.offsetHeight + "px";
+		}
+		
+		homeNav.forEach((menu)=>
+			menu.addEventListener("mouseover",(e)=>indicator(e.currentTarget)));
+	
+		
+	
+	</script>
 	<div class="container">
 		<div class="study_banner">
 			<p class="main_text">공부 시작하기✍🏻</p>
@@ -510,7 +707,19 @@ button {
 	</div>
 	<input type="text" value="${loginSession.mem_seq}"
 		style="display: none" id="mem_seq">
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+	<footer>
+	<div class="row justify-content-center footer">
+		<div class="col-lg-10 col-12">
+			<ul class="ft-ul">
+				<li>StudyHelper Inc.</li>
+				<li>대표 : 스터디헬퍼 사업자등록번호 : 777-77-77777</li>
+				<li>대표번호 : +82)-777-7777 팩스번호 : +82)-1234-5678 홈페이지 :
+					Studyhelper.com</li>
+				<li>CopyrightⓒStudyHelper Inc. All Rights Reserved.</li>
+			</ul>
+		</div>
+	</div>
+</footer>
 	<script>
     let docV = document.documentElement;
     let Stopwatch = function (elem, options) {
@@ -800,8 +1009,8 @@ button {
       alarmTimer = setInterval("countTime()", 1000);
     }
     //23시58분에 알람 맞춤
-    function matchH() { return ($("#hour").val() == '23'); }
-    function matchM() { return ($("#min").val() == '58'); }
+    function matchH() { return ($("#hour").val() == '16'); }
+    function matchM() { return ($("#min").val() == '52'); }
     function matchS() { return ($("#sec").val() == '58'); }
     function countTime() {
       let nowTime = new Date();

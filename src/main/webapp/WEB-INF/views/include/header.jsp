@@ -63,7 +63,7 @@
 .nav:hover {
 	color: black;
 }
-a{
+li>a{
 	display:block;
 }
 li>a:hover {
@@ -142,7 +142,7 @@ vertical-align: top;
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
 								<li><a class="dropdown" href="/study/toStudy">공부 시작하기</a></li>
-							<!-- 	<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li> -->
+								<li><a class="dropdown" href="/librarymap/librarymap">도서관 위치</a></li>
 							</ul></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">
