@@ -251,29 +251,8 @@ span {
 						console.log(kakao_account);
 						console.log(mem_id);
 						location.href = '/member/kakaoSignUp?mem_id=' + mem_id;
-										/*
-										$.ajax({
-                        				type: "post",
-                       					 url: '/member/kakaoLogin', // 로그인
-                      					  data: { "mem_id" : mem_id },
-                      					  dataType: "text",
-                        				success: function (data) {
-                            					console.log(data);
-                            					if (data === "fail") {// 회원가입
-                               					console.log("왔어!");
-                               					//location.href = "/member/kakaoSignUp"
-                              					 location.href = '/member/kakaoSignUp?mem_id=' + mem_id;
-                          					  } else if (data === "success") {
-								console.log("success");
-								location.href="/"
-                           					 }
-                        }, error: function (request, status, error) {
-                            console.log("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
-                        }
-                    })*/
-                    // ajax끝
-                }
-				, fail: function (error) {
+               	 }
+				, error: function (error) {
 					alert(error);
 				}
             })

@@ -70,9 +70,11 @@ h2, h4 {
 a {
 	color: black;
 }
+
 .mem-nick span, b {
 	margin: 5px;
 }
+
 .summerNote {
 	margin-bottom: 20px;
 }
@@ -80,14 +82,18 @@ a {
 .bi-trash:hover {
 	cursor: pointer;
 }
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false] {
-    background-color: white;
+
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false]
+	{
+	background-color: white;
 }
-.note-resizebar{
-	display:none;
+
+.note-resizebar {
+	display: none;
 }
 </style>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<form action="/admin/noticeUpdate" method="post" id="updateForm">
 		<div class="container">
 			<div class="row">
@@ -104,16 +110,16 @@ a {
 			<div class="row notice-title2 d-none">
 				<!-- 수정을 했을때 d-none을 풀어준다 -->
 				<div class="col d-flex justify-content-center">
-					<input type="text" class="form-control" id="title2" name="notice_title"
-						value="${dto.notice_title}" placeholder="제목을 입력해주세요">
+					<input type="text" class="form-control" id="title2"
+						name="notice_title" value="${dto.notice_title}"
+						placeholder="제목을 입력해주세요">
 				</div>
 			</div>
 			<!-- 게시글 정보 띄워주기 -->
 			<div class="row mem-nick">
 				<div class="col">
-					<span>작성자&nbsp<b>관리자&nbsp</b></span> <span> |
-						&nbsp</span> <span>작성일&nbsp<b>${dto.notice_date}&nbsp</b></span> <span>
-						| &nbsp</span> <span>조회수&nbsp<b>${dto.view_count}</b></span>
+					<span>작성자&nbsp<b>관리자&nbsp</b></span> <span> | &nbsp</span> <span>작성일&nbsp<b>${dto.notice_date}&nbsp</b></span>
+					<span> | &nbsp</span> <span>조회수&nbsp<b>${dto.view_count}</b></span>
 				</div>
 			</div>
 			<!-- 게시글 내용 -->
@@ -122,25 +128,34 @@ a {
 					<textarea id="summernote" name="notice_content" rows="10"></textarea>
 				</div>
 			</div>
+
+
 			<div class="row">
 				<div class="col d-flex justify-content-center">
+
 					<button type="button" class="btn btn-secondary m-2" id="toBack">목록</button>
+					<c:if test="${empty loginSession}">
 						<button type="button" class="btn btn-defualt m-2" id="updateBtn">수정</button>
 						<button type="button" class="btn btn-dark m-2" id="deleteBtn">삭제</button>
 						<button type="button" class="btn btn-defualt m-2 d-none"
 							id="completeBtn">완료</button>
+					</c:if>
+
 				</div>
 			</div>
+
 		</div>
 		<div>
-			<input type="text" name="notice_seq" value="${dto.notice_seq}" id="notice_seq"
-				class="d-none">  <input type="text" name="img_src" id="img_src" class="d-none">
+			<input type="text" name="notice_seq" value="${dto.notice_seq}"
+				id="notice_seq" class="d-none"> <input type="text"
+				name="img_src" id="img_src" class="d-none">
 		</div>
 	</form>
+	<jsp:include page="../include/footer.jsp" />
 	<script>
 		 	// 목록 버튼
 			document.getElementById("toBack").onclick = function(){
-				location.href = "/admin/toNotice";
+				location.href = "/board/toBoard";
 			}
 		 	
 			 

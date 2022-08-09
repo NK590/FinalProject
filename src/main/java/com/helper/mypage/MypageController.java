@@ -40,12 +40,10 @@ public class MypageController {
 	@RequestMapping(value = "/myPage") 
 	public String myGroup(Model model) throws Exception{
 		System.out.println("도착");
-		int group_seq = ((MemberDTO)session.getAttribute("loginSession")).getMem_seq();
+		int group_seq = ((MemberDTO)session.getAttribute("loginSession")).getGroup_seq();
 		System.out.println(group_seq);
 		List<GroupDTO> list = service.myGroup(group_seq);
-		System.out.println(list);
 		model.addAttribute("list", list);
-		System.out.println("group마이페이지 값을 보여달라");;
 		return "mypage/myGroup";
 	}
 

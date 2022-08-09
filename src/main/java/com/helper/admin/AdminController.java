@@ -149,6 +149,8 @@ public class AdminController {
 	public String toDetail(int notice_seq,Model model)throws Exception{
 		NoticeDTO dto = service.selectOneNotice(notice_seq);
 		model.addAttribute("dto",dto);
+		MemberDTO loginSession = (MemberDTO)session.getAttribute("loginSession");
+		model.addAttribute("loginSession", loginSession);
 		return "/admin/noticeDetail";
 	}
 	@RequestMapping(value="/noticeUpdate") // 게시글 수정

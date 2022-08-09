@@ -49,7 +49,7 @@
 	</update>
 	<!-- 공부시간 플래너에 띄워주기 -->
 	<select id="recordForPlanner" parameterType="int" resultType="com.helper.study.TimeDTO">
-		select * from tb_timer where mem_seq = #{mem_seq} and  time_count >= 60
+		select * from tb_timer where mem_seq = #{mem_seq} and  time_count >= 1
 	</select>
 </mapper>
 

@@ -119,7 +119,7 @@ vertical-align: top;
 		</div>
 		<!--메뉴-->
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<div class="container">
+			<div class="container-fluid">
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 					aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -134,7 +134,6 @@ vertical-align: top;
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
 							aria-current="page" href="/">홈</a></li>
-						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav" href="/group/">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"
@@ -165,7 +164,6 @@ vertical-align: top;
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
 							aria-current="page" href="/">홈</a></li>
-						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav" onclick="loginAlert()">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"
@@ -185,7 +183,6 @@ vertical-align: top;
 							</ul></li>
 						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">지식 커뮤니티</a></li>
 						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">문의하기</a></li>
-						<li class="nav-item"><a class="nav" href="#" onclick="loginAlert()">마이 페이지</a></li>
 						<li class="nav-item"><a class="nav" href="/member/login">로그인</a></li>
 						<li class="nav-item"><a class="nav" href="/member/signup">회원가입</a></li>
 					</ul>

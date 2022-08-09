@@ -18,7 +18,6 @@
 <style>
 .footer>* {
 	background-color: none;
-	padding: 20px;
 	position: relative;
 }
 

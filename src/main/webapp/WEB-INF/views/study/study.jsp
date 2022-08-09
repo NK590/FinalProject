@@ -401,7 +401,6 @@ vertical-align: top;
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
 							aria-current="page" href="/">홈</a></li>
-						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav" href="/group/">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"
@@ -432,7 +431,6 @@ vertical-align: top;
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav" alink="navy"
 							aria-current="page" href="/">홈</a></li>
-						<li class="nav-item"><a class="nav" href="#">About us</a></li>
 						<li class="nav-item"><a class="nav" onclick="loginAlert()">그룹 스터디</a></li>
 						<li class="nav-item dropdown"><a class="dropdown-toggle"
 							href="#" id="navbarDropdownMenuLink" role="button"

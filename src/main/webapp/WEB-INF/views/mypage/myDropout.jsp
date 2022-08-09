@@ -206,27 +206,25 @@ text-decoration: underline;
 				return;
 			}
 	
-		let dropoutPw = $("#dropoutPw").val();
-		if($("#dropoutPw").val() == ""){
-			alert("비밀번호를 입력해주세요.");
-			return;
-		}else{
-			
-		}	
+			let dropoutPw = $("#dropoutPw").val();
+			if($("#dropoutPw").val() == ""){
+				alert("비밀번호를 입력해주세요.");
+				return;
+			}
 		
-		$.ajax({
-			url : "/mypage/dropoutForm"
-			,type : "post"
-			,data : { mem_pw : dropoutPw}
-			,success : function(data) {
-				console.log(data);
-				if (data == "success") {
+			$.ajax({
+				url : "/mypage/dropoutForm"
+				,type : "post"
+				,data : { mem_pw : dropoutPw}
+				,success : function(data) {
+					console.log(data);
+					if (data == "success") {
 					
 					let result = confirm("정말 탈퇴하시겠습니까?");
 					console.log(result);
 					if (!result) { // confirm 창에서 확인버튼을 눌렀을 때 아이디 삭제 후 메인페이지로 이동
 
-						location.href="/mypage/myPage"
+						location.href="/mypage/myPage";
 
 					} else { // confirm 창에서 취소버튼 눌렀을때 마이페이지의 구독화면으로 이동
 						$.ajax({
@@ -258,6 +256,7 @@ text-decoration: underline;
 			error : function(e) {
 				console.log(e);
 			}
+			})
 		});
 	</script>
 	
