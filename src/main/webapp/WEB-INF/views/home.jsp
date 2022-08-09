@@ -340,8 +340,6 @@
 					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="/">홈</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">About
-								us</a></li>
 						<li class="nav-item"><a class="nav-link" href="/group/">그룹 스터디</a>
 						</li>
 						<li class="nav-item dropdown"><a
@@ -376,8 +374,6 @@
 							<ul class="navbar-nav">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="/">홈</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">About
-										us</a></li>
 								<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">그룹
 										스터디</a></li>
 								<li class="nav-item dropdown"><a
@@ -405,8 +401,6 @@
 									</ul>
 								<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">지식 커뮤니티</a></li>
 								<li class="nav-item"><a class="nav-link" href="#" onclick="sessionCheck();">문의하기</a></li>
-								<li class="nav-item"><a class="nav-link" href="#"
-									onclick="sessionCheck();">마이페이지</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="/member/login">로그인</a></li>
 								<li class="nav-item"><a class="nav-link"

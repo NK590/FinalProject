@@ -571,7 +571,7 @@ textarea {
     <!-- 이상 신고 처리 모달 -->
     <script>
     	
-        let ws = new WebSocket("ws://192.168.20.12/group/detail")
+        let ws = new WebSocket("ws://192.168.20.24/group/detail")
         
         // 전송 버튼 삭제로 인해 없앰
          document.getElementById('chatSend').addEventListener('click', (e) => {
@@ -776,7 +776,7 @@ textarea {
     
     // 신고 제출 버튼 눌렀을 시
     $('#reportSubmitBtn').on('click', (e) => {
-    	let mem_nick = $('#title').val()
+    	let mem_nick = $('#title').val().trim()
     	let report_nick = "${loginSession.mem_nick}"
         let report_reason = $(".form-check-input:checked").val();
         let report_reason_detail = $("#detail-textarea").val();

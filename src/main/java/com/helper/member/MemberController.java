@@ -171,7 +171,7 @@ public class MemberController {
 	@RequestMapping(value = "/toLogin") // toLogin페이지 요청
 	public String toLogin() {
 		System.out.println("toLogin 페이지 요청");
-		return "home";
+		return "redirect:/";
 	}
 	
 	

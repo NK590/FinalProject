@@ -18,6 +18,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css"
 	integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d"
 	crossorigin="anonymous">
+	<!-- bootstrap icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 	<!-- 해더 -->
  
 
@@ -93,6 +95,9 @@ thead, tbody {
 }
 .boardCol{
 margin-bottom : 50px;
+}
+.noticeTr{
+background-color : #f2f5f9;
 }
 
  .aTag {
@@ -180,6 +185,19 @@ font-family: "AppleSDGothicNeoL.ttf";
 						</tr>
 					</thead>
 					<tbody>
+					<%-- 공지사항 --%>
+						<c:if test="${noticeList.size() > 0}">
+							<c:forEach items="${noticeList}" var="nDto">
+								<tr class="noticeTr">
+									<th scope="row"><i class="bi bi-megaphone-fill"></i>&nbsp공지</th>		
+									<td><a href="/admin//toNoticeDetail?notice_seq=${nDto.notice_seq}" class="aTag">${nDto.notice_title}</a></td>
+									<td>관리자</td>
+									<td>${nDto.notice_date}</td>
+									<td>${nDto.view_count}</td>
+									<td class="td">${nDto.notice_content}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
 						<c:if test="${list.size() == 0}">
 							<tr>
 								<th colspan="5" class="textNo">등록된 게시물이 없습니다.</th>

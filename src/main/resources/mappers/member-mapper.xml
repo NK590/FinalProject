@@ -61,7 +61,7 @@
 	
 	<!-- 마이페이지 나의 그룹 -->
 	<select id="myGroup" parameterType="int" resultType="com.helper.group.GroupDTO">
-		select * from tb_group where mem_seq = #{mem_seq} 
+		select * from tb_group where group_seq = #{group_seq}
 	</select>
 	
 	<!-- 그룹 가입 여부 체크 -->

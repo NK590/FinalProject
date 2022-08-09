@@ -24,8 +24,9 @@ public class HomeController {
 	public String home(Model model) throws Exception {
 		adminService.visitCount();
 		List<Map<String, Object>> todayList = adminService.selectTopMem();
+		System.out.println(todayList + "투");
 		List<Map<String, Object>> groupList = adminService.selectTopGroup();
-		System.out.println(groupList);
+		System.out.println(groupList + "그룹");
 		model.addAttribute("todayList", todayList);
 		model.addAttribute("groupList",groupList);
 		return "home";

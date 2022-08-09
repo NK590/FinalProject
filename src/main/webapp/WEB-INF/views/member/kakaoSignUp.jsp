@@ -109,9 +109,11 @@ body {
 						맞게 입력해주세요.</div>
 					<div class="check checkTrue" id="nameTrue" style="display: none;">*사용
 						가능한 닉네임입니다.</div>
+					<div class="check checkNick" id="nameNick" style="display: none;">*중복된
+						닉네임 입니다.</div>
 				</div>
 				<div class="col-12 mb-2">
-					<input type="text" class="form-control" name="mem_nick" required
+					<input type="text" class="form-control" id="mem_nick" name="mem_nick" required
 						onkeyup="nameCheck();"> <span style="font-size: 10px;">*3~10자의
 						영문 대소문자와 숫자, 한글로만 입력하세요.</span>
 				</div>
@@ -152,6 +154,7 @@ body {
 			style="margin-left: 10px;">
 			<button type="button" id="submitBtn" class="w-btn w-btn-skin">가입하기</button>
 		</div>
+		<input type="text" id="checkinput" class="d-none">
 	</div>
 
 
@@ -171,22 +174,44 @@ body {
 
 
 		 // 닉네임
-         function nameCheck(){
-        	 let $mem_nick = $("#memberForm input[name=mem_nick]");
-        	 let regExpName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/;
-         if(!regExpName.test($mem_nick.val())){// 이름을 잘못 입력한 경우
-            $("#nameFalse").attr('style',"display:block");
-            $("#nameTrue").attr('style',"display:none");
-         } else {// 사용 가능 이름
-            $("#nameFalse").attr('style',"display:none");
-            $("#nameTrue").attr('style',"display:block");
-            let ok3 = "Y";
-            return ok3;
-         }
-         if($mem_nick.val() == ""){
-            $("#nameFalse").attr('style',"display:none");
-         }
-      }
+        function nameCheck(){
+			 let regExpName = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,10}$/;
+			 let mem_nick = $('#mem_nick').val();
+			 
+			 if(!regExpName.test($('#mem_nick').val())){// 이름을 잘못 입력한 경우
+		            $("#nameFalse").attr('style',"display:block");
+		            $("#nameTrue").attr('style',"display:none");
+		            $("#nameNick").attr('style',"display:none");
+		     } else {// 사용 가능 이름
+		            
+		        	 $.ajax({
+		 				url : "/member/nickForm"
+		 				,type : "post"
+		 				,data : {mem_nick : mem_nick}
+		 				, success: function(data){
+		 					if(data === "ok"){
+		 						$("#nameTrue").attr('style',"display:block");
+		 						$("#nameNick").attr('style',"display:none");
+		 						$("#nameFalse").attr('style',"display:none");
+		 						$("#checkinput").val(data);
+		 						return;
+		 					}else if(data === "no"){
+		 						$("#nameNick").attr('style',"display:block");
+		 						$("#nameTrue").attr('style',"display:none");
+		 						$("#nameFalse").attr('style',"display:none");
+		 						$("#checkinput").val(data);
+		 						return;
+		 					}
+		 				}, error : function(e){
+		 					console.log(e);
+		 				}
+		 			})
+		        	 
+		         }
+		         if(mem_nick == ""){
+		            $("#nameFalse").attr('style',"display:none");
+		         }
+}	 
 		 
       
 
@@ -211,6 +236,9 @@ body {
 				return;
 			}else if ($("#memStdkey").val() === "선택") {
 				alert("관심분야를 선택해주세요.");
+				return;
+			}else if ($("#checkinput").val() === "no"){
+				alert("중복된 닉네임입니다.");
 				return;
 			}
 

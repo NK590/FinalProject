@@ -145,6 +145,7 @@ public class BoardController {
 		
 		return"a image is deleted";
 	}
+	
 
 	@ExceptionHandler // 에러 처리
 	public String toError(Exception e) {

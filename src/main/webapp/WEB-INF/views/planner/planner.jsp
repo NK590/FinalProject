@@ -37,7 +37,9 @@
 <link rel="stylesheet" type="text/css"
 	href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<!-- fromValidation -->
+<!-- 툴팁 -->
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 
 <title>플래너</title>
 <style>
@@ -52,11 +54,6 @@ html, body {
 	padding-left: 1em;
 	padding-right: 1em;
 }
-
- a {
-	text-decoration: none;
-	color: black;
-} 
 
 .planContent {
 	resize: none;
@@ -87,21 +84,25 @@ html, body {
 }
 
 .fc-button {
-	background-color: #1e90ff !important;
+	background-color: #2c2c6b !important;
 	color: white !important;
 	border-color: transparent !important;
+}
+.fc-daygrid-day-number,.fc-col-header-cell-cushion,.fc-list-day-side-text,.fc-list-day-text{
+	text-decoration: none;
+	color: black;
 }
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	
 	<!-- 플래너 -->
 	<div class="container plannerContainer" id="calendar-container">
 		<div class="row">
-			<div id="calendar"></div>	
+			<div id="calendar"></div>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<!-- modal -->
 	<div id='datepicker'></div>
 	<form id="plannerForm">
@@ -121,27 +122,27 @@ html, body {
 						</div>
 						<div class="row">
 
-							<label class="col label" for="eventType"><span>Type</span></label>
+							<label class="col label" for="eventType"><span>일정타입</span></label>
 							<div class="col-12">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input eventType" type="radio"
 										name="eventType" id="study" value="#6666FF" checked> <label
-										class="form-check-label" for="inlineRadio1">Study</label>
+										class="form-check-label" for="inlineRadio1"><span>📖</span> Study</label>
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input eventType" type="radio"
-										name="eventType" id="appointment" value="#66FFCC"> <label
-										class="form-check-label" for="inlineRadio1">Appointment</label>
+										name="eventType" id="appointment" value="#24d1c3"> <label
+										class="form-check-label" for="inlineRadio1"><span>💼</span> Appointment</label>
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input eventType" type="radio"
-										name="eventType" id="event" value="#FFFF99"> <label
-										class="form-check-label" for="inlineRadio2">Event</label>
+										name="eventType" id="event" value="#f27718"> <label
+										class="form-check-label" for="inlineRadio2"><span>🎉</span>Event</label>
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input eventType" type="radio"
-										name="eventType" id="important" value="#FF6666"> <label
-										class="form-check-label" for="inlineRadio3">Important</label>
+										name="eventType" id="important" value="#d6243f"> <label
+										class="form-check-label" for="inlineRadio3"><span>💡</span>Important</label>
 								</div>
 							</div>
 						</div>
@@ -187,31 +188,32 @@ html, body {
 					</div>
 					<div class="row">
 
-						<label class="col label" for="updateEventType"><span>Type</span></label>
+						<label class="col label" for="updateEventType"><span>일정
+								타입</span></label>
 						<div class="col-12">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input updateEventType" type="radio"
 									name="updateEventType" id="updateStudy" value="#6666FF"
 									disabled> <label class="form-check-label"
-									for="inlineRadio1">Study</label>
+									for="inlineRadio1"><span>📖</span>Study</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input updateEventType" type="radio"
-									name="updateEventType" id="updateAppointment" value="#66FFCC"
+									name="updateEventType" id="updateAppointment" value="#24d1c3"
 									disabled> <label class="form-check-label"
-									for="inlineRadio1">Appointment</label>
+									for="inlineRadio1"><span>💼</span>Appointment</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input updateEventType" type="radio"
-									name="updateEventType" id="updateEvent" value="#FFFF99"
+									name="updateEventType" id="updateEvent" value="#f27718"
 									disabled> <label class="form-check-label"
-									for="inlineRadio2">Event</label>
+									for="inlineRadio2"><span>🎉</span>Event</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input updateEventType" type="radio"
-									name="updateEventType" id="updateImportant" value="#FF6666"
+									name="updateEventType" id="updateImportant" value="#d6243f"
 									disabled> <label class="form-check-label"
-									for="inlineRadio3">Important</label>
+									for="inlineRadio3"><span>💡</span>Important</label>
 							</div>
 						</div>
 					</div>
@@ -244,6 +246,7 @@ html, body {
 			</div>
 		</div>
 	</div>
+		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 	
 		(function() {
@@ -320,7 +323,7 @@ html, body {
 
 							dayMaxEvents : true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 
-							locale : 'ko', // 한국어 설정
+							 locale : 'ko', // 한국어 설정 
 
 							select : function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 							
@@ -329,8 +332,24 @@ html, body {
 							},
 							unselect:function(){
 								
-							},	
-							
+							},
+							eventDidMount:function(info){ // 툴팁 적용
+								tippy(info.el,{
+									content: "일정 : "+info.event.title, //+"시간 : "+info.event.start+" - "+info.event.end,
+									placement: "bottom",
+									maxWidth:"100"
+								});
+							}, 
+							/* eventDidMount: function(event, element) {
+							    $(element).popover({
+							        placement : 'top',
+							        html : true,
+							        trigger : 'hover',
+							        title : event.title ,
+							        content : '<p>' + event.start + '</p><p>' + event.end + '<p>' + event.description + '</p>'
+							  });
+							}, */
+															                
 							eventClick : function(plan) { // 일정 수정 및 삭제
 								if(!plan.event.allDay){
 							console.log(plan);
@@ -430,6 +449,11 @@ html, body {
 								console.log(plan);
 								plan.event.remove();
 							},
+							displayEventEnd: { // 종료시간 띄워주기
+			                    month: false,
+			                    basicWeek: true,
+			                    "default": true
+			                },
 
 							// 등록된 이벤트 띄워주기
 
@@ -437,27 +461,46 @@ html, body {
 									<c:forEach items="${list}" var="dto">
 									{	
 									id : "${dto.plan_seq}",  /* plan_seq id값에 담아주기 */
-									title : "${dto.plan_title}",
+									<c:if test="${dto.plan_background == '#6666FF'}">
+									title : '📖 '+"${dto.plan_title}",
+									textColor : "white",
+									</c:if>
+									<c:if test="${dto.plan_background == '#24d1c3'}">
+									title : '💼 '+"${dto.plan_title}",
+									textColor : "white",
+									</c:if>
+									<c:if test="${dto.plan_background == '#f27718'}">
+									title : '🎉 '+"${dto.plan_title}",
+									textColor : "white",
+									</c:if>
+									<c:if test="${dto.plan_background == '#d6243f'}">
+									title : '💡 '+"${dto.plan_title}",
+									textColor : "white",
+									</c:if>
+									
 									description : "${dto.plan_content}", 
-									start : "${dto.plan_start}",
+									start :"${dto.plan_start}",
 									end : "${dto.plan_end}",
 									backgroundColor : "${dto.plan_background}",
-									textColor : "white",
 									borderColor : "${dto.plan_background}",
 									},
 									</c:forEach>							
 									<c:forEach items="${timeList}" var="timeDto">
 									{
-									title : "${timeDto.time_subject}"+" - "+ time("${timeDto.time_count}"),
+									title : '📚 '+"${timeDto.time_subject}"+" - "+ time("${timeDto.time_count}"),
 									start : "${timeDto.time_date}",
+									backgroundColor : "1e90ff",
 									allDay : true
 									},
 									</c:forEach>
-							]
+							],
+							
 						});
 				// 캘린더 랜더링
 
 				calendar.render();
+				
+				
 				// datepicker 날짜 입력
 				let config ={
 						enableTime: true, 
@@ -663,26 +706,3 @@ html, body {
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
