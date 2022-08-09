@@ -21,7 +21,8 @@
 	<!-- bootstrap icon -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 	<!-- 해더 -->
- 
+ 	<!-- bootstrap icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
 <title>게시판</title>
 </head>
@@ -43,7 +44,6 @@
 	margin-top: 50px;
 	font-family: "GothicA1-Regular.ttf";
 }
-
 .btn-default {
 	border: 1px solid #ced4da;
 }
@@ -51,7 +51,9 @@
 input:first-child {
 	display: inline;
 }
-
+.noticeTr{
+ background-color: #f2f5f9;
+}
 .td {
 	display: none;
 }

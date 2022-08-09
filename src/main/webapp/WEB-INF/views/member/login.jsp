@@ -153,10 +153,8 @@ span {
 
 		<br>
 		<div class="row justify-content-center search">
-			<div class="col-lg-3">
-				<a class="link" href="#" id="idSearch">이메일 찾기</a> <span>|</span> <a class="link" href="#"
-					id="passwordSearch"
-				>비밀번호 찾기</a>
+			<div class="col-lg-12">
+				<a class="link" href="#" id="idSearch">이메일 찾기</a> | <a class="link" href="#"id="passwordSearch">비밀번호 찾기</a>
 
 			</div>
 		</div>
